@@ -37,7 +37,7 @@ studio/
 │       └── assets/      vo.m4a · timings.json · assets-credits.csv · music/ · clips/
 └── templates/project/   runnable skeleton copied by new.sh
 .agents/skills/opuscar-video-studio/  repo skill for agents (workflow, laws, QC, clip sourcing)
-.skills/get-image/ + agent-browser    assisted browsing/licensing when no API
+ .agents/skills/get-image/ + agent-browser    assisted browsing/licensing when no API
 src/lib/films.ts         site manifest — the showcase page renders every film from here
 public/film/             published MP4s served by the Next.js app
 ```
@@ -51,7 +51,7 @@ public/film/             published MP4s served by the Next.js app
 ### LAW 1 — No AI video, no stock picture
 Every frame must be drawn by the project's canvas program. Never use AI video generators, stock footage, or scraped video. Photos or video clips may enter only as **physical printed props** (prints/cards that drop into the paper world) or other documented non-raw assets, each with a license row in the project's `assets/assets-credits.csv`.
 
-**Internet sourcing (allowed, license-aware):** use `studio/engine/clips.mjs` (Wikimedia Commons API, optional Pexels with `PEXELS_API_KEY`, or explicit direct URLs — Mixkit/Coverr/Videvo/NASA/archives via `.skills/get-image` + `agent-browser` to obtain a final licensed URL). The tool downloads to `assets/clips/`, writes `manifest.json`, and prints a CSV row — **review license/attribution and append to `assets/assets-credits.csv` manually**. Sourced media is still LAW 1: use as prop/reference, never raw stock footage in the timeline.
+**Internet sourcing (allowed, license-aware):** use `studio/engine/clips.mjs` (Wikimedia Commons API, optional Pexels with `PEXELS_API_KEY`, or explicit direct URLs — Mixkit/Coverr/Videvo/NASA/archives via `.agents/skills/get-image` + `agent-browser` to obtain a final licensed URL). The tool downloads to `assets/clips/`, writes `manifest.json`, and prints a CSV row — **review license/attribution and append to `assets/assets-credits.csv` manually**. Sourced media is still LAW 1: use as prop/reference, never raw stock footage in the timeline.
 
 ### LAW 1b — MUSIC LAW (sound)
 Background music is **always real classical music**: actual recordings (not MIDI, not synth) whose composition **and** performance are Public Domain or CC0. Rules:

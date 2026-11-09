@@ -31,10 +31,10 @@ licenses but does not block — you must verify.
 
 Use the repo skills in `.skills/`:
 
-- **`.skills/get-image/SKILL.md`** — curated free/public sources (Unsplash,
+- **`.agents/skills/get-image/SKILL.md`** — curated free/public sources (Unsplash,
   Pexels, Pixabay, Wikimedia Commons, Mixkit, Coverr, Openverse, archives,
   NASA/USGS, museums) and licensing checklist. Start here to pick a source.
-- **`agent-browser`** (`.skills/agent-browser/SKILL.md`) — headless browser
+- **`agent-browser`** (` .agents/skills/agent-browser/SKILL.md`) — headless browser
   automation for navigating pages, handling downloads/interactions on sites like
   Mixkit/Videvo that don't have simple free APIs. Snapshot → find download link →
   capture the final URL → pass it to `clips.mjs fetch url --license ... --source ...`.

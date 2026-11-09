@@ -42,7 +42,7 @@ Follow repo `AGENTS.md` first (hard laws win).
   - `bun studio/engine/clips.mjs fetch commons <File|url> --project <slug> --id N [--as name]`
   - `fetch url <direct> --project <slug> --license "..." --source "..."` (Mixkit/Coverr/Videvo/manual). Pexels: `search pexels ...` needs `PEXELS_API_KEY`.
 - Writes `assets/clips/*` + `manifest.json`; prints `csvRow` — **review license/attribution and append to `assets/assets-credits.csv` manually**.
-- No API/complex download pages: use `.skills/get-image/SKILL.md` (source/licensing guide) + `agent-browser` skill to navigate/snapshot and obtain the final licensed URL, then `fetch url`.
+- No API/complex download pages: use `.agents/skills/get-image/SKILL.md` (source/licensing guide) + `agent-browser` skill to navigate/snapshot and obtain the final licensed URL, then `fetch url`.
 - Never raw stock footage in the timeline; use as prop/reference and document.
 
 ## Git hygiene

@@ -9,7 +9,7 @@
 //   - Wikimedia Commons (MediaWiki Action API, no key) — images, audio, video
 //   - Pexels (optional, needs PEXELS_API_KEY env) — photos/videos
 //   - Direct URL download — for any explicitly licensed public file
-//   - .skills/get-image: source guidance/licensing checklist; agent-browser for
+//   - .agents/skills/get-image: source guidance/licensing checklist; agent-browser for
 //     pages without APIs (manual/assisted) — this CLI handles API/URL cases.
 //
 // CLI:
