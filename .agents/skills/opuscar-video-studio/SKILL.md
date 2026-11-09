@@ -1,6 +1,6 @@
 ---
 name: opuscar-video-studio
-description: Create, fix, render, QC, and publish code-drawn Opuscar Studio films (Bun + @napi-rs/canvas + ffmpeg). Use when working in studio/projects/* or studio/engine/*, making a new film, re-timing/syncing VO to picture/SFX, fixing framing/overlap/safe-area/underline issues, sourcing licensed web media as props (Wikimedia/Pexels/Mixkit via clips tool + get-image/agent-browser), rendering chunks, verifying FINAL-FILE LAW, or preparing multi-project git commits.
+description: Create, fix, render, QC, and publish Opuscar Studio films (Bun + @napi-rs/canvas + ffmpeg). Use when working in studio/projects/* or studio/engine/*, making a new film, re-timing/syncing VO to picture/SFX, fixing framing/overlap/safe-area/underline issues, sourcing licensed web media as props or grade-matched plates/B-roll (Wikimedia/Pexels/Mixkit via clips tool + get-image/agent-browser), rendering chunks, verifying FINAL-FILE LAW, or preparing multi-project git commits. Pair with .agents/skills/cinematic-motion-graphics for framing/animation/typography craft (LAW 8).
 ---
 
 # Opuscar Video Studio
@@ -9,13 +9,14 @@ Follow repo `AGENTS.md` first (hard laws win).
 
 ## Layout
 - `studio/engine/` topic-agnostic toolchain (never imports projects).
+- `.agents/skills/cinematic-motion-graphics/` the cinematographer/motion-director bible (LAW 8) — load it whenever framing, animating text, compositing stock, or writing BEATS.md.
 - `studio/projects/<NNN-slug>/` one film: `PROJECT.md`, `BEATS.md`, `timings.mjs` (single clock `T`), `world.mjs` (art), `sfx-plan.mjs` (SFX/music, reads `T`), `render.mjs`, `audio.mjs`, `build.mjs`, `assets/`.
 - `studio/templates/project/` + `bash studio/new.sh <slug> "Title"` scaffold next film.
-- `public/film/<slug>.mp4` published artifact; `src/lib/films.ts` site manifest.
+- `public/film/<slug>.mp4` published artifact; `src/lib/films.ts` film manifest.
 
 ## Hard laws checklist
-- **LAW 1**: every frame code-drawn; no AI video/stock footage. External photos/clips only as **printed props**/documented assets with `assets/assets-credits.csv` rows.
-- **LAW 1b MUSIC**: real recordings only, composition+performance PD/CC0, never MIDI/synth. `assets/music/` + credits; trim/fade/sidechain-duck under VO; **never two beds** (classical asset retires drone). `mixVoWithBus(...,{path,trimTo:T.DUR,gain,fadeIn,fadeOut})`.
+- **LAW 1**: no AI-generated media, ever. Licensed, **real** (non-AI) stock images/video/clips ARE allowed: as printed props, as grade-matched full-frame plates/B-roll (ffmpeg frame extraction → `drawImage`, bible §4), or documented assets — every one with `assets/assets-credits.csv` rows (license, author, source URL, modification). Never raw/ungraded stock to the timeline.
+- **LAW 1b MUSIC**: real classical recordings from open public-domain/openly-licensed sources only (Wikimedia Commons, Openverse, Musopen, archive.org, IMSLP, NASA/US federal archives — verify BOTH composition and performance PD/CC0, or CC-BY + attribution). Never MIDI/synth. `assets/music/` + credits; trim/fade/sidechain-duck under VO (−6…−8 dB, anchor ≈−14.5 LUFS, TP ≤ −0.9 dBTP); **never two beds** (classical asset retires drone). `mixVoWithBus(...,{path,trimTo:T.DUR,gain,fadeIn,fadeOut})`.
 - **LAW 2**: duration = VO duration (`T.FRAMES = round(T.DUR*FPS)`).
 - **LAW 3 FINAL-FILE LAW** (after every build/publish): probe every `out/part_*.mp4` before concat (ffmpeg `-c copy` fails silently on corrupt/moov-missing parts — delete+re-render); verify published MP4 numerically: `nb_read_frames == T.FRAMES±1`, video duration == audio duration.
   ```bash
@@ -25,16 +26,18 @@ Follow repo `AGENTS.md` first (hard laws win).
 - **LAW 4 safe area**: no text/element clips viewport on any beat/camera pose; sweep `bun render.mjs still <t> --scale 4`.
 - **LAW 5 nothing floats**: attached parts root inside silhouette, joint covered.
 - **LAW 6 no stroke crosses type**: underline/circle below last line, >=40px clearance, timed after text stamps in; retime stroke, not text.
+- **LAW 7 publish hygiene**: zip hand-off excludes models/caches/chunks/.env; rebuild after source changes; `public/film/<slug>.mp4` is canonical.
+- **LAW 8 craft**: every BEATS.md row is a complete shot card (intent/shot/move/grid/hero/text-clearance/cues/assets); thirds/phi framing; no text collisions at any frame/pose; still sweep + `--scale 4` crops per beat; binding manual `.agents/skills/cinematic-motion-graphics/SKILL.md`.
 
 ## Workflow (new/fix film)
-1. Brief + beat table: `PROJECT.md`, `BEATS.md`.
-2. VO canonical: `assets/vo.m4a` + `assets/timings.json` (or Kokoro + timestamps if none supplied). ASR/STT verify/fallback (word-level): `node studio/tools/asr/transcribe.mjs assets/vo.m4a --out assets/vo-timings.whisper.json` (JS: @huggingface/transformers + onnx; model Xenova/whisper-tiny.en auto-downloads to `whisper-models/` on first run).
+1. Brief + beat table: `PROJECT.md`, `BEATS.md` — every BEATS row is a full **shot card** (LAW 8); load `.agents/skills/cinematic-motion-graphics/SKILL.md` for craft rules (framing grids, shot sizes, easing, typography, color script, QC loop).
+2. VO canonical: `assets/vo.m4a` + `assets/timings.json` (or Kokoro + timestamps if none supplied). ASR/STT verify/fallback (word-level): `node studio/tools/asr/transcribe.mjs assets/vo.m4a --out assets/vo-timings.whisper.json` (JS: @huggingface/transformers + onnx; model Xenova/whisper-tiny.en auto-downloads to `models/whisper/` on first run).
 3. `timings.mjs`: single clock `T` (scenes, fades, camera Catmull-Rom rail). Picture+SFX import `T`.
-4. `world.mjs`: draw zones on 20kpx paper board with engine props/cast/ink/text; zone dim-backs; `globalAlpha` multiplied. Use `drawPrint(loadImage(...))` for sourced props.
+4. `world.mjs`: draw zones on 20kpx paper board with engine props/cast/ink/text; zone dim-backs; `globalAlpha` multiplied. Use `drawPrint(loadImage(...))` for sourced props. Cast presets & thirds/phi anchors: `engine/presets.mjs` (CAST_PRESETS, THIRDS, PHI_GRID).
 5. `sfx-plan.mjs`: events at `T` times; `musicBed()` returns PD/CC0 bed or `null`.
-6. QC stills at every beat + transitions: `bun render.mjs stills 0.5,... --scale 4` (LAW 4/5/6). Fix world/layout/camera/underline timing.
-7. Build/publish (project dir): `bun render.mjs chunk <s> <e>` sequentially if needed; probe parts; `bun audio.mjs`; `bun build.mjs` (or `--no-video`). Confirm `FINAL-FILE LAW ok`.
-8. Audio QC: LUFS ~ -14.5 area, TP <= -0.9 dBTP, bed ducked. Credits CSV complete. Update `studio/PROJECTS.md` and `src/lib/films.ts`. Commit.
+6. QC stills at every beat + transitions, at pose and at text entry/exit frames: `bun render.mjs stills 0.5,... --scale 4` (LAW 4/5/6/8). Collision scan + plate-contrast check per bible §5/§9. Fix world/layout/camera/underline timing.
+7. Build/publish (project dir): `bun render.mjs chunk <s> <e>` sequentially if needed (cinematic defaults: `filmGrade('documentary-grade')` in scaffolded projects, `quality: 'master'` crf 16, lookahead ≤ 20); probe parts; `bun audio.mjs`; `bun build.mjs` (or `--no-video`). Confirm `FINAL-FILE LAW ok`.
+8. Audio QC: LUFS ~ -14.5 area, TP <= -0.9 dBTP, bed ducked. Credits CSV complete. Update `studio/PROJECTS.md` and `src/lib/films.ts` (film manifest). Commit.
 
 ## Internet clip sourcing (LAW 1)
 - `studio/ASSETS-AND-CLIPS.md` and `studio/engine/clips.mjs`:
@@ -42,8 +45,11 @@ Follow repo `AGENTS.md` first (hard laws win).
   - `bun studio/engine/clips.mjs fetch commons <File|url> --project <slug> --id N [--as name]`
   - `fetch url <direct> --project <slug> --license "..." --source "..."` (Mixkit/Coverr/Videvo/manual). Pexels: `search pexels ...` needs `PEXELS_API_KEY`.
 - Writes `assets/clips/*` + `manifest.json`; prints `csvRow` — **review license/attribution and append to `assets/assets-credits.csv` manually**.
-- No API/complex download pages: use `.agents/skills/get-image/SKILL.md` (source/licensing guide) + `agent-browser` skill to navigate/snapshot and obtain the final licensed URL, then `fetch url`.
-- Never raw stock footage in the timeline; use as prop/reference and document.
+- No API/complex download pages: use `.agents/skills/get-image/SKILL.md` (the complete open-media catalog — images, video, archives, museums, music, SFX, fonts, 3D, datasets; source/licensing guide) + `agent-browser` skill to navigate/snapshot and obtain the final licensed URL, then `fetch url`.
+- Factual claims need a ledger: `.agents/skills/research-sourcing/SKILL.md` — `SOURCES.md` per project, ≥2 primaries for contested numbers, pre-render fact-check gate; templates/project ships the ledger.
+- Tracing a licensed plate into house ink: `.agents/skills/rotoscope/SKILL.md` — `trace.py` → engine `trace.mjs` draw-on polylines (verified).
+- Real geography for a beat (routes, coastlines, satellite, choropleth): `.agents/skills/leafmap/SKILL.md` — leafmap (MIT, `pip install leafmap`) → HTML/matplotlib plate → grade-match → `drawPrint` or ffmpeg frame extraction (bible §4) → credits row.
+- Raw/ungraded stock never reaches the timeline. Grade-match (black/white/gamma/contrast/split-tone), light-wrap/contact shadow/grain, Ken Burns ≤5%/beat, QC still at entry/mid/exit; attribution-required licenses get an on-screen credit block. See bible §4/§8 for the plate pipeline and §4.6 for plates + camera rail.
 
 ## Git hygiene
 - Commit source + canonical small assets + published MP4 per project policy; never commit `node_modules`, `studio/projects/**/out`, `**/frames`, scratch `cmp_*.png`/analysis JSON, `.env`, huge local models/caches (see `.gitignore`).

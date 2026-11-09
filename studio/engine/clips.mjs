@@ -2,8 +2,10 @@
 //
 // Fetches PHOTOS / IMAGES / SHORT CLIPS from public sources into a project's
 // assets folder and records provenance for assets-credits.csv. Media enters the
-// film ONLY as physical printed props or documented assets — never as stock
-// footage played raw (LAW 1). Every download gets license + source metadata.
+// film ONLY as grade-matched full-frame plates / B-roll (ffmpeg frame
+// extraction -> drawImage), printed props, or documented assets — never raw,
+// ungraded stock, never AI-generated media (LAW 1). Every download gets
+// license + source metadata.
 //
 // Sources:
 //   - Wikimedia Commons (MediaWiki Action API, no key) — images, audio, video
@@ -194,7 +196,7 @@ export async function downloadToProject(project, meta, { id, as } = {}) {
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
   const csvId = id || (manifest.items.length + 20);
   const lic = meta.license || 'VERIFY';
-  const notes = `Downloaded ${rec.downloadedAt} to ${rec.localFile}; ${meta.artist ? `Author: ${csvSafe(meta.artist)}; ` : ''}${meta.attributionRequired ? 'ATTRIBUTION REQUIRED - verify before publish; ' : ''}LAW 1: use as physical printed prop/documented asset, not raw stock footage`;
+  const notes = `Downloaded ${rec.downloadedAt} to ${rec.localFile}; ${meta.artist ? `Author: ${csvSafe(meta.artist)}; ` : ''}${meta.attributionRequired ? 'ATTRIBUTION REQUIRED - verify before publish; ' : ''}LAW 1: printed prop / grade-matched plate / documented asset only — never raw ungraded stock`;
   const csv = `${csvId},${csvSafe(meta.title || outName)},${csvSafe(meta.pageUrl || meta.url)},${csvSafe(lic)},"${notes}"`;
   return { outPath, manifestPath, record: rec, csvRow: csv };
 }

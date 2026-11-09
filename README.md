@@ -1,6 +1,6 @@
 # Opuscar Studio (ExTest)
 
-Code-drawn, topic-agnostic film studio (Bun + `@napi-rs/canvas` + ffmpeg). Each frame is drawn by a canvas program; no AI video or stock footage (see `AGENTS.md`).
+Code-drawn, topic-agnostic film studio (Bun + `@napi-rs/canvas` + ffmpeg). Frames are drawn/composited by a canvas program; no AI-generated media. Licensed, real (non-AI) stock images/video/clips are allowed (see `AGENTS.md` LAW 1).
 
 ## Start here
 - **`AGENTS.md`** — hard laws and operating manual (wins).
@@ -12,7 +12,7 @@ Code-drawn, topic-agnostic film studio (Bun + `@napi-rs/canvas` + ffmpeg). Each 
 - `studio/engine/` topic-agnostic toolchain (`clips.mjs` for sourced media)
 - `studio/projects/<NNN-slug>/` films (001 delivered)
 - `studio/templates/project/` + `bash studio/new.sh <slug> "Title"`
-- `public/film/` published MP4s, `src/lib/films.ts` site manifest
+- `public/film/` published MP4 (canonical artifact), `src/lib/films.ts` film manifest
 
 ## Commands (project dir)
 ```bash

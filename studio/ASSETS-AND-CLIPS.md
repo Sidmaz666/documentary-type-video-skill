@@ -1,10 +1,14 @@
 # Assets & Internet Clip Sourcing (LAW 1 compliant)
 
-Opuscar films are **code-drawn** (LAW 1). External media may enter only as
-**documented assets/physical printed props** (e.g. photos dropped onto the paper
-world via `drawPrint`/`noteCard`) — never as raw stock footage played as video.
-Every external asset gets a row in the project's `assets/assets-credits.csv`
-(license + source URL + notes), including CC0/Public Domain.
+Opuscar films ban **AI-generated media** outright (LAW 1). Licensed, real
+(non-AI) stock images and video **are** allowed in the timeline — as physical
+printed props/cards (`drawPrint`/`noteCard`), as **grade-matched full-frame
+plates / B-roll** (ffmpeg frame extraction → `drawImage` inside the beat's time
+window — bible `.agents/skills/cinematic-motion-graphics/SKILL.md` §4), or as
+documented assets. Raw, ungraded, uncredited stock straight to the timeline
+is never allowed. Every external asset gets a row in the project's
+`assets/assets-credits.csv` (license + source URL + modification notes),
+including CC0/Public Domain.
 
 ## Preferred: `studio/engine/clips.mjs` (API/URL, automatable)
 
@@ -47,12 +51,29 @@ const img = await loadImage(new URL('./assets/clips/aurochs.jpg', import.meta.ur
 drawPrint(ctx, img, 2200, 1120, { w: 1320, t0: S.hook + 1.2, t, rot: -0.01 });
 ```
 
+## Using a sourced clip/photo as a full-frame plate or B-roll
+
+```bash
+# extract to a frame sequence the canvas program can drawImage() inside the beat window
+ffmpeg -i assets/clips/<clip>.mp4 -vf scale=3840:-1:flags=lanczos assets/clips/frames/<id>/f_%05d.png
+```
+
+Then in `world.mjs` draw the sequence (mapped from the beat's `t0`/`t1` + local
+fps) with `drawImage`, after grade matching to the house palette
+(black/white/gamma/contrast/split-tone — bible §4.1), with light-wrap/contact
+shadow/grain. Ken Burns ≤5% scale per beat, direction rhyming with the camera
+rail. QC stills at entry/mid/exit frames (LAW 8). Name the folder in
+`assets/clips/manifest.json` so `build.mjs --clean` can drop the regenerable
+frames. License requires attribution → end-card credit block in the film.
+
 For historical/photo reference, you may also redraw the subject in code (project
 001 did this when source images were lost) — still credit the reference if used.
 
 ## Music beds
 
-MUSIC LAW: real recordings only, composition+performance PD/CC0, never MIDI/synth,
-never two beds. Source via Wikimedia Commons/Openverse, verify SHA/license, store
-in `assets/music/`, trim/fade/duck in `sfx-plan.mjs` → `musicBed()`. See
-`projects/001-.../assets/music/README.md` for the provenance template.
+MUSIC LAW: real classical recordings from open public-domain / openly-licensed
+sources only (Commons, Openverse, Musopen, archive.org, IMSLP — verify both
+composition and performance are PD/CC0; or CC-BY with credits row + attribution),
+never MIDI/synth, never two beds. Store in `assets/music/`, trim/fade/duck in
+`sfx-plan.mjs` → `musicBed()`. See `projects/001-.../assets/music/README.md` for
+the provenance template.

@@ -1,6 +1,6 @@
 # PROJECT 001 — The Bravest Snack in History
 
-**Status: DELIVERED.** The canonical artifact is `/home/z/my-project/public/film/the-bravest-snack-in-history.mp4` (976 frames / 32.533 s, 3840×1646 21:9, 30 fps). After the Nov 2026 sandbox wipe (section ③), the delivered MP4 was **restored from the user's upload** and is the film of record. The exact v5 render source was lost; `world.mjs` in this folder is an honest, documented reconstruction of its art, **not** a byte-equivalent copy.
+**Status: DELIVERED.** The canonical artifact is `public/film/001-the-bravest-snack-in-history.mp4` (976 frames / 32.533 s, 3840×1646 21:9, 30 fps). After the Nov 2026 sandbox wipe (section ③), the delivered MP4 was **restored from the user's upload** and is the film of record. The exact v5 render source was lost; `world.mjs` in this folder is an honest, documented reconstruction of its art, **not** a byte-equivalent copy.
 
 ---
 
@@ -10,7 +10,7 @@ The user asked for a **Lemo-Opuscar-style, code-drawn documentary short about th
 
 - Format: **3840×1646 (21:9), 30 fps**, one film ≈ 33 s — duration locked to the voiceover (LAW 2).
 - **One continuous camera move** across a single giant paper board (20,000 px wide) — no cuts.
-- Every frame **drawn by a canvas program** — no AI video, no stock footage (LAW 1). Photos may enter only as **physical printed props** dropping onto the paper, each with a credits row.
+- No AI-generated media (LAW 1); every frame composited by a canvas program. Photos entered as **physical printed props** dropping onto the paper, each with a credits row. *(LAW 1 re-issued Nov 2026: licensed, real non-AI stock is now also allowed as grade-matched plates/B-roll.)*
 - Narration: **the user's own voiceover recording** (`upload/audio.m4a`) with their `timings.json` scene anchors — canonical, not to be replaced by TTS.
 - Hand-drawn feel: ink on laid paper, rubber-stamp titles, typewriter reveals, 8 fps boil.
 - Follow-up feedback rounds (summarized): proper DNA helix instead of the first sketch, a real stickman hunter instead of a scribble, a recognizable Europe map, a proper Holstein cow (the first cow read as a generic blob), the cow's tail must attach inside the body, the red underline must never strike through "IN HISTORY.", and the film needed sound (SFX + music).
@@ -29,7 +29,7 @@ The user asked for a **Lemo-Opuscar-style, code-drawn documentary short about th
 
 ## ③ The wipe incident (Nov 2026)
 
-The sandbox reset erased the working tree **and git history**. Survivors: the user's `upload/` files — including **the delivered film itself** and its voiceover + timings. The delivered MP4 (`the-bravest-snack-in-history.mp4`, 976 frames / 32.533 s) was restored from the user's upload into `public/film/` and is the **canonical artifact** of this film. The v5 render source (this project's exact `world.mjs`/engine code at delivery time) is **lost**; what stands in `studio/` now is a faithful reconstruction for future films (002+), documented as such. It does **not** claim byte-equivalence with the lost source, and the canonical MP4 is never re-rendered or overwritten.
+The sandbox reset erased the working tree **and git history**. Survivors: the user's `upload/` files — including **the delivered film itself** and its voiceover + timings. The delivered MP4 (`001-the-bravest-snack-in-history.mp4`, 976 frames / 32.533 s) was restored from the user's upload into `public/film/` and is the **canonical artifact** of this film. The v5 render source (this project's exact `world.mjs`/engine code at delivery time) is **lost**; what stands in `studio/` now is a faithful reconstruction for future films (002+), documented as such. It does **not** claim byte-equivalence with the lost source, and the canonical MP4 is never re-rendered or overwritten.
 
 Lesson (now in AGENTS.md §7): publish early, commit often — a file that exists only in the sandbox does not exist.
 

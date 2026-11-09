@@ -1,10 +1,61 @@
 ---
-name: "get-image"
-description: "Find/Search/Get images from the web."
+name: get-image
+description: Find, verify and fetch EVERY kind of free/openly-licensed media from the public web for Opuscar films — photos, stock video/B-roll, archival footage, maps, music, SFX, fonts, SVG icons, textures, HDRIs, 3D models, datasets — from NASA to Unsplash to Wikimedia to museum open-access collections. Use to pick sources for clips.mjs (studio/engine/clips.mjs), verify licenses, and build the credits manifest. House law: AI-generated media banned (LAW 1); music beds must be real classical recordings, PD/CC0 composition+performance (MUSIC LAW); every asset lands a row in the project's assets-credits.csv.
 ---
 
 Free media resources for an autonomous video-generation agent
 For your video-production agent, I'd build a browser-accessible media library that searches free stock websites, public-domain archives, Creative Commons collections, and downloadable asset libraries. The goal is to let the agent find and download images, B-roll, archival footage, music, sound effects, illustrations, textures, and other assets without requiring API keys.
+
+
+## ★ The complete open-media stack — everything under the sun
+The full catalogue this repo's agents should draw from. Pick per beat, verify the actual file's license page every time, and record it in `assets-credits.csv` (studio/ASSETS-AND-CLIPS.md). Sections 1–11 below expand on these; this is the index.
+
+**Photo / image / art / archive**
+- General stock: Unsplash (free licence), Pexels, Pixabay, Burst by Shopify, Gratisography (rare), Kaboompics (CC), Negative Space, Life of Pix (PD-ish, check), PicJumbo.
+- Wikimedia Commons (MediaWiki API — used by `clips.mjs`), Openverse (pdm/cc0/cc-by filter), Flickr Commons + Flickr CC, Public Domain Review, Internet Archive, DPLA, Europeana, WikiArt (PD paintings), Recipes of the Middle Ages? no — keep: Project Gutenberg (PD texts/illustrations), Wikisource scans.
+- Museums (open access): Smithsonian Open Access (CC0), Met Open Access, Cleveland Museum of Art (CC0), Art Institute of Chicago, Rijksmuseum (CC0), Getty Open Content, Walters Art Museum, Yale CC0, Louvre (partially), National Gallery of Art (NGA Images, PD/CC0), British Museum (CC BY-NC-SA? — check per object, generally NOT for commercial), Science Museum Group (CC BY-NC-SA? check), Powerhouse (Sydney, CC0), Te Papa (CC BY? check).
+- US government (PD): NASA Image & Video Library (images.nasa.gov), NASA SVS, NASA JPL Photojournal, NASA 3D Resources, NOAA, USGS Multimedia, NPS (nps.gov), CDC/NIOSH, FEMA, Library of Congress (Free to Use; National Screening Room), National Archives (NARA Catalog + Still Pictures), Smithsonian (again), Library of Congress Prints & Photographs Division.
+- Space/Earth: ESA Space in Images (CC BY-SA 3.0 IGO), ESA/Hubble (CC BY 4.0), ESO (CC BY 4.0), JAXA, CSA/ASC, DLR (CC BY-SA? check), NASA GIBS (keyless tiles).
+- Science: Science Museum Group Collection Online (CC BY-NC-SA? verify), Wellcome Collection (CC0/CC BY/CC BY-ND — some ND not allowed for derivatives, verify), Max Planck / arXiv figures (self-archived, verify), PLoS/eLife figures (CC BY), NIH/NIGMS image gallery (PD), CDC PHIL (PD).
+- Maps/atlases: Natural Earth (PD — vectors for ink-style redraws), OpenStreetMap (ODbL), Natural Earth Data, Historical Maps (OldMapsOnline), David Rumsey Map Collection (free viewing; licensing varies — verify), Wikimedia Commons maps.
+- Satellite: NASA GIBS/Worldview, NASA Visible Earth (PD), USGS EarthExplorer (PD), Sentinel Hub/Copernicus (CC BY 4.0 for Sentinel data), ESA Sentinel, NOAA GOES (PD).
+
+**Video footage / B-roll / archival**
+- Modern stock: Pexels, Pixabay, Unsplash? (photos only) — Pexels & Pixabay video; Mixkit (check per-clip), Coverr (no attribution; no AI-training use), Videvo (check tier), Mazwai, Life of Vids, Dareful (4K), Vidsplay, Videezy (check), Splitshire (CC0-ish, check), Distill (free w/ attribution?), Mazwai.
+- Historical/archival: Internet Archive (Prelinger Archives — verify per film), LoC National Screening Room, NARA, NASA SVS, Critical past? no.
+- Timelapse/nature: Pixabay, Dareful, Coverr, Mixkit, Pexels.
+- NASA/NOAA/USGS video libraries (PD).
+
+**Music (bed rule: REAL classical recordings, composition+performance PD/CC0 — MUSIC LAW)**
+- Musopen, Wikimedia Commons audio (PD/CC0), Openverse (pdm/cc0/cc-by), Internet Archive PD collections, IMSLP recordings (per-file license), FreePD (verify), LoC/NASA audio (PD), Musopen, Naxos? no (paid).
+- NOT for beds: Incompetech, YouTube Audio Library, FMA, Pixabay Music (license not guaranteed classical-PD — fine for temp/reference, not for publish).
+- Classical composers in PD (composition): Bach, Mozart, Beethoven, Chopin, Debussy (d.1918, PD in EU/US post-1998), Satie (d.1925), Ravel (d.1937, PD in US; EU life+70 → PD 2008), Puccini (d.1924). RECORDING must also be PD/CC0.
+
+**SFX / ambience**
+- Mixkit SFX, Pixabay SFX, Freesound (CC0 & CC-BY; attribution for CC-BY), Sonniss GDC bundles (free commercial), Kenney SFX (CC0), BBC Sound Effects Library (research use only — licence restricts commercial: verify, generally avoid for publish), YouTube Audio Library SFX.
+
+**Icons / SVG / graphics**
+- Tabler (MIT), Lucide (ISC/MIT), Heroicons (MIT), Bootstrap Icons (MIT), Phosphor (MIT), Font Awesome Free (CC-BY + MIT; attribution), OpenMoji (CC BY-SA 4.0), unDraw (free; no AI training/rescraping), Storyset, illlustrations?; Wikimedia Commons SVG maps; Twemoji (CC-BY 4.0); Streamline (free tier).
+
+**Textures / HDRI / 3D**
+- Poly Haven (CC0 — HDRIs, textures, models), ambientCG (CC0 — PBR), Kenney (CC0 — sprites/props/audio/UI), Quaternius (CC0-ish), Sketchfab (per-model license), NASA 3D Resources, Smithsonian 3D, Google Poly (archived — avoid), Blender Studio open assets (CC-BY, e.g., spring/elephants dongle? — check per project), 3D Warehouse (varies — avoid unclear).
+
+**Fonts** (open source only)
+- Google Fonts (OFL/Apache), Fontshare, Bunny Fonts, Font Squirrel list, Velvetyne (OFL). Repo house fonts: Archivo Black, Caveat, Noto Serif (OFL, already vendored in `studio/assets/fonts/`).
+
+**Datasets (for charts/maps/viz beats)**
+- Natural Earth, USGS, Census (PD), World Bank (CC BY 4.0), Our World in Data (CC BY), Gapminder (CC BY), UN (varies — check), NASA/NOAA climate (PD), Copernicus (CC BY), OpenStreetMap (ODbL), Wikidata (CC0), Eurostat (free w/ attribution), OECD (varies).
+
+**Tools / libs (open source, agent can install)**
+- ffmpeg (LGPL/GPL), Blender (open), GIMP/Krita/Inkscape/Audacity (GPL), leafmap/geemap (MIT — see `.agents/skills/leafmap`), osmium/osmconvert, osmnx (OSM analysis), QGIS (GPL), Natural Earth QGIS styles.
+
+### House rules while sourcing (binding)
+1. **AI-generated media is banned forever (LAW 1)** — even if tagged "free"/CC0. No exceptions.
+2. **Music beds**: real classical recordings only, PD/CC0 composition AND performance, from open public-data sources (§5). All other music is for reference only — never publish it.
+3. **Every asset → `assets/assets-credits.csv`** (id, source URL, license, attribution, modification). Attribution-required → composited end-card credit block (LAW 1).
+4. **Grade before composite** (bible §4): black/white/gamma/contrast, split-tone, light-wrap, contact shadow; QC still at entry/mid/exit (LAW 8). Never raw stock straight to the timeline.
+5. **Never misrepresent** stock/archival as original footage; never strip watermarks; never bypass paywalls/CAPTCHAs; respect rate limits & terms; prefer Commons API / `clips.mjs`.
+6. If close to majority-stock composition, redesign the beat (bible §8.4).
 
 One important distinction: a website can be free to browse and download from without permitting unrestricted automated scraping. The agent should use ordinary webpages and their permitted download options, respect site terms, and check each asset's licence.
 1. Start with these core sources

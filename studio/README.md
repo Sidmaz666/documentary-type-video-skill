@@ -1,6 +1,6 @@
 # studio/ — the Opuscar film factory
 
-A **topic-agnostic, code-drawn film studio**. One repo holds many films; each film is one folder under `projects/`. Every frame is drawn frame-by-frame by a canvas program (`@napi-rs/canvas` under Bun) and encoded to MP4 — no AI video, no stock footage. Sound is code-synthesized SFX + real PD/CC0 classical recordings, mixed against the voiceover. The operating manual (hard laws) lives in `/home/z/my-project/AGENTS.md` — read it first; it wins over anything here.
+A **topic-agnostic, code-drawn film studio**. One repo holds many films; each film is one folder under `projects/`. Frames are composited frame-by-frame by a canvas program (`@napi-rs/canvas` under Bun) and encoded to MP4 — never AI-generated media; licensed, real (non-AI) stock images/video/clips are allowed as grade-matched plates, B-roll or printed props (LAW 1). Sound is synthesized SFX + real public-domain/openly-licensed classical recordings from open public-data sources, mixed against the voiceover (LAW 1b). The operating manual (hard laws) lives in `AGENTS.md` at the repo root — read it first; it wins over anything here.
 
 ## Repo map
 
@@ -19,7 +19,8 @@ studio/
 │   ├── props.mjs        laid-paper world, photo prints, note cards
 │   ├── characters.mjs   the cast: stickman, Holstein cow, DNA helix, spread map
 │   ├── grade.mjs        vignette / grain / fades
-│   ├── compose.mjs      frame pipeline (motion blur, grade) + render CLI
+│   ├── compose.mjs      frame pipeline (motion blur, grade) + render CLI (--preset/--quality)
+│   ├── presets.mjs      cinematic presets: FILM_PRESETS (grades), VIDEO_PRESETS (x264 ladder, lookahead ≤20), CAST_PRESETS, CAMERA_PRESETS, phi/thirds helpers
 │   ├── sfx.mjs          synthesized SFX library + VO/SFX/music mix stage
 │   ├── buildlib.mjs     chunk render → probe → concat → mux → publish (LAW 3)
 │   └── clips.mjs        media search/fetch → assets/clips + manifest + CSV row (LAW 1)
@@ -39,6 +40,7 @@ bash studio/new.sh my-slug "My Film Title"
 cd studio/projects/002-my-slug
 
 # 2. write the brief (PROJECT.md) — what is the ONE idea?
+#    claims → SOURCES.md ledger first (research-sourcing skill); no green ledger, no VO
 
 # 3. drop the narration + anchors (LAW 2: duration = VO length)
 #    (your own recording, or Kokoro per AGENTS.md — export word timestamps)
@@ -63,15 +65,16 @@ bun build.mjs
 
 ## The music stage
 
-Background music is **always real classical music** (MUSIC LAW): actual recordings — not MIDI, not synth — composition **and** performance Public Domain or CC0. Drop the file into `assets/music/`, add a credits row, and set `musicBed()` in `sfx-plan.mjs` to return `{ path, trimTo: T.DUR, gain, fadeIn, fadeOut }`. The mix stage trims, fades and sidechain-ducks it under the VO (≈6–8 dB). **Never two beds:** when a classical asset exists, the synth drone fallback is retired for that film. Project 001's Satie bed was lost in the wipe — see `projects/001-.../assets/music/README.md`.
+Background music is **always real classical music from open public-domain / openly-licensed sources** (MUSIC LAW): actual recordings — not MIDI, not synth — composition **and** performance Public Domain or CC0 (or CC-BY with attribution). Sourced from open public data: Wikimedia Commons, Openverse, Musopen, archive.org PD collections, IMSLP (verify each recording's license page), NASA/US federal archives. Drop the file into `assets/music/`, add a credits row, and set `musicBed()` in `sfx-plan.mjs` to return `{ path, trimTo: T.DUR, gain, fadeIn, fadeOut }`. The mix stage trims, fades and sidechain-ducks it under the VO (≈6–8 dB). **Never two beds:** when a classical asset exists, the synth drone fallback is retired for that film. Project 001's Satie bed was lost in the wipe — see `projects/001-.../assets/music/README.md`.
 
 ## Sourcing photos/clips from the internet (LAW 1)
 
-See `ASSETS-AND-CLIPS.md`. `bun studio/engine/clips.mjs` searches/fetches via Wikimedia Commons (no key), Pexels (`PEXELS_API_KEY`), or direct licensed URLs into `assets/clips/` with `manifest.json` + a CSV row — **review and append to `assets-credits.csv` manually**. For Mixkit/Coverr/Videvo/manual pages, use `.agents/skills/get-image` + `.agents/skills/agent-browser` to obtain the final licensed URL, then `clips.mjs fetch url`. Use sourced media only as **printed props/documented assets**, never raw stock footage.
+See `ASSETS-AND-CLIPS.md`. `bun studio/engine/clips.mjs` searches/fetches via Wikimedia Commons (no key), Pexels (`PEXELS_API_KEY`), or direct licensed URLs into `assets/clips/` with `manifest.json` + a CSV row — **review and append to `assets-credits.csv` manually**. For Mixkit/Coverr/Videvo/manual pages, use `.agents/skills/get-image` + `.agents/skills/agent-browser` to obtain the final licensed URL, then `clips.mjs fetch url`. Sourced media may enter as **printed props**, **grade-matched full-frame plates / B-roll** (ffmpeg frame extraction → `drawImage` in the beat window — see the bible `.agents/skills/cinematic-motion-graphics/SKILL.md` §4/§8), or documented assets. Never raw, ungraded, uncredited stock; never AI-generated media.
 
 ## QC checklist (per AGENTS.md)
 
-- [ ] **Still sweep** at every beat: `bun render.mjs still <t>` — nothing beheaded, nothing spilling (LAW 4).
+- [ ] **Still sweep** at every beat **at pose and at text entry/exit frames**: `bun render.mjs still <t>` — nothing beheaded, nothing spilling, no text collisions (LAW 4/6/8).
+- [ ] **Shot cards complete** in `BEATS.md` for every beat (intent/shot/move/grid/hero/text/cues/assets).
 - [ ] **Zoom crops** on characters/underlines: nothing floats (LAW 5), no stroke crosses type (LAW 6).
 - [ ] `bun build.mjs` prints `FINAL-FILE LAW ok` (frames + both stream durations, LAW 3).
 - [ ] Audio QC: mix ≈ −14.5 LUFS area, TP ≤ −0.9 dBTP, bed audibly ducked.
@@ -87,6 +90,8 @@ See `ASSETS-AND-CLIPS.md`. `bun studio/engine/clips.mjs` searches/fetches via Wi
 6. **Single clock** — `timings.mjs` is the only timing truth; world and sfx-plan both import it.
 7. **Zone dim-backs** — when the camera leaves a zone, the zone dims; old heroes never bleed into the next beat.
 8. **Alphas multiply** — every draw helper multiplies inherited `globalAlpha`, so dim-backs compose.
+9. **One idea per beat, framed deliberately** — every beat declares a shot card (shot size, move, thirds/phi grid anchor, hero, text clearances); no text collisions (LAW 8 — see `.agents/skills/cinematic-motion-graphics/SKILL.md`).
+10. **Cinematic grade by preset** — `engine/presets.mjs` ships `documentary-grade` (warm key/cool shadow, heavier grain), `archival-essay`, `night-essay` and the house `paper-storybook`; encode with `VIDEO_PRESETS` (`master` crf 16, lookahead ≤ 20 — OOM law). Characters are grounded by contact shadows (draw before the cast).
 
 ## Fonts
 
