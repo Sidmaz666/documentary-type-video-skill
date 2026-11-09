@@ -43,11 +43,10 @@ studio/projects/*/BEAT_TABLE.md
 
 # large local / models / non-source
 /.skills/
-/kokoro/*.bin
-/kokoro/*.onnx
+/models/*
+!/models/README.md
 /the-bravest-snack-in-history.mp4
 /ref_audio.aac
-/whisper-models/
 
 # 001 prop source/derived (credited in CSV; keep local if reworking props)
 studio/projects/001-the-bravest-snack-in-history/assets/photo-props/

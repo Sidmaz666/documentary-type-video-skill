@@ -2,7 +2,7 @@
 // Word-level ASR/STT timestamps for Opuscar VO.
 // JS stack: @huggingface/transformers (onnxruntime-node) running Whisper tiny.en
 // - no native cmake/whisper.cpp build required (works on Windows out of the box).
-// First run downloads the model (~116 MB) into ./whisper-models/ (gitignored).
+// First run downloads the model (~116 MB) into ./models/whisper/ (gitignored).
 //
 // Examples:
 //   node studio/tools/asr/transcribe.mjs studio/projects/001-the-bravest-snack-in-history/assets/vo.m4a
@@ -80,7 +80,7 @@ export async function transcribe(audioPath, opts = {}) {
   try {
     const { audio, sampleRate } = decodeWav16kMono(wavPath);
     const { pipeline, env } = await import('@huggingface/transformers');
-    env.cacheDir = resolve(opts.modelPath || 'whisper-models');
+    env.cacheDir = resolve(opts.modelPath || 'models/whisper');
     const model = opts.model || 'Xenova/whisper-tiny.en';
     const t = await pipeline('automatic-speech-recognition', model, { dtype: 'q8' });
     const out = await t(audio, { return_timestamps: 'word', chunk_length_s: 30 });
@@ -94,7 +94,7 @@ export async function transcribe(audioPath, opts = {}) {
 async function main() {
   const audio = process.argv.slice(2).find((a) => a && !a.startsWith('-'));
   if (!audio || has('-h') || has('--help')) {
-    console.log(`usage: node studio/tools/asr/transcribe.mjs <audio> [--model Xenova/whisper-tiny.en|Xenova/whisper-tiny] [--out file.json] [--modelPath ./whisper-models]\n       bun studio/tools/asr/transcribe.mjs <audio> ...\nJS/onnxruntime stack (@huggingface/transformers). First run downloads the model (~116 MB) to ./whisper-models/ (gitignored).\nOutput: JSON with word-level timestamps: segments[].words[].{start,end,word,prob}`);
+    console.log(`usage: node studio/tools/asr/transcribe.mjs <audio> [--model Xenova/whisper-tiny.en|Xenova/whisper-tiny] [--out file.json] [--modelPath ./models/whisper]\n       bun studio/tools/asr/transcribe.mjs <audio> ...\nJS/onnxruntime stack (@huggingface/transformers). First run downloads the model (~116 MB) to ./models/whisper/ (gitignored).\nOutput: JSON with word-level timestamps: segments[].words[].{start,end,word,prob}`);
     process.exit(audio ? 0 : 2);
   }
   const out = arg('--out', resolve(audio).replace(/\.[^.]+$/, '') + '.whisper.json');

@@ -8,10 +8,11 @@
 import { spawn } from 'node:child_process';
 import { createCanvas } from '@napi-rs/canvas';
 import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { ffmpegChunkArgs } from './compose.mjs';
 
-const ROOT = 'D:/YOUTUBE/ExTest';
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 export const outDir = (slug) => join(ROOT, 'studio/projects', slug, 'out');
 export const publishPath = (slug) => join(ROOT, 'public/film', `${slug}.mp4`);
 
