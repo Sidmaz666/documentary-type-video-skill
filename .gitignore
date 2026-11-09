@@ -1,0 +1,61 @@
+# dependencies
+node_modules/
+
+# output / generated (never commit)
+out/
+dist/
+*.tgz
+studio/projects/**/out/
+studio/projects/**/frames/
+public/film/*.part*.mp4
+
+# code coverage
+coverage/
+*.lcov
+
+# logs
+logs/
+*.log
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+dev.log
+
+# dotenv
+.env
+.env.*
+!.env.example
+
+# caches / local
+.eslintcache
+.cache/
+*.tsbuildinfo
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Windows reserved / accidental
+nul
+NUL
+studio/projects/*/nul
+
+# analysis / scratch artifacts (project-local; keep only source + canonical assets)
+studio/projects/*/cmp_*.png
+studio/projects/*/ref*.png
+studio/projects/*/*_analysis.json
+studio/projects/*/camera_rail*.json
+studio/projects/*/new_camera_keys.json
+studio/projects/*/precise_camera_keys.json
+studio/projects/*/REPLICATION_STUDY.md
+studio/projects/*/REFERENCE_VS_RECONSTRUCTION.md
+studio/projects/*/BEAT_TABLE.md
+
+# large local media/models (keep published/canonical as decided per project)
+/the-bravest-snack-in-history.mp4
+/ref_audio.aac
+/kokoro/*.bin
+/kokoro/*.onnx
+
+# root scratch
+/frames/
