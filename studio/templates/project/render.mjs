@@ -8,11 +8,14 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderFrame, renderChunkFrames } from '../../engine/compose.mjs';
+import { filmGrade } from '../../engine/presets.mjs';
 import { T } from './timings.mjs';
 import { drawWorld } from './world.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const GRADE = { fade: { fadeIn: T.fadeIn, fadeOut: T.fadeOut } };
+// Cinematic default for new films: warm documentary grade + fade window.
+// Swap 'documentary-grade' for 'paper-storybook' (house default), 'archival-essay', or 'night-essay'.
+const GRADE = filmGrade('documentary-grade', { fadeIn: T.fadeIn, fadeOut: T.fadeOut });
 
 function stillAt(t, scale = 1, out) {
   const W = Math.round(T.W / scale), H = Math.round(T.H / scale);
@@ -36,7 +39,7 @@ async function main() {
     const [s, e] = rest.map(Number);
     await renderChunkFrames({
       T, drawWorld, grade: GRADE, start: s, end: e,
-      outPath: join(HERE, 'out', `part_${String(s).padStart(4, '0')}.mp4`), scale,
+      outPath: join(HERE, 'out', `part_${String(s).padStart(4, '0')}.mp4`), scale, quality: 'master',
     });
     console.log(`chunk [${s}, ${e}) → out/`);
   } else {

@@ -7,18 +7,41 @@ import { boilPt, boilWobble, handStroke, handCircle } from './ink.mjs';
 
 const STROKE = { w: 6, color: INK, boil: 2.4 };
 
+// groundShadow — soft contact ellipse under a grounded subject. Sells the
+// composite (nothing floats — LAW 5/bible §4.3) and grounds the figure in
+// the paper. Drawn BEFORE the subject; multiply inherited alpha.
+function groundShadow(ctx, rx, ry, alpha = 0.3) {
+  const inherited = ctx.globalAlpha;
+  ctx.save();
+  ctx.translate(0, ry * 0.4);
+  ctx.scale(1, ry / Math.max(1, rx));
+  const g = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
+  g.addColorStop(0, `rgba(28,24,20,${alpha})`);
+  g.addColorStop(0.7, `rgba(28,24,20,${alpha * 0.4})`);
+  g.addColorStop(1, 'rgba(28,24,20,0)');
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.arc(0, 0, rx, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
 // ── stickman ──────────────────────────────────────────────────────────────
 // Clean stick figure hunter. Origin (x, y) = ground under the feet. h = height.
 // pose: 'stand' | 'alert' | 'spear' | 'walk'. progress ∈ [0,1] draws progressively.
+// opts: shadow (default true) drops a contact ellipse; flip mirrors the figure horizontally.
 export function stickman(ctx, x, y, opts = {}) {
-  const { h = 420, pose = 'stand', t = 0, walk = 0, progress = 1, alpha = 1, w = STROKE.w * 1.55 } = opts;
+  const { h = 420, pose = 'stand', t = 0, walk = 0, progress = 1, alpha = 1, w = STROKE.w * 1.55, shadow = true, flip = false } = opts;
   const inherited = ctx.globalAlpha;
   ctx.save();
   ctx.globalAlpha = inherited * alpha;
   ctx.translate(x, y);
   ctx.rotate(boilWobble(0.0016)); // pivot = own base center
+  if (flip) ctx.scale(-1, 1);
   const u = clamp(progress);
   const n = (a, b) => clamp((u - a) / (b - a)); // progressive reveal windows
+
+  if (shadow && u > 0.02) groundShadow(ctx, h * 0.185, h * 0.03, 0.32 * Math.min(1, u + 0.15));
 
   // proportions
   const headR = h * 0.11;
@@ -95,12 +118,13 @@ export function stickman(ctx, x, y, opts = {}) {
 // walk ∈ [0,1) walk-cycle phase. LAW 5: tail root starts INSIDE the rump and
 // is drawn BEFORE the body fill, so the root joint is covered by the body.
 export function cow(ctx, x, y, opts = {}) {
-  const { s = 520, t = 0, walk = 0, alpha = 1, w = 7 } = opts;
+  const { s = 520, t = 0, walk = 0, alpha = 1, w = 7, shadow = true } = opts;
   const inherited = ctx.globalAlpha;
   ctx.save();
   ctx.globalAlpha = inherited * alpha;
   ctx.translate(x, y);
   ctx.rotate(boilWobble(0.0014)); // pivot = own center (ground midpoint)
+  if (shadow) groundShadow(ctx, s * 0.34, s * 0.028, 0.3);
   const bodyW = s, bodyH = s * 0.52;
   const topY = -bodyH - s * 0.1;      // back line
   const bellyY = -s * 0.12;           // belly line

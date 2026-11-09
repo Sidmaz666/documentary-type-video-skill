@@ -16,7 +16,7 @@ function centeredFont(ctx, size, font) {
 export function stampText(ctx, x, y, text, opts = {}) {
   const {
     size = 120, color = INK, font = FONT.display, rot = 0, alpha = 1,
-    t0 = 0, t = 0, pop = 0.12, boil = true,
+    t0 = 0, t = 0, pop = 0.12, boil = true, press = true, pressDepth = 0.03,
   } = opts;
   if (t < t0) return;
   const inherited = ctx.globalAlpha;
@@ -28,8 +28,17 @@ export function stampText(ctx, x, y, text, opts = {}) {
   const u = clamp((t - t0) / pop);
   const s = 1.35 - 0.35 * easeOutBack(u); // overshoot → settle at 1
   ctx.scale(s, s);
-  ctx.fillStyle = color;
   centeredFont(ctx, size, font);
+  if (press) {
+    // letterpress punch: offset dark ghost under the stamp (documentary print feel)
+    ctx.save();
+    ctx.translate(0, size * pressDepth);
+    ctx.globalAlpha = inherited * alpha * 0.4;
+    ctx.fillStyle = INK;
+    ctx.fillText(text, 0, 0);
+    ctx.restore();
+  }
+  ctx.fillStyle = color;
   ctx.fillText(text, 0, 0);
   ctx.restore();
   ctx.globalAlpha = inherited;

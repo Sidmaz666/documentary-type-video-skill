@@ -20,7 +20,8 @@ import { PAPER } from './style.mjs';
 import { camAt, handheldDamped, applyCam, camSpeed } from './camera.mjs';
 import { setBoil } from './ink.mjs';
 import { setPaperView } from './props.mjs';
-import { vignette, grain, fade } from './grade.mjs';
+import { vignette, grain, fade, splitTone } from './grade.mjs';
+import { filmGrade, VIDEO_PRESETS, DEFAULT_VIDEO_PRESET } from './presets.mjs';
 
 export const FPS = 30;
 const SUB = 1 / 90; // motion-blur sub-sample spacing
@@ -97,7 +98,8 @@ export function renderFrame(ctx, W, H, t, drawWorld, opts = {}) {
   }
 
   setPaperView(null);
-  // grade passes
+  // grade passes (split-tone before vignette so corners stay cool under the falloff)
+  if (grade.splitTone) splitTone(ctx, W, H, grade.splitTone);
   if (grade.vignette !== null) vignette(ctx, W, H, grade.vignette || {});
   if (grade.grain !== null) grain(ctx, W, H, frameIdx, grade.grain || {});
   if (grade.fade !== null) fade(ctx, W, H, t, grade.fade || {});
@@ -105,12 +107,17 @@ export function renderFrame(ctx, W, H, t, drawWorld, opts = {}) {
 }
 
 // ── ffmpeg chunk writer (raw RGBA piped frame by frame) ───────────────────
-export function ffmpegChunkArgs(W, H, outPath) {
+// quality: name of a VIDEO_PRESETS ladder entry ('master'|'web'|'qc') or a
+// preset object. lookahead is ALWAYS capped ≤ 20 (AGENTS.md §4 OOM law).
+export function ffmpegChunkArgs(W, H, outPath, quality = DEFAULT_VIDEO_PRESET) {
+  const q = typeof quality === 'string' ? VIDEO_PRESETS[quality] : (quality || VIDEO_PRESETS[DEFAULT_VIDEO_PRESET]);
+  if (!q) throw new Error(`unknown video preset: ${quality} (have: ${Object.keys(VIDEO_PRESETS).join(', ')})`);
+  const lookahead = Math.min(20, q.lookahead ?? 20);
   return [
     '-y', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-r', String(FPS),
     '-i', '-',
-    '-c:v', 'libx264', '-preset', 'fast', '-crf', '18',
-    '-x264-params', 'lookahead=20', '-pix_fmt', 'yuv420p',
+    '-c:v', 'libx264', '-preset', q.preset, '-crf', String(q.crf),
+    '-x264-params', `lookahead=${lookahead}`, '-pix_fmt', q.pixFmt || 'yuv420p',
     outPath,
   ];
 }
@@ -118,13 +125,13 @@ export function ffmpegChunkArgs(W, H, outPath) {
 // renderChunkFrames — renders frames [start, end) of T into outPath by
 // streaming RGBA buffers into ffmpeg. drawWorld/T come from the caller.
 // Returns a promise that resolves when ffmpeg exits 0.
-export function renderChunkFrames({ T, drawWorld, grade, start, end, outPath, scale = 1, W, H }) {
+export function renderChunkFrames({ T, drawWorld, grade, start, end, outPath, scale = 1, W, H, quality = DEFAULT_VIDEO_PRESET }) {
   W = W || T.W; H = H || T.H;
   const SW = Math.round(W / scale), SH = Math.round(H / scale);
   const canvas = createCanvas(SW, SH);
   const ctx = canvas.getContext('2d');
   mkdirSync(dirname(outPath), { recursive: true });
-  const ff = spawn('ffmpeg', ffmpegChunkArgs(SW, SH, outPath), { stdio: ['pipe', 'inherit', 'inherit'] });
+  const ff = spawn('ffmpeg', ffmpegChunkArgs(SW, SH, outPath, quality), { stdio: ['pipe', 'inherit', 'inherit'] });
   return new Promise((res, rej) => {
     ff.on('error', rej);
     ff.on('close', (code) => (code === 0 ? res() : rej(new Error(`ffmpeg chunk exited ${code}`))));
@@ -154,6 +161,8 @@ function parseArgs(argv) {
     else if (a === '--timings') args.timings = argv[++i];
     else if (a === '--scale') args.scale = parseFloat(argv[++i]);
     else if (a === '--out') args.out = argv[++i];
+    else if (a === '--preset') args.preset = argv[++i];
+    else if (a === '--quality') args.quality = argv[++i];
     else args._.push(a);
   }
   return args;
@@ -165,7 +174,7 @@ export async function cli(argv = process.argv.slice(2)) {
   const worldPath = args.world || process.env.STUDIO_WORLD;
   const timingsPath = args.timings || process.env.STUDIO_TIMINGS;
   if (!cmd || !['still', 'stills', 'chunk'].includes(cmd) || !worldPath || !timingsPath) {
-    console.error('usage: bun compose.mjs still <t>|stills t1,t2|chunk <start> <end> --world world.mjs --timings timings.mjs [--scale S] [--out p.png]');
+    console.error('usage: bun compose.mjs still <t>|stills t1,t2|chunk <start> <end> --world world.mjs --timings timings.mjs [--scale S] [--out p.png] [--preset paper-storybook|documentary-grade|archival-essay|night-essay] [--quality master|web|qc]');
     process.exit(2);
   }
   const Tmod = await import(pathResolve(timingsPath));
@@ -173,7 +182,9 @@ export async function cli(argv = process.argv.slice(2)) {
   const Wmod = await import(pathResolve(worldPath));
   const drawWorld = Wmod.drawWorld || Wmod.default?.drawWorld;
   if (typeof drawWorld !== 'function') throw new Error('world module must export drawWorld(ctx, t)');
-  const grade = { fade: { fadeIn: T.fadeIn || [0, 0.4], fadeOut: T.fadeOut || [31.9, 32.53] } };
+  const fadeWin = { fadeIn: T.fadeIn || [0, 0.4], fadeOut: T.fadeOut || [31.9, 32.53] };
+  const grade = args.preset ? filmGrade(args.preset, fadeWin) : { fade: fadeWin };
+  const quality = args.quality || DEFAULT_VIDEO_PRESET;
   const scale = args.scale || 1;
   const SW = Math.round(T.W / scale), SH = Math.round(T.H / scale);
 
@@ -194,7 +205,7 @@ export async function cli(argv = process.argv.slice(2)) {
   if (cmd === 'chunk') {
     const [s, e] = rest.map(Number);
     const out = args.out || `part_${String(s).padStart(4, '0')}.mp4`;
-    await renderChunkFrames({ T, drawWorld, grade, start: s, end: e, outPath: out, scale });
+    await renderChunkFrames({ T, drawWorld, grade, start: s, end: e, outPath: out, scale, quality });
     console.log(`chunk done → ${out}`);
   }
 }

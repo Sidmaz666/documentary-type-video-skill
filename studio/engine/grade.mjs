@@ -40,6 +40,24 @@ export function grain(ctx, W, H, frameIdx, { amount = 0.5, stride = 7 } = {}) {
   ctx.globalAlpha = inherited;
 }
 
+// splitTone — warm-center/cool-edge split tone, the documentary-grade look.
+// Two cheap full-frame gradients; drawn before vignette. Keeps PAPER
+// readable; do NOT raise alphas (text contrast is law, bible §5.3).
+export function splitTone(ctx, W, H, { warm = 0.055, cool = 0.06 } = {}) {
+  const w = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.2, W / 2, H / 2, Math.min(W, H) * 0.75);
+  w.addColorStop(0, `rgba(232,176,75,${clamp(warm)})`);
+  w.addColorStop(1, 'rgba(232,176,75,0)');
+  ctx.save();
+  ctx.fillStyle = w;
+  ctx.fillRect(0, 0, W, H);
+  const c = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.62, W / 2, H / 2, Math.hypot(W, H) * 0.66);
+  c.addColorStop(0, 'rgba(34,51,59,0)');
+  c.addColorStop(1, `rgba(34,51,59,${clamp(cool)})`);
+  ctx.fillStyle = c;
+  ctx.fillRect(0, 0, W, H);
+  ctx.restore();
+}
+
 // fade — black overlay alpha from fadeIn/fadeOut windows [t0, t1].
 export function fade(ctx, W, H, t, { fadeIn = [0, 0.4], fadeOut = [31.9, 32.53] } = {}) {
   let a = 0;

@@ -2,13 +2,17 @@
 // Topic-agnostic: knows nothing about any film. Imported by every engine module.
 import { GlobalFonts } from '@napi-rs/canvas';
 import { readdirSync, existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 // ── House palette ─────────────────────────────────────────────────────────
 export const PAPER = '#f4ead8'; // warm cream board
+export const PAPER_HI = '#faf3e3'; // paper highlight (key-light face of cards/prints)
 export const INK   = '#1c1814'; // near-black warm ink
 export const RED   = '#b3341f'; // accent red (circles, underlines, mutation)
 export const GOLD  = '#c9a227'; // accent gold
+export const TEAL  = '#22333b'; // cool shadow split-tone
+export const WARM  = '#e8b04b'; // warm key split-tone
 export const SHADOW = 'rgba(28,24,20,0.18)'; // print drop shadows
 
 // ── Math helpers ──────────────────────────────────────────────────────────
@@ -17,6 +21,9 @@ export const clamp = (v, a = 0, b = 1) => (v < a ? a : v > b ? b : v);
 export const smoothstep = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
 export const easeInOut = (u) => (u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
 export const easeOutBack = (u, s = 1.70158) => 1 + (s + 1) * Math.pow(u - 1, 3) + s * Math.pow(u - 1, 2);
+export const easeOutQuart = (u) => 1 - Math.pow(1 - clamp(u), 4);
+export const easeInQuart = (u) => Math.pow(clamp(u), 4);
+export const easeInOutCubic = (u) => (u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2);
 
 // ── Deterministic hashing (byte-stable, order-independent per call) ──────
 // hash(n): integer → [0,1). Used everywhere the boil needs a stable jitter.
@@ -44,10 +51,10 @@ export function rng(seed) {
 export const rand = (seed) => rng(seed)(); // one draw
 
 // ── Fonts ─────────────────────────────────────────────────────────────────
-// Try to register every .ttf/.otf in studio/assets/fonts. Family name is
-// mapped by filename prefix (case-insensitive contains). Fallbacks keep the
-// engine usable with zero downloads.
-const FONT_DIRS = ['D:/YOUTUBE/ExTest/studio/assets/fonts'];
+// Try to register every .ttf/.otf in the repo's studio/assets/fonts. Path is
+// resolved relative to THIS file, so the engine works on any machine/checkout.
+const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
+const FONT_DIRS = [join(REPO_ROOT, 'studio', 'assets', 'fonts')];
 const FAMILY_BY_FILE = [
   ['archivoblack', 'Archivo Black'],
   ['anton', 'Anton'],

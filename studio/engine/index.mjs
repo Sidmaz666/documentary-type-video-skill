@@ -11,4 +11,6 @@ export * from './grade.mjs';
 export * from './compose.mjs';
 export * from './sfx.mjs';
 export * from './buildlib.mjs';
+export * from './presets.mjs';
+export * from './trace.mjs';
 export * as clips from './clips.mjs';
