@@ -115,6 +115,41 @@ export const films: Film[] = [
       "Rendered at 3840×1646 (21:9), 30 fps, 976 frames, chunk-encoded H.264",
     ],
   },
+  {
+    slug: "002-ink-and-ember",
+    title: "Ink & Ember",
+    tagline: "A code-drawn documentary · 24.6 seconds · one continuous camera move",
+    description:
+      "Ink is the oldest memory technology we have. Five thousand years of lampblack and glue, ground and dried, poured into movable type — every story you have ever read began as a stubborn black promise. Every frame composited by a canvas program onto a 4000px paper board: the seed dot, the scribe, the press, the falling drop.",
+    videoUrl: "/film/002-ink-and-ember.mp4",
+    zipUrl: "",
+    duration: 24.633,
+    frames: 739,
+    width: 1920,
+    height: 822,
+    fps: 30,
+    codec: "H.264 + AAC",
+    sizeMB: 8.9,
+    scenes: [
+      { id: "hook", title: "Ink.", line: "Five thousand years ago, ink was memory you could carry.", start: 0, end: 3.9, hero: "red seed dot + ping · INK. stamp · 'five thousand years of memory' types on" },
+      { id: "china", title: "China", line: "In China, scribes ground lampblack with glue into sticks — ink that outlasted kings.", start: 3.9, end: 10.0, hero: "stickman scribe + mortar arcs · pine-soot ink stick drops in · soot motes" },
+      { id: "gutenberg", title: "1440", line: "Around fourteen forty, Gutenberg split the word into movable type. And in fourteen fifty five, the Gutenberg Bible poured from the press.", start: 10.0, end: 19.3, hero: "type case rises · press sheet types itself · 1440./1455. stamps" },
+      { id: "everything", title: "Everything You Have Ever Read", line: "Everything you have ever read began as a stubborn black promise.", start: 18.98, end: 22.76, hero: "mask-up type wipe · a stretching ink drop falls clear of the words" },
+      { id: "remember", title: "It Remembers.", line: "This is ink. It remembers.", start: 22.76, end: 24.633, hero: "drop lands · ink pool ripples · IT REMEMBERS. stamp · fade out" },
+    ],
+    audio: {
+      vo: "Kokoro-82M local TTS (am_michael, calm professional male), word-anchored timings via whisper ASR",
+      sfx: "Pencil scratches, paper drops, stamp thuds, camera whooshes — all code-synthesized",
+      music: "Erik Satie — Gymnopédie No. 1 (1888, public domain), piano recording (Teknopazzo, CC0), reused from 001's verified bed; trimmed to length, faded, sidechain-ducked under the narration",
+      musicCredit: "Satie / Teknopazzo — CC0, via Wikimedia Commons",
+    },
+    credits: [
+      "Every frame composited by a canvas program — no AI-generated media (LAW 1)",
+      "VO: Kokoro-82M (Apache-2.0), local synthesis — no cloud voice services",
+      "Score: Satie, Gymnopédie No. 1 — CC0 recording, ducked under narration",
+      "Rendered at 1920×822 (test-resolution 21:9 class), 30 fps, 739 frames, chunk-encoded H.264",
+    ],
+  },
 ];
 
 export const featuredFilm = films[0];

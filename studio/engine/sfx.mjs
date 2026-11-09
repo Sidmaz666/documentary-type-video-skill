@@ -221,8 +221,9 @@ function duckEnvelope(voL, voR, len, { window = 0.05, duck = 0.42 } = {}) {
 // ── the mix stage ─────────────────────────────────────────────────────────
 // sfxEvents: [{ t, samples?, make?, name?, gain?, pan? }]
 // music: { path, trimTo, gain = 1, fadeIn = 0.8, fadeOut = 1.2 } or null
-export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out = 'out/mix.wav', tail = 0.0 } = {}) {
+export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out = 'out/mix.wav', tail = 0.0, voGain = 1 } = {}) {
   const vo = await decodeAudio(voPath);
+  if (voGain !== 1) { for (let i = 0; i < vo.L.length; i++) { vo.L[i] *= voGain; vo.R[i] *= voGain; } }
   headFade(vo.L); headFade(vo.R);
   // bus length: VO (+tail), extended to cover the last SFX event if it rings longer
   let lastEnd = 0;

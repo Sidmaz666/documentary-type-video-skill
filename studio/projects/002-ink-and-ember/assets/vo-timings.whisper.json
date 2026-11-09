@@ -1,0 +1,419 @@
+{
+  "backend": "@huggingface/transformers",
+  "model": "Xenova/whisper-tiny.en",
+  "audio": "D:\\YOUTUBE\\ExTest\\studio\\projects\\002-ink-and-ember\\assets\\vo.m4a",
+  "duration": 24.619,
+  "language": "en",
+  "text": "Five thousand years ago, ink was memory you could carry. In China, scribes ground lamp-black with glue into sticks ink that out-lasted kings. Around 1440, Gutenberg split the word into movable type. And in 1455, the Gutenberg Bible poured from the press. Everything you have ever read began as a stubborn black promise. This is ink. It remembers.",
+  "segments": [
+    {
+      "start": 0.52,
+      "end": 3.56,
+      "text": "Five thousand years ago, ink was memory you could carry.",
+      "words": [
+        {
+          "start": 0.52,
+          "end": 0.78,
+          "word": "Five",
+          "prob": null
+        },
+        {
+          "start": 0.78,
+          "end": 1.14,
+          "word": "thousand",
+          "prob": null
+        },
+        {
+          "start": 1.14,
+          "end": 1.52,
+          "word": "years",
+          "prob": null
+        },
+        {
+          "start": 1.52,
+          "end": 1.76,
+          "word": "ago,",
+          "prob": null
+        },
+        {
+          "start": 1.76,
+          "end": 2.02,
+          "word": "ink",
+          "prob": null
+        },
+        {
+          "start": 2.02,
+          "end": 2.36,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 2.36,
+          "end": 2.58,
+          "word": "memory",
+          "prob": null
+        },
+        {
+          "start": 2.58,
+          "end": 2.82,
+          "word": "you",
+          "prob": null
+        },
+        {
+          "start": 2.82,
+          "end": 3.24,
+          "word": "could",
+          "prob": null
+        },
+        {
+          "start": 3.24,
+          "end": 3.56,
+          "word": "carry.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 3.9,
+      "end": 9.6,
+      "text": "In China, scribes ground lamp -black with glue into sticks ink that out -lasted kings.",
+      "words": [
+        {
+          "start": 3.9,
+          "end": 4.34,
+          "word": "In",
+          "prob": null
+        },
+        {
+          "start": 4.34,
+          "end": 4.66,
+          "word": "China,",
+          "prob": null
+        },
+        {
+          "start": 4.86,
+          "end": 5.6,
+          "word": "scribes",
+          "prob": null
+        },
+        {
+          "start": 5.6,
+          "end": 5.96,
+          "word": "ground",
+          "prob": null
+        },
+        {
+          "start": 5.96,
+          "end": 6.2,
+          "word": "lamp",
+          "prob": null
+        },
+        {
+          "start": 6.2,
+          "end": 6.46,
+          "word": "-black",
+          "prob": null
+        },
+        {
+          "start": 6.46,
+          "end": 6.7,
+          "word": "with",
+          "prob": null
+        },
+        {
+          "start": 6.7,
+          "end": 7.06,
+          "word": "glue",
+          "prob": null
+        },
+        {
+          "start": 7.06,
+          "end": 7.44,
+          "word": "into",
+          "prob": null
+        },
+        {
+          "start": 7.44,
+          "end": 7.76,
+          "word": "sticks",
+          "prob": null
+        },
+        {
+          "start": 7.76,
+          "end": 8,
+          "word": "ink",
+          "prob": null
+        },
+        {
+          "start": 8,
+          "end": 8.28,
+          "word": "that",
+          "prob": null
+        },
+        {
+          "start": 8.28,
+          "end": 8.28,
+          "word": "out",
+          "prob": null
+        },
+        {
+          "start": 8.28,
+          "end": 9.08,
+          "word": "-lasted",
+          "prob": null
+        },
+        {
+          "start": 9.08,
+          "end": 9.6,
+          "word": "kings.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 10,
+      "end": 14.02,
+      "text": "Around 1440, Gutenberg split the word into movable type.",
+      "words": [
+        {
+          "start": 10,
+          "end": 10.86,
+          "word": "Around",
+          "prob": null
+        },
+        {
+          "start": 10.86,
+          "end": 11.52,
+          "word": "1440,",
+          "prob": null
+        },
+        {
+          "start": 11.58,
+          "end": 12.1,
+          "word": "Gutenberg",
+          "prob": null
+        },
+        {
+          "start": 12.1,
+          "end": 12.34,
+          "word": "split",
+          "prob": null
+        },
+        {
+          "start": 12.34,
+          "end": 12.54,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 12.54,
+          "end": 12.8,
+          "word": "word",
+          "prob": null
+        },
+        {
+          "start": 12.8,
+          "end": 13.02,
+          "word": "into",
+          "prob": null
+        },
+        {
+          "start": 13.02,
+          "end": 13.72,
+          "word": "movable",
+          "prob": null
+        },
+        {
+          "start": 13.72,
+          "end": 14.02,
+          "word": "type.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 14.24,
+      "end": 18.52,
+      "text": "And in 1455, the Gutenberg Bible poured from the press.",
+      "words": [
+        {
+          "start": 14.24,
+          "end": 14.56,
+          "word": "And",
+          "prob": null
+        },
+        {
+          "start": 14.56,
+          "end": 14.88,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 14.88,
+          "end": 15.78,
+          "word": "1455,",
+          "prob": null
+        },
+        {
+          "start": 15.9,
+          "end": 16.34,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 16.34,
+          "end": 16.94,
+          "word": "Gutenberg",
+          "prob": null
+        },
+        {
+          "start": 16.94,
+          "end": 17.26,
+          "word": "Bible",
+          "prob": null
+        },
+        {
+          "start": 17.26,
+          "end": 17.52,
+          "word": "poured",
+          "prob": null
+        },
+        {
+          "start": 17.52,
+          "end": 17.74,
+          "word": "from",
+          "prob": null
+        },
+        {
+          "start": 17.74,
+          "end": 18.1,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 18.1,
+          "end": 18.52,
+          "word": "press.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 18.98,
+      "end": 22.44,
+      "text": "Everything you have ever read began as a stubborn black promise.",
+      "words": [
+        {
+          "start": 18.98,
+          "end": 19.26,
+          "word": "Everything",
+          "prob": null
+        },
+        {
+          "start": 19.26,
+          "end": 19.48,
+          "word": "you",
+          "prob": null
+        },
+        {
+          "start": 19.48,
+          "end": 19.72,
+          "word": "have",
+          "prob": null
+        },
+        {
+          "start": 19.72,
+          "end": 20,
+          "word": "ever",
+          "prob": null
+        },
+        {
+          "start": 20,
+          "end": 20.38,
+          "word": "read",
+          "prob": null
+        },
+        {
+          "start": 20.38,
+          "end": 20.7,
+          "word": "began",
+          "prob": null
+        },
+        {
+          "start": 20.7,
+          "end": 20.86,
+          "word": "as",
+          "prob": null
+        },
+        {
+          "start": 20.86,
+          "end": 21.1,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 21.1,
+          "end": 21.54,
+          "word": "stubborn",
+          "prob": null
+        },
+        {
+          "start": 21.54,
+          "end": 21.96,
+          "word": "black",
+          "prob": null
+        },
+        {
+          "start": 21.96,
+          "end": 22.44,
+          "word": "promise.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 22.76,
+      "end": 23.68,
+      "text": "This is ink.",
+      "words": [
+        {
+          "start": 22.76,
+          "end": 23.04,
+          "word": "This",
+          "prob": null
+        },
+        {
+          "start": 23.04,
+          "end": 23.46,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 23.46,
+          "end": 23.68,
+          "word": "ink.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 23.96,
+      "end": 24.68,
+      "text": "It remembers.",
+      "words": [
+        {
+          "start": 23.96,
+          "end": 24.44,
+          "word": "It",
+          "prob": null
+        },
+        {
+          "start": 24.44,
+          "end": 24.68,
+          "word": "remembers.",
+          "prob": null
+        }
+      ]
+    }
+  ]
+}

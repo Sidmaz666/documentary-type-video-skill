@@ -1,0 +1,4 @@
+id,asset,source,license,notes
+07,voiceover — narration,assets/vo.m4a,user-owned|generated,"Canonical VO; LAW 2 duration = VO"
+08,fonts — Archivo Black / Caveat / Noto Serif,Google Fonts,SIL Open Font License 1.1,"House fonts in studio/assets/fonts (fallbacks allowed)"
+09,music bed — Erik Satie Gymnopédie No.1 (piano recording by Teknopazzo),https://commons.wikimedia.org/wiki/File:Gymnopedie_No._1..ogg,CC0 1.0,"REUSED from project 001's verified bed (Nov 2026 re-source). Composition PD (Satie d.1925); performance CC0 own-work dedication by Teknopazzo. Source file gymnopedie_no1_source.ogg SHA-1 1465775de774068e2d0d24b9ea852b323b4fb0d1 (matches Commons structured data). Working Vorbis q5 copy SHA-1 df27c1090cfb9cbf66f9493ba053de26680c1a71. No images/clips used; no attribution required (CC0), credited here + end-card courtesy line."
