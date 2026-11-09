@@ -29,7 +29,7 @@ licenses but does not block — you must verify.
 
 ## Agent-assisted browsing (when no API / complex pages)
 
-Use the repo skills in `.skills/`:
+Use the repo skills in `.agents/skills/` (get-image, agent-browser):
 
 - **`.agents/skills/get-image/SKILL.md`** — curated free/public sources (Unsplash,
   Pexels, Pixabay, Wikimedia Commons, Mixkit, Coverr, Openverse, archives,

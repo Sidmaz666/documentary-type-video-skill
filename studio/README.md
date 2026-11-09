@@ -66,7 +66,7 @@ Background music is **always real classical music** (MUSIC LAW): actual recordin
 
 ## Sourcing photos/clips from the internet (LAW 1)
 
-See `ASSETS-AND-CLIPS.md`. `bun studio/engine/clips.mjs` searches/fetches via Wikimedia Commons (no key), Pexels (`PEXELS_API_KEY`), or direct licensed URLs into `assets/clips/` with `manifest.json` + a CSV row — **review and append to `assets-credits.csv` manually**. For Mixkit/Coverr/Videvo/manual pages, use `.skills/get-image` + `agent-browser` to obtain the final licensed URL, then `clips.mjs fetch url`. Use sourced media only as **printed props/documented assets**, never raw stock footage.
+See `ASSETS-AND-CLIPS.md`. `bun studio/engine/clips.mjs` searches/fetches via Wikimedia Commons (no key), Pexels (`PEXELS_API_KEY`), or direct licensed URLs into `assets/clips/` with `manifest.json` + a CSV row — **review and append to `assets-credits.csv` manually**. For Mixkit/Coverr/Videvo/manual pages, use `.agents/skills/get-image` + `.agents/skills/agent-browser` to obtain the final licensed URL, then `clips.mjs fetch url`. Use sourced media only as **printed props/documented assets**, never raw stock footage.
 
 ## QC checklist (per AGENTS.md)
 
