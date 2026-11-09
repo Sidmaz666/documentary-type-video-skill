@@ -10,7 +10,6 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@napi-rs/canvas": "^1.1.0",
-    "nodejs-whisper": "^0.4.1"
+    "@napi-rs/canvas": "^1.1.0"
   }
 }

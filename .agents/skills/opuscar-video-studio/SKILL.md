@@ -28,7 +28,7 @@ Follow repo `AGENTS.md` first (hard laws win).
 
 ## Workflow (new/fix film)
 1. Brief + beat table: `PROJECT.md`, `BEATS.md`.
-2. VO canonical: `assets/vo.m4a` + `assets/timings.json` (or Kokoro + timestamps if none supplied). ASR/STT verify/fallback (word-level): `python studio/tools/asr/transcribe_whisper.py assets/vo.m4a --fast --model tiny --out assets/vo-timings.json` (needs `faster-whisper` or `openai-whisper`).
+2. VO canonical: `assets/vo.m4a` + `assets/timings.json` (or Kokoro + timestamps if none supplied). ASR/STT verify/fallback (word-level): `node studio/tools/asr/transcribe.mjs assets/vo.m4a --out assets/vo-timings.whisper.json` (JS: @huggingface/transformers + onnx; model Xenova/whisper-tiny.en auto-downloads to `whisper-models/` on first run).
 3. `timings.mjs`: single clock `T` (scenes, fades, camera Catmull-Rom rail). Picture+SFX import `T`.
 4. `world.mjs`: draw zones on 20kpx paper board with engine props/cast/ink/text; zone dim-backs; `globalAlpha` multiplied. Use `drawPrint(loadImage(...))` for sourced props.
 5. `sfx-plan.mjs`: events at `T` times; `musicBed()` returns PD/CC0 bed or `null`.

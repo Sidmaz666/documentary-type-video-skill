@@ -52,3 +52,6 @@ studio/projects/*/BEAT_TABLE.md
 # 001 prop source/derived (credited in CSV; keep local if reworking props)
 studio/projects/001-the-bravest-snack-in-history/assets/photo-props/
 studio/projects/001-the-bravest-snack-in-history/assets/photo-props-src/
+
+# local HF/transformers model cache
+.cache-whisper/
