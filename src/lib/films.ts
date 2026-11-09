@@ -51,7 +51,7 @@ export const films: Film[] = [
     height: 1646,
     fps: 30,
     codec: "H.264 + AAC",
-    sizeMB: 80,
+    sizeMB: 42.5,
     scenes: [
       {
         id: "hook",
