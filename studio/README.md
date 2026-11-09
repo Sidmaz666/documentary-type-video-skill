@@ -42,6 +42,7 @@ cd studio/projects/002-my-slug
 
 # 3. drop the narration + anchors (LAW 2: duration = VO length)
 #    (your own recording, or Kokoro per AGENTS.md — export word timestamps)
+#    verify/align: python studio/tools/asr/transcribe_whisper.py assets/vo.m4a --fast --model tiny --out assets/vo-timings.json
 cp /path/to/vo.m4a assets/vo.m4a
 cp /path/to/timings.json assets/timings.json
 
