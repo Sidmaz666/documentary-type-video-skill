@@ -1,46 +1,35 @@
 # dependencies
 node_modules/
 
-# output / generated (never commit)
+# output / generated
 out/
 dist/
 *.tgz
 studio/projects/**/out/
 studio/projects/**/frames/
-public/film/*.part*.mp4
 
-# code coverage
-coverage/
-*.lcov
-
-# logs
-logs/
+# logs/caches/env
 *.log
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 dev.log
-
-# dotenv
-.env
-.env.*
-!.env.example
-
-# caches / local
 .eslintcache
 .cache/
 *.tsbuildinfo
+.env
+.env.*
+!.env.example
+coverage/
+*.lcov
 
 # IDE / OS
 .idea/
 .vscode/
 .DS_Store
 Thumbs.db
-
-# Windows reserved / accidental
 nul
 NUL
 studio/projects/*/nul
 
-# analysis / scratch artifacts (project-local; keep only source + canonical assets)
+# scratch / analysis
 studio/projects/*/cmp_*.png
 studio/projects/*/ref*.png
 studio/projects/*/*_analysis.json
@@ -50,19 +39,16 @@ studio/projects/*/precise_camera_keys.json
 studio/projects/*/REPLICATION_STUDY.md
 studio/projects/*/REFERENCE_VS_RECONSTRUCTION.md
 studio/projects/*/BEAT_TABLE.md
-
-# large local media/models (keep published/canonical as decided per project)
-/the-bravest-snack-in-history.mp4
-/ref_audio.aac
-/kokoro/*.bin
-/kokoro/*.onnx
-
-# root scratch
 /frames/
 
-# optional local skill packs (untracked; keep source-of-truth skills in .agents/skills)
+# large local / models / non-source
 /.skills/
+/kokoro/*.bin
+/kokoro/*.onnx
+/the-bravest-snack-in-history.mp4
+/ref_audio.aac
+/whisper-models/
 
-# 001 prop source/derived images (credited in CSV; keep local if reworking props)
+# 001 prop source/derived (credited in CSV; keep local if reworking props)
 studio/projects/001-the-bravest-snack-in-history/assets/photo-props/
 studio/projects/001-the-bravest-snack-in-history/assets/photo-props-src/
