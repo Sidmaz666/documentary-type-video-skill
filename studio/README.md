@@ -43,8 +43,9 @@ cd studio/projects/002-my-slug
 #    claims → SOURCES.md ledger first (research-sourcing skill); no green ledger, no VO
 
 # 3. drop the narration + anchors (LAW 2: duration = VO length)
-#    (your own recording, or Kokoro per AGENTS.md — export word timestamps)
+#    (your own recording, or generate with Kokoro: python ../../studio/tools/tts/kokoro.py --text-file script.txt --out assets/vo.m4a)
 #    verify/align: node studio/tools/asr/transcribe.mjs assets/vo.m4a --out assets/vo-timings.whisper.json
+#    (or bun studio/tools/asr/transcribe.mjs assets/vo.m4a ...)
 cp /path/to/vo.m4a assets/vo.m4a
 cp /path/to/timings.json assets/timings.json
 

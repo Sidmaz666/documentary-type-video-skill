@@ -31,7 +31,7 @@ Follow repo `AGENTS.md` first (hard laws win).
 
 ## Workflow (new/fix film)
 1. Brief + beat table: `PROJECT.md`, `BEATS.md` — every BEATS row is a full **shot card** (LAW 8); load `.agents/skills/cinematic-motion-graphics/SKILL.md` for craft rules (framing grids, shot sizes, easing, typography, color script, QC loop).
-2. VO canonical: `assets/vo.m4a` + `assets/timings.json` (or Kokoro + timestamps if none supplied). ASR/STT verify/fallback (word-level): `node studio/tools/asr/transcribe.mjs assets/vo.m4a --out assets/vo-timings.whisper.json` (JS: @huggingface/transformers + onnx; model Xenova/whisper-tiny.en auto-downloads to `models/whisper/` on first run).
+2. VO canonical: `assets/vo.m4a` + `assets/timings.json` (or Kokoro + timestamps if none supplied). VO without supplied narration: `python studio/tools/tts/kokoro.py --text "…" --out assets/vo.m4a [--voice am_michael]` (local Kokoro-82M, offline, Apache-2.0; verified). ASR/STT verify/fallback (word-level): `node studio/tools/asr/transcribe.mjs assets/vo.m4a --out assets/vo-timings.whisper.json` (JS: @huggingface/transformers + onnx; model Xenova/whisper-tiny.en auto-downloads to `models/whisper/` on first run).
 3. `timings.mjs`: single clock `T` (scenes, fades, camera Catmull-Rom rail). Picture+SFX import `T`.
 4. `world.mjs`: draw zones on 20kpx paper board with engine props/cast/ink/text; zone dim-backs; `globalAlpha` multiplied. Use `drawPrint(loadImage(...))` for sourced props. Cast presets & thirds/phi anchors: `engine/presets.mjs` (CAST_PRESETS, THIRDS, PHI_GRID).
 5. `sfx-plan.mjs`: events at `T` times; `musicBed()` returns PD/CC0 bed or `null`.
