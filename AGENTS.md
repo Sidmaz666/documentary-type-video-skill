@@ -131,7 +131,7 @@ Every beat in `BEATS.md` carries a complete **shot card** (intent, shot size, an
 
 - **Render chunks sequentially, never in parallel.** 4 concurrent Skia+ffmpeg instances OOM-kill each other (~75s per 244-frame chunk).
 - **Detached background processes may be reaped** when the shell exits. Run chunk renders synchronously inside the tool window, or via `setsid` with explicit progress polling.
-- **x264 lookahead capped at 20 + `-preset fast`.** The default deep lookahead queues ~400 MB at 4K and contributed to OOM kills.
+- **x264 lookahead capped at 20 + `-preset fast`** (`-x264-params rc-lookahead=20`; a bare `lookahead=` is silently ignored by libx264 — only warns, never applies). The default deep lookahead queues ~400 MB at 4K and contributed to OOM kills.
 - **4K H.264 decode can be SIGKILLed** for frame extraction QC; verify picture via render-side stills (`bun render.mjs still <t>`) and the browser, audio via `astats`/`silencedetect` on small windows.
 
 ## 5 · Commands

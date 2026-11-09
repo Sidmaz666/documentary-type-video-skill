@@ -117,7 +117,7 @@ export function ffmpegChunkArgs(W, H, outPath, quality = DEFAULT_VIDEO_PRESET) {
     '-y', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-r', String(FPS),
     '-i', '-',
     '-c:v', 'libx264', '-preset', q.preset, '-crf', String(q.crf),
-    '-x264-params', `lookahead=${lookahead}`, '-pix_fmt', q.pixFmt || 'yuv420p',
+    '-x264-params', `rc-lookahead=${lookahead}`, '-pix_fmt', q.pixFmt || 'yuv420p',
     outPath,
   ];
 }

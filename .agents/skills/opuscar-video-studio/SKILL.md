@@ -56,4 +56,4 @@ Follow repo `AGENTS.md` first (hard laws win).
 - `bun run lint` at repo root may be unrelated (check `package.json`); report actual lint/typecheck status honestly.
 
 ## Env gotchas (Windows/4GB)
-- Render chunks sequentially; x264 lookahead capped/preset fast in engine; detached bg renders may be reaped. Probe parts before concat. Use `$TEMP` not `/tmp` assumptions. Windows `nul` is reserved.
+- Render chunks sequentially; `-x264-params rc-lookahead=20` + `-preset fast` in engine (a bare `lookahead=` is ignored by libx264 with only a stderr warning — verified 2026-11); detached bg renders may be reaped. Probe parts before concat. Use `$TEMP` not `/tmp` assumptions. Windows `nul` is reserved.
