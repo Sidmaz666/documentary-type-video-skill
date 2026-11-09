@@ -54,3 +54,6 @@ studio/projects/001-the-bravest-snack-in-history/assets/photo-props-src/
 
 # local HF/transformers model cache
 .cache-whisper/
+
+# project-local model caches (ASR tool resolved CWD-relative before repo-root fix)
+studio/projects/*/models/

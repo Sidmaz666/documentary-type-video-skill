@@ -11,9 +11,14 @@
 // Output JSON: {backend,model,audio,duration,language,text,
 //               segments:[{start,end,text,words:[{start,end,word,prob}]}]}
 // Word chunks are grouped into sentences (split on . ! ? and on pauses > GAP_SEC).
-import { pathToFileURL } from 'node:url';
+import { pathToFileURL, fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
-import { resolve, dirname } from 'node:path';
+import { resolve, dirname, join } from 'node:path';
+
+// Repo root = three levels up from this file (studio/tools/asr/transcribe.mjs).
+// The default ASR cache lives in <repo>/models/whisper regardless of CWD —
+// running this tool from inside a project folder must NOT re-download 116 MB.
+const REPO_ROOT = dirname(dirname(dirname(dirname(fileURLToPath(import.meta.url)))));
 import { mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 
@@ -80,7 +85,7 @@ export async function transcribe(audioPath, opts = {}) {
   try {
     const { audio, sampleRate } = decodeWav16kMono(wavPath);
     const { pipeline, env } = await import('@huggingface/transformers');
-    env.cacheDir = resolve(opts.modelPath || 'models/whisper');
+    env.cacheDir = resolve(opts.modelPath || join(REPO_ROOT, 'models', 'whisper'));
     const model = opts.model || 'Xenova/whisper-tiny.en';
     const t = await pipeline('automatic-speech-recognition', model, { dtype: 'q8' });
     const out = await t(audio, { return_timestamps: 'word', chunk_length_s: 30 });
@@ -94,7 +99,7 @@ export async function transcribe(audioPath, opts = {}) {
 async function main() {
   const audio = process.argv.slice(2).find((a) => a && !a.startsWith('-'));
   if (!audio || has('-h') || has('--help')) {
-    console.log(`usage: node studio/tools/asr/transcribe.mjs <audio> [--model Xenova/whisper-tiny.en|Xenova/whisper-tiny] [--out file.json] [--modelPath ./models/whisper]\n       bun studio/tools/asr/transcribe.mjs <audio> ...\nJS/onnxruntime stack (@huggingface/transformers). First run downloads the model (~116 MB) to ./models/whisper/ (gitignored).\nOutput: JSON with word-level timestamps: segments[].words[].{start,end,word,prob}`);
+    console.log(`usage: node studio/tools/asr/transcribe.mjs <audio> [--model Xenova/whisper-tiny.en|Xenova/whisper-tiny] [--out file.json] [--modelPath <dir>] (default: <repo>/models/whisper)\n       bun studio/tools/asr/transcribe.mjs <audio> ...\nJS/onnxruntime stack (@huggingface/transformers). First run downloads the model (~116 MB) to ./models/whisper/ (gitignored).\nOutput: JSON with word-level timestamps: segments[].words[].{start,end,word,prob}`);
     process.exit(audio ? 0 : 2);
   }
   const out = arg('--out', resolve(audio).replace(/\.[^.]+$/, '') + '.whisper.json');
