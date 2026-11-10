@@ -22,6 +22,7 @@ What is this film? Who is it for? What is the ONE idea? (Edit this.)
 - [ ] **external source asset (REQUIRED ≥1, LAW 9)**: `bun ../../engine/clips.mjs search/fetch ...` → `assets/clips/`, review CSV row. Fetch manifest + CSV rows before building
 - [ ] music bed: PD/CC0 classical recording in `assets/music/` (LAW 1b); mix must be **audible from 0:00** — `mixVoWithBus` trims leading silence automatically (`trimLead: true`); verify −38 dB silence run < 0.3 s at open
 - [ ] safe-area sweep clean: `bun ../../studio/tools/safearea.mjs --world world.mjs --timings timings.mjs` (LAW 4; exits 1 on breach)
+- [ ] (recommended) background vibe plate: one constant, low-α multiply plate (engine `drawBackgroundPlate`), credits-CSV row; sources micro-credit end-card in the tail
 
 ## Decision log
 

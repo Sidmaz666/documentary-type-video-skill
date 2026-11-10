@@ -16,4 +16,5 @@ Every row is a complete **shot card** (LAW 8) — a beat without one is not rend
 - Underlines/circles: never cross type; ≥40px clearance below the last line (LAW 6).
 - No text collisions: no text overlaps any other text, hero art, or stroke, at any frame (LAW 8).
 - Framing: compose on thirds/phi grids; one hero per beat; grid anchors verified at pose (bible §1–§2).
+- Background vibe plate (optional, encouraged): one constant low-α multiply plate (`drawBackgroundPlate`) — never per-beat, never a rival hero; credits-CSV row.
 - Sourced media (LAW 1 + LAW 9): **at least one** licensed, real (non-AI) external asset MUST appear in the film — printed props, grade-matched full-frame plates/B-roll (ffmpeg frame extraction → `drawImage`), or documented assets — always with `assets-credits.csv` rows (`studio/engine/clips.mjs`). Never raw/ungraded stock, never AI-generated media. Name the asset in the beat's Assets cell.

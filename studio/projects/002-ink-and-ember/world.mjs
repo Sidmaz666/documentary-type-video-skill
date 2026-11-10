@@ -1,7 +1,7 @@
 // world.mjs — Ink & Ember: the board. 4000px of ink-black history drifting by
 // behind four beats. House ink style; every stroke boils, every alpha multiplies.
 import { INK, RED, FONT, clamp, lerp, easeInQuart, easeOutQuart, hash } from '../../engine/style.mjs';
-import { drawPaper, drawPrint, roundRect } from '../../engine/props.mjs';
+import { drawPaper, drawBackgroundPlate, drawPrint, roundRect } from '../../engine/props.mjs';
 import { handStroke, handCircle } from '../../engine/ink.mjs';
 import { stampText, typewriter, maskUpText } from '../../engine/text.mjs';
 import { stickman } from '../../engine/characters.mjs';
@@ -10,11 +10,12 @@ import { T } from './timings.mjs';
 
 // ── real museum artifacts as physical printed props (LAW 1 / LAW 9) ───────
 const ASSET_DIR = new URL('./assets/clips/', import.meta.url);
-let IMG_INKCAKE = null, IMG_BIBLE = null;
+let IMG_INKCAKE = null, IMG_BIBLE = null, IMG_VIBE = null;
 {
   const { loadImage } = await import('../../engine/props.mjs');
   IMG_INKCAKE = await loadImage(new URL('ink_cake_cma.jpg', ASSET_DIR));
   IMG_BIBLE = await loadImage(new URL('gutenberg_page_ransom.jpg', ASSET_DIR));
+  IMG_VIBE = await loadImage(new URL('webber_kealakekua_1779.jpg', ASSET_DIR));
 }
 
 const S = T.scenes;
@@ -180,6 +181,8 @@ function inkDrop(ctx, x, groundY, t) {
 
 export function drawWorld(ctx, t) {
   drawPaper(ctx, -200, -250, T.BOARD_W + 400, T.BOARD_H + 500, 11);
+  // constant ink-wash vibe plate (John Webber, Kealakekua Bay, 1779, ink/wash, PD) — multiply at α≈0.16
+  drawBackgroundPlate(ctx, IMG_VIBE, { x: -200, y: -250, w: T.BOARD_W + 400, h: T.BOARD_H + 500, alpha: 0.16 });
 
   // ── ZONE A · hook ────────────────────────────────────────────
   {
@@ -201,11 +204,11 @@ export function drawWorld(ctx, t) {
 
   // ── ZONE B · china ───────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 3.4, 8.2, 0.55, 0); // China dissolves during the transit (voice is done ~7.5) — a full-ink ghost at the left margin was a defect
+    const a = zoneAlpha(t, 3.4, 7.4, 0.55, 0); // China dissolves during the transit (VO China line ends ~9.6 but the hero is done by ~7.5) — dissolve must beat the rightward transit seats the stickman in the left band
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      stickman(ctx, 1520, 640, { h: 250, pose: 'stand', t, progress: clamp((t - 3.55) / 1.6) });
+      stickman(ctx, 1680, 640, { h: 250, pose: 'stand', t, progress: clamp((t - 3.55) / 1.6) });
       mortar(ctx, 1915, 585, t);
       soot(ctx, 1915, 560, t);
       inkStick(ctx, 1915, 470, t, 5.5);
@@ -244,6 +247,41 @@ export function drawWorld(ctx, t) {
       maskUpText(ctx, 3300, 268, 'HAVE EVER READ', { size: 68, t0: 19.9, t1: 20.8, t, font: FONT.display, rot: 0 });
       inkDrop(ctx, 3920, 560, t);
       stampText(ctx, 3720, 700, 'IT REMEMBERS.', { size: 118, t0: 23.96, t, color: INK, rot: -0.01 });
+      ctx.restore();
+    }
+  }
+
+  // ── ZONE R · the board remembers — low-alpha echoes of every hero on the pull-back ──
+  {
+    const a = clamp((t - 22.4) / 1.4, 0, 1);
+    if (a > 0.01) {
+      ctx.save();
+      ctx.globalAlpha *= a * 0.17;
+      // left-half heroes re-emerge as the camera pulls back (they never re-enter frame by themselves)
+      stickman(ctx, 1520, 640, { h: 250, pose: 'stand', t, progress: 1 });
+      mortar(ctx, 1915, 585, t);
+      inkStick(ctx, 1915, 470, t, 5.5);
+      pressSheet(ctx, 2580, 400, t);
+      typeCase(ctx, 2580, 182, t);
+      stampText(ctx, 2310, 678, '1440.', { size: 132, t0: 0, t, color: INK, rot: 0.015 });
+      stampText(ctx, 2870, 678, '1455.', { size: 132, t0: 0, t, color: REDF, rot: -0.018 });
+      // the artifacts themselves, remembered — re-prints at α echo
+      drawPrint(ctx, IMG_INKCAKE, 1420, 260, { w: 280, rot: -0.02 });
+      ctx.restore();
+    }
+  }
+
+  // ── end-card micro-sources — tiny serif block on the right (upper zone D, clear of the stamp and pool) ──
+  {
+    const a = clamp((t - 23.15) / 0.8, 0, 1);
+    if (a > 0.01) {
+      ctx.save();
+      ctx.globalAlpha *= a * 0.78;
+      ctx.fillStyle = INK;
+      ctx.font = '15px "Noto Serif", serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('SOURCES — ink cake: Cleveland Museum of Art, 1942.245 (CC0) · Gutenberg leaf: Harry Ransom Center, UT (PD)', 3300, 748);
+      ctx.fillText('music: Satie / Teknopazzo, Gymnopédie No.1 (CC0) · voice: Kokoro am_michael (Apache-2.0) · code-drawn by Opuscar Studio', 3300, 772);
       ctx.restore();
     }
   }

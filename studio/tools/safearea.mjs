@@ -51,7 +51,7 @@ for (const t of times) {
   let mean = 0;
   for (let i = 0; i < data.length; i += 4) mean += 0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2];
   mean /= SW * SH;
-  if (mean < 90) { console.log(`skip t=${t.toFixed(2)} (fade frame, mean ${mean.toFixed(0)})`); continue; }
+  if (mean < 180) { console.log(`skip t=${t.toFixed(2)} (dim/fade frame, mean ${mean.toFixed(0)})`); continue; }
   const darkIn = (x0, y0, x1, y1) => {
     let n = 0;
     for (let y = y0; y < y1; y++) {

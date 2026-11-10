@@ -332,6 +332,8 @@ bun studio/engine/clips.mjs manifest --project <slug>
 - **Tracing real plates into house ink** (lithographs, artifacts, species): use the `rotoscope` skill (`studio/tools/rotoscope/trace.py` → `engine/trace.mjs`) — a trace is a derivative of the source; license still applies (LAW 1). Prefer PD/CC0 references.
 House identity is the paper world. Pre-drawn in code: all type, diagrams, charts, maps, timelines, characters, icons, paper props. Source only what drawing can't do: real faces/places/events, archival textures, scientific plates. A film that is 80% stock is a compilation, not an Opuscar Studio film — if you reach that ratio, redesign the beat, don't source harder.
 
+**Background vibe plate (encouraged):** one constant, low-alpha (α≈0.10–0.20) plate multiply-blended into the paper (`drawBackgroundPlate` in `engine/props.mjs`) — ink-wash paintings and archival scans give instant atmospheric depth without touching the heroes. Never per-beat plates, never a competing focal point; plate = texture, always a credits-CSV row. Close the film with a **micro-credit sources end-card** during the tail (tiny serif, α low, inside safe area) — house practice, and it makes the audit trail visible. (002 exemplar: Webber, 1779 PD plate.)
+
 ---
 
 ## 9 · The per-beat QC loop (LAW 8)

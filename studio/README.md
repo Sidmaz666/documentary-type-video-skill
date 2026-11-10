@@ -96,6 +96,7 @@ Background music is **always real classical music from open public-domain / open
 7. **Zone dim-backs** — when the camera leaves a zone, the zone dims; old heroes never bleed into the next beat.
 8. **Alphas multiply** — every draw helper multiplies inherited `globalAlpha`, so dim-backs compose.
 9. **One idea per beat, framed deliberately** — every beat declares a shot card (shot size, move, thirds/phi grid anchor, hero, text clearances); no text collisions (LAW 8 — see `.agents/skills/cinematic-motion-graphics/SKILL.md`).
+11. **Background vibe plate** — one constant, grade-matched, low-alpha plate multiply-blended into the paper (`drawBackgroundPlate`, α≈0.10–0.20 — ink-wash or archival wash works best). Never per-beat, never a second hero; always a credits-CSV row (LAW 1/9). Films close with a micro-credit end-card.
 10. **Cinematic grade by preset** — `engine/presets.mjs` ships `documentary-grade` (warm key/cool shadow, heavier grain), `archival-essay`, `night-essay` and the house `paper-storybook`; encode with `VIDEO_PRESETS` (`master` crf 16, lookahead ≤ 20 — OOM law). Characters are grounded by contact shadows (draw before the cast).
 
 ## Fonts

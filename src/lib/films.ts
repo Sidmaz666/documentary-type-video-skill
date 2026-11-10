@@ -120,7 +120,7 @@ export const films: Film[] = [
     title: "Ink & Ember",
     tagline: "A code-drawn documentary · 24.6 seconds · one continuous camera move",
     description:
-      "Ink is the oldest memory technology we have. Five thousand years of lampblack and glue, ground and dried, poured into movable type — every story you have ever read began as a stubborn black promise. Every frame composited by a canvas program onto a two-axis-grid paper board: the seed dot, the scribe, the press, the falling drop — anchored by two real artifacts as physical prints (a Qing-dynasty ink cake, CC0; a Gutenberg Bible leaf, public domain).",
+      "Ink is the oldest memory technology we have. Five thousand years of lampblack and glue, ground and dried, poured into movable type — every story you have ever read began as a stubborn black promise. Every frame composited by a canvas program onto a two-axis-grid paper board washed with a constant ink-wash plate (Webber, 1779, PD): the seed dot, the scribe, the press, the falling drop — anchored by two real artifacts as physical prints (a Qing-dynasty ink cake, CC0; a Gutenberg Bible leaf, public domain).",
     videoUrl: "/film/002-ink-and-ember.mp4",
     zipUrl: "",
     duration: 24.633,
@@ -129,7 +129,7 @@ export const films: Film[] = [
     height: 822,
     fps: 30,
     codec: "H.264 + AAC",
-    sizeMB: 12.0,
+    sizeMB: 18.0,
     scenes: [
       { id: "hook", title: "Ink.", line: "Five thousand years ago, ink was memory you could carry.", start: 0, end: 3.9, hero: "red seed dot + ping · INK. stamp · 'five thousand years of memory' types on" },
       { id: "china", title: "China", line: "In China, scribes ground lampblack with glue into sticks — ink that outlasted kings.", start: 3.9, end: 10.0, hero: "stickman scribe + mortar arcs · pine-soot ink stick drops in · soot motes" },
@@ -145,7 +145,7 @@ export const films: Film[] = [
     },
     credits: [
       "Every frame composited by a canvas program — no AI-generated media (LAW 1)",
-      "External source assets (LAW 9): Qing-dynasty ink cake print (Cleveland Museum of Art, CC0 1.0); Gutenberg Bible leaf print (Harry Ransom Center scan, PD) — both composited as physical prints",
+      "External source assets (LAW 9): Qing-dynasty ink cake print (Cleveland Museum of Art, CC0 1.0); Gutenberg Bible leaf print (Harry Ransom Center scan, PD); constant ink-wash background plate (John Webber, Kealakekua Bay, 1779 — Honolulu Academy of Arts scan, PD)",
       "VO: Kokoro-82M (Apache-2.0), local synthesis — no cloud voice services",
       "Score: Satie, Gymnopédie No. 1 — CC0 recording, ducked under narration",
       "Rendered at 1920×822 (test-resolution 21:9 class), 30 fps, 739 frames, chunk-encoded H.264",

@@ -137,6 +137,23 @@ export function drawPaper(ctx, x, y, w, h, seed = 7) {
   ctx.globalAlpha = baseA;
 }
 
+// ── background vibe plate ─────────────────────────────────────────────────
+// drawBackgroundPlate — a grade-matched, low-alpha plate blended INTO the
+// paper via multiply (ink-wash paintings, archival scans, manuscript pages).
+// World-fixed: one constant vibe for the whole film (cohesion beats variety).
+// Very low alpha (α≈0.10–0.20) — texture, never a competing hero; never
+// majority-stock (house identity = paper world + typography). Edge fade is
+// the grade's vignette's job. Call AFTER drawPaper, BEFORE any zone art.
+export function drawBackgroundPlate(ctx, img, opts = {}) {
+  const { x, y, w, h, alpha = 0.15 } = opts;
+  const inherited = ctx.globalAlpha;
+  ctx.save();
+  ctx.globalCompositeOperation = 'multiply';
+  ctx.globalAlpha = inherited * alpha;
+  ctx.drawImage(img, x, y, w, h);
+  ctx.restore();
+}
+
 // ── photo prints ──────────────────────────────────────────────────────────
 // drawPrint — a photo as a physical print: white border, soft shadow, slight
 // rot, drops in at t0 over dur with easeOutBack overshoot landing.
