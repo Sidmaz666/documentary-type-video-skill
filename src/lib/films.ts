@@ -129,7 +129,7 @@ export const films: Film[] = [
     height: 822,
     fps: 30,
     codec: "H.264 + AAC",
-    sizeMB: 8.9,
+    sizeMB: 12.0,
     scenes: [
       { id: "hook", title: "Ink.", line: "Five thousand years ago, ink was memory you could carry.", start: 0, end: 3.9, hero: "red seed dot + ping · INK. stamp · 'five thousand years of memory' types on" },
       { id: "china", title: "China", line: "In China, scribes ground lampblack with glue into sticks — ink that outlasted kings.", start: 3.9, end: 10.0, hero: "stickman scribe + mortar arcs · pine-soot ink stick drops in · soot motes" },
