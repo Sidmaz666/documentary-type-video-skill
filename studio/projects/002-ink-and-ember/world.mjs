@@ -131,8 +131,8 @@ function typeCase(ctx, x, y, t) {
 
 // the falling ink drop + pool ripples
 function inkDrop(ctx, x, groundY, t) {
-  const fallU = clamp((t - 19.5) / 3.1);
-  if (t < 19.5) return;
+  const fallU = clamp((t - 18.2) / 3.6);
+  if (t < 18.2) return;
   const y = fallU >= 1 ? groundY : lerp(90, groundY - 8, easeInQuart(fallU));
   const inherited = ctx.globalAlpha;
   if (fallU < 1) {
@@ -147,7 +147,7 @@ function inkDrop(ctx, x, groundY, t) {
     ctx.restore();
   } else {
     // pool + three ripples
-    const landed = t - 22.6;
+    const landed = t - 21.8;
     ctx.save();
     ctx.globalAlpha *= 0.96;
     ctx.fillStyle = INK;
@@ -174,7 +174,7 @@ export function drawWorld(ctx, t) {
 
   // ── ZONE A · hook ────────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 0.0, 5.2, 0.55, 0.16);
+    const a = zoneAlpha(t, 0.0, 3.0, 0.5, 0); // hook retires fully behind the drift — no edge clip, no ghost competing with China
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
@@ -192,7 +192,7 @@ export function drawWorld(ctx, t) {
 
   // ── ZONE B · china ───────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 3.4, 10.8, 0.6, 0.22);
+    const a = zoneAlpha(t, 3.4, 10.3, 0.55, 0); // China exits completely — clipped ghost slivers at frame edge were a defect
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
@@ -227,8 +227,8 @@ export function drawWorld(ctx, t) {
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      maskUpText(ctx, 3300, 180, 'EVERYTHING YOU', { size: 68, t0: 19.0, t1: 20.1, t, font: FONT.display, rot: 0 });
-      maskUpText(ctx, 3300, 268, 'HAVE EVER READ', { size: 68, t0: 20.0, t1: 21.1, t, font: FONT.display, rot: 0 });
+      maskUpText(ctx, 3300, 180, 'EVERYTHING YOU', { size: 68, t0: 18.98, t1: 19.88, t, font: FONT.display, rot: 0 });
+      maskUpText(ctx, 3300, 268, 'HAVE EVER READ', { size: 68, t0: 19.9, t1: 20.8, t, font: FONT.display, rot: 0 });
       inkDrop(ctx, 3920, 560, t);
       stampText(ctx, 3720, 700, 'IT REMEMBERS.', { size: 118, t0: 23.96, t, color: INK, rot: -0.01 });
       ctx.restore();

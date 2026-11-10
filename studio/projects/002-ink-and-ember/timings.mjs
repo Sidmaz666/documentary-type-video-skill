@@ -29,16 +29,21 @@ export const T = {
 
   // One continuous Catmull-Rom move: A (hold) → B (drift) → C (drift) → D (settle) → tail pull-back.
   cameraKeys: [
-    { t: 0.0,  x: 750,  y: 411, zoom: 0.94 },   // hook holds
-    { t: 1.2,  x: 780,  y: 408, zoom: 0.935 },  // sub-px creep
-    { t: 3.75, x: 1650, y: 400, zoom: 0.965 },  // arrive China BEFORE "In China," (3.90)
-    { t: 6.0,  x: 1700, y: 401, zoom: 0.97 },
-    { t: 9.7,  x: 2550, y: 398, zoom: 1.0 },    // arrive Gutenberg BEFORE "Around" (10.0)
-    { t: 12.3, x: 2530, y: 398, zoom: 1.002 },
-    { t: 16.0, x: 2750, y: 399, zoom: 0.985 },
-    { t: 18.6, x: 3480, y: 400, zoom: 0.9 },    // arrive zone D BEFORE "Everything" (18.98)
-    { t: 22.7, x: 3520, y: 399, zoom: 0.86 },
-    { t: 24.619, x: 2720, y: 400, zoom: 0.58 }, // tail pull-back
+    // Rule of thirds held in the FRAME (not the world): every hero sits at a
+    // third line, never dead center. Arrivals land BEFORE their VO beat word.
+    //   A hero left-third (text left)         B hero right-third (ink stick)
+    //   C press sheet left-third              D hero left-third
+    { t: 0.0,  x: 1095, y: 411, zoom: 0.94 },   // A: INK. on left-third line
+    { t: 1.0,  x: 1088, y: 409, zoom: 0.945 },  // breathing hold
+    { t: 3.78, x: 1464, y: 402, zoom: 0.965 },  // B: arrives BEFORE "In China," (3.90); stick at right-third
+    { t: 6.5,  x: 1442, y: 402, zoom: 0.97 },
+    { t: 8.2,  x: 2100, y: 400, zoom: 0.985 },  // flatten acceleration across the board
+    { t: 9.75, x: 2913, y: 398, zoom: 1.0 },    // C: arrives BEFORE "Around" (10.0); sheet on left-third
+    { t: 12.3, x: 2900, y: 398, zoom: 1.002 },
+    { t: 15.5, x: 2785, y: 399, zoom: 0.99 },   // micro drift left as stamps land
+    { t: 18.6, x: 3655, y: 400, zoom: 0.9 },    // D: arrives BEFORE "Everything" (18.98); text on left-third
+    { t: 22.7, x: 3695, y: 399, zoom: 0.86 },
+    { t: 24.619, x: 2950, y: 400, zoom: 0.6 },  // tail pull-back
   ],
 };
 
