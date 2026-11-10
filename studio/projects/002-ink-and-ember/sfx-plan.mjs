@@ -23,10 +23,10 @@ export function sfxEvents() {
   at(10.85, thud, 0.9);                         // VO "fourteen forty" 10.86 — 1440. stamp lands ON the word
   at(13.0, ping, 0.3);                          // VO "movable type" 13.02 — type set
   at(14.95, thud, 0.95);                        // VO "1455" 14.88–15.78 — 1455. stamp lands on the number
-  at(18.0, () => whoosh(0.9, (u) => u * u), 0.35); // the void opens — drop begins falling during "Everything…"
+  at(18.15, () => whoosh(1.1, (u) => u * u), 0.35); // the void opens — the drop begins falling as the transit completes
   at(18.98, ping, 0.4);                          // VO "Everything…" — mask-up begins
-  at(20.6, () => whoosh(0.9, (u) => u * u), 0.4); // drop accelerates (VO silence → swoosh of the fall)
-  at(21.85, paperDropWhump, 1.0);               // the drop lands
+  at(19.7, () => whoosh(0.9, (u) => u * u), 0.4); // the fall plunges (VO silence → swoosh)
+  at(21.4, paperDropWhump, 1.0);               // the drop lands
   at(23.96, thud, 0.95);                        // VO "It remembers." 23.96 — stamp lands ON the words
   at(24.2, () => whoosh(0.9), 0.28);            // tail pull-back air
 

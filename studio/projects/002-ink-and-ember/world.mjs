@@ -48,7 +48,7 @@ const STAMPS = [
   { t0: 1.7, x: 750, y: 440 },
   { t0: 10.85, x: 2310, y: 678 },
   { t0: 14.95, x: 2870, y: 678 },
-  { t0: 23.96, x: 3720, y: 640 },
+  { t0: 23.96, x: 3720, y: 610 },
 ];
 function stampFlash(ctx, t) {
   for (const s of STAMPS) {
@@ -167,8 +167,8 @@ function typeCase(ctx, x, y, t) {
 
 // the falling ink drop + pool ripples
 function inkDrop(ctx, x, groundY, t) {
-  const fallU = clamp((t - 18.2) / 3.6);
-  if (t < 18.2) return;
+  const fallU = clamp((t - 18.4) / 3.0);
+  if (t < 18.4) return;
   const y = fallU >= 1 ? groundY : lerp(90, groundY - 8, easeInQuart(fallU));
   const inherited = ctx.globalAlpha;
   if (fallU < 1) {
@@ -183,7 +183,7 @@ function inkDrop(ctx, x, groundY, t) {
     ctx.restore();
   } else {
     // pool + three ripples
-    const landed = t - 21.8;
+    const landed = t - 21.4;
     ctx.save();
     ctx.globalAlpha *= 0.96;
     ctx.fillStyle = INK;
@@ -193,7 +193,7 @@ function inkDrop(ctx, x, groundY, t) {
       const age = landed - i * 0.22;
       if (age <= 0) continue;
       const ru = clamp(age / 1.15);
-      const rx = lerp(30, 265, easeOutQuart(ru));
+      const rx = lerp(24, 200, easeOutQuart(ru));
       ctx.globalAlpha = inherited * (1 - ru) * 0.8;
       handStroke(ctx, [
         { x: x - rx, y: groundY + 4 },
@@ -243,7 +243,7 @@ export function drawWorld(ctx, t) {
       // real artifact — Qing-dynasty ink cake (Cleveland Museum of Art, CC0) as a physical print, left-third, above the scribe
       drawPrint(ctx, IMG_INKCAKE, 1135, 300, { w: 320, rot: -0.018, alpha: clamp((t - 4.2) / 0.6, 0, 1) * clamp((7.6 - t) / 0.7, 0, 1) });
       const textA = clamp(1 - Math.max(0, t - 7.3) / 0.6, 0, 1); // gone by ~7.9, before the move can seat it in the safe band
-      if (textA > 0.01) typewriter(ctx, 2255, 620, 'PINE SOOT + GLUE', { size: 40, t0: 6.35, t, cps: 18, font: FONT.serif, alpha: textA });
+      if (textA > 0.01) typewriter(ctx, 2170, 646, 'PINE SOOT + GLUE', { size: 40, t0: 6.35, t, cps: 18, font: FONT.serif, alpha: textA });
       ctx.restore();
     }
   }
@@ -254,10 +254,7 @@ export function drawWorld(ctx, t) {
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      pressSheet(ctx, 2580, 400, t);
       typeCase(ctx, 2580, 182, t); // top edge 72px — clear of the 60px safe margin
-      // real artifact — Gutenberg Bible leaf (Harry Ransom Center scan, PD) as a physical print, right-third; drops in as VO says "Gutenberg Bible" (16.34–17.26)
-      drawPrint(ctx, IMG_BIBLE, 3220, 300, { w: 270, rot: 0.016, alpha: clamp((t - 12.1) / 0.6, 0, 1) });
       stampText(ctx, 2310, 678, '1440.', { size: 132, t0: 10.85, t, color: INK, rot: 0.015 });
       typewriter(ctx, 2580, 262, 'MOVABLE TYPE', { size: 30, t0: 13.0, t, cps: 22, font: FONT.serif });
       stampText(ctx, 2870, 678, '1455.', { size: 132, t0: 14.95, t, color: REDF, rot: -0.018 });
@@ -265,6 +262,30 @@ export function drawWorld(ctx, t) {
     }
   }
 
+  // ── carry-over props — the two dark-safe prints outlive zone C's dissolve
+  // (dead-air bridge, 16–18.6 s): the press sheet carries to ~18.35, the Gutenberg
+  // leaf lingers to ~18.6 — the camera glides over the dimming artifacts into the
+  // drop at 18.4. Both sit BELOW the low-swoop dip's view-top band (band bottom ≈ 220
+  // at dip apex); the type case never carries over.
+  {
+    const a = clamp((t - 8.8) / 0.8, 0, 1) * clamp((18.35 - t) / 2.8, 0, 1);
+    if (a > 0.01) {
+      ctx.save();
+      ctx.globalAlpha *= a;
+      pressSheet(ctx, 2580, 400, t);
+      ctx.restore();
+    }
+  }
+  {
+    const a = clamp((t - 12.1) / 0.6, 0, 1) * clamp((18.6 - t) / 3.2, 0, 1);
+    if (a > 0.01) {
+      drawPrint(ctx, IMG_BIBLE, 3220, 400, { w: 200, rot: 0.016, alpha: a });
+    }
+  }
+
+  // ── end-card stack (zones D + R + prints), top→bottom bands:
+  // mask-ups 130..300 · scroll print 314..430 · ink pool 469..499 · STAMP 560..660 ·
+  // credits 699..758. Every band ≥40px apart — never restack without re-checking.
   // ── ZONE D · everything ──────────────────────────────────────
   {
     const a = zoneAlpha(t, 17.9, 99.0, 0.7);
@@ -273,8 +294,8 @@ export function drawWorld(ctx, t) {
       ctx.globalAlpha *= a;
       maskUpText(ctx, 3300, 180, 'EVERYTHING YOU', { size: 68, t0: 18.98, t1: 19.88, t, font: FONT.display, rot: 0 });
       maskUpText(ctx, 3300, 268, 'HAVE EVER READ', { size: 68, t0: 19.9, t1: 20.8, t, font: FONT.display, rot: 0 });
-      inkDrop(ctx, 3920, 560, t);
-      stampText(ctx, 3720, 640, 'IT REMEMBERS.', { size: 118, t0: 23.96, t, color: INK, rot: -0.01 });
+      inkDrop(ctx, 3920, 478, t);
+      stampText(ctx, 3720, 610, 'IT REMEMBERS.', { size: 100, t0: 23.96, t, color: INK, rot: -0.01 });
       ctx.restore();
     }
   }
@@ -286,7 +307,7 @@ export function drawWorld(ctx, t) {
       ctx.save();
       ctx.globalAlpha *= a * 0.17;
       // left-half heroes re-emerge as the camera pulls back (they never re-enter frame by themselves)
-      stickman(ctx, 1520, 640, { h: 250, pose: 'stand', t, progress: 1 });
+      stickman(ctx, 1780, 640, { h: 230, pose: 'stand', t, progress: 1 });
       mortar(ctx, 1915, 585, t);
       inkStick(ctx, 1915, 470, t, 5.5);
       pressSheet(ctx, 2580, 400, t);
@@ -301,18 +322,18 @@ export function drawWorld(ctx, t) {
 
   // ── end-card artifact — a real Ming-dynasty calligraphy handscroll above the ink pool
   // (Met Open Access, CC0; the physical evidence for "it remembers"). Fades in as the
-  // camera pulls back; clear of the mask-up lines (bottom 276) and the pool (554).
+  // camera pulls back; clear of the mask-up lines (bottom ~300) and the pool (457).
   {
-    const a = clamp((t - 22.2) / 0.9, 0, 1) * 0.94;
+    const a = clamp((t - 21.95) / 0.7, 0, 1) * 0.94;
     if (a > 0.01) {
-      drawPrint(ctx, IMG_SCROLL, 3920, 392, { w: 560, rot: 0.014, alpha: a });
+      drawPrint(ctx, IMG_SCROLL, 3920, 370, { w: 560, rot: 0.014, alpha: a });
     }
   }
 
   // ── stamp flashes — impact blooms on the four stamps ( drawn last, tint the frame )
   stampFlash(ctx, t);
 
-  // ── end-card micro-sources — three short serif lines under IT REMEMBERS. (clear of the stamp's cap band and the safe margin)
+  // ── end-card micro-sources — three short serif lines under IT REMEMBERS. (stamp bottom 660 → credits top ~699; bottom baseline 754 < 762 safe edge)
   {
     const a = clamp((t - 23.15) / 0.8, 0, 1);
     if (a > 0.01) {
@@ -321,9 +342,9 @@ export function drawWorld(ctx, t) {
       ctx.fillStyle = INK;
       ctx.font = '15px "Noto Serif", serif';
       ctx.textAlign = 'center';
-      ctx.fillText('SOURCES — ink cake (CMA 1942.245, CC0) · Gutenberg leaf (PD)', 3300, 706);
-      ctx.fillText('handscroll: Ming, Met DP-13230-001 (CC0) · cropped for print', 3300, 728);
-      ctx.fillText('voice: Kokoro (Apache-2.0) · Satie/Teknopazzo Gymnopédie No.1 (CC0) · Opuscar Studio', 3300, 750);
+      ctx.fillText('SOURCES — ink cake (CMA 1942.245, CC0) · Gutenberg leaf (PD)', 3300, 710);
+      ctx.fillText('handscroll: Ming, Met DP-13230-001 (CC0) · cropped for print', 3300, 732);
+      ctx.fillText('voice: Kokoro (Apache-2.0) · Satie/Teknopazzo Gymnopédie No.1 (CC0) · Opuscar Studio', 3300, 754);
       ctx.restore();
     }
   }

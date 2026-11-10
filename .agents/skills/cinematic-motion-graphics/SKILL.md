@@ -274,6 +274,23 @@ Text is a bounding-box system, not vibes. Per frame:
 ### 5.7 Safe area enforcement
 Text lives in title-safe (inner ~80%), ≥60px from every edge — verify at **every camera pose in the beat's window**, including mid-rail poses, not just key poses.
 
+### 5.8 End-card stack contract (LAW 8)
+The final 2–4 seconds stack artifact print + mask-ups + pool/falling prop + terminal stamp + credits in ONE viewport. Without a hard banded layout they collide (002 v9 shipped with the terminal stamp sitting on the ink pool). Rules:
+1. Lay the end card as strata, top→bottom, each band **≥40 design-px apart**, and write the band table as a comment in `world.mjs` (002: mask-ups 130..300 · scroll print 314..430 · ink pool 469..499 · terminal stamp 560..660 · credits 699..758).
+2. Never restack a band without re-verifying **every other band** at the same t.
+3. The terminal stamp carries no underline — it is the full stop; credits go below it, bottom baseline ≤ H−58 (762 for 822 design height).
+4. Artifacts fade in **in situ** (alpha ramps), never drop across the safe band; their fade-in ramps must clear the previous transit.
+5. QC stills at **t_end−1.0, t_end−0.3, t_end** minimum (`bun render.mjs still <t>`), not just key poses — the two hold frames catch overlaps that pose checks miss.
+
+### 5.9 Dead air & zone hand-offs (LAW 2 / LAW 8)
+A sustained window of blank paper breaks the picture. Rules:
+1. **Dead-air scan (part of every QC):** list every window where no hero, print or text is on screen; ≥1.5 s is a defect — retime or bridge it, never ship it.
+2. Fix with **carry-over prints**, not new heroes: props whose alpha survives the zone dissolve and dissolves again into the next beat (002: press sheet carries to ~18.35, Gutenberg leaf to ~18.6, both gone before the drop lands at 18.4+3.0 s; the camera glides over the dimming artifacts).
+3. Carry-overs sit **below the departing transit's dip band** — the world-y band the view-top crosses at a sink/low-swoop apex (LAW 4 gates this; 002 band bottom ≈ 220 at t≈17.05; carry-overs' top edges ≈ 257).
+4. If the lane is empty anyway, move the next hero/drop earlier — a carry-over never pads (LAW 2).
+5. **Drop-onset rule (props entering from above):** an object entering across the top edge must not enter before the camera has cleared the transit that dipped the view; onset is calibrated to the rail (002: onset 18.4, after the low-swoop recovery — the sweep failed at 17.0), never to the VO alone.
+6. **Pull-back echo rule (LAW 4):** ghost reprises on the tail pull-back must sit ≥120 design-px inside the deepest-pull view window (002 tail zoom 0.60 → view x∈[1350,4550]; the stickman echo was half-clipped at 1520 and moved to 1780) or they clip at the frame edge. Shrink, re-place, or cut them.
+
 ---
 
 ## 6 · Color & the color script

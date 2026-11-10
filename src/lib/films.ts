@@ -139,7 +139,7 @@ export const films: Film[] = [
     height: 822,
     fps: 30,
     codec: "H.264 + AAC",
-    sizeMB: 18.0,
+    sizeMB: 17.3,
     captions: "/film/002-ink-and-ember.en.srt",
     alternates: [
       { label: "16:9 paper-extension master (1920×1080)", url: "/film/002-ink-and-ember-16x9.mp4", note: "same paper world and camera rail re-framed to a taller canvas — extra laid paper, no bars, no crop (LAW 4 safe at every pose)" },
