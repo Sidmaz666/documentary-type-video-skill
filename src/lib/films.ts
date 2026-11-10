@@ -7,6 +7,12 @@ export type FilmScene = {
   hero: string;
 };
 
+export type FilmAlternate = {
+  label: string;
+  url: string;
+  note: string;
+};
+
 export type Film = {
   slug: string;
   title: string;
@@ -29,6 +35,10 @@ export type Film = {
     musicCredit: string;
   };
   credits: string[];
+  /** sidecar captions (SRT) when published */
+  captions?: string;
+  /** alternate masters (e.g. 16:9 paper-extension) */
+  alternates?: FilmAlternate[];
 };
 
 /**
@@ -118,7 +128,7 @@ export const films: Film[] = [
   {
     slug: "002-ink-and-ember",
     title: "Ink & Ember",
-    tagline: "A code-drawn documentary · 24.6 seconds · one continuous camera move",
+    tagline: "A code-drawn documentary · 24.6 seconds · one continuous, ever-varying camera move",
     description:
       "Ink is the oldest memory technology we have. Five thousand years of lampblack and glue, ground and dried, poured into movable type — every story you have ever read began as a stubborn black promise. Every frame composited by a canvas program onto a two-axis-grid paper board washed with a constant ink-wash plate (Webber, 1779, PD): the seed dot, the scribe, the press, the falling drop — anchored by two real artifacts as physical prints (a Qing-dynasty ink cake, CC0; a Gutenberg Bible leaf, public domain).",
     videoUrl: "/film/002-ink-and-ember.mp4",
@@ -130,6 +140,10 @@ export const films: Film[] = [
     fps: 30,
     codec: "H.264 + AAC",
     sizeMB: 18.0,
+    captions: "/film/002-ink-and-ember.en.srt",
+    alternates: [
+      { label: "16:9 paper-extension master (1920×1080)", url: "/film/002-ink-and-ember-16x9.mp4", note: "same paper world and camera rail re-framed to a taller canvas — extra laid paper, no bars, no crop (LAW 4 safe at every pose)" },
+    ],
     scenes: [
       { id: "hook", title: "Ink.", line: "Five thousand years ago, ink was memory you could carry.", start: 0, end: 3.9, hero: "red seed dot + ping · INK. stamp · 'five thousand years of memory' types on" },
       { id: "china", title: "China", line: "In China, scribes ground lampblack with glue into sticks — ink that outlasted kings.", start: 3.9, end: 10.0, hero: "stickman scribe + mortar arcs · pine-soot ink stick drops in · soot motes" },
@@ -145,7 +159,8 @@ export const films: Film[] = [
     },
     credits: [
       "Every frame composited by a canvas program — no AI-generated media (LAW 1)",
-      "External source assets (LAW 9): Qing-dynasty ink cake print (Cleveland Museum of Art, CC0 1.0); Gutenberg Bible leaf print (Harry Ransom Center scan, PD); constant ink-wash background plate (John Webber, Kealakekua Bay, 1779 — Honolulu Academy of Arts scan, PD)",
+      "External source assets (LAW 9): Qing-dynasty ink cake print (Cleveland Museum of Art, CC0 1.0); Gutenberg Bible leaf print (Harry Ransom Center scan, PD); constant ink-wash background plate (John Webber, Kealakekua Bay, 1779 — Honolulu Academy of Arts scan, PD); Ming-dynasty calligraphy handscroll print (Met DP-13230-001, Ni Yuanlu / Huang Daozhou — CC0, cropped for print)",
+      "Typography: Liu Jian Mao Cao (OFL 1.1) brush stamp for the hook INK.; Archivo Black / Caveat / Noto Serif display faces",
       "VO: Kokoro-82M (Apache-2.0), local synthesis — no cloud voice services",
       "Score: Satie, Gymnopédie No. 1 — CC0 recording, ducked under narration",
       "Rendered at 1920×822 (test-resolution 21:9 class), 30 fps, 739 frames, chunk-encoded H.264",

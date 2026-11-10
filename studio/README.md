@@ -11,10 +11,10 @@ studio/
 ├── PROJECTS.md          ← index of films (delivered / in production / ideas)
 ├── new.sh               ← bash studio/new.sh <slug> "<Title>" → scaffold film #002+
 ├── assets/fonts/        ← house fonts (best-effort downloads; graceful fallbacks)
-├── tools/               ← asr (whisper) · tts (kokoro) · ddg (DDG search) · rotoscope · safearea (LAW 4 sweep)
+├── tools/               ← asr (whisper) · tts (kokoro) · ddg (DDG search) · rotoscope · safearea (LAW 4 sweep) · deliver.mjs (16:9 alternate + key stills + SRT copy) · srt.mjs (captions from ASR)
 ├── engine/              ← TOPIC-AGNOSTIC toolchain (imports nothing from projects/)
 │   ├── style.mjs        palette / fonts / math / deterministic RNG
-│   ├── camera.mjs       Catmull-Rom camera rail + handheld noise
+│   ├── camera.mjs       Catmull-Rom rail + handheld noise + TRANSITION VARIETY bank (LAW 10)
 │   ├── ink.mjs          the boil (8fps) + hand strokes/circles/arrows
 │   ├── text.mjs         stamps / mask-ups / typewriter
 │   ├── props.mjs        two-axis-grid paper world, photo prints, note cards
@@ -32,6 +32,10 @@ studio/
 
 
 **Pipeline:** canvas frame → raw RGBA piped frame-by-frame into ffmpeg → 244-frame chunks (`part_*.mp4`, sequential — OOM law) → every part ffprobed (LAW 3) → concat `-c copy` → `video-only.mp4` → mux with `mix.wav` (+faststart) → publish to `public/film/<slug>.mp4` → FINAL-FILE LAW numeric probe.
+
+## Production targets
+
+**001 and 002 are test reels.** They exist to prove the research→VO→render→publish pipeline; nobody ships a 30-second film as "done". Production films are **5–6-minute** or **10–12-minute** illustrated essays: VO-driven (Kokoro/verified-wav), one zone per ~20–40 s of narration, long paper boards (~10–14k px per minute), many transits — every one of them diagonal or arc'd (**LAW 10**: `makeVariedRail` in `engine/camera.mjs`, never a dead straight ride; record `T.rail.variety`), QC still sweep at every pose, LAW 4 sweep mandatory, and **SRT captions + a 16:9 paper-extension master + key stills** delivered alongside the 21:9 master (`studio/tools/deliver.mjs`). Zone counts, durations, and rail length all scale from the VO — nothing is stretched to a target runtime (LAW 2).
 
 ## Quickstart: film #002 end-to-end
 
@@ -53,7 +57,8 @@ cp /path/to/timings.json assets/timings.json
 # 4. fill the beat table (creative contract): BEATS.md
 
 # 5. edit timings.mjs — the single clock: scenes, fades, camera keys
-#    (one continuous Catmull-Rom move; tail pull-back recommended)
+#    (one continuous Catmull-Rom move; every zone transit diagonal/arc — LAW 10,
+#    makeVariedRail(keys, seed); tail pull-back recommended)
 
 # 6. draw the world: world.mjs zones using the engine cast
 #    (stickman, cow, helix, spreadMap, drawPrint, noteCard, stamps, typewriter)
@@ -81,8 +86,10 @@ Background music is **always real classical music from open public-domain / open
 - [ ] **Zoom crops** on characters/underlines: nothing floats (LAW 5), no stroke crosses type (LAW 6).
 - [ ] **LAW 4 safe-area sweep**: `bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs` prints `SAFE AREA OK` (exit 0).
 - [ ] **LAW 9 source-asset gate**: ≥1 real licensed external asset in-frame; credits-CSV rows present.
+- [ ] **LAW 10 transit variety**: every zone-to-zone transit carries a diagonal/arc vector (`makeVariedRail`; `T.rail.variety` logged in PROJECT.md); no straight horizontal rides end-to-end.
 - [ ] `bun build.mjs` prints `FINAL-FILE LAW ok` (frames + both stream durations, LAW 3).
 - [ ] Audio QC: mix ≈ −14.5 LUFS area, TP ≤ −0.9 dBTP, bed audibly ducked **and audible from 0:00 (no leading silence ≥0.3 s at −38 dB)**.
+- [ ] Deliverables: SRT sidecar (`studio/tools/srt.mjs`), 16:9 paper-extension master + key stills (`studio/tools/deliver.mjs --project <slug>`), films.ts manifest rows + sizes.
 - [ ] Credits CSV complete; zip rebuilt per LAW 7; git commit.
 
 ## House style rules (the short list)
@@ -106,5 +113,6 @@ Background music is **always real classical music from open public-domain / open
 - **Archivo Black** — downloaded OK (`ArchivoBlack-Regular.ttf`)
 - **Caveat** — downloaded OK (`Caveat-Regular.ttf`)
 - **Noto Serif** — downloaded OK (`NotoSerif-Regular.ttf`)
+- **Liu Jian Mao Cao** — downloaded OK (`LiuJianMaoCao-Regular.ttf`) — brush stamps (002 hook INK.)
 
 (Update this list if a download ever fails; the fallbacks cover the gap.)

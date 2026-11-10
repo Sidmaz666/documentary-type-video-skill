@@ -3,7 +3,7 @@
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { T } from './timings.mjs';
-import { thud, whoosh, ping, pencilScratch, paperDropWhump } from '../../engine/sfx.mjs';
+import { thud, whoosh, ping, pencilScratch, paperDropWhump, airSwell } from '../../engine/sfx.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const S = T.scenes;
@@ -12,6 +12,7 @@ export function sfxEvents() {
   const E = [];
   const at = (t, fn, gain = 1, pan = 0) => E.push({ t, make: fn, gain, pan });
 
+  at(0.0, () => airSwell(2.6, 0.5), 0.22);      // the room itself inhales — the scene starts before the voice does
   at(0.5, ping, 0.45);                          // VO "Five…" 0.52 — the seed answers
   at(1.7, thud, 0.9);                           // VO "ink" 1.76 — INK. stamp lands on the word
   at(3.45, paperDropWhump, 0.75);               // zone B drops in — lands on the drift, not after the word
@@ -36,5 +37,6 @@ export function musicBed() {
   return {
     path: join(HERE, 'assets', 'music', 'gymnopedie_no1.ogg'),
     trimTo: T.DUR, gain: 0.78, fadeIn: 0.5, fadeOut: 2.0, trimLead: true, // bed must enter audibly — no silent open
+    swell: { at: 22.9, gain: 1.26, dur: 1.7 }, // CAMERA PULL-BACK: bed blooms +2 dB under the ink drop landing / IT REMEMBERS.
   };
 }

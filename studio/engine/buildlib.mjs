@@ -7,7 +7,7 @@
 // durations) and throws on mismatch.
 import { spawn } from 'node:child_process';
 import { createCanvas } from '@napi-rs/canvas';
-import { mkdirSync, writeFileSync, rmSync, existsSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ffmpegChunkArgs } from './compose.mjs';
@@ -71,11 +71,21 @@ export async function renderChunks(renderFrame, T, { chunk = 244, slug } = {}) {
 
 // concatParts — LAW 3: probe EVERY part before concat; fail loudly on a
 // corrupt part (missing moov → ffprobe errors or reports no duration).
-export async function concatParts(slug) {
-  const dir = outDir(slug);
-  const list = (await import('node:fs')).readFileSync(join(dir, 'list.txt'), 'utf8')
-    .split('\n').map((l) => l.trim()).filter(Boolean).map((l) => l.replace(/^file '/, '').replace(/'$/, ''));
+export async function concatParts(slug, { dir } = {}) {
+  dir = dir || outDir(slug);
+  const listPath = join(dir, 'list.txt');
+  let list;
+  if (existsSync(listPath)) {
+    list = readFileSync(listPath, 'utf8')
+      .split('\n').map((l) => l.trim()).filter(Boolean).map((l) => l.replace(/^file '/, '').replace(/'$/, ''));
+  } else {
+    // alternate renders (e.g. deliver.mjs) may not write list.txt — scan for parts
+    list = ((await import('node:fs')).readdirSync(dir))
+      .filter((f) => /^part_\d+\.mp4$/.test(f))
+      .sort();
+  }
   if (!list.length) throw new Error('no parts listed — nothing to concat');
+  if (!existsSync(listPath)) writeFileSync(listPath, list.map((n) => `file '${n}'`).join('\n') + '\n');
   for (const name of list) {
     const p = join(dir, name);
     if (!existsSync(p)) throw new Error(`LAW 3: missing part ${name} — delete and re-render that chunk`);
@@ -95,12 +105,12 @@ export async function concatParts(slug) {
 }
 
 // muxAndPublish — mux video-only + mix.wav (faststart, video copied), publish
-// to public/film/<slug>.mp4, then run the FINAL-FILE LAW probe.
-export async function muxAndPublish(slug, { mixWav, frames, dur, fps = 30 } = {}) {
-  const dir = outDir(slug);
+// to public/film/<slug>.mp4 (or { publishAs }), then run the FINAL-FILE LAW probe.
+export async function muxAndPublish(slug, { mixWav, frames, dur, fps = 30, publishAs, dir } = {}) {
+  dir = dir || outDir(slug);
   const videoOnly = join(dir, 'video-only.mp4');
   if (!mixWav || !existsSync(mixWav)) throw new Error(`mix.wav not found at ${mixWav} — run the audio stage first`);
-  const pub = publishPath(slug);
+  const pub = publishAs ? join(ROOT, 'public/film', publishAs) : publishPath(slug);
   mkdirSync(join(ROOT, 'public/film'), { recursive: true });
   await run('ffmpeg', ['-y', '-i', videoOnly, '-i', mixWav,
     '-map', '0:v:0', '-map', '1:a:0',

@@ -10,12 +10,13 @@ import { T } from './timings.mjs';
 
 // ── real museum artifacts as physical printed props (LAW 1 / LAW 9) ───────
 const ASSET_DIR = new URL('./assets/clips/', import.meta.url);
-let IMG_INKCAKE = null, IMG_BIBLE = null, IMG_VIBE = null;
+let IMG_INKCAKE = null, IMG_BIBLE = null, IMG_VIBE = null, IMG_SCROLL = null;
 {
   const { loadImage } = await import('../../engine/props.mjs');
   IMG_INKCAKE = await loadImage(new URL('ink_cake_cma.jpg', ASSET_DIR));
   IMG_BIBLE = await loadImage(new URL('gutenberg_page_ransom.jpg', ASSET_DIR));
   IMG_VIBE = await loadImage(new URL('webber_kealakekua_1779.jpg', ASSET_DIR));
+  IMG_SCROLL = await loadImage(new URL('joint_calligraphy_ming_met.jpg', ASSET_DIR));
 }
 
 const S = T.scenes;
@@ -38,6 +39,31 @@ function seedDot(ctx, x, y, r, t, t0) {
   ctx.arc(x, y, r * (0.6 + 0.4 * Math.min(1, u + 0.3 * Math.sin(Math.max(0, t - t0) * 4))), 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
+}
+
+// stampFlash — a warm-white radial bloom at each stamp's impact point, peaking
+// ~0.3 α and decaying over ~0.45 s (film-leak feel, not a strobe). Drawn LAST
+// (after every zone) so it tints the whole frame at the moment of impact.
+const STAMPS = [
+  { t0: 1.7, x: 750, y: 440 },
+  { t0: 10.85, x: 2310, y: 678 },
+  { t0: 14.95, x: 2870, y: 678 },
+  { t0: 23.96, x: 3720, y: 640 },
+];
+function stampFlash(ctx, t) {
+  for (const s of STAMPS) {
+    const age = t - s.t0;
+    if (age < 0 || age > 0.5) continue;
+    const a = 0.3 * Math.exp(-age / 0.14) * (age < 0.05 ? age / 0.05 : 1);
+    if (a <= 0.004) continue;
+    ctx.save();
+    const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, 620);
+    g.addColorStop(0, `rgba(255,246,224,${a})`);
+    g.addColorStop(1, 'rgba(255,246,224,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(s.x - 620, s.y - 620, 1240, 1240);
+    ctx.restore();
+  }
 }
 
 // Chinese ink stick — pine-soot slab with a vermilion groove
@@ -180,9 +206,11 @@ function inkDrop(ctx, x, groundY, t) {
 }
 
 export function drawWorld(ctx, t) {
-  drawPaper(ctx, -200, -250, T.BOARD_W + 400, T.BOARD_H + 500, 11);
+  // extended vertical coverage: the 16:9 paper-extension deliverable needs the
+  // board to reach y∈[-700, 1700] at the tail pull-back (zoom .6)
+  drawPaper(ctx, -200, -700, T.BOARD_W + 400, 2400, 11);
   // constant ink-wash vibe plate (John Webber, Kealakekua Bay, 1779, ink/wash, PD) — multiply at α≈0.16
-  drawBackgroundPlate(ctx, IMG_VIBE, { x: -200, y: -250, w: T.BOARD_W + 400, h: T.BOARD_H + 500, alpha: 0.16 });
+  drawBackgroundPlate(ctx, IMG_VIBE, { x: -200, y: -700, w: T.BOARD_W + 400, h: 2400, alpha: 0.16 });
 
   // ── ZONE A · hook ────────────────────────────────────────────
   {
@@ -195,7 +223,7 @@ export function drawWorld(ctx, t) {
       ping(ctx, 750, 225, 150, (Math.max(0, t - 0.5) * 1.35) % 1.6);
       const textA = clamp(1 - Math.max(0, t - 2.3) / 0.7, 0, 1); // gone by t=3.0 — before the camera can crop it (LAW 4, absolute at every pose)
       if (textA > 0.01) {
-        stampText(ctx, 750, 440, 'INK.', { size: 250, t0: 1.7, t, color: INK, rot: -0.012, alpha: textA });
+        stampText(ctx, 750, 440, 'INK.', { size: 250, t0: 1.7, t, color: INK, rot: -0.012, alpha: textA, font: FONT.brush });
         typewriter(ctx, 750, 625, 'five thousand years of memory', { size: 36, t0: 0.55, t, cps: 18, font: FONT.hand, rot: 0.008, alpha: textA });
       }
       ctx.restore();
@@ -222,7 +250,7 @@ export function drawWorld(ctx, t) {
 
   // ── ZONE C · gutenberg ───────────────────────────────────────
   {
-    const a = zoneAlpha(t, 8.8, 15.9, 0.6, 0); // dissolve must clear before the rightward transit seats the plate in the left safe band (~17.0) — gone by ~17.0 (LAW 4)
+    const a = zoneAlpha(t, 8.8, 14.95, 0.6, 0); // dissolve must clear BEFORE the low-swoop transit (typeCase beheads in the top band otherwise, LAW 4 — transit's vertical vector is down)
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
@@ -246,7 +274,7 @@ export function drawWorld(ctx, t) {
       maskUpText(ctx, 3300, 180, 'EVERYTHING YOU', { size: 68, t0: 18.98, t1: 19.88, t, font: FONT.display, rot: 0 });
       maskUpText(ctx, 3300, 268, 'HAVE EVER READ', { size: 68, t0: 19.9, t1: 20.8, t, font: FONT.display, rot: 0 });
       inkDrop(ctx, 3920, 560, t);
-      stampText(ctx, 3720, 700, 'IT REMEMBERS.', { size: 118, t0: 23.96, t, color: INK, rot: -0.01 });
+      stampText(ctx, 3720, 640, 'IT REMEMBERS.', { size: 118, t0: 23.96, t, color: INK, rot: -0.01 });
       ctx.restore();
     }
   }
@@ -271,7 +299,20 @@ export function drawWorld(ctx, t) {
     }
   }
 
-  // ── end-card micro-sources — tiny serif block on the right (upper zone D, clear of the stamp and pool) ──
+  // ── end-card artifact — a real Ming-dynasty calligraphy handscroll above the ink pool
+  // (Met Open Access, CC0; the physical evidence for "it remembers"). Fades in as the
+  // camera pulls back; clear of the mask-up lines (bottom 276) and the pool (554).
+  {
+    const a = clamp((t - 22.2) / 0.9, 0, 1) * 0.94;
+    if (a > 0.01) {
+      drawPrint(ctx, IMG_SCROLL, 3920, 392, { w: 560, rot: 0.014, alpha: a });
+    }
+  }
+
+  // ── stamp flashes — impact blooms on the four stamps ( drawn last, tint the frame )
+  stampFlash(ctx, t);
+
+  // ── end-card micro-sources — three short serif lines under IT REMEMBERS. (clear of the stamp's cap band and the safe margin)
   {
     const a = clamp((t - 23.15) / 0.8, 0, 1);
     if (a > 0.01) {
@@ -280,8 +321,9 @@ export function drawWorld(ctx, t) {
       ctx.fillStyle = INK;
       ctx.font = '15px "Noto Serif", serif';
       ctx.textAlign = 'center';
-      ctx.fillText('SOURCES — ink cake: Cleveland Museum of Art, 1942.245 (CC0) · Gutenberg leaf: Harry Ransom Center, UT (PD)', 3300, 748);
-      ctx.fillText('music: Satie / Teknopazzo, Gymnopédie No.1 (CC0) · voice: Kokoro am_michael (Apache-2.0) · code-drawn by Opuscar Studio', 3300, 772);
+      ctx.fillText('SOURCES — ink cake (CMA 1942.245, CC0) · Gutenberg leaf (PD)', 3300, 706);
+      ctx.fillText('handscroll: Ming, Met DP-13230-001 (CC0) · cropped for print', 3300, 728);
+      ctx.fillText('voice: Kokoro (Apache-2.0) · Satie/Teknopazzo Gymnopédie No.1 (CC0) · Opuscar Studio', 3300, 750);
       ctx.restore();
     }
   }

@@ -2,7 +2,10 @@
 // Picture (world.mjs) and sound (sfx-plan.mjs) both import this file.
 // Placeholder: a 10-second demo. Edit DUR/FRAMES to your VO length (LAW 2:
 // film duration = VO duration) and lay your camera keys across the board.
-import { makeRail } from '../../engine/camera.mjs';
+// PRODUCTION TARGETS: 5–6 min or 10–12 min essays (001/002 are test reels).
+// Boards scale ~10–14k px per minute; use many zones and makeVariedRail (LAW 10)
+// so every transit bends diagonally — never a dead straight right.
+import { makeVariedRail } from '../../engine/camera.mjs';
 
 export const T = {
   W: 3840,
@@ -22,7 +25,11 @@ export const T = {
   fadeIn: [0, 0.4],
   fadeOut: [9.5, 10.0],
 
-  // One continuous Catmull-Rom move: start → drift → pull-back.
+  // One continuous Catmull-Rom move with VARIED transits (LAW 10): long spans
+  // (|dx| ≥ 650 design px) are auto-split and nudged by a deterministic
+  // anti-repeat bank (diag-sink/diag-rise/high-arc/low-swoop/stepped-rise/
+  // deep-dive); short drifts stay pure. Seed per film (e.g. slug number);
+  // if LAW 4 flags a mid-transit beheading, re-seed or pass { dyScale: 0.6 }.
   cameraKeys: [
     { t: 0.0,  x: 1500,  y: 1150, zoom: 1.0 },
     { t: 4.5,  x: 5500,  y: 1100, zoom: 1.02 },
@@ -31,4 +38,5 @@ export const T = {
   ],
 };
 
-T.rail = makeRail(T.cameraKeys);
+T.rail = makeVariedRail(T.cameraKeys, 1);
+console.log('[timings] rail variety:', JSON.stringify(T.rail.variety));

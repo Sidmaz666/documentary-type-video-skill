@@ -1,28 +1,31 @@
 # 002 — Ink & Ember
 
-**Status: DELIVERED (test film)** — `public/film/002-ink-and-ember.mp4`, published 2026-11-09, re-rendered 2026-11-10 with safe-area/external-source pass; FINAL-FILE LAW verified three times (739 frames; video 24.633 s == audio 24.618 s); LAW 4 sweep 99/99 clean; LAW 9 compliant (two real artifacts in-frame).
+**Status: DELIVERED (test film)** — `public/film/002-ink-and-ember.mp4`, published 2026-11-09, re-rendered 2026-11-10 with safe-area/external-source + **transition-variety** pass; FINAL-FILE LAW verified four times (739 frames; video 24.633 s == audio 24.618 s); LAW 4 sweep 99/99 clean; LAW 9 compliant (four real artifacts in-frame); deliverables: 21:9 master + 16:9 paper-extension master (`public/film/002-ink-and-ember-16x9.mp4`) + SRT captions + key stills (`public/film/stills/`).
 
 ## The brief (one paragraph)
 
 A 25-second test film for the rebuilt pipeline (new engine quality: presets, letterpress stamps, contact shadows, laworchestrated research ledger, Kokoro VO, LAW 8 shot cards). Subject: ink — the oldest memory technology we have. The ONE idea: **everything you have ever read began as a stubborn black promise.** Narrated in the user's house voice (Kokoro `am_michael`, verified locally 2026-11-09). It doubles as the end-to-end proof of the post-audit toolchain.
 
+**Test-reel notice:** 001 and 002 are short-form pipeline proofs, NOT the product. Production films target **5–6 min or 10–12 min** illustrated essays (see `studio/PROJECTS.md`, `studio/README.md`).
+
 ## Format
 - 1920×822 (21:9 class, even dimensions) · 30 fps · duration = VO length (24.62 s, LAW 2) · test resolution, not the 4K master format
-- One continuous camera move across a 4000px board, tail pull-back
+- One continuous camera move across a 4200px board (LAW 10 — every zone transit is diagonal/arc; `makeVariedRail(keys, seed 2)`), tail pull-back
 - Claim discipline: SOURCES.md ledger green before render (research-sourcing skill)
 
 ## Checklist before building
 - [x] `assets/vo.m4a` — Kokoro am_michael, 24.62 s (LAW 2)
 - [x] `assets/vo-timings.whisper.json` — ASR word timestamps (60 words)
 - [x] `SOURCES.md` — 4 claims, all verified 2026-11-09
-- [x] `BEATS.md` — shot cards for every beat (LAW 8)
-- [x] `assets/assets-credits.csv` — Satie bed (CC0) + **three real external artifacts in-frame** (LAW 9): Qing-dynasty ink cake print (CLE, CC0) in the China beat; Gutenberg Bible leaf (Harry Ransom Center scan, PD) in the Gutenberg beat; constant ink-wash vibe plate (Webber, Kealakekua Bay, 1779, PD) multiplied across the world
+- [x] `BEATS.md` — shot cards for every beat (LAW 8) + color script (§Color script)
+- [x] `assets/assets-credits.csv` — Satie bed (CC0) + **four real external artifacts in-frame** (LAW 9): Qing-dynasty ink cake print (CLE, CC0) in the China beat; Gutenberg Bible leaf (Harry Ransom Center scan, PD) in the Gutenberg beat; constant ink-wash vibe plate (Webber, Kealakekua Bay, 1779, PD) multiplied across the world; Ming-dynasty joint-calligraphy handscroll print (Met DP-13230-001, Ni Yuanlu / Huang Daozhou, CC0 — cropped for print) above the ink pool at the tail
 - [x] QC stills at every beat + transitions
 - [x] FINAL-FILE LAW on the published MP4
 
 ## Decision log
 | v | Decision |
 |---|----------|
+| v9 | Professional-editor gap pass (user directive: resolve all remaining gaps + stop camera riding the same axis): (1) **brush typography** — Liu Jian Mao Cao (OFL) fetched + registered as engine font `FONT.brush`; hook `INK.` now hand-painted (credits row 17); (2) **transition-variety camera (LAW 10)** — engine `makeVariedRail()` auto-splits any |Δx| ≥ 650 px span and nudges it from a deterministic anti-repeat bank (diag-sink/diag-rise/high-arc/low-swoop/stepped-rise/deep-dive); 002 ships seed 2 (`deep-dive → diag-rise → low-swoop → high-arc`, `T.rail.variety`); all transits verified by the LAW 4 sweep (zone C retracted by 14.95 s so the low-swoop never beheads the type case — LAW 4 still gates variety); (3) **grade pop** — warm-white radial impact blooms (`stampFlash()` in world.mjs) on all four stamps, peak α≈0.30, decay ~0.14 s; (4) **end-card artifact** — real Ming-dynasty joint-calligraphy handscroll (Met DP-13230-001, Ni Yuanlu / Huang Daozhou, CC0, cropped for print, row 18) fades in above the ink pool from 22.2 s — the physical evidence for "it remembers"; end-card micro-credit block redesigned to three short lines under the raised stamp (LAW 8); (5) **music swell** — `mixVoWithBus` learned `music.swell` (smoothstep bed-gain ramp at 22.9 s → +2 dB held to the tail fade); mix −13.3 LUFS, TP −1.4 dBTP, bed audible from 0:00, tail bloom verified; (6) **SFX room tone** — new engine `airSwell()` under the opening (the scene inhales before the voice); (7) **deliverables** — SRT sidecar (`assets/subtitles.en.srt` from the whisper ASR, 6 cues; copied to `public/film/002-ink-and-ember.en.srt`), new `studio/tools/deliver.mjs` renders a **16:9 paper-extension master** (same world+rail re-framed to 1920×1080, paper extended to y∈[-700,1700], FINAL-FILE LAW verified, published as `public/film/002-ink-and-ember-16x9.mp4`) + three key stills (`public/film/stills/002-ink-and-ember-{hook,everything,remember}.png`); (8) **color script** documented in BEATS.md (warm-neutral hook → cool-soot China → warm-mid Gutenberg → stark-neutral Everything → warm-settle Remember); (9) vertical alternates (4:5/9:16) explicitly rejected — boards demand re-authored rails; documented in PROJECTS.md; (10) 001 documented as grandfathered canonical, never re-rendered. FINAL-FILE re-verified: 739f, video 24.633 s == audio 24.618 s; LAW 4 sweep 99/99. |
 | v1 | scaffolded from templates/project; claims verified against Britannica Kids (ink, printing press) and MFA CAMEO (carbon-based ink) — ledger SOURCES.md |
 | v2 | VO synthesized locally with Kokoro am_michael (user's house voice default); timings from ASR word anchors; Satie Gymnopédie No.1 (Teknopazzo, CC0) reused from 001's verified bed (SHA-1 match) |
 | v3 | QC still sweep caught 3 defects: hook stamp beheaded + dot/type collision (zone A rewritten), MOVABLE TYPE colliding with stamps (moved inside the press sheet as its headline), ink drop falling through the mask-up text (drop moved right, text kept left). All fixed; 12-beat still sweep clean. |

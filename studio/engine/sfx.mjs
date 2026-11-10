@@ -7,8 +7,10 @@
 // mixVoWithBus(voPath, sfxEvents, {music, out}) decodes the VO with ffmpeg to
 // PCM, applies an 80 ms protective head-fade (kills recorded pops), places
 // each SFX event at its time with gain/pan, and — when a music bed is given —
-// trims it, fades it, and sidechain-ducks it under the VO envelope (≈6–8 dB
-// dip while speech RMS is high). Writes PCM16 stereo WAV.
+// trims it, fades it, sidechain-ducks it under the VO envelope (≈6–8 dB dip
+// while speech RMS is high) and optionally swells it at the tail
+// (music.swell = { at, gain = 1.26, dur = 1.6 } — smoothstep ramp held to the
+// fade-out; the bed blooms under the final beat instead of plateauing).
 //
 // MUSIC LAW: `drone()` is a documented FALLBACK bed only. When a project has
 // a classical recording (music: {path, ...}), the drone is retired for that
@@ -152,7 +154,21 @@ export function drone(dur = 10) {
   return scale(out, 0.16);
 }
 
-export const SFX = { thud, paperSlap, typewriterKey, pencilScratch, paperDropWhump, hoofCloak, ping, whoosh, drone };
+// airSwell(dur, peak) — a breath of room tone under an opening: filtered noise
+// with a bell envelope and a hollow band color, for "the scene started before
+// the voice did". Deterministic xorshift noise, bandpass ≈ low-mid swell.
+export function airSwell(dur = 2.4, peak = 0.5) {
+  const n = sec(dur);
+  const shaped = bandpass(noiseBuf(n), 0.02, 0.12);
+  const out = new Float32Array(n);
+  for (let i = 0; i < n; i++) {
+    const u = i / n;
+    out[i] = shaped[i] * Math.pow(Math.sin(u * Math.PI), 2) * peak;
+  }
+  return scale(out, 1.0);
+}
+
+export const SFX = { thud, paperSlap, typewriterKey, pencilScratch, paperDropWhump, hoofCloak, ping, whoosh, drone, airSwell };
 
 // ── the bus ───────────────────────────────────────────────────────────────
 function makeBus(lenSamples) {
@@ -220,7 +236,7 @@ function duckEnvelope(voL, voR, len, { window = 0.05, duck = 0.42 } = {}) {
 
 // ── the mix stage ─────────────────────────────────────────────────────────
 // sfxEvents: [{ t, samples?, make?, name?, gain?, pan? }]
-// music: { path, trimTo, gain = 1, fadeIn = 0.8, fadeOut = 1.2 } or null
+// music: { path, trimTo, gain = 1, fadeIn = 0.8, fadeOut = 1.2, trimLead, swell: { at, gain, dur } } or null
 export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out = 'out/mix.wav', tail = 0.0, voGain = 1 } = {}) {
   // MUSIC LAW helpers: trimLead skips the source recording's leading silence so the bed is audibly PRESENT from second 0 (never a silent open).
   const vo = await decodeAudio(voPath);
@@ -265,11 +281,25 @@ export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out =
     const trimN = Math.min(m.L.length - onsetN, Math.round((music.trimTo ?? vo.dur) * SR));
     const g = music.gain ?? 1;
     const fi = sec(music.fadeIn ?? 0.8), fo = sec(music.fadeOut ?? 1.2);
+    // optional end-of-film swell: bed gain ramps up by swell.gain (smoothstep over
+    // swell.dur) beginning at swell.at and HOLDS until the fade-out — a bloom under
+    // the final stamp, not a cut (MUSIC LAW: never a second bed, just this bed rising).
+    const swell = music.swell || null;
+    const sw0 = swell ? sec(Math.max(0, swell.at ?? 0)) : 0;
+    const swD = swell ? sec(Math.max(0.05, swell.dur ?? 1.6)) : 0;
+    const swTarget = swell ? (swell.gain ?? 1.26) : 1;
     const duck = duckEnvelope(vo.L, vo.R, total);
     for (let i = 0; i < Math.min(trimN, total); i++) {
       let f = 1;
       if (i < fi) f *= i / fi;
       if (i > trimN - fo) f *= Math.max(0, (trimN - i) / fo);
+      if (swell) {
+        if (i >= sw0 + swD) f *= swTarget;
+        else if (i >= sw0) {
+          const u = (i - sw0) / swD;
+          f *= 1 + (swTarget - 1) * (u * u * (3 - 2 * u));
+        }
+      }
       const d = duck[i];
       bus.L[i] += m.L[i + onsetN] * g * f * d;
       bus.R[i] += m.R[i + onsetN] * g * f * d;

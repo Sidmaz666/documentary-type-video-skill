@@ -61,9 +61,10 @@ const FAMILY_BY_FILE = [
   ['archivo', 'Archivo'],
   ['caveat', 'Caveat'],
   ['noto', 'Noto Serif'],
+  ['liujianmaocao', 'Liu Jian Mao Cao'],
 ];
 
-export const FONT = { display: 'sans-serif', hand: 'sans-serif', serif: 'serif', sans: 'sans-serif', black: 'sans-serif' };
+export const FONT = { display: 'sans-serif', hand: 'sans-serif', serif: 'serif', sans: 'sans-serif', black: 'sans-serif', brush: 'serif' };
 const registered = [];
 
 for (const dir of FONT_DIRS) {
@@ -91,6 +92,7 @@ if (fams.has('Archivo Black')) FONT.display = 'Archivo Black';
 if (fams.has('Caveat'))        FONT.hand = 'Caveat';
 if (fams.has('Noto Serif'))    FONT.serif = 'Noto Serif';
 if (fams.has('Archivo'))       FONT.sans = 'Archivo';
+if (fams.has('Liu Jian Mao Cao')) FONT.brush = 'Liu Jian Mao Cao';
 // Anton is the house CONDENSED display face (ref numerals/titles). When it is
 // present it takes over FONT.display; Archivo Black stays reachable as
 // FONT.black for any occasional wide-stamp need.

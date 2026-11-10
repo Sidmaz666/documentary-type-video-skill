@@ -11,7 +11,7 @@ Every row is a complete **shot card** (LAW 8) — a beat without one is not rend
 
 - Boil: 8 fps quantized, ±2.4px / ±0.002rad, hash-deterministic.
 - Paper: subtle two-axis grid — laid rules (horizontal, α≈0.05) + chain lines (vertical, α≈0.04), 118px, bowed on a fixed lattice.
-- Camera: one Catmull-Rom rail; handheld damped on fast pushes; 1/90s sub-sample blur during fast travel only.
+- Camera: one Catmull-Rom rail via `makeVariedRail(keys, seed)` (LAW 10 — every zone transit bends diagonally up/down or arcs, never a dead straight ride; `T.rail.variety` logged in PROJECT.md); handheld damped on fast pushes; 1/90s sub-sample blur during fast travel only. Name each transit vector in the Move column.
 - Safe area: titles/captions/hero art ≥60px inside the viewport at every camera pose (LAW 4) — enforced by `bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs` (exits 1 on breach).
 - Underlines/circles: never cross type; ≥40px clearance below the last line (LAW 6).
 - No text collisions: no text overlaps any other text, hero art, or stroke, at any frame (LAW 8).

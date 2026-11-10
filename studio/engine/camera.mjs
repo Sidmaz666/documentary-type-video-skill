@@ -4,6 +4,84 @@
 // key (hold-drift). Handheld noise is damped during fast pushes.
 import { hash, clamp } from './style.mjs';
 
+// ── TRANSITION VARIETY LAW ─────────────────────────────────────────────────
+// A scene-to-scene transit must NEVER be the same axis twice in a row:
+// sliding straight right from zone to zone reads as a screensaver, not
+// cinema. Every transit gets a distinct vector picked deterministically
+// (hash of the film seed + transit index, anti-repeat enforced): diagonal
+// rising, diagonal sinking, high arc, low swoop — plus a slight zoom bias.
+// makeVariedRail() augments a key list automatically (preferred for films
+// with many zones). Hand-authored rails must honor the same law: give every
+// long span a non-horizontal component and never two same-sign vertical
+// pushes in sequence (bible §2, AGENTS.md §3).
+export const TRANSITION_BANK = [
+  { name: 'diag-sink',    dy: +150, dz:  +0.012 }, // diagonal descending onto the next scene
+  { name: 'diag-rise',    dy: -150, dz:  +0.012 }, // diagonal rising onto the next scene
+  { name: 'high-arc',     dy: -215, dz:  -0.014 }, // high swoop over the board
+  { name: 'low-swoop',    dy: +225, dz:  -0.016 }, // low graze under the board
+  { name: 'stepped-rise', dy:  -95, dz:  +0.020 }, // gentle rising diagonal, slight push-in
+  { name: 'deep-dive',    dy:   +95, dz:  -0.006 }, // shallow sink, slight pull-back
+];
+
+// raw deterministic pick (no anti-repeat)
+function bankPick(seed, index) {
+  const h = hash(Math.imul((seed | 0) || 1, 2654435761) ^ Math.imul(index + 1, 40503));
+  return TRANSITION_BANK[Math.floor(h * TRANSITION_BANK.length) % TRANSITION_BANK.length];
+}
+
+// transitionProfile(seed, index) → { name, dy, dz }. Walks the chain so the
+// anti-repeat is GLOBAL: consecutive transits never share the sign of their
+// vertical vector (rising after rising is skipped forward through the bank).
+export function transitionProfile(seed, index) {
+  let prevSign = 0;
+  let p = bankPick(seed, 0);
+  for (let i = 0; i <= index; i++) {
+    p = bankPick(seed, i);
+    let guard = 0;
+    while (prevSign !== 0 && Math.sign(p.dy) === prevSign && guard++ < TRANSITION_BANK.length * 2) {
+      p = TRANSITION_BANK[(TRANSITION_BANK.indexOf(p) + 1) % TRANSITION_BANK.length];
+    }
+    prevSign = Math.sign(p.dy);
+  }
+  return p;
+}
+
+// makeVariedRail(keys, seed, opts) — drop-in replacement for makeRail() for
+// LONG films (5–6 / 10–12 min essays where every zone boundary is a transit).
+// Any span whose horizontal travel exceeds opts.minTransit (default 650
+// design px) gets its midpoint nudged by transitionProfile() (dy, with a
+// small zoom bias); short drifts stay pure. opts.dyScale shrinks the nudge
+// for tight boards (default 1). Returns a makeRail() rail with a
+// `.variety` log: [{ t, profile, dy }] — record it in the project decision
+// log. Deterministic; byte-identical for the same seed.
+export function makeVariedRail(keys, seed = 1, opts = {}) {
+  const minTransit = opts.minTransit ?? 650;
+  const dyScale = opts.dyScale ?? 1;
+  const k = [...keys].sort((a, b) => a.t - b.t);
+  const out = [];
+  const variety = [];
+  let transit = 0;
+  for (let i = 0; i < k.length; i++) {
+    out.push({ ...k[i] });
+    const a = k[i], b = k[i + 1];
+    if (!b) break;
+    if (Math.abs(b.x - a.x) < minTransit) continue;
+    const p = transitionProfile(seed, transit);
+    const mid = {
+      t: (a.t + b.t) / 2,
+      x: (a.x + b.x) / 2,
+      y: (a.y + b.y) / 2 + p.dy * dyScale,
+      zoom: clamp((a.zoom + b.zoom) / 2 + p.dz, 0.3, 1.4),
+    };
+    out.push(mid);
+    variety.push({ t: Number(mid.t.toFixed(3)), profile: p.name, dy: Math.round(p.dy * dyScale) });
+    transit++;
+  }
+  const rail = makeRail(out);
+  rail.variety = variety;
+  return rail;
+}
+
 // Catmull-Rom for one component given 4 control values and u∈[0,1].
 function catmullRom(p0, p1, p2, p3, u) {
   const u2 = u * u, u3 = u2 * u;

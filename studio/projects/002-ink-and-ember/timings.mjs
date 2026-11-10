@@ -1,6 +1,6 @@
 // timings.mjs — THE single source of truth clock for Ink & Ember.
 // Picture (world.mjs) and sound (sfx-plan.mjs) both import this file.
-import { makeRail } from '../../engine/camera.mjs';
+import { makeVariedRail } from '../../engine/camera.mjs';
 
 export const T = {
   W: 1920,
@@ -28,6 +28,12 @@ export const T = {
   fadeOut: [24.0, 24.619],
 
   // One continuous Catmull-Rom move: A (hold) → B (drift) → C (drift) → D (settle) → tail pull-back.
+  // TRANSITION VARIETY LAW (AGENTS.md §3, bible §2, LAW 10): long transits (|dx| ≥ 650px)
+  // are auto-split and nudged by makeVariedRail() — never straight right. This film's
+  // transits (seed 2): 6.5→8.2 deep-dive (+95), 8.2→9.75 diag-rise (−150),
+  // 15.5→18.6 low-swoop (+225), 22.7→24.6 high-arc (−215) — see T.rail.variety, logged
+  // in PROJECT.md. Holds stay pure horizontal. Zone C retracts by 14.95 s so the swoop's
+  // top band never beheads the type case (LAW 4).
   cameraKeys: [
     // Rule of thirds held in the FRAME (not the world): every hero sits at a
     // third line, never dead center. Arrivals land BEFORE their VO beat word.
@@ -47,4 +53,4 @@ export const T = {
   ],
 };
 
-T.rail = makeRail(T.cameraKeys);
+T.rail = makeVariedRail(T.cameraKeys, 2);

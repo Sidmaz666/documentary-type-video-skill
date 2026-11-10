@@ -5,7 +5,7 @@ description: Director-of-photography + motion-graphics bible for Opuscar Studio 
 
 # The Cinematic Motion-Graphics Bible
 
-The craft manual behind AGENTS.md LAW 1, 1b, 4, 5, 6 and 8. `AGENTS.md` hard laws win over anything here; this document tells you **how** to satisfy them frame by frame, beat by beat. Nothing in this file permits AI-generated media — ever.
+The craft manual behind AGENTS.md LAW 1, 1b, 4, 5, 6, 8 and 10. `AGENTS.md` hard laws win over anything here; this document tells you **how** to satisfy them frame by frame, beat by beat. Nothing in this file permits AI-generated media — ever.
 
 **How to use:** every beat in `BEATS.md` carries a **shot card** (§0). You may not render a beat whose shot card is incomplete. QC stills are judged against this bible, not against vibes.
 
@@ -19,7 +19,7 @@ Every row of `BEATS.md` declares all of the following. A beat without a complete
 |-------|--------------------|------------|
 | `intent` | The ONE thing the viewer must feel/learn | "many things" |
 | `shot` | Shot size + angle (§1.9–1.10) | "normal" |
-| `move` | Camera move + easing (§2) | "move around" |
+| `move` | Camera move + transit vector into the beat (§2, LAW 10) | "move around" |
 | `grid` | Composition grid + anchor coordinates (§1.2–1.6) | "centered-ish" |
 | `hero` | The single focal subject | two co-heroes |
 | `text` | Every text layer, size, clearance (§5) | "some text" |
@@ -135,11 +135,18 @@ House default: **enter a sequence WS → MS → CU** to walk the viewer in; exit
 
 House camera law (AGENTS.md §3): **one continuous Catmull-Rom rail per film**, C1-continuous — holds keep drifting toward the next move; the film never stops dead. Sub-sample 1/90s motion blur on fast travel only. Parallax order: foreground > midground > background displacement.
 
+**Transition Variety (LAW 10):** no two scene-to-scene transits may share the same axis. Every long span (|Δx| ≥ 650 design px) must bend vertically — diagonal rising or sinking, high arc, low swoop — picked deterministically (hash-seeded bank, anti-repeat sign alternation) via `makeVariedRail()` in `engine/camera.mjs`. Short in-zone drifts stay horizontal. Rules of thumb:
+- A rising transit needs empty sky above the departing zone (type case, stamps, mask-up walls all behead in a rising window — LAW 4, 002's type case). A sinking transit needs the departing zone to have fully receded below the arrival window or its top edge beheads under the downward clip (002's `PINE SOOT` / `1455.` ghosts).
+- Name the transit vector into the beat inside the shot card (`move`): e.g. `transit: diag-rise (−150px) into B`.
+- Log the profile list (`T.rail.variety`) in PROJECT.md's decision log. If LAW 4 fails mid-transit, shrink `dyScale` or re-seed — never "only clips for a moment".
+- Production essays (5–6 / 10–12 min) transit dozens of times: the bank + anti-repeat exists for exactly that; hand-authoring each transit guarantees drift into monotone.
+
 Pacing rules:
 - Holds last ≥1.2s before the next move begins (feel, not timing).
 - Rail velocity: push-ins 150–400px/s world; fast travel ≤3× that; anything faster needs motion-blur sub-sampling or it ghosts structure (banned).
 - Moves have semantic direction — push = closer to truth, pull = bigger truth. Never pan "just to show more paper".
 - Every move ends on a composed power point (§1.2/1.3), not mid-gesture.
+- Every transit between zones carries a non-horizontal vector (LAW 10) — a film whose scenes all slide in the same direction reads as a screensaver, not cinema.
 
 ---
 
@@ -391,3 +398,4 @@ Plus the existing Texture & motion feel section (boil, paper, rail, safe-area, L
 | LAW 7 (publish/zip hygiene) | repo ops, not craft — see `AGENTS.md` |
 | LAW 8 (frame/beat craft; no text collisions) | §0–§6, §9, §10 |
 | LAW 9 (external source assets mandatory) | §8, §9, §4 |
+| LAW 10 (camera variety; never straight rides) | §2, §0 `move`, engine `makeVariedRail()` |
