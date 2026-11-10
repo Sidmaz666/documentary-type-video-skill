@@ -3,7 +3,8 @@
 // outer MARGIN-px band on any edge. Paper fibers/grain never reach the ink
 // threshold, so this is robust against house paper texture (verified).
 //
-// usage: bun studio/tools/safearea.mjs --world <world.mjs> --timings <timings.mjs> [--times t1,t2,...] [--margin 60] [--scale 2]
+// usage: bun studio/tools/safearea.mjs --world <world.mjs> --timings <timings.mjs> [--times t1,t2,...] [--margin 60] [--scale 2] [--design WxH]
+// --design WxH sweeps an alternate design resolution (e.g. the 16:9 paper-extension master: --design 1920x1080)
 // default sweep: every 0.25 s of T.DUR
 import { createCanvas } from '@napi-rs/canvas';
 import { resolve, dirname, join } from 'node:path';
@@ -18,9 +19,10 @@ for (let i = 0; i < argv.length; i++) {
   else if (a === '--times') args.times = argv[++i].split(',').map(Number);
   else if (a === '--margin') args.margin = parseInt(argv[++i], 10);
   else if (a === '--scale') args.scale = parseFloat(argv[++i]);
+  else if (a === '--design') args.design = argv[++i];
 }
 if (!args.world || !args.timings) {
-  console.error('usage: bun safearea.mjs --world world.mjs --timings timings.mjs [--times t1,t2,...] [--margin 60] [--scale 2]');
+  console.error('usage: bun safearea.mjs --world world.mjs --timings timings.mjs [--times t1,t2,...] [--margin 60] [--scale 2] [--design 1920x1080]');
   process.exit(2);
 }
 const MARGIN = args.margin ?? 60;   // LAW 4 safe area, design px
@@ -32,7 +34,13 @@ const Wmod = await import(pathToFileURL(resolve(args.world)).href);
 const drawWorld = Wmod.drawWorld || Wmod.default?.drawWorld;
 const { renderFrame } = await import('../engine/compose.mjs');
 
-const W = T.W, H = T.H;
+let DW = T.W, DH = T.H;
+if (args.design) {
+  const m = /^(\d+)x(\d+)$/.exec(args.design);
+  if (!m) { console.error('--design expects WxH (e.g. 1920x1080)'); process.exit(2); }
+  DW = parseInt(m[1], 10); DH = parseInt(m[2], 10);
+}
+const W = DW, H = DH;
 const SW = Math.round(W / SCALE), SH = Math.round(H / SCALE);
 const M = Math.round(MARGIN / SCALE);
 const INK = 100; // luminance ceiling for "ink" — paper sits ~230, vignette stays >150

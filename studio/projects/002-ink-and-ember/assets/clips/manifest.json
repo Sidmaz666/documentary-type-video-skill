@@ -1,17 +1,56 @@
 {
+  "canonical": "assets-credits.csv",
+  "note": "Manifest of sourced media for 002-ink-and-ember. assets-credits.csv is the canonical LAW 1/LAW 9 ledger (license + author + source URL + modification). This file exists so tools can enumerate downloads; fields marked null were not recorded at fetch time (no values were invented).",
   "items": [
+    {
+      "source": "commons",
+      "title": "China, Qing dynasty - Ink Cake - 1942.245 - Cleveland Museum of Art.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:China%2C_Qing_dynasty_-_Ink_Cake_-_1942.245_-_Cleveland_Museum_of_Art.jpg",
+      "localFile": "assets/clips/ink_cake_cma.jpg",
+      "license": "CC0 1.0",
+      "artist": null,
+      "attributionRequired": false,
+      "project": "002-ink-and-ember",
+      "downloadedAt": "2026-11-10",
+      "creditsRow": 14
+    },
+    {
+      "source": "commons",
+      "title": "Gutenberg bible Old Testament Epistle of St Jerome.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:Gutenberg_bible_Old_Testament_Epistle_of_St_Jerome.jpg",
+      "localFile": "assets/clips/gutenberg_page_ransom.jpg",
+      "license": "Public Domain",
+      "artist": null,
+      "attributionRequired": false,
+      "project": "002-ink-and-ember",
+      "downloadedAt": "2026-11-10",
+      "creditsRow": 15
+    },
+    {
+      "source": "commons",
+      "title": "John Webber - 'Kealakekua Bay and the village Kowroaa', 1779, ink, ink wash and watercolor.jpg",
+      "pageUrl": "https://commons.wikimedia.org/wiki/File:John_Webber_-_'Kealakekua_Bay_and_the_village_Kowroaa'%2C_1779%2C_ink%2C_ink_wash_and_watercolor.jpg",
+      "localFile": "assets/clips/webber_kealakekua_1779.jpg",
+      "license": "Public Domain",
+      "artist": "John Webber",
+      "attributionRequired": false,
+      "project": "002-ink-and-ember",
+      "downloadedAt": "2026-11-10",
+      "creditsRow": 16
+    },
     {
       "source": "direct",
       "title": "%E6%98%8E_%E4%BA%8C%E5%AE%B6%E6%B3%95%E6%9B%B8%E5%90%88%E5%8D%B7-Joint_Calligraphy_MET_DP-13230-001.jpg",
       "url": "https://commons.wikimedia.org/wiki/Special:FilePath/%E6%98%8E_%E4%BA%8C%E5%AE%B6%E6%B3%95%E6%9B%B8%E5%90%88%E5%8D%B7-Joint_Calligraphy_MET_DP-13230-001.jpg?width=2400",
-      "license": "CC0 1.0",
-      "licenseUrl": null,
-      "artist": null,
-      "attributionRequired": false,
       "pageUrl": "https://commons.wikimedia.org/wiki/File:明_二家法書合卷-Joint_Calligraphy_MET_DP-13230-001.jpg",
       "localFile": "assets/clips/joint_calligraphy_ming_met.jpg",
-      "downloadedAt": "2026-11-10T07:04:23.417Z",
-      "project": "002-ink-and-ember"
+      "license": "CC0 1.0",
+      "artist": "Ni Yuanlu / Huang Daozhou",
+      "attributionRequired": false,
+      "project": "002-ink-and-ember",
+      "downloadedAt": "2026-11-10",
+      "creditsRow": 18,
+      "modification": "cropped to y=56..824 (ffmpeg crop) — removes calibration strip; crop only, no retouch"
     }
   ]
 }
