@@ -1,0 +1,690 @@
+1
+00:00:00,180 --> 00:00:02,840
+On the eighth of November, twenty
+twenty-six, the
+
+2
+00:00:02,840 --> 00:00:04,960
+founder and chief executive of
+NVIDIA sent a
+
+3
+00:00:05,000 --> 00:00:06,500
+letter to his employees.
+
+4
+00:00:06,760 --> 00:00:09,160
+Two sentences in, he wrote: I was
+unfaithful
+
+5
+00:00:09,160 --> 00:00:09,980
+to my wife.
+
+6
+00:00:10,120 --> 00:00:11,280
+He gave no name.
+
+7
+00:00:11,480 --> 00:00:13,800
+But the board had already seen what
+American
+
+8
+00:00:13,800 --> 00:00:16,580
+intelligence agencies had concluded
+— and within hours,
+
+9
+00:00:16,700 --> 00:00:19,060
+it announced an independent
+investigation.
+
+10
+00:00:19,260 --> 00:00:20,480
+Not into an affair.
+
+11
+00:00:20,660 --> 00:00:23,560
+Into a foreign intelligence effort,
+reportedly aimed at
+
+12
+00:00:23,560 --> 00:00:26,600
+the most powerful man in artificial
+intelligence.
+
+13
+00:00:26,600 --> 00:00:30,180
+Jensen Huang co-founded NVIDIA in
+1993 and has
+
+14
+00:00:30,180 --> 00:00:31,540
+run it ever since.
+
+15
+00:00:31,540 --> 00:00:35,100
+In July 2025, NVIDIA became the
+first company
+
+16
+00:00:35,100 --> 00:00:37,380
+ever to cross four trillion dollars.
+
+17
+00:00:37,380 --> 00:00:40,060
+Three months later, the first to
+cross five.
+
+18
+00:00:40,320 --> 00:00:43,140
+Every frontier AI model on Earth
+runs, in
+
+19
+00:00:43,140 --> 00:00:45,900
+large part, on NVIDIA silicon —
+which makes
+
+20
+00:00:45,900 --> 00:00:47,700
+who may buy it one of the sharpest
+
+21
+00:00:47,700 --> 00:00:49,500
+edges of American power.
+
+22
+00:00:49,500 --> 00:00:51,660
+And Huang was no bystander to that
+debate.
+
+23
+00:00:51,820 --> 00:00:54,260
+He urged Washington to ease the
+export ban.
+
+24
+00:00:54,380 --> 00:00:55,920
+He got the President's ear.
+
+25
+00:00:56,080 --> 00:00:57,640
+The woman at the center of this is
+
+26
+00:00:57,640 --> 00:01:00,000
+another Huang — Alice Huang, no
+relation.
+
+27
+00:01:00,080 --> 00:01:01,480
+A Chinese citizen.
+
+28
+00:01:01,700 --> 00:01:04,660
+Reported as a top executive at
+Megaspeed International
+
+29
+00:01:04,660 --> 00:01:07,420
+— a Singapore company renting
+computing power, built
+
+30
+00:01:07,420 --> 00:01:09,800
+on NVIDIA chips, to Chinese firms.
+
+31
+00:01:10,080 --> 00:01:10,980
+Not charged.
+
+32
+00:01:11,240 --> 00:01:12,100
+Not heard from.
+
+33
+00:01:12,280 --> 00:01:14,520
+And Jensen Huang has never said her
+name.
+
+34
+00:01:14,620 --> 00:01:16,740
+What the press calls an affair, and
+what
+
+35
+00:01:16,740 --> 00:01:19,100
+intelligence agencies call an asset
+— they overlap
+
+36
+00:01:19,480 --> 00:01:20,840
+around this one person.
+
+37
+00:01:21,080 --> 00:01:24,480
+According to reporting based on US
+intelligence assessments,
+
+38
+00:01:24,640 --> 00:01:27,620
+surveillance unmasked a contact that
+identified Jensen Huang
+
+39
+00:01:27,620 --> 00:01:29,120
+as the American on the other end of
+
+40
+00:01:29,120 --> 00:01:31,760
+the line — and concluded Alice Huang
+was
+
+41
+00:01:31,760 --> 00:01:34,600
+an asset of China's Ministry of
+State Security,
+
+42
+00:01:34,800 --> 00:01:37,800
+recruited to cultivate him, to
+potentially influence the
+
+43
+00:01:37,800 --> 00:01:38,660
+chip flow.
+
+44
+00:01:38,860 --> 00:01:41,220
+A memo circulated to top officials
+in the
+
+45
+00:01:41,220 --> 00:01:42,700
+spring of twenty twenty-six.
+
+46
+00:01:42,700 --> 00:01:46,040
+The Financial Times reported it
+described a romantic
+
+47
+00:01:46,040 --> 00:01:46,400
+relationship.
+
+48
+00:01:47,000 --> 00:01:49,100
+Secretary of State Rubio oversaw it.
+
+49
+00:01:49,360 --> 00:01:51,320
+President Trump was briefed about a
+year before
+
+50
+00:01:51,320 --> 00:01:53,320
+it went public — and chose not to
+
+51
+00:01:53,320 --> 00:01:53,700
+act.
+
+52
+00:01:53,940 --> 00:01:56,080
+Before you call it settled — hold
+on.
+
+53
+00:01:56,200 --> 00:01:58,560
+Neither the CIA nor the White House
+has
+
+54
+00:01:58,560 --> 00:01:59,400
+confirmed it.
+
+55
+00:01:59,840 --> 00:02:02,240
+NBC said it had not independently
+confirmed it.
+
+56
+00:02:02,380 --> 00:02:04,760
+The Wall Street Journal reported she
+vanished into
+
+57
+00:02:04,760 --> 00:02:08,240
+China in late 2024 — and Singapore's
+Ministry
+
+58
+00:02:08,240 --> 00:02:11,980
+of Home Affairs replied flatly: no
+such investigations
+
+59
+00:02:11,980 --> 00:02:12,540
+existed.
+
+60
+00:02:12,860 --> 00:02:15,000
+China called it groundless
+speculation.
+
+61
+00:02:15,000 --> 00:02:18,080
+An allegation this serious, and a
+denial this
+
+62
+00:02:18,180 --> 00:02:20,260
+absolute — both sit on the table at
+
+63
+00:02:20,260 --> 00:02:20,740
+once.
+
+64
+00:02:20,940 --> 00:02:23,120
+Which is why the board's only public
+words
+
+65
+00:02:23,120 --> 00:02:26,520
+were cautious: no reason to believe
+national security
+
+66
+00:02:26,460 --> 00:02:28,340
+or NVIDIA secrets were compromised.
+
+67
+00:02:28,620 --> 00:02:32,240
+Megaspeed — once 7Road, a
+Chinese-backed firm —
+
+68
+00:02:32,240 --> 00:02:34,120
+renamed in 2023.
+
+69
+00:02:34,600 --> 00:02:36,960
+Alice Huang was its managing
+director for eight
+
+70
+00:02:36,960 --> 00:02:37,240
+months.
+
+71
+00:02:37,580 --> 00:02:41,440
+Its Malaysian affiliate,
+Speedmatrix, reportedly bought at
+least
+
+72
+00:02:41,440 --> 00:02:44,900
+four-point-eight billion dollars of
+equipment containing NVIDIA
+
+73
+00:02:44,880 --> 00:02:49,420
+technology between June 2024 and
+February 2026.
+
+74
+00:02:49,720 --> 00:02:51,960
+The Commerce Department probed it —
+then the
+
+75
+00:02:51,960 --> 00:02:53,040
+case moved to Justice.
+
+76
+00:02:53,040 --> 00:02:55,800
+Huang told Bloomberg his dealings
+were normal and
+
+77
+00:02:55,800 --> 00:02:56,940
+not unusual.
+
+78
+00:02:57,180 --> 00:03:00,440
+NVIDIA says the diversion
+allegations were thoroughly
+investigated
+
+79
+00:03:00,440 --> 00:03:01,760
+and debunked last year.
+
+80
+00:03:01,900 --> 00:03:03,160
+None of this is new.
+
+81
+00:03:03,160 --> 00:03:06,160
+Margaretha Zelle — Mata Hari — was
+executed
+
+82
+00:03:06,160 --> 00:03:08,320
+by France in 1917.
+
+83
+00:03:08,620 --> 00:03:12,340
+A century later, declassified files
+showed British intelligence
+
+84
+00:03:12,340 --> 00:03:13,900
+found nothing she passed on.
+
+85
+00:03:14,140 --> 00:03:17,180
+East Germany's Stasi ran an entire
+directorate of
+
+86
+00:03:17,180 --> 00:03:20,760
+Romeos — staged-romance recruiters,
+harvesting the loyalties of
+
+87
+00:03:20,760 --> 00:03:22,220
+West German officials.
+
+88
+00:03:22,420 --> 00:03:25,480
+Monica Witt, a US Air Force
+intelligence specialist,
+
+89
+00:03:25,620 --> 00:03:28,760
+fell into an online romance with
+Iranian-linked operatives
+
+90
+00:03:28,760 --> 00:03:30,720
+— and defected in 2013.
+
+91
+00:03:30,860 --> 00:03:34,220
+And from 2011 to 2015, an operative
+known
+
+92
+00:03:34,220 --> 00:03:37,680
+as Christine Fang cultivated
+American politicians — the
+
+93
+00:03:37,680 --> 00:03:40,660
+FBI captured romantic relationships
+with at least two
+
+94
+00:03:40,660 --> 00:03:41,100
+mayors.
+
+95
+00:03:41,280 --> 00:03:44,100
+The playbook is older than the
+microchip.
+
+96
+00:03:44,100 --> 00:03:44,520
+Access.
+
+97
+00:03:44,580 --> 00:03:45,460
+Intimacy.
+
+98
+00:03:45,640 --> 00:03:46,040
+Leverage.
+
+99
+00:03:46,080 --> 00:03:47,480
+But — and this is the discipline —
+
+100
+00:03:47,480 --> 00:03:49,880
+the fact that agencies use romance
+does not
+
+101
+00:03:49,880 --> 00:03:51,880
+prove this case was an operation.
+
+102
+00:03:51,980 --> 00:03:53,440
+Mata Hari is the warning.
+
+103
+00:03:53,580 --> 00:03:55,040
+Why does Washington care?
+
+104
+00:03:55,220 --> 00:03:56,900
+Because of what NVIDIA sells.
+
+105
+00:03:57,100 --> 00:04:01,260
+Since October 2022, America has
+required licenses for
+
+106
+00:04:01,260 --> 00:04:04,120
+its most advanced AI chips to reach
+China.
+
+107
+00:04:04,340 --> 00:04:08,860
+In 2025, the China-specific H20 lost
+that license
+
+108
+00:04:08,860 --> 00:04:09,440
+too.
+
+109
+00:04:09,440 --> 00:04:13,520
+In December, the President approved
+H200 sales —
+
+110
+00:04:13,520 --> 00:04:14,880
+a twenty-five percent cut to the US
+—
+
+111
+00:04:14,880 --> 00:04:18,180
+and by May 2026, roughly ten firms
+were
+
+112
+00:04:18,180 --> 00:04:20,000
+cleared, and zero had taken
+delivery.
+
+113
+00:04:20,660 --> 00:04:22,000
+Beijing simply said no.
+
+114
+00:04:22,320 --> 00:04:25,120
+So when an alleged asset of Chinese
+intelligence
+
+115
+00:04:25,120 --> 00:04:28,460
+reportedly cultivated the man who
+shapes America's AI-hardware
+
+116
+00:04:28,460 --> 00:04:30,880
+policy — who dines with the
+President —
+
+117
+00:04:30,880 --> 00:04:33,740
+every call and every favor becomes
+consequential.
+
+118
+00:04:34,160 --> 00:04:36,640
+Republicans in the House demanded a
+closed-door briefing.
+
+119
+00:04:36,840 --> 00:04:40,160
+On November ninth, NVIDIA fell about
+four-point-three percent
+
+120
+00:04:40,160 --> 00:04:42,220
+— one hundred ninety billion
+dollars, in a
+
+121
+00:04:42,220 --> 00:04:42,520
+day.
+
+122
+00:04:42,820 --> 00:04:45,140
+A shareholder suit followed within
+hours — for
+
+123
+00:04:45,140 --> 00:04:46,720
+failing to disclose an affair.
+
+124
+00:04:47,000 --> 00:04:48,400
+Not for proven espionage.
+
+125
+00:04:48,720 --> 00:04:49,080
+So.
+
+126
+00:04:49,080 --> 00:04:50,440
+What do we actually know?
+
+127
+00:04:50,780 --> 00:04:53,820
+Confirmed: Jensen Huang admitted
+being unfaithful.
+
+128
+00:04:53,920 --> 00:04:56,820
+The board opened an independent
+investigation.
+
+129
+00:04:57,060 --> 00:04:58,960
+China calls it all smears — on the
+
+130
+00:04:58,960 --> 00:05:00,300
+record, twice.
+
+131
+00:05:00,300 --> 00:05:02,940
+Reported: intelligence assessed
+Alice Huang as a Ministry
+
+132
+00:05:02,940 --> 00:05:04,420
+of State Security asset.
+
+133
+00:05:04,880 --> 00:05:06,820
+Unknown: what, if anything, she
+passed.
+
+134
+00:05:07,000 --> 00:05:09,060
+And whether this was an operation,
+an accident,
+
+135
+00:05:09,060 --> 00:05:09,840
+or coincidence.
+
+136
+00:05:10,400 --> 00:05:12,280
+The evidence does not let anyone say
+honey
+
+137
+00:05:12,280 --> 00:05:13,100
+trap as a fact.
+
+138
+00:05:13,160 --> 00:05:14,640
+It lets everyone ask the question.
+
+139
+00:05:15,060 --> 00:05:16,380
+The oldest trick in history.
+
+140
+00:05:16,620 --> 00:05:17,400
+Two people.
+
+141
+00:05:17,560 --> 00:05:19,720
+One runs the machine that runs the
+modern
+
+142
+00:05:19,720 --> 00:05:19,840
+world.
+
+143
+00:05:20,220 --> 00:05:23,260
+The other, reportedly, worked for
+its oldest adversary.
+
+144
+00:05:23,460 --> 00:05:25,800
+Whether this was an operation, an
+accident, or
+
+145
+00:05:25,800 --> 00:05:28,520
+human weakness wearing a badge —
+nobody credible
+
+146
+00:05:28,520 --> 00:05:29,360
+can say yet.
+
+147
+00:05:29,580 --> 00:05:32,260
+But one thing is certain: the most
+guarded
+
+148
+00:05:32,260 --> 00:05:34,400
+secrets on Earth now move as much
+through
+
+149
+00:05:34,400 --> 00:05:36,020
+trust as through technology.
+
+150
+00:05:36,260 --> 00:05:38,740
+And trust, it turns out, is the one
+
+151
+00:05:38,740 --> 00:05:39,840
+system nobody has patched.

@@ -237,7 +237,7 @@ function duckEnvelope(voL, voR, len, { window = 0.05, duck = 0.42 } = {}) {
 // ── the mix stage ─────────────────────────────────────────────────────────
 // sfxEvents: [{ t, samples?, make?, name?, gain?, pan? }]
 // music: { path, trimTo, gain = 1, fadeIn = 0.8, fadeOut = 1.2, trimLead, swell: { at, gain, dur } } or null
-export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out = 'out/mix.wav', tail = 0.0, voGain = 1 } = {}) {
+export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out = 'out/mix.wav', tail = 0.0, voGain = 1, masterTrim = 0 } = {}) {
   // MUSIC LAW helpers: trimLead skips the source recording's leading silence so the bed is audibly PRESENT from second 0 (never a silent open).
   const vo = await decodeAudio(voPath);
   if (voGain !== 1) { for (let i = 0; i < vo.L.length; i++) { vo.L[i] *= voGain; vo.R[i] *= voGain; } }
@@ -331,9 +331,19 @@ export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out =
     return s < 0 ? -g : g;
   };
   for (let i = 0; i < total; i++) { bus.L[i] = lim(bus.L[i]); bus.R[i] = lim(bus.R[i]); }
+  // masterTrim: post-limiter headroom in dB for LOSSY MASTERS. AAC (the mux
+  // encode) reconstructs transients ~+0.1..0.25 dB above the WAV true peak, so
+  // a -0.9 dBTP WAV measures as -0.8 dBTP in the published MP4 — over the
+  // DoD ceiling (TP <= -0.9 dBTP). Trimming the whole bus keeps the VO/bed/SFX
+  // BALANCE byte-identical in level relationships, only lowering the ceiling.
+  // Set masterTrim < 0 for any mix that gets AAC-encoded (values in dB).
+  if (masterTrim !== 0) {
+    const mt = Math.pow(10, masterTrim / 20);
+    for (let i = 0; i < total; i++) { bus.L[i] *= mt; bus.R[i] *= mt; }
+  }
   let peak = 0;
   for (let i = 0; i < total; i++) peak = Math.max(peak, Math.abs(bus.L[i]), Math.abs(bus.R[i]));
-  console.log(`[mix] ${out} ${total / SR.toFixed(3)}s — true-peak ${peak.toFixed(3)} (${(20 * Math.log10(peak)).toFixed(2)} dBTP)`);
+  console.log(`[mix] ${out} ${(total / SR).toFixed(3)}s — true-peak ${peak.toFixed(3)} (${(20 * Math.log10(peak)).toFixed(2)} dBTP)`);
 
   writeWav(out, bus.L, bus.R);
   return { out, dur: total / SR, peak };

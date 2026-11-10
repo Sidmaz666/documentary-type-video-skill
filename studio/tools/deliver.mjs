@@ -77,11 +77,22 @@ const pub16 = await muxAndPublish(slug, {
 console.log(`[deliver] published → ${pub16}`);
 
 // ── 2) key stills (design resolution, same grade as the master) ────────────
-const STILLS = [
-  { name: 'hook', t: 1.75 },
-  { name: 'everything', t: 21.0 },
-  { name: 'remember', t: 24.05 },
-];
+// per-project key-still times (defaults preserve the 002 reel): --stills hook@8.5,everything@159.0,remember@318.5
+const stillsArg = arg('--stills');
+const STILLS = stillsArg
+  ? stillsArg.split(',').map((part) => {
+      const [name, t] = part.split('@');
+      if (!name || Number.isNaN(Number(t))) {
+        console.error(`--stills entries must be name@t seconds — got '${part}'`);
+        process.exit(2);
+      }
+      return { name: name.trim(), t: Number(t) };
+    })
+  : [
+      { name: 'hook', t: 1.75 },
+      { name: 'everything', t: 21.0 },
+      { name: 'remember', t: 24.05 },
+    ];
 for (const { name, t } of STILLS) {
   const canvas = createCanvas(T.W, T.H);
   const ctx = canvas.getContext('2d');

@@ -1,0 +1,5955 @@
+{
+  "backend": "@huggingface/transformers",
+  "model": "Xenova/whisper-tiny.en",
+  "audio": "D:\\YOUTUBE\\ExTest\\studio\\projects\\003-the-oldest-trick-in-history\\assets\\vo.m4a",
+  "duration": 339.925,
+  "language": "en",
+  "text": "On the 8th of November, 2026, the founder and chief executive of Envidia sent a letter to his employees. Two sentences in, he wrote, I was unfaithful to my wife. He gave no name, but the board had already seen what American intelligence agencies had concluded, and within hours, it announced an independent investigation. Not into an affair. Into a foreign intelligence effort reportedly aimed at the most powerful man in artificial intelligence Jensen Huang co-founded Envidia in 1993 and has run it ever since in July 2025 Envidia became the first company ever to cross $4 trillion Three months later the first to cross five Every frontier AI model on earth runs in large part on Envidia Silicon Which makes who may buy it one of the sharpest edges of American power and And Wong was... who may buy it one of the sharpest edges of American power. And Wang was no bystander to that debate. He urged Washington to ease the export ban. He got the president's ear. The woman at the center of this is another Huang, Alice Huang, no relation, a Chinese citizen. Reported as a top executive at Megaspeed International, a Singapore company renting computing power built on Nvidia chips to Chinese firms, not charged, not heard from, and Jensen Huang has never said her name. What the press calls in a fair and what intelligence agencies call an asset, they overlap around this one person. According to reporting based on U.S. intelligence assessments, surveillance unmasked a contact that identified Jensen Huang as the American on the other end of the line, and concluded Alice Huang was an asset of China's Ministry of State Security, recruited to cultivate him, to potentially influence the chip flow. A memo circulated to top officials in the spring of 2026, the Financial Times reported it described a romantic relationship. Secretary of State Rubio oversaw it. President Trump was briefed about a year before it went public and chose not to act. Before you call it settled, hold on. Neither the CIA nor the White House has confirmed it. NBC said it had not independently confirmed it. The Wall Street Journal reported she vanished into China in late 2024, and Singapore's Ministry of Home Affairs replied flatly, no such investigations existed. China called it groundless speculation, and allegation this serious, and a denial this absolute, both sit on the table at once. Which is why the boards only public words were cautious. No reason to believe national security or Nvidia secrets were compromised. Megaspeed once seven rode, a Chinese-backed firm, renamed in 2023. Alice Huang was its managing director for eight months. Its Malaysian affiliate, Speed Matrix, reportedly bought at least 4.8 billion dollars of equipment containing Nvidia technology between June 2020 and February 2026. The Commerce Department probed it, then the case moved to justice. Wang told Bloomberg his dealings were normal and not unusual. Nvidia says the diversion allegations were thoroughly investigated and debunked last year. None of this is new. Margaret Thisselle, Mata Harari, was executed by France in 1917. A century later, declassified files showed British intelligence found nothing she passed on. East Germany's Stasi ran an entire directory of Romeo's staged romance recruiters, harvesting the loyalties of West German officials. Monica Whit, a U.S. Air Force intelligence specialist, fell into an online romance with Iranian-linked operatives and defected in 2013. And from 2011 to 2015, an operative known as Christine Fang cultivated American politicians, the FBI captured romantic relationships with at least two mayors. The playbook is older than the microchip. Access. Intimacy. Leverage. But this is the discipline. The fact that agencies use romance does not prove this case was an operation. Mata Hari is the warning. Why does Washington care? Because of what Nvidia sells. Since October 2022, America has required licenses for its most advanced AI chips to reach China. In 2025, the China-specific H20 lost that license to. In December, President approved H-200 sales, a 25% cut to the U.S. and by May 2026, roughly 10 firms were cleared and zero had taken delivery. Beijing simply said no. So when an alleged asset of Chinese intelligence reportedly cultivated the man who shapes America's AI hardware policy, who dines with the president, every call and every favor becomes consequential. Republicans in the House demanded a closed door briefing. On November 9, Nvidia fell about 4.3%, $190 billion in a day. A shareholder suit followed with an hour's for failing to disclose an affair. Not for proven espionage, so what do we actually know, confirmed? Jensen Huang admitted being unfaithful, the board opened an independent investigation. China calls it all smears on the record twice, reported, intelligence assessed Alice Huang as a Ministry of State Security Asset. Unknown. What if anything she passed, and whether this was an operation and accident or coincidence, the evidence does not let anyone say honey trap as a fact, it lets everyone ask the question, the oldest trick in history, two people, one runs the machine that runs the modern world. The other reportedly worked for its oldest adversary, whether this was an operation and accident, or human weakness wearing a badge, nobody credible can say yet. But one thing is certain. The most guarded secrets on Earth now move as much through trust as through technology. And trust, it turns out, is the one system nobody has patched.",
+  "segments": [
+    {
+      "start": 0.18,
+      "end": 6.5,
+      "text": "On the 8th of November, 2026, the founder and chief executive of Envidia sent a letter to his employees.",
+      "words": [
+        {
+          "start": 0.18,
+          "end": 0.3,
+          "word": "On",
+          "prob": null
+        },
+        {
+          "start": 0.3,
+          "end": 0.46,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 0.46,
+          "end": 0.6,
+          "word": "8th",
+          "prob": null
+        },
+        {
+          "start": 0.6,
+          "end": 1.04,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 1.04,
+          "end": 1.12,
+          "word": "November,",
+          "prob": null
+        },
+        {
+          "start": 1.48,
+          "end": 2.52,
+          "word": "2026,",
+          "prob": null
+        },
+        {
+          "start": 2.52,
+          "end": 2.84,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 2.84,
+          "end": 3.12,
+          "word": "founder",
+          "prob": null
+        },
+        {
+          "start": 3.12,
+          "end": 3.38,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 3.38,
+          "end": 3.82,
+          "word": "chief",
+          "prob": null
+        },
+        {
+          "start": 3.82,
+          "end": 4.06,
+          "word": "executive",
+          "prob": null
+        },
+        {
+          "start": 4.06,
+          "end": 4.28,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 4.28,
+          "end": 4.8,
+          "word": "Envidia",
+          "prob": null
+        },
+        {
+          "start": 4.8,
+          "end": 4.9,
+          "word": "sent",
+          "prob": null
+        },
+        {
+          "start": 4.9,
+          "end": 4.96,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 5,
+          "end": 5,
+          "word": "letter",
+          "prob": null
+        },
+        {
+          "start": 5.22,
+          "end": 5.4,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 5.4,
+          "end": 5.94,
+          "word": "his",
+          "prob": null
+        },
+        {
+          "start": 5.94,
+          "end": 6.5,
+          "word": "employees.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 6.76,
+      "end": 9.98,
+      "text": "Two sentences in, he wrote, I was unfaithful to my wife.",
+      "words": [
+        {
+          "start": 6.76,
+          "end": 7.08,
+          "word": "Two",
+          "prob": null
+        },
+        {
+          "start": 7.08,
+          "end": 7.42,
+          "word": "sentences",
+          "prob": null
+        },
+        {
+          "start": 7.42,
+          "end": 7.44,
+          "word": "in,",
+          "prob": null
+        },
+        {
+          "start": 7.58,
+          "end": 8,
+          "word": "he",
+          "prob": null
+        },
+        {
+          "start": 8.16,
+          "end": 8.22,
+          "word": "wrote,",
+          "prob": null
+        },
+        {
+          "start": 8.24,
+          "end": 8.5,
+          "word": "I",
+          "prob": null
+        },
+        {
+          "start": 8.5,
+          "end": 8.7,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 8.7,
+          "end": 9.16,
+          "word": "unfaithful",
+          "prob": null
+        },
+        {
+          "start": 9.16,
+          "end": 9.36,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 9.36,
+          "end": 9.74,
+          "word": "my",
+          "prob": null
+        },
+        {
+          "start": 9.74,
+          "end": 9.98,
+          "word": "wife.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 10.12,
+      "end": 19.06,
+      "text": "He gave no name, but the board had already seen what American intelligence agencies had concluded, and within hours, it announced an independent investigation.",
+      "words": [
+        {
+          "start": 10.12,
+          "end": 10.36,
+          "word": "He",
+          "prob": null
+        },
+        {
+          "start": 10.36,
+          "end": 10.64,
+          "word": "gave",
+          "prob": null
+        },
+        {
+          "start": 10.64,
+          "end": 11.06,
+          "word": "no",
+          "prob": null
+        },
+        {
+          "start": 11.06,
+          "end": 11.28,
+          "word": "name,",
+          "prob": null
+        },
+        {
+          "start": 11.48,
+          "end": 11.7,
+          "word": "but",
+          "prob": null
+        },
+        {
+          "start": 11.7,
+          "end": 11.86,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 11.86,
+          "end": 12.34,
+          "word": "board",
+          "prob": null
+        },
+        {
+          "start": 12.34,
+          "end": 12.46,
+          "word": "had",
+          "prob": null
+        },
+        {
+          "start": 12.46,
+          "end": 12.72,
+          "word": "already",
+          "prob": null
+        },
+        {
+          "start": 12.72,
+          "end": 12.96,
+          "word": "seen",
+          "prob": null
+        },
+        {
+          "start": 12.96,
+          "end": 13.34,
+          "word": "what",
+          "prob": null
+        },
+        {
+          "start": 13.34,
+          "end": 13.8,
+          "word": "American",
+          "prob": null
+        },
+        {
+          "start": 13.8,
+          "end": 14.44,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 14.46,
+          "end": 14.56,
+          "word": "agencies",
+          "prob": null
+        },
+        {
+          "start": 14.8,
+          "end": 15.14,
+          "word": "had",
+          "prob": null
+        },
+        {
+          "start": 15.14,
+          "end": 15.6,
+          "word": "concluded,",
+          "prob": null
+        },
+        {
+          "start": 15.7,
+          "end": 15.98,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 15.98,
+          "end": 16.42,
+          "word": "within",
+          "prob": null
+        },
+        {
+          "start": 16.42,
+          "end": 16.58,
+          "word": "hours,",
+          "prob": null
+        },
+        {
+          "start": 16.7,
+          "end": 17,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 17,
+          "end": 17.28,
+          "word": "announced",
+          "prob": null
+        },
+        {
+          "start": 17.28,
+          "end": 17.74,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 17.74,
+          "end": 18.48,
+          "word": "independent",
+          "prob": null
+        },
+        {
+          "start": 18.48,
+          "end": 19.06,
+          "word": "investigation.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 19.26,
+      "end": 20.48,
+      "text": "Not into an affair.",
+      "words": [
+        {
+          "start": 19.26,
+          "end": 19.5,
+          "word": "Not",
+          "prob": null
+        },
+        {
+          "start": 19.5,
+          "end": 19.68,
+          "word": "into",
+          "prob": null
+        },
+        {
+          "start": 19.68,
+          "end": 20,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 20,
+          "end": 20.48,
+          "word": "affair.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 20.66,
+      "end": 36.48,
+      "text": "Into a foreign intelligence effort reportedly aimed at the most powerful man in artificial intelligence Jensen Huang co -founded Envidia in 1993 and has run it ever since in July 2025 Envidia became the first company ever to cross $4 trillion",
+      "words": [
+        {
+          "start": 20.66,
+          "end": 21,
+          "word": "Into",
+          "prob": null
+        },
+        {
+          "start": 21,
+          "end": 21.24,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 21.24,
+          "end": 21.82,
+          "word": "foreign",
+          "prob": null
+        },
+        {
+          "start": 21.82,
+          "end": 22.26,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 22.26,
+          "end": 22.92,
+          "word": "effort",
+          "prob": null
+        },
+        {
+          "start": 22.92,
+          "end": 23.28,
+          "word": "reportedly",
+          "prob": null
+        },
+        {
+          "start": 23.28,
+          "end": 23.46,
+          "word": "aimed",
+          "prob": null
+        },
+        {
+          "start": 23.44,
+          "end": 23.56,
+          "word": "at",
+          "prob": null
+        },
+        {
+          "start": 23.56,
+          "end": 23.84,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 23.84,
+          "end": 24.24,
+          "word": "most",
+          "prob": null
+        },
+        {
+          "start": 24.24,
+          "end": 24.62,
+          "word": "powerful",
+          "prob": null
+        },
+        {
+          "start": 24.62,
+          "end": 24.92,
+          "word": "man",
+          "prob": null
+        },
+        {
+          "start": 24.92,
+          "end": 25.38,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 25.38,
+          "end": 26,
+          "word": "artificial",
+          "prob": null
+        },
+        {
+          "start": 26.12,
+          "end": 26.6,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 26.6,
+          "end": 27.1,
+          "word": "Jensen",
+          "prob": null
+        },
+        {
+          "start": 27.1,
+          "end": 27.38,
+          "word": "Huang",
+          "prob": null
+        },
+        {
+          "start": 27.38,
+          "end": 27.62,
+          "word": "co",
+          "prob": null
+        },
+        {
+          "start": 27.62,
+          "end": 28.1,
+          "word": "-founded",
+          "prob": null
+        },
+        {
+          "start": 28.1,
+          "end": 28.42,
+          "word": "Envidia",
+          "prob": null
+        },
+        {
+          "start": 28.42,
+          "end": 29.36,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 29.36,
+          "end": 29.9,
+          "word": "1993",
+          "prob": null
+        },
+        {
+          "start": 29.9,
+          "end": 30.08,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 30.08,
+          "end": 30.18,
+          "word": "has",
+          "prob": null
+        },
+        {
+          "start": 30.18,
+          "end": 30.32,
+          "word": "run",
+          "prob": null
+        },
+        {
+          "start": 30.32,
+          "end": 30.54,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 30.54,
+          "end": 30.92,
+          "word": "ever",
+          "prob": null
+        },
+        {
+          "start": 30.92,
+          "end": 31.54,
+          "word": "since",
+          "prob": null
+        },
+        {
+          "start": 31.54,
+          "end": 31.88,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 31.88,
+          "end": 32.86,
+          "word": "July",
+          "prob": null
+        },
+        {
+          "start": 32.86,
+          "end": 32.88,
+          "word": "2025",
+          "prob": null
+        },
+        {
+          "start": 33.66,
+          "end": 34.14,
+          "word": "Envidia",
+          "prob": null
+        },
+        {
+          "start": 34.14,
+          "end": 34.32,
+          "word": "became",
+          "prob": null
+        },
+        {
+          "start": 34.32,
+          "end": 34.58,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 34.58,
+          "end": 34.9,
+          "word": "first",
+          "prob": null
+        },
+        {
+          "start": 34.9,
+          "end": 35.1,
+          "word": "company",
+          "prob": null
+        },
+        {
+          "start": 35.1,
+          "end": 35.26,
+          "word": "ever",
+          "prob": null
+        },
+        {
+          "start": 35.26,
+          "end": 35.58,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 35.58,
+          "end": 35.92,
+          "word": "cross",
+          "prob": null
+        },
+        {
+          "start": 35.92,
+          "end": 36.32,
+          "word": "$4",
+          "prob": null
+        },
+        {
+          "start": 36.32,
+          "end": 36.48,
+          "word": "trillion",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 37.38,
+      "end": 49.98,
+      "text": "Three months later the first to cross five Every frontier AI model on earth runs in large part on Envidia Silicon Which makes who may buy it one of the sharpest edges of American power and And Wong was ...",
+      "words": [
+        {
+          "start": 37.38,
+          "end": 37.7,
+          "word": "Three",
+          "prob": null
+        },
+        {
+          "start": 37.7,
+          "end": 38.04,
+          "word": "months",
+          "prob": null
+        },
+        {
+          "start": 38.04,
+          "end": 38.42,
+          "word": "later",
+          "prob": null
+        },
+        {
+          "start": 38.42,
+          "end": 38.68,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 38.68,
+          "end": 38.86,
+          "word": "first",
+          "prob": null
+        },
+        {
+          "start": 38.86,
+          "end": 39.1,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 39.1,
+          "end": 39.2,
+          "word": "cross",
+          "prob": null
+        },
+        {
+          "start": 39.74,
+          "end": 40.06,
+          "word": "five",
+          "prob": null
+        },
+        {
+          "start": 40.32,
+          "end": 40.74,
+          "word": "Every",
+          "prob": null
+        },
+        {
+          "start": 40.74,
+          "end": 41.32,
+          "word": "frontier",
+          "prob": null
+        },
+        {
+          "start": 41.32,
+          "end": 41.62,
+          "word": "AI",
+          "prob": null
+        },
+        {
+          "start": 41.62,
+          "end": 41.9,
+          "word": "model",
+          "prob": null
+        },
+        {
+          "start": 41.9,
+          "end": 42.12,
+          "word": "on",
+          "prob": null
+        },
+        {
+          "start": 42.12,
+          "end": 42.46,
+          "word": "earth",
+          "prob": null
+        },
+        {
+          "start": 42.46,
+          "end": 42.84,
+          "word": "runs",
+          "prob": null
+        },
+        {
+          "start": 42.84,
+          "end": 43.14,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 43.14,
+          "end": 43.6,
+          "word": "large",
+          "prob": null
+        },
+        {
+          "start": 43.6,
+          "end": 44,
+          "word": "part",
+          "prob": null
+        },
+        {
+          "start": 44,
+          "end": 44.28,
+          "word": "on",
+          "prob": null
+        },
+        {
+          "start": 44.28,
+          "end": 44.8,
+          "word": "Envidia",
+          "prob": null
+        },
+        {
+          "start": 44.88,
+          "end": 44.88,
+          "word": "Silicon",
+          "prob": null
+        },
+        {
+          "start": 45.46,
+          "end": 45.66,
+          "word": "Which",
+          "prob": null
+        },
+        {
+          "start": 45.74,
+          "end": 45.9,
+          "word": "makes",
+          "prob": null
+        },
+        {
+          "start": 45.9,
+          "end": 46.12,
+          "word": "who",
+          "prob": null
+        },
+        {
+          "start": 46.12,
+          "end": 46.36,
+          "word": "may",
+          "prob": null
+        },
+        {
+          "start": 46.36,
+          "end": 46.54,
+          "word": "buy",
+          "prob": null
+        },
+        {
+          "start": 46.54,
+          "end": 46.66,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 46.66,
+          "end": 46.76,
+          "word": "one",
+          "prob": null
+        },
+        {
+          "start": 46.76,
+          "end": 47,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 47,
+          "end": 47.16,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 47.16,
+          "end": 47.7,
+          "word": "sharpest",
+          "prob": null
+        },
+        {
+          "start": 47.7,
+          "end": 48,
+          "word": "edges",
+          "prob": null
+        },
+        {
+          "start": 48,
+          "end": 48.4,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 48.4,
+          "end": 48.92,
+          "word": "American",
+          "prob": null
+        },
+        {
+          "start": 48.92,
+          "end": 49.5,
+          "word": "power",
+          "prob": null
+        },
+        {
+          "start": 49.5,
+          "end": 49.7,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 49.58,
+          "end": 49.8,
+          "word": "And",
+          "prob": null
+        },
+        {
+          "start": 49.8,
+          "end": 49.98,
+          "word": "Wong",
+          "prob": null
+        },
+        {
+          "start": 49.98,
+          "end": 49.98,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 49.98,
+          "end": 49.98,
+          "word": "...",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 45.92,
+      "end": 49.32,
+      "text": "who may buy it one of the sharpest edges of American power.",
+      "words": [
+        {
+          "start": 45.92,
+          "end": 46.12,
+          "word": "who",
+          "prob": null
+        },
+        {
+          "start": 46.12,
+          "end": 46.36,
+          "word": "may",
+          "prob": null
+        },
+        {
+          "start": 46.36,
+          "end": 46.54,
+          "word": "buy",
+          "prob": null
+        },
+        {
+          "start": 46.54,
+          "end": 46.7,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 46.7,
+          "end": 46.78,
+          "word": "one",
+          "prob": null
+        },
+        {
+          "start": 46.78,
+          "end": 46.98,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 46.98,
+          "end": 47.18,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 47.18,
+          "end": 47.72,
+          "word": "sharpest",
+          "prob": null
+        },
+        {
+          "start": 47.72,
+          "end": 48.02,
+          "word": "edges",
+          "prob": null
+        },
+        {
+          "start": 48.02,
+          "end": 48.44,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 48.44,
+          "end": 48.84,
+          "word": "American",
+          "prob": null
+        },
+        {
+          "start": 48.84,
+          "end": 49.32,
+          "word": "power.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 49.54,
+      "end": 51.66,
+      "text": "And Wang was no bystander to that debate.",
+      "words": [
+        {
+          "start": 49.54,
+          "end": 49.78,
+          "word": "And",
+          "prob": null
+        },
+        {
+          "start": 49.78,
+          "end": 50,
+          "word": "Wang",
+          "prob": null
+        },
+        {
+          "start": 50,
+          "end": 50.26,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 50.26,
+          "end": 50.64,
+          "word": "no",
+          "prob": null
+        },
+        {
+          "start": 50.64,
+          "end": 51.04,
+          "word": "bystander",
+          "prob": null
+        },
+        {
+          "start": 51.04,
+          "end": 51.24,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 51.24,
+          "end": 51.58,
+          "word": "that",
+          "prob": null
+        },
+        {
+          "start": 51.58,
+          "end": 51.66,
+          "word": "debate.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 51.82,
+      "end": 54.26,
+      "text": "He urged Washington to ease the export ban.",
+      "words": [
+        {
+          "start": 51.82,
+          "end": 52.1,
+          "word": "He",
+          "prob": null
+        },
+        {
+          "start": 52.1,
+          "end": 52.6,
+          "word": "urged",
+          "prob": null
+        },
+        {
+          "start": 52.6,
+          "end": 52.92,
+          "word": "Washington",
+          "prob": null
+        },
+        {
+          "start": 52.92,
+          "end": 53.1,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 53.1,
+          "end": 53.42,
+          "word": "ease",
+          "prob": null
+        },
+        {
+          "start": 53.42,
+          "end": 53.68,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 53.68,
+          "end": 54.02,
+          "word": "export",
+          "prob": null
+        },
+        {
+          "start": 54.02,
+          "end": 54.26,
+          "word": "ban.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 54.38,
+      "end": 55.92,
+      "text": "He got the president's ear.",
+      "words": [
+        {
+          "start": 54.38,
+          "end": 54.58,
+          "word": "He",
+          "prob": null
+        },
+        {
+          "start": 54.58,
+          "end": 54.8,
+          "word": "got",
+          "prob": null
+        },
+        {
+          "start": 54.8,
+          "end": 55.02,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 55.02,
+          "end": 55.56,
+          "word": "president's",
+          "prob": null
+        },
+        {
+          "start": 55.56,
+          "end": 55.92,
+          "word": "ear.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 56.08,
+      "end": 61.48,
+      "text": "The woman at the center of this is another Huang, Alice Huang, no relation, a Chinese citizen.",
+      "words": [
+        {
+          "start": 56.08,
+          "end": 56.26,
+          "word": "The",
+          "prob": null
+        },
+        {
+          "start": 56.26,
+          "end": 56.48,
+          "word": "woman",
+          "prob": null
+        },
+        {
+          "start": 56.48,
+          "end": 56.64,
+          "word": "at",
+          "prob": null
+        },
+        {
+          "start": 56.64,
+          "end": 56.78,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 56.78,
+          "end": 56.96,
+          "word": "center",
+          "prob": null
+        },
+        {
+          "start": 56.96,
+          "end": 57.14,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 57.14,
+          "end": 57.32,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 57.32,
+          "end": 57.64,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 57.64,
+          "end": 58.08,
+          "word": "another",
+          "prob": null
+        },
+        {
+          "start": 58.08,
+          "end": 58.2,
+          "word": "Huang,",
+          "prob": null
+        },
+        {
+          "start": 58.46,
+          "end": 58.82,
+          "word": "Alice",
+          "prob": null
+        },
+        {
+          "start": 58.82,
+          "end": 58.9,
+          "word": "Huang,",
+          "prob": null
+        },
+        {
+          "start": 59.14,
+          "end": 59.62,
+          "word": "no",
+          "prob": null
+        },
+        {
+          "start": 59.62,
+          "end": 60,
+          "word": "relation,",
+          "prob": null
+        },
+        {
+          "start": 60.08,
+          "end": 60.54,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 60.54,
+          "end": 60.58,
+          "word": "Chinese",
+          "prob": null
+        },
+        {
+          "start": 60.96,
+          "end": 61.48,
+          "word": "citizen.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 61.7,
+      "end": 74.52,
+      "text": "Reported as a top executive at Megaspeed International, a Singapore company renting computing power built on Nvidia chips to Chinese firms, not charged, not heard from, and Jensen Huang has never said her name.",
+      "words": [
+        {
+          "start": 61.7,
+          "end": 62,
+          "word": "Reported",
+          "prob": null
+        },
+        {
+          "start": 62,
+          "end": 62.16,
+          "word": "as",
+          "prob": null
+        },
+        {
+          "start": 62.16,
+          "end": 62.42,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 62.42,
+          "end": 62.86,
+          "word": "top",
+          "prob": null
+        },
+        {
+          "start": 62.86,
+          "end": 63.18,
+          "word": "executive",
+          "prob": null
+        },
+        {
+          "start": 63.18,
+          "end": 63.26,
+          "word": "at",
+          "prob": null
+        },
+        {
+          "start": 63.26,
+          "end": 64.24,
+          "word": "Megaspeed",
+          "prob": null
+        },
+        {
+          "start": 64.24,
+          "end": 64.66,
+          "word": "International,",
+          "prob": null
+        },
+        {
+          "start": 64.74,
+          "end": 65.06,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 65.06,
+          "end": 65.58,
+          "word": "Singapore",
+          "prob": null
+        },
+        {
+          "start": 65.58,
+          "end": 65.92,
+          "word": "company",
+          "prob": null
+        },
+        {
+          "start": 65.92,
+          "end": 66.32,
+          "word": "renting",
+          "prob": null
+        },
+        {
+          "start": 66.42,
+          "end": 66.42,
+          "word": "computing",
+          "prob": null
+        },
+        {
+          "start": 66.84,
+          "end": 67.14,
+          "word": "power",
+          "prob": null
+        },
+        {
+          "start": 67.14,
+          "end": 67.42,
+          "word": "built",
+          "prob": null
+        },
+        {
+          "start": 67.42,
+          "end": 67.82,
+          "word": "on",
+          "prob": null
+        },
+        {
+          "start": 67.82,
+          "end": 68.18,
+          "word": "Nvidia",
+          "prob": null
+        },
+        {
+          "start": 68.18,
+          "end": 68.46,
+          "word": "chips",
+          "prob": null
+        },
+        {
+          "start": 68.46,
+          "end": 68.9,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 68.9,
+          "end": 69.34,
+          "word": "Chinese",
+          "prob": null
+        },
+        {
+          "start": 69.34,
+          "end": 69.8,
+          "word": "firms,",
+          "prob": null
+        },
+        {
+          "start": 70.08,
+          "end": 70.58,
+          "word": "not",
+          "prob": null
+        },
+        {
+          "start": 70.58,
+          "end": 70.98,
+          "word": "charged,",
+          "prob": null
+        },
+        {
+          "start": 71.24,
+          "end": 71.54,
+          "word": "not",
+          "prob": null
+        },
+        {
+          "start": 71.54,
+          "end": 71.92,
+          "word": "heard",
+          "prob": null
+        },
+        {
+          "start": 71.92,
+          "end": 72.1,
+          "word": "from,",
+          "prob": null
+        },
+        {
+          "start": 72.28,
+          "end": 72.5,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 72.62,
+          "end": 72.68,
+          "word": "Jensen",
+          "prob": null
+        },
+        {
+          "start": 72.96,
+          "end": 73.2,
+          "word": "Huang",
+          "prob": null
+        },
+        {
+          "start": 73.2,
+          "end": 73.48,
+          "word": "has",
+          "prob": null
+        },
+        {
+          "start": 73.48,
+          "end": 73.62,
+          "word": "never",
+          "prob": null
+        },
+        {
+          "start": 73.62,
+          "end": 73.84,
+          "word": "said",
+          "prob": null
+        },
+        {
+          "start": 73.84,
+          "end": 74.14,
+          "word": "her",
+          "prob": null
+        },
+        {
+          "start": 74.14,
+          "end": 74.52,
+          "word": "name.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 74.62,
+      "end": 80.84,
+      "text": "What the press calls in a fair and what intelligence agencies call an asset, they overlap around this one person.",
+      "words": [
+        {
+          "start": 74.62,
+          "end": 74.78,
+          "word": "What",
+          "prob": null
+        },
+        {
+          "start": 74.78,
+          "end": 75,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 75,
+          "end": 75.3,
+          "word": "press",
+          "prob": null
+        },
+        {
+          "start": 75.3,
+          "end": 75.5,
+          "word": "calls",
+          "prob": null
+        },
+        {
+          "start": 75.5,
+          "end": 75.64,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 75.64,
+          "end": 75.86,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 75.86,
+          "end": 76.04,
+          "word": "fair",
+          "prob": null
+        },
+        {
+          "start": 76.04,
+          "end": 76.32,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 76.32,
+          "end": 76.74,
+          "word": "what",
+          "prob": null
+        },
+        {
+          "start": 76.74,
+          "end": 77.28,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 77.28,
+          "end": 77.6,
+          "word": "agencies",
+          "prob": null
+        },
+        {
+          "start": 77.6,
+          "end": 77.84,
+          "word": "call",
+          "prob": null
+        },
+        {
+          "start": 77.84,
+          "end": 78.16,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 78.16,
+          "end": 78.56,
+          "word": "asset,",
+          "prob": null
+        },
+        {
+          "start": 78.78,
+          "end": 79.1,
+          "word": "they",
+          "prob": null
+        },
+        {
+          "start": 79.1,
+          "end": 79.1,
+          "word": "overlap",
+          "prob": null
+        },
+        {
+          "start": 79.48,
+          "end": 79.68,
+          "word": "around",
+          "prob": null
+        },
+        {
+          "start": 79.68,
+          "end": 79.94,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 79.94,
+          "end": 80.26,
+          "word": "one",
+          "prob": null
+        },
+        {
+          "start": 80.26,
+          "end": 80.84,
+          "word": "person.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 81.08,
+      "end": 83.22,
+      "text": "According to reporting based on U .S.",
+      "words": [
+        {
+          "start": 81.08,
+          "end": 81.36,
+          "word": "According",
+          "prob": null
+        },
+        {
+          "start": 81.36,
+          "end": 81.7,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 81.7,
+          "end": 82.06,
+          "word": "reporting",
+          "prob": null
+        },
+        {
+          "start": 82.06,
+          "end": 82.34,
+          "word": "based",
+          "prob": null
+        },
+        {
+          "start": 82.34,
+          "end": 82.5,
+          "word": "on",
+          "prob": null
+        },
+        {
+          "start": 82.5,
+          "end": 82.74,
+          "word": "U",
+          "prob": null
+        },
+        {
+          "start": 82.74,
+          "end": 83.22,
+          "word": ".S.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 83.2,
+      "end": 98.66,
+      "text": "intelligence assessments, surveillance unmasked a contact that identified Jensen Huang as the American on the other end of the line, and concluded Alice Huang was an asset of China's Ministry of State Security, recruited to cultivate him, to potentially influence the chip flow.",
+      "words": [
+        {
+          "start": 83.2,
+          "end": 83.88,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 83.88,
+          "end": 84.48,
+          "word": "assessments,",
+          "prob": null
+        },
+        {
+          "start": 84.64,
+          "end": 85.06,
+          "word": "surveillance",
+          "prob": null
+        },
+        {
+          "start": 85.06,
+          "end": 85.5,
+          "word": "unmasked",
+          "prob": null
+        },
+        {
+          "start": 85.5,
+          "end": 85.82,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 85.82,
+          "end": 85.84,
+          "word": "contact",
+          "prob": null
+        },
+        {
+          "start": 86.14,
+          "end": 86.68,
+          "word": "that",
+          "prob": null
+        },
+        {
+          "start": 86.68,
+          "end": 86.98,
+          "word": "identified",
+          "prob": null
+        },
+        {
+          "start": 86.98,
+          "end": 87.42,
+          "word": "Jensen",
+          "prob": null
+        },
+        {
+          "start": 87.42,
+          "end": 87.62,
+          "word": "Huang",
+          "prob": null
+        },
+        {
+          "start": 87.62,
+          "end": 87.78,
+          "word": "as",
+          "prob": null
+        },
+        {
+          "start": 87.78,
+          "end": 88.1,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 88.1,
+          "end": 88.44,
+          "word": "American",
+          "prob": null
+        },
+        {
+          "start": 88.44,
+          "end": 88.54,
+          "word": "on",
+          "prob": null
+        },
+        {
+          "start": 88.54,
+          "end": 88.7,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 88.7,
+          "end": 88.84,
+          "word": "other",
+          "prob": null
+        },
+        {
+          "start": 88.84,
+          "end": 88.98,
+          "word": "end",
+          "prob": null
+        },
+        {
+          "start": 88.98,
+          "end": 89.12,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 89.12,
+          "end": 89.4,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 89.4,
+          "end": 89.88,
+          "word": "line,",
+          "prob": null
+        },
+        {
+          "start": 90.1,
+          "end": 90.34,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 90.34,
+          "end": 90.34,
+          "word": "concluded",
+          "prob": null
+        },
+        {
+          "start": 90.82,
+          "end": 91.18,
+          "word": "Alice",
+          "prob": null
+        },
+        {
+          "start": 91.18,
+          "end": 91.5,
+          "word": "Huang",
+          "prob": null
+        },
+        {
+          "start": 91.5,
+          "end": 91.76,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 91.76,
+          "end": 91.92,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 91.92,
+          "end": 92.16,
+          "word": "asset",
+          "prob": null
+        },
+        {
+          "start": 92.16,
+          "end": 92.42,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 92.42,
+          "end": 92.96,
+          "word": "China's",
+          "prob": null
+        },
+        {
+          "start": 92.96,
+          "end": 93.14,
+          "word": "Ministry",
+          "prob": null
+        },
+        {
+          "start": 93.14,
+          "end": 93.44,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 93.44,
+          "end": 94.12,
+          "word": "State",
+          "prob": null
+        },
+        {
+          "start": 94.12,
+          "end": 94.6,
+          "word": "Security,",
+          "prob": null
+        },
+        {
+          "start": 94.8,
+          "end": 95.22,
+          "word": "recruited",
+          "prob": null
+        },
+        {
+          "start": 95.22,
+          "end": 95.48,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 95.48,
+          "end": 95.48,
+          "word": "cultivate",
+          "prob": null
+        },
+        {
+          "start": 95.96,
+          "end": 96.26,
+          "word": "him,",
+          "prob": null
+        },
+        {
+          "start": 96.34,
+          "end": 96.78,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 96.78,
+          "end": 97.3,
+          "word": "potentially",
+          "prob": null
+        },
+        {
+          "start": 97.3,
+          "end": 97.56,
+          "word": "influence",
+          "prob": null
+        },
+        {
+          "start": 97.56,
+          "end": 97.8,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 97.8,
+          "end": 98.14,
+          "word": "chip",
+          "prob": null
+        },
+        {
+          "start": 98.14,
+          "end": 98.66,
+          "word": "flow.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 98.86,
+      "end": 106.4,
+      "text": "A memo circulated to top officials in the spring of 2026, the Financial Times reported it described a romantic relationship.",
+      "words": [
+        {
+          "start": 98.86,
+          "end": 99.06,
+          "word": "A",
+          "prob": null
+        },
+        {
+          "start": 99.06,
+          "end": 99.64,
+          "word": "memo",
+          "prob": null
+        },
+        {
+          "start": 99.64,
+          "end": 99.94,
+          "word": "circulated",
+          "prob": null
+        },
+        {
+          "start": 99.94,
+          "end": 100.16,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 100.16,
+          "end": 100.56,
+          "word": "top",
+          "prob": null
+        },
+        {
+          "start": 100.56,
+          "end": 100.82,
+          "word": "officials",
+          "prob": null
+        },
+        {
+          "start": 100.82,
+          "end": 101.02,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 101.02,
+          "end": 101.22,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 101.22,
+          "end": 101.42,
+          "word": "spring",
+          "prob": null
+        },
+        {
+          "start": 101.42,
+          "end": 101.74,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 101.74,
+          "end": 102.58,
+          "word": "2026,",
+          "prob": null
+        },
+        {
+          "start": 102.7,
+          "end": 103.04,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 103.04,
+          "end": 103.58,
+          "word": "Financial",
+          "prob": null
+        },
+        {
+          "start": 103.58,
+          "end": 103.98,
+          "word": "Times",
+          "prob": null
+        },
+        {
+          "start": 103.98,
+          "end": 103.98,
+          "word": "reported",
+          "prob": null
+        },
+        {
+          "start": 104.26,
+          "end": 104.62,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 104.62,
+          "end": 104.88,
+          "word": "described",
+          "prob": null
+        },
+        {
+          "start": 104.88,
+          "end": 105.32,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 105.3,
+          "end": 106.04,
+          "word": "romantic",
+          "prob": null
+        },
+        {
+          "start": 106.04,
+          "end": 106.4,
+          "word": "relationship.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 107,
+      "end": 109.1,
+      "text": "Secretary of State Rubio oversaw it.",
+      "words": [
+        {
+          "start": 107,
+          "end": 107.24,
+          "word": "Secretary",
+          "prob": null
+        },
+        {
+          "start": 107.24,
+          "end": 107.54,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 107.54,
+          "end": 107.96,
+          "word": "State",
+          "prob": null
+        },
+        {
+          "start": 107.96,
+          "end": 108.42,
+          "word": "Rubio",
+          "prob": null
+        },
+        {
+          "start": 108.42,
+          "end": 108.88,
+          "word": "oversaw",
+          "prob": null
+        },
+        {
+          "start": 108.88,
+          "end": 109.1,
+          "word": "it.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 109.36,
+      "end": 113.7,
+      "text": "President Trump was briefed about a year before it went public and chose not to act.",
+      "words": [
+        {
+          "start": 109.36,
+          "end": 109.74,
+          "word": "President",
+          "prob": null
+        },
+        {
+          "start": 109.74,
+          "end": 110,
+          "word": "Trump",
+          "prob": null
+        },
+        {
+          "start": 110,
+          "end": 110.24,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 110.24,
+          "end": 110.52,
+          "word": "briefed",
+          "prob": null
+        },
+        {
+          "start": 110.52,
+          "end": 110.72,
+          "word": "about",
+          "prob": null
+        },
+        {
+          "start": 110.72,
+          "end": 110.94,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 110.94,
+          "end": 111.24,
+          "word": "year",
+          "prob": null
+        },
+        {
+          "start": 111.24,
+          "end": 111.32,
+          "word": "before",
+          "prob": null
+        },
+        {
+          "start": 111.32,
+          "end": 111.44,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 111.58,
+          "end": 111.84,
+          "word": "went",
+          "prob": null
+        },
+        {
+          "start": 111.98,
+          "end": 112.34,
+          "word": "public",
+          "prob": null
+        },
+        {
+          "start": 112.34,
+          "end": 112.58,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 112.58,
+          "end": 112.84,
+          "word": "chose",
+          "prob": null
+        },
+        {
+          "start": 112.84,
+          "end": 113.02,
+          "word": "not",
+          "prob": null
+        },
+        {
+          "start": 113.02,
+          "end": 113.32,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 113.32,
+          "end": 113.7,
+          "word": "act.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 113.94,
+      "end": 116.08,
+      "text": "Before you call it settled, hold on.",
+      "words": [
+        {
+          "start": 113.94,
+          "end": 114.14,
+          "word": "Before",
+          "prob": null
+        },
+        {
+          "start": 114.14,
+          "end": 114.3,
+          "word": "you",
+          "prob": null
+        },
+        {
+          "start": 114.3,
+          "end": 114.54,
+          "word": "call",
+          "prob": null
+        },
+        {
+          "start": 114.54,
+          "end": 114.82,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 114.82,
+          "end": 114.98,
+          "word": "settled,",
+          "prob": null
+        },
+        {
+          "start": 115.24,
+          "end": 115.66,
+          "word": "hold",
+          "prob": null
+        },
+        {
+          "start": 115.66,
+          "end": 116.08,
+          "word": "on.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 116.2,
+      "end": 119.4,
+      "text": "Neither the CIA nor the White House has confirmed it.",
+      "words": [
+        {
+          "start": 116.2,
+          "end": 116.56,
+          "word": "Neither",
+          "prob": null
+        },
+        {
+          "start": 116.56,
+          "end": 116.94,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 116.94,
+          "end": 117.32,
+          "word": "CIA",
+          "prob": null
+        },
+        {
+          "start": 117.32,
+          "end": 117.52,
+          "word": "nor",
+          "prob": null
+        },
+        {
+          "start": 117.52,
+          "end": 117.6,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 117.82,
+          "end": 117.88,
+          "word": "White",
+          "prob": null
+        },
+        {
+          "start": 118.04,
+          "end": 118.4,
+          "word": "House",
+          "prob": null
+        },
+        {
+          "start": 118.4,
+          "end": 118.56,
+          "word": "has",
+          "prob": null
+        },
+        {
+          "start": 118.56,
+          "end": 119.06,
+          "word": "confirmed",
+          "prob": null
+        },
+        {
+          "start": 119.06,
+          "end": 119.4,
+          "word": "it.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 119.84,
+      "end": 122.24,
+      "text": "NBC said it had not independently confirmed it.",
+      "words": [
+        {
+          "start": 119.84,
+          "end": 120.28,
+          "word": "NBC",
+          "prob": null
+        },
+        {
+          "start": 120.28,
+          "end": 120.42,
+          "word": "said",
+          "prob": null
+        },
+        {
+          "start": 120.42,
+          "end": 120.58,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 120.58,
+          "end": 120.9,
+          "word": "had",
+          "prob": null
+        },
+        {
+          "start": 120.9,
+          "end": 121.42,
+          "word": "not",
+          "prob": null
+        },
+        {
+          "start": 121.42,
+          "end": 121.84,
+          "word": "independently",
+          "prob": null
+        },
+        {
+          "start": 121.84,
+          "end": 122.18,
+          "word": "confirmed",
+          "prob": null
+        },
+        {
+          "start": 122.18,
+          "end": 122.24,
+          "word": "it.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 122.38,
+      "end": 132.54,
+      "text": "The Wall Street Journal reported she vanished into China in late 2024, and Singapore's Ministry of Home Affairs replied flatly, no such investigations existed.",
+      "words": [
+        {
+          "start": 122.38,
+          "end": 122.62,
+          "word": "The",
+          "prob": null
+        },
+        {
+          "start": 122.62,
+          "end": 122.84,
+          "word": "Wall",
+          "prob": null
+        },
+        {
+          "start": 122.84,
+          "end": 123.04,
+          "word": "Street",
+          "prob": null
+        },
+        {
+          "start": 123.16,
+          "end": 123.28,
+          "word": "Journal",
+          "prob": null
+        },
+        {
+          "start": 123.5,
+          "end": 123.84,
+          "word": "reported",
+          "prob": null
+        },
+        {
+          "start": 123.84,
+          "end": 124.1,
+          "word": "she",
+          "prob": null
+        },
+        {
+          "start": 124.1,
+          "end": 124.4,
+          "word": "vanished",
+          "prob": null
+        },
+        {
+          "start": 124.4,
+          "end": 124.76,
+          "word": "into",
+          "prob": null
+        },
+        {
+          "start": 124.76,
+          "end": 124.94,
+          "word": "China",
+          "prob": null
+        },
+        {
+          "start": 124.94,
+          "end": 125.22,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 125.26,
+          "end": 126.24,
+          "word": "late",
+          "prob": null
+        },
+        {
+          "start": 126.24,
+          "end": 126.9,
+          "word": "2024,",
+          "prob": null
+        },
+        {
+          "start": 127.1,
+          "end": 127.4,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 127.4,
+          "end": 127.54,
+          "word": "Singapore's",
+          "prob": null
+        },
+        {
+          "start": 128.02,
+          "end": 128.24,
+          "word": "Ministry",
+          "prob": null
+        },
+        {
+          "start": 128.24,
+          "end": 128.4,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 128.4,
+          "end": 128.76,
+          "word": "Home",
+          "prob": null
+        },
+        {
+          "start": 128.76,
+          "end": 129.26,
+          "word": "Affairs",
+          "prob": null
+        },
+        {
+          "start": 129.26,
+          "end": 129.6,
+          "word": "replied",
+          "prob": null
+        },
+        {
+          "start": 129.6,
+          "end": 130.24,
+          "word": "flatly,",
+          "prob": null
+        },
+        {
+          "start": 130.44,
+          "end": 130.72,
+          "word": "no",
+          "prob": null
+        },
+        {
+          "start": 130.72,
+          "end": 131.38,
+          "word": "such",
+          "prob": null
+        },
+        {
+          "start": 131.38,
+          "end": 131.98,
+          "word": "investigations",
+          "prob": null
+        },
+        {
+          "start": 131.98,
+          "end": 132.54,
+          "word": "existed.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 132.86,
+      "end": 140.74,
+      "text": "China called it groundless speculation, and allegation this serious, and a denial this absolute, both sit on the table at once.",
+      "words": [
+        {
+          "start": 132.86,
+          "end": 133.1,
+          "word": "China",
+          "prob": null
+        },
+        {
+          "start": 133.1,
+          "end": 133.32,
+          "word": "called",
+          "prob": null
+        },
+        {
+          "start": 133.32,
+          "end": 133.62,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 133.62,
+          "end": 134.4,
+          "word": "groundless",
+          "prob": null
+        },
+        {
+          "start": 134.4,
+          "end": 135,
+          "word": "speculation,",
+          "prob": null
+        },
+        {
+          "start": 135.18,
+          "end": 135.62,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 135.62,
+          "end": 135.98,
+          "word": "allegation",
+          "prob": null
+        },
+        {
+          "start": 135.98,
+          "end": 136.4,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 136.4,
+          "end": 136.84,
+          "word": "serious,",
+          "prob": null
+        },
+        {
+          "start": 136.94,
+          "end": 137.06,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 137.06,
+          "end": 137.34,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 137.34,
+          "end": 137.58,
+          "word": "denial",
+          "prob": null
+        },
+        {
+          "start": 137.74,
+          "end": 138.08,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 138.18,
+          "end": 138.58,
+          "word": "absolute,",
+          "prob": null
+        },
+        {
+          "start": 138.98,
+          "end": 139.14,
+          "word": "both",
+          "prob": null
+        },
+        {
+          "start": 139.14,
+          "end": 139.34,
+          "word": "sit",
+          "prob": null
+        },
+        {
+          "start": 139.34,
+          "end": 139.5,
+          "word": "on",
+          "prob": null
+        },
+        {
+          "start": 139.5,
+          "end": 139.68,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 139.68,
+          "end": 139.92,
+          "word": "table",
+          "prob": null
+        },
+        {
+          "start": 139.92,
+          "end": 140.26,
+          "word": "at",
+          "prob": null
+        },
+        {
+          "start": 140.26,
+          "end": 140.74,
+          "word": "once.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 140.94,
+      "end": 143.94,
+      "text": "Which is why the boards only public words were cautious.",
+      "words": [
+        {
+          "start": 140.94,
+          "end": 141.1,
+          "word": "Which",
+          "prob": null
+        },
+        {
+          "start": 141.1,
+          "end": 141.28,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 141.28,
+          "end": 141.48,
+          "word": "why",
+          "prob": null
+        },
+        {
+          "start": 141.48,
+          "end": 141.76,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 141.76,
+          "end": 142.22,
+          "word": "boards",
+          "prob": null
+        },
+        {
+          "start": 142.22,
+          "end": 142.58,
+          "word": "only",
+          "prob": null
+        },
+        {
+          "start": 142.58,
+          "end": 142.9,
+          "word": "public",
+          "prob": null
+        },
+        {
+          "start": 142.9,
+          "end": 143.12,
+          "word": "words",
+          "prob": null
+        },
+        {
+          "start": 143.12,
+          "end": 143.4,
+          "word": "were",
+          "prob": null
+        },
+        {
+          "start": 143.4,
+          "end": 143.94,
+          "word": "cautious.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 144.22,
+      "end": 148.34,
+      "text": "No reason to believe national security or Nvidia secrets were compromised.",
+      "words": [
+        {
+          "start": 144.22,
+          "end": 144.48,
+          "word": "No",
+          "prob": null
+        },
+        {
+          "start": 144.48,
+          "end": 144.74,
+          "word": "reason",
+          "prob": null
+        },
+        {
+          "start": 144.74,
+          "end": 145.04,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 145.04,
+          "end": 145.52,
+          "word": "believe",
+          "prob": null
+        },
+        {
+          "start": 145.52,
+          "end": 146.04,
+          "word": "national",
+          "prob": null
+        },
+        {
+          "start": 146.04,
+          "end": 146.52,
+          "word": "security",
+          "prob": null
+        },
+        {
+          "start": 146.46,
+          "end": 146.88,
+          "word": "or",
+          "prob": null
+        },
+        {
+          "start": 146.88,
+          "end": 147.36,
+          "word": "Nvidia",
+          "prob": null
+        },
+        {
+          "start": 147.36,
+          "end": 147.78,
+          "word": "secrets",
+          "prob": null
+        },
+        {
+          "start": 147.78,
+          "end": 148.28,
+          "word": "were",
+          "prob": null
+        },
+        {
+          "start": 148.28,
+          "end": 148.34,
+          "word": "compromised.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 148.62,
+      "end": 154.12,
+      "text": "Megaspeed once seven rode, a Chinese -backed firm, renamed in 2023.",
+      "words": [
+        {
+          "start": 148.62,
+          "end": 149.44,
+          "word": "Megaspeed",
+          "prob": null
+        },
+        {
+          "start": 149.44,
+          "end": 149.8,
+          "word": "once",
+          "prob": null
+        },
+        {
+          "start": 149.8,
+          "end": 150.18,
+          "word": "seven",
+          "prob": null
+        },
+        {
+          "start": 150.18,
+          "end": 150.52,
+          "word": "rode,",
+          "prob": null
+        },
+        {
+          "start": 150.58,
+          "end": 151.04,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 151.04,
+          "end": 151.42,
+          "word": "Chinese",
+          "prob": null
+        },
+        {
+          "start": 151.42,
+          "end": 151.8,
+          "word": "-backed",
+          "prob": null
+        },
+        {
+          "start": 151.86,
+          "end": 152.02,
+          "word": "firm,",
+          "prob": null
+        },
+        {
+          "start": 152.24,
+          "end": 152.68,
+          "word": "renamed",
+          "prob": null
+        },
+        {
+          "start": 152.68,
+          "end": 153.16,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 153.16,
+          "end": 154.12,
+          "word": "2023.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 154.6,
+      "end": 157.24,
+      "text": "Alice Huang was its managing director for eight months.",
+      "words": [
+        {
+          "start": 154.6,
+          "end": 154.9,
+          "word": "Alice",
+          "prob": null
+        },
+        {
+          "start": 154.9,
+          "end": 155.06,
+          "word": "Huang",
+          "prob": null
+        },
+        {
+          "start": 155.06,
+          "end": 155.3,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 155.3,
+          "end": 155.64,
+          "word": "its",
+          "prob": null
+        },
+        {
+          "start": 155.64,
+          "end": 156.16,
+          "word": "managing",
+          "prob": null
+        },
+        {
+          "start": 156.16,
+          "end": 156.36,
+          "word": "director",
+          "prob": null
+        },
+        {
+          "start": 156.36,
+          "end": 156.58,
+          "word": "for",
+          "prob": null
+        },
+        {
+          "start": 156.58,
+          "end": 156.96,
+          "word": "eight",
+          "prob": null
+        },
+        {
+          "start": 156.96,
+          "end": 157.24,
+          "word": "months.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 157.58,
+      "end": 169.42,
+      "text": "Its Malaysian affiliate, Speed Matrix, reportedly bought at least 4 .8 billion dollars of equipment containing Nvidia technology between June 2020 and February 2026.",
+      "words": [
+        {
+          "start": 157.58,
+          "end": 158,
+          "word": "Its",
+          "prob": null
+        },
+        {
+          "start": 158,
+          "end": 158.58,
+          "word": "Malaysian",
+          "prob": null
+        },
+        {
+          "start": 158.58,
+          "end": 158.8,
+          "word": "affiliate,",
+          "prob": null
+        },
+        {
+          "start": 159,
+          "end": 159.44,
+          "word": "Speed",
+          "prob": null
+        },
+        {
+          "start": 159.44,
+          "end": 159.72,
+          "word": "Matrix,",
+          "prob": null
+        },
+        {
+          "start": 160.38,
+          "end": 160.68,
+          "word": "reportedly",
+          "prob": null
+        },
+        {
+          "start": 160.68,
+          "end": 160.84,
+          "word": "bought",
+          "prob": null
+        },
+        {
+          "start": 160.84,
+          "end": 161.1,
+          "word": "at",
+          "prob": null
+        },
+        {
+          "start": 161.1,
+          "end": 161.44,
+          "word": "least",
+          "prob": null
+        },
+        {
+          "start": 161.44,
+          "end": 161.7,
+          "word": "4",
+          "prob": null
+        },
+        {
+          "start": 161.7,
+          "end": 162.42,
+          "word": ".8",
+          "prob": null
+        },
+        {
+          "start": 162.42,
+          "end": 162.74,
+          "word": "billion",
+          "prob": null
+        },
+        {
+          "start": 162.74,
+          "end": 162.94,
+          "word": "dollars",
+          "prob": null
+        },
+        {
+          "start": 162.94,
+          "end": 163.2,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 163.24,
+          "end": 163.74,
+          "word": "equipment",
+          "prob": null
+        },
+        {
+          "start": 163.76,
+          "end": 164.26,
+          "word": "containing",
+          "prob": null
+        },
+        {
+          "start": 164.26,
+          "end": 164.9,
+          "word": "Nvidia",
+          "prob": null
+        },
+        {
+          "start": 164.88,
+          "end": 165.22,
+          "word": "technology",
+          "prob": null
+        },
+        {
+          "start": 165.34,
+          "end": 165.44,
+          "word": "between",
+          "prob": null
+        },
+        {
+          "start": 165.72,
+          "end": 166.42,
+          "word": "June",
+          "prob": null
+        },
+        {
+          "start": 166.42,
+          "end": 167.12,
+          "word": "2020",
+          "prob": null
+        },
+        {
+          "start": 167.12,
+          "end": 167.5,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 167.5,
+          "end": 168.32,
+          "word": "February",
+          "prob": null
+        },
+        {
+          "start": 168.32,
+          "end": 169.42,
+          "word": "2026.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 169.72,
+      "end": 173.04,
+      "text": "The Commerce Department probed it, then the case moved to justice.",
+      "words": [
+        {
+          "start": 169.72,
+          "end": 170.02,
+          "word": "The",
+          "prob": null
+        },
+        {
+          "start": 170.02,
+          "end": 170.6,
+          "word": "Commerce",
+          "prob": null
+        },
+        {
+          "start": 170.6,
+          "end": 170.86,
+          "word": "Department",
+          "prob": null
+        },
+        {
+          "start": 170.86,
+          "end": 171.2,
+          "word": "probed",
+          "prob": null
+        },
+        {
+          "start": 171.2,
+          "end": 171.36,
+          "word": "it,",
+          "prob": null
+        },
+        {
+          "start": 171.6,
+          "end": 171.74,
+          "word": "then",
+          "prob": null
+        },
+        {
+          "start": 171.74,
+          "end": 171.96,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 171.96,
+          "end": 172.32,
+          "word": "case",
+          "prob": null
+        },
+        {
+          "start": 172.32,
+          "end": 172.6,
+          "word": "moved",
+          "prob": null
+        },
+        {
+          "start": 172.6,
+          "end": 172.94,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 172.94,
+          "end": 173.04,
+          "word": "justice.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 173.34,
+      "end": 176.94,
+      "text": "Wang told Bloomberg his dealings were normal and not unusual.",
+      "words": [
+        {
+          "start": 173.34,
+          "end": 173.56,
+          "word": "Wang",
+          "prob": null
+        },
+        {
+          "start": 173.56,
+          "end": 173.92,
+          "word": "told",
+          "prob": null
+        },
+        {
+          "start": 173.92,
+          "end": 174.26,
+          "word": "Bloomberg",
+          "prob": null
+        },
+        {
+          "start": 174.26,
+          "end": 174.5,
+          "word": "his",
+          "prob": null
+        },
+        {
+          "start": 174.5,
+          "end": 174.78,
+          "word": "dealings",
+          "prob": null
+        },
+        {
+          "start": 174.78,
+          "end": 175.06,
+          "word": "were",
+          "prob": null
+        },
+        {
+          "start": 175.06,
+          "end": 175.5,
+          "word": "normal",
+          "prob": null
+        },
+        {
+          "start": 175.5,
+          "end": 175.8,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 175.8,
+          "end": 176.28,
+          "word": "not",
+          "prob": null
+        },
+        {
+          "start": 176.28,
+          "end": 176.94,
+          "word": "unusual.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 177.18,
+      "end": 181.76,
+      "text": "Nvidia says the diversion allegations were thoroughly investigated and debunked last year.",
+      "words": [
+        {
+          "start": 177.18,
+          "end": 177.52,
+          "word": "Nvidia",
+          "prob": null
+        },
+        {
+          "start": 177.52,
+          "end": 177.78,
+          "word": "says",
+          "prob": null
+        },
+        {
+          "start": 177.78,
+          "end": 178.12,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 178.12,
+          "end": 178.72,
+          "word": "diversion",
+          "prob": null
+        },
+        {
+          "start": 178.72,
+          "end": 179.04,
+          "word": "allegations",
+          "prob": null
+        },
+        {
+          "start": 179.04,
+          "end": 179.4,
+          "word": "were",
+          "prob": null
+        },
+        {
+          "start": 179.4,
+          "end": 180.06,
+          "word": "thoroughly",
+          "prob": null
+        },
+        {
+          "start": 180.06,
+          "end": 180.44,
+          "word": "investigated",
+          "prob": null
+        },
+        {
+          "start": 180.44,
+          "end": 180.66,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 180.66,
+          "end": 181,
+          "word": "debunked",
+          "prob": null
+        },
+        {
+          "start": 181.14,
+          "end": 181.36,
+          "word": "last",
+          "prob": null
+        },
+        {
+          "start": 181.36,
+          "end": 181.76,
+          "word": "year.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 181.9,
+      "end": 183.16,
+      "text": "None of this is new.",
+      "words": [
+        {
+          "start": 181.9,
+          "end": 182.04,
+          "word": "None",
+          "prob": null
+        },
+        {
+          "start": 182.04,
+          "end": 182.24,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 182.24,
+          "end": 182.44,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 182.44,
+          "end": 182.8,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 182.8,
+          "end": 183.16,
+          "word": "new.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 183.5,
+      "end": 188.32,
+      "text": "Margaret Thisselle, Mata Harari, was executed by France in 1917.",
+      "words": [
+        {
+          "start": 183.5,
+          "end": 183.86,
+          "word": "Margaret",
+          "prob": null
+        },
+        {
+          "start": 183.86,
+          "end": 184.44,
+          "word": "Thisselle,",
+          "prob": null
+        },
+        {
+          "start": 184.5,
+          "end": 184.72,
+          "word": "Mata",
+          "prob": null
+        },
+        {
+          "start": 184.72,
+          "end": 185.12,
+          "word": "Harari,",
+          "prob": null
+        },
+        {
+          "start": 185.38,
+          "end": 185.78,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 185.78,
+          "end": 186.16,
+          "word": "executed",
+          "prob": null
+        },
+        {
+          "start": 186.16,
+          "end": 186.44,
+          "word": "by",
+          "prob": null
+        },
+        {
+          "start": 186.44,
+          "end": 186.86,
+          "word": "France",
+          "prob": null
+        },
+        {
+          "start": 186.86,
+          "end": 187.76,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 187.76,
+          "end": 188.32,
+          "word": "1917.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 188.62,
+      "end": 193.9,
+      "text": "A century later, declassified files showed British intelligence found nothing she passed on.",
+      "words": [
+        {
+          "start": 188.62,
+          "end": 188.9,
+          "word": "A",
+          "prob": null
+        },
+        {
+          "start": 188.9,
+          "end": 189.36,
+          "word": "century",
+          "prob": null
+        },
+        {
+          "start": 189.36,
+          "end": 189.8,
+          "word": "later,",
+          "prob": null
+        },
+        {
+          "start": 189.96,
+          "end": 190.84,
+          "word": "declassified",
+          "prob": null
+        },
+        {
+          "start": 190.84,
+          "end": 191.14,
+          "word": "files",
+          "prob": null
+        },
+        {
+          "start": 191.14,
+          "end": 191.44,
+          "word": "showed",
+          "prob": null
+        },
+        {
+          "start": 191.44,
+          "end": 191.94,
+          "word": "British",
+          "prob": null
+        },
+        {
+          "start": 191.94,
+          "end": 192.34,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 192.34,
+          "end": 192.56,
+          "word": "found",
+          "prob": null
+        },
+        {
+          "start": 192.56,
+          "end": 192.84,
+          "word": "nothing",
+          "prob": null
+        },
+        {
+          "start": 192.84,
+          "end": 193.08,
+          "word": "she",
+          "prob": null
+        },
+        {
+          "start": 193.16,
+          "end": 193.36,
+          "word": "passed",
+          "prob": null
+        },
+        {
+          "start": 193.52,
+          "end": 193.9,
+          "word": "on.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 194.14,
+      "end": 202.22,
+      "text": "East Germany's Stasi ran an entire directory of Romeo's staged romance recruiters, harvesting the loyalties of West German officials.",
+      "words": [
+        {
+          "start": 194.14,
+          "end": 194.52,
+          "word": "East",
+          "prob": null
+        },
+        {
+          "start": 194.52,
+          "end": 195.2,
+          "word": "Germany's",
+          "prob": null
+        },
+        {
+          "start": 195.2,
+          "end": 195.52,
+          "word": "Stasi",
+          "prob": null
+        },
+        {
+          "start": 195.52,
+          "end": 195.74,
+          "word": "ran",
+          "prob": null
+        },
+        {
+          "start": 195.74,
+          "end": 196.1,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 196.1,
+          "end": 196.56,
+          "word": "entire",
+          "prob": null
+        },
+        {
+          "start": 196.56,
+          "end": 196.82,
+          "word": "directory",
+          "prob": null
+        },
+        {
+          "start": 196.82,
+          "end": 197.18,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 197.18,
+          "end": 197.98,
+          "word": "Romeo's",
+          "prob": null
+        },
+        {
+          "start": 197.98,
+          "end": 198.34,
+          "word": "staged",
+          "prob": null
+        },
+        {
+          "start": 198.34,
+          "end": 198.76,
+          "word": "romance",
+          "prob": null
+        },
+        {
+          "start": 198.76,
+          "end": 199.48,
+          "word": "recruiters,",
+          "prob": null
+        },
+        {
+          "start": 199.5,
+          "end": 199.5,
+          "word": "harvesting",
+          "prob": null
+        },
+        {
+          "start": 199.82,
+          "end": 199.94,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 199.94,
+          "end": 200.48,
+          "word": "loyalties",
+          "prob": null
+        },
+        {
+          "start": 200.48,
+          "end": 200.76,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 200.76,
+          "end": 201.04,
+          "word": "West",
+          "prob": null
+        },
+        {
+          "start": 201.04,
+          "end": 201.58,
+          "word": "German",
+          "prob": null
+        },
+        {
+          "start": 201.58,
+          "end": 202.22,
+          "word": "officials.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 202.42,
+      "end": 203.72,
+      "text": "Monica Whit, a U .S.",
+      "words": [
+        {
+          "start": 202.42,
+          "end": 202.72,
+          "word": "Monica",
+          "prob": null
+        },
+        {
+          "start": 202.72,
+          "end": 203.06,
+          "word": "Whit,",
+          "prob": null
+        },
+        {
+          "start": 203.2,
+          "end": 203.3,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 203.3,
+          "end": 203.54,
+          "word": "U",
+          "prob": null
+        },
+        {
+          "start": 203.54,
+          "end": 203.72,
+          "word": ".S.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 203.76,
+      "end": 210.72,
+      "text": "Air Force intelligence specialist, fell into an online romance with Iranian -linked operatives and defected in 2013.",
+      "words": [
+        {
+          "start": 203.76,
+          "end": 204.04,
+          "word": "Air",
+          "prob": null
+        },
+        {
+          "start": 204.04,
+          "end": 204.48,
+          "word": "Force",
+          "prob": null
+        },
+        {
+          "start": 204.48,
+          "end": 205.12,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 205.12,
+          "end": 205.48,
+          "word": "specialist,",
+          "prob": null
+        },
+        {
+          "start": 205.62,
+          "end": 205.76,
+          "word": "fell",
+          "prob": null
+        },
+        {
+          "start": 205.76,
+          "end": 206,
+          "word": "into",
+          "prob": null
+        },
+        {
+          "start": 206,
+          "end": 206.16,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 206.36,
+          "end": 206.56,
+          "word": "online",
+          "prob": null
+        },
+        {
+          "start": 206.82,
+          "end": 207.14,
+          "word": "romance",
+          "prob": null
+        },
+        {
+          "start": 207.14,
+          "end": 207.52,
+          "word": "with",
+          "prob": null
+        },
+        {
+          "start": 207.52,
+          "end": 207.88,
+          "word": "Iranian",
+          "prob": null
+        },
+        {
+          "start": 207.88,
+          "end": 208.4,
+          "word": "-linked",
+          "prob": null
+        },
+        {
+          "start": 208.4,
+          "end": 208.76,
+          "word": "operatives",
+          "prob": null
+        },
+        {
+          "start": 208.76,
+          "end": 208.86,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 208.86,
+          "end": 209.42,
+          "word": "defected",
+          "prob": null
+        },
+        {
+          "start": 209.42,
+          "end": 210.18,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 210.18,
+          "end": 210.72,
+          "word": "2013.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 210.86,
+      "end": 221.1,
+      "text": "And from 2011 to 2015, an operative known as Christine Fang cultivated American politicians, the FBI captured romantic relationships with at least two mayors.",
+      "words": [
+        {
+          "start": 210.86,
+          "end": 211.06,
+          "word": "And",
+          "prob": null
+        },
+        {
+          "start": 211.06,
+          "end": 211.66,
+          "word": "from",
+          "prob": null
+        },
+        {
+          "start": 211.66,
+          "end": 212.02,
+          "word": "2011",
+          "prob": null
+        },
+        {
+          "start": 212.02,
+          "end": 212.8,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 212.8,
+          "end": 213.06,
+          "word": "2015,",
+          "prob": null
+        },
+        {
+          "start": 213.16,
+          "end": 213.52,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 213.56,
+          "end": 213.86,
+          "word": "operative",
+          "prob": null
+        },
+        {
+          "start": 213.92,
+          "end": 214.22,
+          "word": "known",
+          "prob": null
+        },
+        {
+          "start": 214.22,
+          "end": 214.66,
+          "word": "as",
+          "prob": null
+        },
+        {
+          "start": 214.66,
+          "end": 215,
+          "word": "Christine",
+          "prob": null
+        },
+        {
+          "start": 215,
+          "end": 215.42,
+          "word": "Fang",
+          "prob": null
+        },
+        {
+          "start": 215.42,
+          "end": 216.02,
+          "word": "cultivated",
+          "prob": null
+        },
+        {
+          "start": 216.02,
+          "end": 216.54,
+          "word": "American",
+          "prob": null
+        },
+        {
+          "start": 216.54,
+          "end": 217.12,
+          "word": "politicians,",
+          "prob": null
+        },
+        {
+          "start": 217.3,
+          "end": 217.68,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 217.68,
+          "end": 218.24,
+          "word": "FBI",
+          "prob": null
+        },
+        {
+          "start": 218.24,
+          "end": 218.76,
+          "word": "captured",
+          "prob": null
+        },
+        {
+          "start": 218.76,
+          "end": 219.44,
+          "word": "romantic",
+          "prob": null
+        },
+        {
+          "start": 219.44,
+          "end": 219.44,
+          "word": "relationships",
+          "prob": null
+        },
+        {
+          "start": 219.74,
+          "end": 219.86,
+          "word": "with",
+          "prob": null
+        },
+        {
+          "start": 219.86,
+          "end": 220.02,
+          "word": "at",
+          "prob": null
+        },
+        {
+          "start": 220.02,
+          "end": 220.36,
+          "word": "least",
+          "prob": null
+        },
+        {
+          "start": 220.36,
+          "end": 220.66,
+          "word": "two",
+          "prob": null
+        },
+        {
+          "start": 220.66,
+          "end": 221.1,
+          "word": "mayors.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 221.28,
+      "end": 224.1,
+      "text": "The playbook is older than the microchip.",
+      "words": [
+        {
+          "start": 221.28,
+          "end": 221.52,
+          "word": "The",
+          "prob": null
+        },
+        {
+          "start": 221.52,
+          "end": 221.92,
+          "word": "playbook",
+          "prob": null
+        },
+        {
+          "start": 221.92,
+          "end": 222.16,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 222.16,
+          "end": 222.4,
+          "word": "older",
+          "prob": null
+        },
+        {
+          "start": 222.4,
+          "end": 222.62,
+          "word": "than",
+          "prob": null
+        },
+        {
+          "start": 222.62,
+          "end": 222.7,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 222.7,
+          "end": 224.1,
+          "word": "microchip.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 224.1,
+      "end": 224.52,
+      "text": "Access.",
+      "words": [
+        {
+          "start": 224.1,
+          "end": 224.52,
+          "word": "Access.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 224.58,
+      "end": 225.46,
+      "text": "Intimacy.",
+      "words": [
+        {
+          "start": 224.58,
+          "end": 225.46,
+          "word": "Intimacy.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 225.64,
+      "end": 226.04,
+      "text": "Leverage.",
+      "words": [
+        {
+          "start": 225.64,
+          "end": 226.04,
+          "word": "Leverage.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 226.08,
+      "end": 227.46,
+      "text": "But this is the discipline.",
+      "words": [
+        {
+          "start": 226.08,
+          "end": 226.12,
+          "word": "But",
+          "prob": null
+        },
+        {
+          "start": 226.48,
+          "end": 226.66,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 226.66,
+          "end": 226.8,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 226.8,
+          "end": 227.16,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 227.16,
+          "end": 227.46,
+          "word": "discipline.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 227.48,
+      "end": 231.88,
+      "text": "The fact that agencies use romance does not prove this case was an operation.",
+      "words": [
+        {
+          "start": 227.48,
+          "end": 227.72,
+          "word": "The",
+          "prob": null
+        },
+        {
+          "start": 227.72,
+          "end": 228,
+          "word": "fact",
+          "prob": null
+        },
+        {
+          "start": 228,
+          "end": 228.28,
+          "word": "that",
+          "prob": null
+        },
+        {
+          "start": 228.28,
+          "end": 228.72,
+          "word": "agencies",
+          "prob": null
+        },
+        {
+          "start": 228.72,
+          "end": 229.08,
+          "word": "use",
+          "prob": null
+        },
+        {
+          "start": 229.08,
+          "end": 229.4,
+          "word": "romance",
+          "prob": null
+        },
+        {
+          "start": 229.4,
+          "end": 229.62,
+          "word": "does",
+          "prob": null
+        },
+        {
+          "start": 229.62,
+          "end": 229.88,
+          "word": "not",
+          "prob": null
+        },
+        {
+          "start": 229.88,
+          "end": 230.1,
+          "word": "prove",
+          "prob": null
+        },
+        {
+          "start": 230.1,
+          "end": 230.36,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 230.36,
+          "end": 230.44,
+          "word": "case",
+          "prob": null
+        },
+        {
+          "start": 230.54,
+          "end": 230.56,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 230.68,
+          "end": 231.26,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 231.26,
+          "end": 231.88,
+          "word": "operation.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 231.98,
+      "end": 233.44,
+      "text": "Mata Hari is the warning.",
+      "words": [
+        {
+          "start": 231.98,
+          "end": 232.24,
+          "word": "Mata",
+          "prob": null
+        },
+        {
+          "start": 232.24,
+          "end": 232.48,
+          "word": "Hari",
+          "prob": null
+        },
+        {
+          "start": 232.48,
+          "end": 232.76,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 232.76,
+          "end": 233,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 233,
+          "end": 233.44,
+          "word": "warning.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 233.58,
+      "end": 235.04,
+      "text": "Why does Washington care?",
+      "words": [
+        {
+          "start": 233.58,
+          "end": 233.82,
+          "word": "Why",
+          "prob": null
+        },
+        {
+          "start": 233.82,
+          "end": 234.2,
+          "word": "does",
+          "prob": null
+        },
+        {
+          "start": 234.2,
+          "end": 234.72,
+          "word": "Washington",
+          "prob": null
+        },
+        {
+          "start": 234.72,
+          "end": 235.04,
+          "word": "care?",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 235.22,
+      "end": 236.9,
+      "text": "Because of what Nvidia sells.",
+      "words": [
+        {
+          "start": 235.22,
+          "end": 235.32,
+          "word": "Because",
+          "prob": null
+        },
+        {
+          "start": 235.32,
+          "end": 235.56,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 235.56,
+          "end": 235.94,
+          "word": "what",
+          "prob": null
+        },
+        {
+          "start": 235.94,
+          "end": 235.98,
+          "word": "Nvidia",
+          "prob": null
+        },
+        {
+          "start": 236.44,
+          "end": 236.9,
+          "word": "sells.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 237.1,
+      "end": 244.12,
+      "text": "Since October 2022, America has required licenses for its most advanced AI chips to reach China.",
+      "words": [
+        {
+          "start": 237.1,
+          "end": 237.5,
+          "word": "Since",
+          "prob": null
+        },
+        {
+          "start": 237.5,
+          "end": 238.58,
+          "word": "October",
+          "prob": null
+        },
+        {
+          "start": 238.58,
+          "end": 239.12,
+          "word": "2022,",
+          "prob": null
+        },
+        {
+          "start": 239.44,
+          "end": 239.9,
+          "word": "America",
+          "prob": null
+        },
+        {
+          "start": 239.9,
+          "end": 240.26,
+          "word": "has",
+          "prob": null
+        },
+        {
+          "start": 240.26,
+          "end": 240.8,
+          "word": "required",
+          "prob": null
+        },
+        {
+          "start": 240.8,
+          "end": 241.14,
+          "word": "licenses",
+          "prob": null
+        },
+        {
+          "start": 241.14,
+          "end": 241.26,
+          "word": "for",
+          "prob": null
+        },
+        {
+          "start": 241.26,
+          "end": 241.5,
+          "word": "its",
+          "prob": null
+        },
+        {
+          "start": 241.5,
+          "end": 242.02,
+          "word": "most",
+          "prob": null
+        },
+        {
+          "start": 242.02,
+          "end": 242.46,
+          "word": "advanced",
+          "prob": null
+        },
+        {
+          "start": 242.46,
+          "end": 242.72,
+          "word": "AI",
+          "prob": null
+        },
+        {
+          "start": 242.76,
+          "end": 242.76,
+          "word": "chips",
+          "prob": null
+        },
+        {
+          "start": 242.94,
+          "end": 243.22,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 243.22,
+          "end": 243.68,
+          "word": "reach",
+          "prob": null
+        },
+        {
+          "start": 243.68,
+          "end": 244.12,
+          "word": "China.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 244.34,
+      "end": 249,
+      "text": "In 2025, the China -specific H20 lost that license to.",
+      "words": [
+        {
+          "start": 244.34,
+          "end": 245.36,
+          "word": "In",
+          "prob": null
+        },
+        {
+          "start": 245.36,
+          "end": 245.78,
+          "word": "2025,",
+          "prob": null
+        },
+        {
+          "start": 246,
+          "end": 246.28,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 246.28,
+          "end": 246.78,
+          "word": "China",
+          "prob": null
+        },
+        {
+          "start": 246.78,
+          "end": 247.12,
+          "word": "-specific",
+          "prob": null
+        },
+        {
+          "start": 247.12,
+          "end": 247.74,
+          "word": "H20",
+          "prob": null
+        },
+        {
+          "start": 247.74,
+          "end": 248,
+          "word": "lost",
+          "prob": null
+        },
+        {
+          "start": 248,
+          "end": 248.36,
+          "word": "that",
+          "prob": null
+        },
+        {
+          "start": 248.36,
+          "end": 248.86,
+          "word": "license",
+          "prob": null
+        },
+        {
+          "start": 248.86,
+          "end": 249,
+          "word": "to.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 249.44,
+      "end": 254.72,
+      "text": "In December, President approved H -200 sales, a 25 % cut to the U .S.",
+      "words": [
+        {
+          "start": 249.44,
+          "end": 249.96,
+          "word": "In",
+          "prob": null
+        },
+        {
+          "start": 249.96,
+          "end": 250.3,
+          "word": "December,",
+          "prob": null
+        },
+        {
+          "start": 250.3,
+          "end": 250.74,
+          "word": "President",
+          "prob": null
+        },
+        {
+          "start": 250.74,
+          "end": 251.3,
+          "word": "approved",
+          "prob": null
+        },
+        {
+          "start": 251.3,
+          "end": 251.32,
+          "word": "H",
+          "prob": null
+        },
+        {
+          "start": 251.32,
+          "end": 252.12,
+          "word": "-200",
+          "prob": null
+        },
+        {
+          "start": 252.12,
+          "end": 252.56,
+          "word": "sales,",
+          "prob": null
+        },
+        {
+          "start": 252.66,
+          "end": 253.14,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 253.14,
+          "end": 253.5,
+          "word": "25",
+          "prob": null
+        },
+        {
+          "start": 253.5,
+          "end": 253.52,
+          "word": "%",
+          "prob": null
+        },
+        {
+          "start": 253.7,
+          "end": 253.82,
+          "word": "cut",
+          "prob": null
+        },
+        {
+          "start": 253.82,
+          "end": 254,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 254,
+          "end": 254.1,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 254.1,
+          "end": 254.38,
+          "word": "U",
+          "prob": null
+        },
+        {
+          "start": 254.38,
+          "end": 254.72,
+          "word": ".S.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 254.88,
+      "end": 260,
+      "text": "and by May 2026, roughly 10 firms were cleared and zero had taken delivery.",
+      "words": [
+        {
+          "start": 254.88,
+          "end": 255.02,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 255.02,
+          "end": 255.26,
+          "word": "by",
+          "prob": null
+        },
+        {
+          "start": 255.26,
+          "end": 255.8,
+          "word": "May",
+          "prob": null
+        },
+        {
+          "start": 255.8,
+          "end": 256.88,
+          "word": "2026,",
+          "prob": null
+        },
+        {
+          "start": 256.9,
+          "end": 257.32,
+          "word": "roughly",
+          "prob": null
+        },
+        {
+          "start": 257.32,
+          "end": 257.62,
+          "word": "10",
+          "prob": null
+        },
+        {
+          "start": 257.62,
+          "end": 257.84,
+          "word": "firms",
+          "prob": null
+        },
+        {
+          "start": 257.84,
+          "end": 258.18,
+          "word": "were",
+          "prob": null
+        },
+        {
+          "start": 258.18,
+          "end": 258.6,
+          "word": "cleared",
+          "prob": null
+        },
+        {
+          "start": 258.6,
+          "end": 258.96,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 258.96,
+          "end": 259.14,
+          "word": "zero",
+          "prob": null
+        },
+        {
+          "start": 259.14,
+          "end": 259.38,
+          "word": "had",
+          "prob": null
+        },
+        {
+          "start": 259.38,
+          "end": 259.78,
+          "word": "taken",
+          "prob": null
+        },
+        {
+          "start": 259.78,
+          "end": 260,
+          "word": "delivery.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 260.66,
+      "end": 262,
+      "text": "Beijing simply said no.",
+      "words": [
+        {
+          "start": 260.66,
+          "end": 261.18,
+          "word": "Beijing",
+          "prob": null
+        },
+        {
+          "start": 261.18,
+          "end": 261.42,
+          "word": "simply",
+          "prob": null
+        },
+        {
+          "start": 261.42,
+          "end": 261.84,
+          "word": "said",
+          "prob": null
+        },
+        {
+          "start": 261.84,
+          "end": 262,
+          "word": "no.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 262.32,
+      "end": 273.74,
+      "text": "So when an alleged asset of Chinese intelligence reportedly cultivated the man who shapes America's AI hardware policy, who dines with the president, every call and every favor becomes consequential.",
+      "words": [
+        {
+          "start": 262.32,
+          "end": 262.44,
+          "word": "So",
+          "prob": null
+        },
+        {
+          "start": 262.44,
+          "end": 262.6,
+          "word": "when",
+          "prob": null
+        },
+        {
+          "start": 262.6,
+          "end": 262.86,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 262.86,
+          "end": 263.26,
+          "word": "alleged",
+          "prob": null
+        },
+        {
+          "start": 263.26,
+          "end": 263.42,
+          "word": "asset",
+          "prob": null
+        },
+        {
+          "start": 263.42,
+          "end": 263.86,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 263.86,
+          "end": 264.48,
+          "word": "Chinese",
+          "prob": null
+        },
+        {
+          "start": 264.48,
+          "end": 265.12,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 265.12,
+          "end": 265.5,
+          "word": "reportedly",
+          "prob": null
+        },
+        {
+          "start": 265.5,
+          "end": 265.8,
+          "word": "cultivated",
+          "prob": null
+        },
+        {
+          "start": 265.8,
+          "end": 265.96,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 265.96,
+          "end": 266,
+          "word": "man",
+          "prob": null
+        },
+        {
+          "start": 266.2,
+          "end": 266.24,
+          "word": "who",
+          "prob": null
+        },
+        {
+          "start": 266.42,
+          "end": 266.86,
+          "word": "shapes",
+          "prob": null
+        },
+        {
+          "start": 266.86,
+          "end": 267.52,
+          "word": "America's",
+          "prob": null
+        },
+        {
+          "start": 267.52,
+          "end": 267.92,
+          "word": "AI",
+          "prob": null
+        },
+        {
+          "start": 267.92,
+          "end": 268.46,
+          "word": "hardware",
+          "prob": null
+        },
+        {
+          "start": 268.46,
+          "end": 268.88,
+          "word": "policy,",
+          "prob": null
+        },
+        {
+          "start": 269.02,
+          "end": 269.24,
+          "word": "who",
+          "prob": null
+        },
+        {
+          "start": 269.24,
+          "end": 269.62,
+          "word": "dines",
+          "prob": null
+        },
+        {
+          "start": 269.62,
+          "end": 270.2,
+          "word": "with",
+          "prob": null
+        },
+        {
+          "start": 270.2,
+          "end": 270.2,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 270.2,
+          "end": 270.56,
+          "word": "president,",
+          "prob": null
+        },
+        {
+          "start": 270.88,
+          "end": 271.2,
+          "word": "every",
+          "prob": null
+        },
+        {
+          "start": 271.2,
+          "end": 271.38,
+          "word": "call",
+          "prob": null
+        },
+        {
+          "start": 271.38,
+          "end": 271.52,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 271.7,
+          "end": 271.82,
+          "word": "every",
+          "prob": null
+        },
+        {
+          "start": 271.98,
+          "end": 272.42,
+          "word": "favor",
+          "prob": null
+        },
+        {
+          "start": 272.42,
+          "end": 273.04,
+          "word": "becomes",
+          "prob": null
+        },
+        {
+          "start": 273.04,
+          "end": 273.74,
+          "word": "consequential.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 274.16,
+      "end": 276.64,
+      "text": "Republicans in the House demanded a closed door briefing.",
+      "words": [
+        {
+          "start": 274.16,
+          "end": 274.42,
+          "word": "Republicans",
+          "prob": null
+        },
+        {
+          "start": 274.42,
+          "end": 274.5,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 274.5,
+          "end": 274.78,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 274.78,
+          "end": 275.2,
+          "word": "House",
+          "prob": null
+        },
+        {
+          "start": 275.2,
+          "end": 275.48,
+          "word": "demanded",
+          "prob": null
+        },
+        {
+          "start": 275.48,
+          "end": 275.84,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 275.84,
+          "end": 276.14,
+          "word": "closed",
+          "prob": null
+        },
+        {
+          "start": 276.14,
+          "end": 276.52,
+          "word": "door",
+          "prob": null
+        },
+        {
+          "start": 276.52,
+          "end": 276.64,
+          "word": "briefing.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 276.84,
+      "end": 282.52,
+      "text": "On November 9, Nvidia fell about 4 .3 %, $190 billion in a day.",
+      "words": [
+        {
+          "start": 276.84,
+          "end": 277.12,
+          "word": "On",
+          "prob": null
+        },
+        {
+          "start": 277.12,
+          "end": 277.6,
+          "word": "November",
+          "prob": null
+        },
+        {
+          "start": 277.6,
+          "end": 277.94,
+          "word": "9,",
+          "prob": null
+        },
+        {
+          "start": 278.04,
+          "end": 278.34,
+          "word": "Nvidia",
+          "prob": null
+        },
+        {
+          "start": 278.34,
+          "end": 278.68,
+          "word": "fell",
+          "prob": null
+        },
+        {
+          "start": 278.68,
+          "end": 279,
+          "word": "about",
+          "prob": null
+        },
+        {
+          "start": 279,
+          "end": 279.22,
+          "word": "4",
+          "prob": null
+        },
+        {
+          "start": 279.22,
+          "end": 280.16,
+          "word": ".3",
+          "prob": null
+        },
+        {
+          "start": 280.16,
+          "end": 280.18,
+          "word": "%,",
+          "prob": null
+        },
+        {
+          "start": 280.74,
+          "end": 281.34,
+          "word": "$190",
+          "prob": null
+        },
+        {
+          "start": 281.34,
+          "end": 281.76,
+          "word": "billion",
+          "prob": null
+        },
+        {
+          "start": 281.76,
+          "end": 281.96,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 281.96,
+          "end": 282.22,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 282.22,
+          "end": 282.52,
+          "word": "day.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 282.82,
+      "end": 286.72,
+      "text": "A shareholder suit followed with an hour's for failing to disclose an affair.",
+      "words": [
+        {
+          "start": 282.82,
+          "end": 283.12,
+          "word": "A",
+          "prob": null
+        },
+        {
+          "start": 283.12,
+          "end": 283.62,
+          "word": "shareholder",
+          "prob": null
+        },
+        {
+          "start": 283.62,
+          "end": 283.88,
+          "word": "suit",
+          "prob": null
+        },
+        {
+          "start": 283.88,
+          "end": 284.1,
+          "word": "followed",
+          "prob": null
+        },
+        {
+          "start": 284.1,
+          "end": 284.3,
+          "word": "with",
+          "prob": null
+        },
+        {
+          "start": 284.3,
+          "end": 284.52,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 284.52,
+          "end": 284.86,
+          "word": "hour's",
+          "prob": null
+        },
+        {
+          "start": 284.86,
+          "end": 285.14,
+          "word": "for",
+          "prob": null
+        },
+        {
+          "start": 285.14,
+          "end": 285.4,
+          "word": "failing",
+          "prob": null
+        },
+        {
+          "start": 285.4,
+          "end": 285.72,
+          "word": "to",
+          "prob": null
+        },
+        {
+          "start": 285.72,
+          "end": 285.96,
+          "word": "disclose",
+          "prob": null
+        },
+        {
+          "start": 285.96,
+          "end": 286.32,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 286.32,
+          "end": 286.72,
+          "word": "affair.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 287,
+      "end": 291.3,
+      "text": "Not for proven espionage, so what do we actually know, confirmed?",
+      "words": [
+        {
+          "start": 287,
+          "end": 287.22,
+          "word": "Not",
+          "prob": null
+        },
+        {
+          "start": 287.22,
+          "end": 287.5,
+          "word": "for",
+          "prob": null
+        },
+        {
+          "start": 287.5,
+          "end": 288.12,
+          "word": "proven",
+          "prob": null
+        },
+        {
+          "start": 288.12,
+          "end": 288.4,
+          "word": "espionage,",
+          "prob": null
+        },
+        {
+          "start": 288.72,
+          "end": 289.08,
+          "word": "so",
+          "prob": null
+        },
+        {
+          "start": 289.08,
+          "end": 289.22,
+          "word": "what",
+          "prob": null
+        },
+        {
+          "start": 289.22,
+          "end": 289.56,
+          "word": "do",
+          "prob": null
+        },
+        {
+          "start": 289.56,
+          "end": 289.74,
+          "word": "we",
+          "prob": null
+        },
+        {
+          "start": 289.74,
+          "end": 290.22,
+          "word": "actually",
+          "prob": null
+        },
+        {
+          "start": 290.22,
+          "end": 290.44,
+          "word": "know,",
+          "prob": null
+        },
+        {
+          "start": 290.78,
+          "end": 291.3,
+          "word": "confirmed?",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 291.6,
+      "end": 296.82,
+      "text": "Jensen Huang admitted being unfaithful, the board opened an independent investigation.",
+      "words": [
+        {
+          "start": 291.6,
+          "end": 292,
+          "word": "Jensen",
+          "prob": null
+        },
+        {
+          "start": 292,
+          "end": 292.34,
+          "word": "Huang",
+          "prob": null
+        },
+        {
+          "start": 292.34,
+          "end": 292.8,
+          "word": "admitted",
+          "prob": null
+        },
+        {
+          "start": 292.8,
+          "end": 293,
+          "word": "being",
+          "prob": null
+        },
+        {
+          "start": 293,
+          "end": 293.82,
+          "word": "unfaithful,",
+          "prob": null
+        },
+        {
+          "start": 293.92,
+          "end": 294.28,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 294.28,
+          "end": 294.62,
+          "word": "board",
+          "prob": null
+        },
+        {
+          "start": 294.62,
+          "end": 294.94,
+          "word": "opened",
+          "prob": null
+        },
+        {
+          "start": 294.94,
+          "end": 295.4,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 295.4,
+          "end": 296.18,
+          "word": "independent",
+          "prob": null
+        },
+        {
+          "start": 296.18,
+          "end": 296.82,
+          "word": "investigation.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 297.06,
+      "end": 304.42,
+      "text": "China calls it all smears on the record twice, reported, intelligence assessed Alice Huang as a Ministry of State Security Asset.",
+      "words": [
+        {
+          "start": 297.06,
+          "end": 297.42,
+          "word": "China",
+          "prob": null
+        },
+        {
+          "start": 297.42,
+          "end": 297.58,
+          "word": "calls",
+          "prob": null
+        },
+        {
+          "start": 297.58,
+          "end": 297.88,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 297.88,
+          "end": 298.02,
+          "word": "all",
+          "prob": null
+        },
+        {
+          "start": 298.02,
+          "end": 298.5,
+          "word": "smears",
+          "prob": null
+        },
+        {
+          "start": 298.5,
+          "end": 298.74,
+          "word": "on",
+          "prob": null
+        },
+        {
+          "start": 298.74,
+          "end": 298.96,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 298.96,
+          "end": 299.5,
+          "word": "record",
+          "prob": null
+        },
+        {
+          "start": 299.5,
+          "end": 300.3,
+          "word": "twice,",
+          "prob": null
+        },
+        {
+          "start": 300.3,
+          "end": 300.54,
+          "word": "reported,",
+          "prob": null
+        },
+        {
+          "start": 300.86,
+          "end": 301.42,
+          "word": "intelligence",
+          "prob": null
+        },
+        {
+          "start": 301.42,
+          "end": 301.62,
+          "word": "assessed",
+          "prob": null
+        },
+        {
+          "start": 301.84,
+          "end": 302.1,
+          "word": "Alice",
+          "prob": null
+        },
+        {
+          "start": 302.12,
+          "end": 302.36,
+          "word": "Huang",
+          "prob": null
+        },
+        {
+          "start": 302.36,
+          "end": 302.6,
+          "word": "as",
+          "prob": null
+        },
+        {
+          "start": 302.6,
+          "end": 302.72,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 302.72,
+          "end": 302.94,
+          "word": "Ministry",
+          "prob": null
+        },
+        {
+          "start": 302.94,
+          "end": 303.22,
+          "word": "of",
+          "prob": null
+        },
+        {
+          "start": 303.22,
+          "end": 303.72,
+          "word": "State",
+          "prob": null
+        },
+        {
+          "start": 303.72,
+          "end": 304.16,
+          "word": "Security",
+          "prob": null
+        },
+        {
+          "start": 304.16,
+          "end": 304.42,
+          "word": "Asset.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 304.88,
+      "end": 305.18,
+      "text": "Unknown.",
+      "words": [
+        {
+          "start": 304.88,
+          "end": 305.18,
+          "word": "Unknown.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 305.42,
+      "end": 319.84,
+      "text": "What if anything she passed, and whether this was an operation and accident or coincidence, the evidence does not let anyone say honey trap as a fact, it lets everyone ask the question, the oldest trick in history, two people, one runs the machine that runs the modern world.",
+      "words": [
+        {
+          "start": 305.42,
+          "end": 305.6,
+          "word": "What",
+          "prob": null
+        },
+        {
+          "start": 305.6,
+          "end": 305.92,
+          "word": "if",
+          "prob": null
+        },
+        {
+          "start": 305.92,
+          "end": 306.14,
+          "word": "anything",
+          "prob": null
+        },
+        {
+          "start": 306.14,
+          "end": 306.54,
+          "word": "she",
+          "prob": null
+        },
+        {
+          "start": 306.54,
+          "end": 306.82,
+          "word": "passed,",
+          "prob": null
+        },
+        {
+          "start": 307,
+          "end": 307.18,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 307.18,
+          "end": 307.38,
+          "word": "whether",
+          "prob": null
+        },
+        {
+          "start": 307.38,
+          "end": 307.56,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 307.56,
+          "end": 307.7,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 307.7,
+          "end": 308.12,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 308.12,
+          "end": 308.48,
+          "word": "operation",
+          "prob": null
+        },
+        {
+          "start": 308.48,
+          "end": 308.76,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 308.76,
+          "end": 309.06,
+          "word": "accident",
+          "prob": null
+        },
+        {
+          "start": 309.06,
+          "end": 309.48,
+          "word": "or",
+          "prob": null
+        },
+        {
+          "start": 309.48,
+          "end": 309.84,
+          "word": "coincidence,",
+          "prob": null
+        },
+        {
+          "start": 310.4,
+          "end": 310.62,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 310.62,
+          "end": 310.92,
+          "word": "evidence",
+          "prob": null
+        },
+        {
+          "start": 310.92,
+          "end": 311.06,
+          "word": "does",
+          "prob": null
+        },
+        {
+          "start": 311.06,
+          "end": 311.3,
+          "word": "not",
+          "prob": null
+        },
+        {
+          "start": 311.3,
+          "end": 311.58,
+          "word": "let",
+          "prob": null
+        },
+        {
+          "start": 311.58,
+          "end": 311.84,
+          "word": "anyone",
+          "prob": null
+        },
+        {
+          "start": 311.84,
+          "end": 312.06,
+          "word": "say",
+          "prob": null
+        },
+        {
+          "start": 312.06,
+          "end": 312.28,
+          "word": "honey",
+          "prob": null
+        },
+        {
+          "start": 312.28,
+          "end": 312.48,
+          "word": "trap",
+          "prob": null
+        },
+        {
+          "start": 312.48,
+          "end": 312.62,
+          "word": "as",
+          "prob": null
+        },
+        {
+          "start": 312.62,
+          "end": 312.9,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 312.9,
+          "end": 313.1,
+          "word": "fact,",
+          "prob": null
+        },
+        {
+          "start": 313.16,
+          "end": 313.36,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 313.36,
+          "end": 313.64,
+          "word": "lets",
+          "prob": null
+        },
+        {
+          "start": 313.64,
+          "end": 313.98,
+          "word": "everyone",
+          "prob": null
+        },
+        {
+          "start": 313.98,
+          "end": 314.16,
+          "word": "ask",
+          "prob": null
+        },
+        {
+          "start": 314.16,
+          "end": 314.56,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 314.56,
+          "end": 314.64,
+          "word": "question,",
+          "prob": null
+        },
+        {
+          "start": 315.06,
+          "end": 315.42,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 315.42,
+          "end": 315.62,
+          "word": "oldest",
+          "prob": null
+        },
+        {
+          "start": 315.62,
+          "end": 315.78,
+          "word": "trick",
+          "prob": null
+        },
+        {
+          "start": 315.78,
+          "end": 316.1,
+          "word": "in",
+          "prob": null
+        },
+        {
+          "start": 316.1,
+          "end": 316.38,
+          "word": "history,",
+          "prob": null
+        },
+        {
+          "start": 316.62,
+          "end": 317,
+          "word": "two",
+          "prob": null
+        },
+        {
+          "start": 317,
+          "end": 317.4,
+          "word": "people,",
+          "prob": null
+        },
+        {
+          "start": 317.56,
+          "end": 317.82,
+          "word": "one",
+          "prob": null
+        },
+        {
+          "start": 317.82,
+          "end": 318.02,
+          "word": "runs",
+          "prob": null
+        },
+        {
+          "start": 318.02,
+          "end": 318.26,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 318.26,
+          "end": 318.56,
+          "word": "machine",
+          "prob": null
+        },
+        {
+          "start": 318.56,
+          "end": 318.78,
+          "word": "that",
+          "prob": null
+        },
+        {
+          "start": 318.78,
+          "end": 319.1,
+          "word": "runs",
+          "prob": null
+        },
+        {
+          "start": 319.1,
+          "end": 319.24,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 319.24,
+          "end": 319.72,
+          "word": "modern",
+          "prob": null
+        },
+        {
+          "start": 319.72,
+          "end": 319.84,
+          "word": "world.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 320.22,
+      "end": 329.36,
+      "text": "The other reportedly worked for its oldest adversary, whether this was an operation and accident, or human weakness wearing a badge, nobody credible can say yet.",
+      "words": [
+        {
+          "start": 320.22,
+          "end": 320.54,
+          "word": "The",
+          "prob": null
+        },
+        {
+          "start": 320.54,
+          "end": 321.06,
+          "word": "other",
+          "prob": null
+        },
+        {
+          "start": 321.06,
+          "end": 321.5,
+          "word": "reportedly",
+          "prob": null
+        },
+        {
+          "start": 321.5,
+          "end": 321.64,
+          "word": "worked",
+          "prob": null
+        },
+        {
+          "start": 321.64,
+          "end": 321.9,
+          "word": "for",
+          "prob": null
+        },
+        {
+          "start": 321.9,
+          "end": 322.28,
+          "word": "its",
+          "prob": null
+        },
+        {
+          "start": 322.28,
+          "end": 322.8,
+          "word": "oldest",
+          "prob": null
+        },
+        {
+          "start": 322.8,
+          "end": 323.26,
+          "word": "adversary,",
+          "prob": null
+        },
+        {
+          "start": 323.46,
+          "end": 323.72,
+          "word": "whether",
+          "prob": null
+        },
+        {
+          "start": 323.72,
+          "end": 323.9,
+          "word": "this",
+          "prob": null
+        },
+        {
+          "start": 323.9,
+          "end": 324.04,
+          "word": "was",
+          "prob": null
+        },
+        {
+          "start": 324.04,
+          "end": 324.46,
+          "word": "an",
+          "prob": null
+        },
+        {
+          "start": 324.46,
+          "end": 324.78,
+          "word": "operation",
+          "prob": null
+        },
+        {
+          "start": 324.78,
+          "end": 325.16,
+          "word": "and",
+          "prob": null
+        },
+        {
+          "start": 325.14,
+          "end": 325.34,
+          "word": "accident,",
+          "prob": null
+        },
+        {
+          "start": 325.52,
+          "end": 325.8,
+          "word": "or",
+          "prob": null
+        },
+        {
+          "start": 325.8,
+          "end": 326.24,
+          "word": "human",
+          "prob": null
+        },
+        {
+          "start": 326.24,
+          "end": 326.5,
+          "word": "weakness",
+          "prob": null
+        },
+        {
+          "start": 326.5,
+          "end": 326.78,
+          "word": "wearing",
+          "prob": null
+        },
+        {
+          "start": 326.78,
+          "end": 327.12,
+          "word": "a",
+          "prob": null
+        },
+        {
+          "start": 327.12,
+          "end": 327.44,
+          "word": "badge,",
+          "prob": null
+        },
+        {
+          "start": 327.76,
+          "end": 328.24,
+          "word": "nobody",
+          "prob": null
+        },
+        {
+          "start": 328.24,
+          "end": 328.52,
+          "word": "credible",
+          "prob": null
+        },
+        {
+          "start": 328.52,
+          "end": 328.72,
+          "word": "can",
+          "prob": null
+        },
+        {
+          "start": 328.72,
+          "end": 329.2,
+          "word": "say",
+          "prob": null
+        },
+        {
+          "start": 329.2,
+          "end": 329.36,
+          "word": "yet.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 329.58,
+      "end": 330.92,
+      "text": "But one thing is certain.",
+      "words": [
+        {
+          "start": 329.58,
+          "end": 329.82,
+          "word": "But",
+          "prob": null
+        },
+        {
+          "start": 329.82,
+          "end": 330.02,
+          "word": "one",
+          "prob": null
+        },
+        {
+          "start": 330.02,
+          "end": 330.28,
+          "word": "thing",
+          "prob": null
+        },
+        {
+          "start": 330.28,
+          "end": 330.58,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 330.58,
+          "end": 330.92,
+          "word": "certain.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 331.06,
+      "end": 336.02,
+      "text": "The most guarded secrets on Earth now move as much through trust as through technology.",
+      "words": [
+        {
+          "start": 331.06,
+          "end": 331.4,
+          "word": "The",
+          "prob": null
+        },
+        {
+          "start": 331.4,
+          "end": 331.8,
+          "word": "most",
+          "prob": null
+        },
+        {
+          "start": 331.8,
+          "end": 332.26,
+          "word": "guarded",
+          "prob": null
+        },
+        {
+          "start": 332.26,
+          "end": 332.54,
+          "word": "secrets",
+          "prob": null
+        },
+        {
+          "start": 332.54,
+          "end": 332.8,
+          "word": "on",
+          "prob": null
+        },
+        {
+          "start": 332.8,
+          "end": 333.12,
+          "word": "Earth",
+          "prob": null
+        },
+        {
+          "start": 333.12,
+          "end": 333.34,
+          "word": "now",
+          "prob": null
+        },
+        {
+          "start": 333.34,
+          "end": 333.54,
+          "word": "move",
+          "prob": null
+        },
+        {
+          "start": 333.54,
+          "end": 333.78,
+          "word": "as",
+          "prob": null
+        },
+        {
+          "start": 333.78,
+          "end": 334.16,
+          "word": "much",
+          "prob": null
+        },
+        {
+          "start": 334.16,
+          "end": 334.4,
+          "word": "through",
+          "prob": null
+        },
+        {
+          "start": 334.4,
+          "end": 334.64,
+          "word": "trust",
+          "prob": null
+        },
+        {
+          "start": 334.64,
+          "end": 334.86,
+          "word": "as",
+          "prob": null
+        },
+        {
+          "start": 334.86,
+          "end": 335.46,
+          "word": "through",
+          "prob": null
+        },
+        {
+          "start": 335.46,
+          "end": 336.02,
+          "word": "technology.",
+          "prob": null
+        }
+      ]
+    },
+    {
+      "start": 336.26,
+      "end": 339.84,
+      "text": "And trust, it turns out, is the one system nobody has patched.",
+      "words": [
+        {
+          "start": 336.26,
+          "end": 336.6,
+          "word": "And",
+          "prob": null
+        },
+        {
+          "start": 336.6,
+          "end": 336.94,
+          "word": "trust,",
+          "prob": null
+        },
+        {
+          "start": 337.02,
+          "end": 337.3,
+          "word": "it",
+          "prob": null
+        },
+        {
+          "start": 337.3,
+          "end": 337.76,
+          "word": "turns",
+          "prob": null
+        },
+        {
+          "start": 337.76,
+          "end": 337.8,
+          "word": "out,",
+          "prob": null
+        },
+        {
+          "start": 338,
+          "end": 338.2,
+          "word": "is",
+          "prob": null
+        },
+        {
+          "start": 338.2,
+          "end": 338.4,
+          "word": "the",
+          "prob": null
+        },
+        {
+          "start": 338.4,
+          "end": 338.74,
+          "word": "one",
+          "prob": null
+        },
+        {
+          "start": 338.74,
+          "end": 339.2,
+          "word": "system",
+          "prob": null
+        },
+        {
+          "start": 339.2,
+          "end": 339.54,
+          "word": "nobody",
+          "prob": null
+        },
+        {
+          "start": 339.54,
+          "end": 339.84,
+          "word": "has",
+          "prob": null
+        },
+        {
+          "start": 339.84,
+          "end": 339.84,
+          "word": "patched.",
+          "prob": null
+        }
+      ]
+    }
+  ]
+}

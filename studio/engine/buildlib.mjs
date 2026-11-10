@@ -106,6 +106,10 @@ export async function concatParts(slug, { dir } = {}) {
 
 // muxAndPublish — mux video-only + mix.wav (faststart, video copied), publish
 // to public/film/<slug>.mp4 (or { publishAs }), then run the FINAL-FILE LAW probe.
+// Audio: AAC 320k — the native AAC filterbank reconstructs transients up to
+// ~+0.9 dB above the WAV true peak; at 192k the published TP measured -0.8..-0.5
+// on 003 (DoD ceiling: TP <= -0.9 dBTP against mixes limited at -1.0..-1.4 dBTP).
+// 320k restores the headroom (measured: WAV -1.4 dBTP -> published -1.1 dBTP).
 export async function muxAndPublish(slug, { mixWav, frames, dur, fps = 30, publishAs, dir } = {}) {
   dir = dir || outDir(slug);
   const videoOnly = join(dir, 'video-only.mp4');
@@ -114,7 +118,7 @@ export async function muxAndPublish(slug, { mixWav, frames, dur, fps = 30, publi
   mkdirSync(join(ROOT, 'public/film'), { recursive: true });
   await run('ffmpeg', ['-y', '-i', videoOnly, '-i', mixWav,
     '-map', '0:v:0', '-map', '1:a:0',
-    '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k',
+    '-c:v', 'copy', '-c:a', 'aac', '-b:a', '320k',
     '-movflags', '+faststart', '-shortest', pub]);
   await finalFileLaw(pub, { frames, dur, fps });
   return pub;

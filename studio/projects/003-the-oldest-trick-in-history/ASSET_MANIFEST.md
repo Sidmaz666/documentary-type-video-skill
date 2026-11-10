@@ -1,0 +1,37 @@
+# ASSET_MANIFEST — provenance & licence (LAW 1)
+
+Downloaded 2026-11-10 into `assets/clips/` and `assets/music/`. Credits CSV rows:
+`assets/assets-credits.csv`. All images enter the timeline as **printed props**
+(grade-matched); the Song Nian handscroll is the constant **multiply vibe plate**
+(α≈0.09). Nothing is used raw/ungraded; nothing is AI-generated; no news-agency
+(AP/Reuters/Getty) imagery is used. The SATIRE section of YouTube policy is not a
+factor: zero fabricated evidence — every document motif drawn in-canvas is labelled
+as illustration.
+
+| Asset | Source | Licence | Author | Attribution | Use |
+|---|---|---|---|---|---|
+| jh_2023.jpg | Wikimedia Commons (File:Jensen_Huang_20231109.jpg) | CC BY 2.0 | Office of the President, ROC (Taiwan) / 總統府 | Required — end-card + CSV row 01 | ACT 2 print |
+| mata_hari.jpg | Wikimedia Commons (File:Mata_Hari,_by_Jacob_Merkelbach.jpg) | Public Domain | Jacob Merkelbach | Not required (credited anyway) | ACT 4 print |
+| markus_wolf.jpg | Wikimedia Commons (File:Bundesarchiv_Bild_183-1989-1208-420,_Markus_Wolf.jpg) | CC BY-SA 3.0 de | Elke Schöps / Bundesarchiv | Required — end-card + CSV row 04 | ACT 4 print |
+| monica_witt.png | Wikimedia Commons (File:Monica_Elfriede_Witt.png) | Public Domain | FBI (US federal work) | Not required | ACT 4 print |
+| songnian_landscape.jpg | Wikimedia Commons (File:清_松年_山水_手卷-Landscape_MET_DP204810.jpg) | CC0 1.0 | Song Nian / The Met Open Access | Not required | Vibe plate (whole film) |
+| pathetique_iv.flac | Wikimedia Commons (File:Tchaikovsky_-_Symphony_No._6…IV._Finale_–_Adagio_lamentoso_(Musopen_Symphony).flac) | Public Domain | Tchaikovsky (comp.) / Musopen Symphony (perf.) | Not required | Music bed |
+
+## YouTube packaging (outside the timeline)
+`thumbnail.mjs` (run: `bun thumbnail.mjs`) composes the 1280×720 thumbnails from
+the SAME CC BY 2.0 portrait (re-graded in-canvas; CSV row 10): primary
+`HONEY TRAP?` (`out/thumb.png` → `public/film/003-…-thumb.png`) and variant
+`AN AFFAIR? / AN OPERATION?` (`out/thumb-alt.png` → `public/film/003-…-thumb-alt.png`).
+Both ask a question — neither asserts a conclusion. CC BY 2.0 attribution for
+thumbnail use rides in the YouTube description credit block (VIDEO_METADATA.md).
+
+## Vibe plate & grade
+`drawBackgroundPlate` multiply at α=0.09; warm split-tone grade (`documentary-grade`
+preset), vignette 0.34, grain 0.62. Prints drop in with in-situ fades only — never
+drop-ins across the safe band (LAW 4).
+
+## Credits end-card (composited)
+Jacob Merkelbach (PD) · Bundesarchiv Bild 183-1989-1208-420 — Elke Schöps (CC BY-SA
+3.0 de) · Office of the President (Taiwan) (CC BY 2.0) · DOE/NREL (PD) · FBI (PD) ·
+Met Open Access DP204810, Song Nian (CC0) · Musopen Symphony — Tchaikovsky Op. 74
+(PD) · Voice: Kokoro-82M (Apache-2.0) · Opuscar Studio.
