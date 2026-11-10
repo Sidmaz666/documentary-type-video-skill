@@ -1,6 +1,6 @@
 ---
 name: get-image
-description: Find, verify and fetch EVERY kind of free/openly-licensed media from the public web for Opuscar films — photos, stock video/B-roll, archival footage, maps, music, SFX, fonts, SVG icons, textures, HDRIs, 3D models, datasets — from NASA to Unsplash to Wikimedia to museum open-access collections. Use to pick sources for clips.mjs (studio/engine/clips.mjs), verify licenses, and build the credits manifest. House law: AI-generated media banned (LAW 1); music beds must be real classical recordings, PD/CC0 composition+performance (MUSIC LAW); every asset lands a row in the project's assets-credits.csv.
+description: Find, verify and fetch EVERY kind of free/openly-licensed media from the public web for Opuscar films — photos, stock video/B-roll, archival footage, maps, music, SFX, fonts, SVG icons, textures, HDRIs, 3D models, datasets — from NASA to Unsplash to Wikimedia to museum open-access collections. Use to pick sources for clips.mjs (studio/engine/clips.mjs), verify licenses, and build the credits manifest. House law: AI-generated media banned (LAW 1); music beds must be real classical recordings, PD/CC0 composition+performance (MUSIC LAW); every asset lands a row in the project's assets-credits.csv; **LAW 9 — at least one real licensed external asset MUST appear in every film** (a film with zero source material fails).
 ---
 
 Free media resources for an autonomous video-generation agent
@@ -51,6 +51,7 @@ The full catalogue this repo's agents should draw from. Pick per beat, verify th
 
 ### House rules while sourcing (binding)
 1. **AI-generated media is banned forever (LAW 1)** — even if tagged "free"/CC0. No exceptions.
+1a. **A film MUST include ≥1 real licensed external asset (LAW 9)** — this catalog is how you find it; the film is not shippable without it.
 2. **Music beds**: real classical recordings only, PD/CC0 composition AND performance, from open public-data sources (§5). All other music is for reference only — never publish it.
 3. **Every asset → `assets/assets-credits.csv`** (id, source URL, license, attribution, modification). Attribution-required → composited end-card credit block (LAW 1).
 4. **Grade before composite** (bible §4): black/white/gamma/contrast, split-tone, light-wrap, contact shadow; QC still at entry/mid/exit (LAW 8). Never raw stock straight to the timeline.

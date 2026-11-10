@@ -16,28 +16,29 @@ Follow repo `AGENTS.md` first (hard laws win).
 
 ## Hard laws checklist
 - **LAW 1**: no AI-generated media, ever. Licensed, **real** (non-AI) stock images/video/clips ARE allowed: as printed props, as grade-matched full-frame plates/B-roll (ffmpeg frame extraction → `drawImage`, bible §4), or documented assets — every one with `assets/assets-credits.csv` rows (license, author, source URL, modification). Never raw/ungraded stock to the timeline.
-- **LAW 1b MUSIC**: real classical recordings from open public-domain/openly-licensed sources only (Wikimedia Commons, Openverse, Musopen, archive.org, IMSLP, NASA/US federal archives — verify BOTH composition and performance PD/CC0, or CC-BY + attribution). Never MIDI/synth. `assets/music/` + credits; trim/fade/sidechain-duck under VO (−6…−8 dB, anchor ≈−14.5 LUFS, TP ≤ −0.9 dBTP); **never two beds** (classical asset retires drone). `mixVoWithBus(...,{path,trimTo:T.DUR,gain,fadeIn,fadeOut})`.
+- **LAW 1b MUSIC**: real classical recordings from open public-domain/openly-licensed sources only (Wikimedia Commons, Openverse, Musopen, archive.org, IMSLP, NASA/US federal archives — verify BOTH composition and performance PD/CC0, or CC-BY + attribution). Never MIDI/synth. `assets/music/` + credits; trim/fade/sidechain-duck under VO (−6…−8 dB, anchor ≈−14.5 LUFS, TP ≤ −0.9 dBTP); **never two beds** (classical asset retires drone). `mixVoWithBus(...,{path,trimTo:T.DUR,gain,fadeIn,fadeOut,trimLead:true})` — the bed must be **audible from second 0** (trimLead skips leading silence; verify no ≥0.3 s run at −38 dB at open).
 - **LAW 2**: duration = VO duration (`T.FRAMES = round(T.DUR*FPS)`).
 - **LAW 3 FINAL-FILE LAW** (after every build/publish): probe every `out/part_*.mp4` before concat (ffmpeg `-c copy` fails silently on corrupt/moov-missing parts — delete+re-render); verify published MP4 numerically: `nb_read_frames == T.FRAMES±1`, video duration == audio duration.
   ```bash
   ffprobe -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames,duration -of default=noprint_wrappers=1 public/film/<slug>.mp4
   ffprobe -v error -select_streams a:0 -show_entries stream=duration -of default=noprint_wrappers=1 public/film/<slug>.mp4
   ```
-- **LAW 4 safe area**: no text/element clips viewport on any beat/camera pose; sweep `bun render.mjs still <t> --scale 4`.
+- **LAW 4 safe area**: no text/element clips viewport on any beat/camera pose; sweep every 0.25 s: `bun studio/tools/safearea.mjs --world studio/projects/<slug>/world.mjs --timings studio/projects/<slug>/timings.mjs` (exit 1 on breach); supplement with `bun render.mjs still <t> --scale 4` per beat. Prints must **fade in situ** — drop-in entries cross the top safe band.
 - **LAW 5 nothing floats**: attached parts root inside silhouette, joint covered.
 - **LAW 6 no stroke crosses type**: underline/circle below last line, >=40px clearance, timed after text stamps in; retime stroke, not text.
 - **LAW 7 publish hygiene**: zip hand-off excludes models/caches/chunks/.env; rebuild after source changes; `public/film/<slug>.mp4` is canonical.
 - **LAW 8 craft**: every BEATS.md row is a complete shot card (intent/shot/move/grid/hero/text-clearance/cues/assets); thirds/phi framing; no text collisions at any frame/pose; still sweep + `--scale 4` crops per beat; binding manual `.agents/skills/cinematic-motion-graphics/SKILL.md`.
+- **LAW 9 external source law**: every film MUST contain ≥1 real, licensed external asset in-frame (photo/clip/archival; human author; PD/CC0/CC-BY-with-attribution or free-stock licenses) — a film with zero source material FAILS. Name it in the beat's Assets cell; credits-CSV row mandatory; grade-match/composite so the paper world stays the house identity.
 
 ## Workflow (new/fix film)
 1. Brief + beat table: `PROJECT.md`, `BEATS.md` — every BEATS row is a full **shot card** (LAW 8); load `.agents/skills/cinematic-motion-graphics/SKILL.md` for craft rules (framing grids, shot sizes, easing, typography, color script, QC loop).
 2. VO canonical: `assets/vo.m4a` + `assets/timings.json` (or Kokoro + timestamps if none supplied). VO without supplied narration: `python studio/tools/tts/kokoro.py --text "…" --out assets/vo.m4a [--voice am_michael]` (local Kokoro-82M, offline, Apache-2.0; verified). ASR/STT verify/fallback (word-level): `node studio/tools/asr/transcribe.mjs assets/vo.m4a --out assets/vo-timings.whisper.json` (JS: @huggingface/transformers + onnx; model Xenova/whisper-tiny.en auto-downloads to `models/whisper/` on first run).
 3. `timings.mjs`: single clock `T` (scenes, fades, camera Catmull-Rom rail). Picture+SFX import `T`.
-4. `world.mjs`: draw zones on 20kpx paper board with engine props/cast/ink/text; zone dim-backs; `globalAlpha` multiplied. Use `drawPrint(loadImage(...))` for sourced props. Cast presets & thirds/phi anchors: `engine/presets.mjs` (CAST_PRESETS, THIRDS, PHI_GRID).
+4. `world.mjs`: draw zones on 20kpx paper board with engine props/cast/ink/text; zone dim-backs; `globalAlpha` multiplied. Use `drawPrint(loadImage(...))` for sourced props — prints **fade in situ** (`alpha: clamp((t - t0)/0.6, 0, 1)`), never `drop:` entries that cross the top safe band. Cast presets & thirds/phi anchors: `engine/presets.mjs` (CAST_PRESETS, THIRDS, PHI_GRID).
 5. `sfx-plan.mjs`: events at `T` times; `musicBed()` returns PD/CC0 bed or `null`.
-6. QC stills at every beat + transitions, at pose and at text entry/exit frames: `bun render.mjs stills 0.5,... --scale 4` (LAW 4/5/6/8). Collision scan + plate-contrast check per bible §5/§9. Fix world/layout/camera/underline timing.
+6. QC stills at every beat + transitions, at pose and at text entry/exit frames: `bun render.mjs stills 0.5,... --scale 4` (LAW 4/5/6/8) **plus the LAW 4 sweep** `bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs` (must report `SAFE AREA OK`). Collision scan + plate-contrast check per bible §5/§9. Fix world/layout/camera/underline timing (never accept "it only clips for a moment").
 7. Build/publish (project dir): `bun render.mjs chunk <s> <e>` sequentially if needed (cinematic defaults: `filmGrade('documentary-grade')` in scaffolded projects, `quality: 'master'` crf 16, lookahead ≤ 20); probe parts; `bun audio.mjs`; `bun build.mjs` (or `--no-video`). Confirm `FINAL-FILE LAW ok`.
-8. Audio QC: LUFS ~ -14.5 area, TP <= -0.9 dBTP, bed ducked. Credits CSV complete. Update `studio/PROJECTS.md` and `src/lib/films.ts` (film manifest). Commit.
+8. Audio QC: LUFS ~ -14.5 area, TP <= -0.9 dBTP, bed ducked **and audible from 0:00 (no leading silence ≥0.3 s at −38 dB; verify with ebur128/silencedetect)**. Credits CSV complete (≥1 external asset row — LAW 9). Update `studio/PROJECTS.md` and `src/lib/films.ts` (film manifest). Commit.
 
 ## Internet clip sourcing (LAW 1)
 - `studio/ASSETS-AND-CLIPS.md` and `studio/engine/clips.mjs`:

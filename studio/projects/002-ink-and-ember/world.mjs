@@ -1,12 +1,21 @@
 // world.mjs — Ink & Ember: the board. 4000px of ink-black history drifting by
 // behind four beats. House ink style; every stroke boils, every alpha multiplies.
 import { INK, RED, FONT, clamp, lerp, easeInQuart, easeOutQuart, hash } from '../../engine/style.mjs';
-import { drawPaper, roundRect } from '../../engine/props.mjs';
+import { drawPaper, drawPrint, roundRect } from '../../engine/props.mjs';
 import { handStroke, handCircle } from '../../engine/ink.mjs';
 import { stampText, typewriter, maskUpText } from '../../engine/text.mjs';
 import { stickman } from '../../engine/characters.mjs';
 import { ping } from '../../engine/characters.mjs';
 import { T } from './timings.mjs';
+
+// ── real museum artifacts as physical printed props (LAW 1 / LAW 9) ───────
+const ASSET_DIR = new URL('./assets/clips/', import.meta.url);
+let IMG_INKCAKE = null, IMG_BIBLE = null;
+{
+  const { loadImage } = await import('../../engine/props.mjs');
+  IMG_INKCAKE = await loadImage(new URL('ink_cake_cma.jpg', ASSET_DIR));
+  IMG_BIBLE = await loadImage(new URL('gutenberg_page_ransom.jpg', ASSET_DIR));
+}
 
 const S = T.scenes;
 const REDF = '#b3341f';
@@ -192,31 +201,35 @@ export function drawWorld(ctx, t) {
 
   // ── ZONE B · china ───────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 3.4, 10.3, 0.55, 0); // China exits completely — clipped ghost slivers at frame edge were a defect
+    const a = zoneAlpha(t, 3.4, 8.2, 0.55, 0); // China dissolves during the transit (voice is done ~7.5) — a full-ink ghost at the left margin was a defect
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      stickman(ctx, 1400, 640, { h: 250, pose: 'stand', t, progress: clamp((t - 3.55) / 1.6) });
-      mortar(ctx, 1795, 585, t);
-      soot(ctx, 1795, 560, t);
-      inkStick(ctx, 1795, 470, t, 5.5);
-      const textA = clamp(1 - Math.max(0, t - 9.0) / 0.8, 0, 1); // text leaves its window before the camera does (LAW 4)
-      if (textA > 0.01) typewriter(ctx, 1760, 738, 'PINE SOOT + GLUE', { size: 44, t0: 6.35, t, cps: 18, font: FONT.serif, alpha: textA });
+      stickman(ctx, 1520, 640, { h: 250, pose: 'stand', t, progress: clamp((t - 3.55) / 1.6) });
+      mortar(ctx, 1915, 585, t);
+      soot(ctx, 1915, 560, t);
+      inkStick(ctx, 1915, 470, t, 5.5);
+      // real artifact — Qing-dynasty ink cake (Cleveland Museum of Art, CC0) as a physical print, left-third, above the scribe
+      drawPrint(ctx, IMG_INKCAKE, 1135, 300, { w: 320, rot: -0.018, alpha: clamp((t - 4.2) / 0.6, 0, 1) * clamp((7.6 - t) / 0.7, 0, 1) });
+      const textA = clamp(1 - Math.max(0, t - 7.3) / 0.6, 0, 1); // gone by ~7.9, before the move can seat it in the safe band
+      if (textA > 0.01) typewriter(ctx, 2255, 620, 'PINE SOOT + GLUE', { size: 40, t0: 6.35, t, cps: 18, font: FONT.serif, alpha: textA });
       ctx.restore();
     }
   }
 
   // ── ZONE C · gutenberg ───────────────────────────────────────
   {
-    const a = zoneAlpha(t, 8.8, 19.6, 0.7, 0.16);
+    const a = zoneAlpha(t, 8.8, 15.9, 0.6, 0); // dissolve must clear before the rightward transit seats the plate in the left safe band (~17.0) — gone by ~17.0 (LAW 4)
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
       pressSheet(ctx, 2580, 400, t);
-      typeCase(ctx, 2580, 155, t);
-      stampText(ctx, 2310, 692, '1440.', { size: 132, t0: 10.85, t, color: INK, rot: 0.015 });
+      typeCase(ctx, 2580, 182, t); // top edge 72px — clear of the 60px safe margin
+      // real artifact — Gutenberg Bible leaf (Harry Ransom Center scan, PD) as a physical print, right-third; drops in as VO says "Gutenberg Bible" (16.34–17.26)
+      drawPrint(ctx, IMG_BIBLE, 3220, 300, { w: 270, rot: 0.016, alpha: clamp((t - 12.1) / 0.6, 0, 1) });
+      stampText(ctx, 2310, 678, '1440.', { size: 132, t0: 10.85, t, color: INK, rot: 0.015 });
       typewriter(ctx, 2580, 262, 'MOVABLE TYPE', { size: 30, t0: 13.0, t, cps: 22, font: FONT.serif });
-      stampText(ctx, 2870, 692, '1455.', { size: 132, t0: 14.95, t, color: REDF, rot: -0.018 });
+      stampText(ctx, 2870, 678, '1455.', { size: 132, t0: 14.95, t, color: REDF, rot: -0.018 });
       ctx.restore();
     }
   }

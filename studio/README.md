@@ -1,6 +1,6 @@
 # studio/ — the Opuscar film factory
 
-A **topic-agnostic, code-drawn film studio**. One repo holds many films; each film is one folder under `projects/`. Frames are composited frame-by-frame by a canvas program (`@napi-rs/canvas` under Bun) and encoded to MP4 — never AI-generated media; licensed, real (non-AI) stock images/video/clips are allowed as grade-matched plates, B-roll or printed props (LAW 1). Sound is synthesized SFX + real public-domain/openly-licensed classical recordings from open public-data sources, mixed against the voiceover (LAW 1b). The operating manual (hard laws) lives in `AGENTS.md` at the repo root — read it first; it wins over anything here.
+A **topic-agnostic, code-drawn film studio**. One repo holds many films; each film is one folder under `projects/`. Frames are composited frame-by-frame by a canvas program (`@napi-rs/canvas` under Bun) and encoded to MP4 — never AI-generated media; licensed, real (non-AI) stock images/video/clips are allowed as grade-matched plates, B-roll or printed props (LAW 1) — and **at least one such external asset is mandatory in every film (LAW 9)**; a film with zero source assets is a failure. Sound is synthesized SFX + real public-domain/openly-licensed classical recordings from open public-data sources, mixed against the voiceover (LAW 1b). The operating manual (hard laws) lives in `AGENTS.md` at the repo root — read it first; it wins over anything here.
 
 ## Repo map
 
@@ -11,12 +11,13 @@ studio/
 ├── PROJECTS.md          ← index of films (delivered / in production / ideas)
 ├── new.sh               ← bash studio/new.sh <slug> "<Title>" → scaffold film #002+
 ├── assets/fonts/        ← house fonts (best-effort downloads; graceful fallbacks)
+├── tools/               ← asr (whisper) · tts (kokoro) · ddg (DDG search) · rotoscope · safearea (LAW 4 sweep)
 ├── engine/              ← TOPIC-AGNOSTIC toolchain (imports nothing from projects/)
 │   ├── style.mjs        palette / fonts / math / deterministic RNG
 │   ├── camera.mjs       Catmull-Rom camera rail + handheld noise
 │   ├── ink.mjs          the boil (8fps) + hand strokes/circles/arrows
 │   ├── text.mjs         stamps / mask-ups / typewriter
-│   ├── props.mjs        laid-paper world, photo prints, note cards
+│   ├── props.mjs        two-axis-grid paper world, photo prints, note cards
 │   ├── characters.mjs   the cast: stickman, Holstein cow, DNA helix, spread map
 │   ├── grade.mjs        vignette / grain / fades
 │   ├── compose.mjs      frame pipeline (motion blur, grade) + render CLI (--preset/--quality)
@@ -59,33 +60,36 @@ cp /path/to/timings.json assets/timings.json
 
 # 7. score it: sfx-plan.mjs reads the same clock T — SFX can never drift
 
-# 8. QC stills (LAW 4 sweep), then build
+# 8. QC stills + LAW 4 safe-area sweep, then build
 bun render.mjs stills 0.5,2.0,6.5,12.0,18.0,24.0,28.0,31.5 --scale 4
+bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs   # must print SAFE AREA OK (exit 0)
 bun build.mjs
 ```
 
 ## The music stage
 
-Background music is **always real classical music from open public-domain / openly-licensed sources** (MUSIC LAW): actual recordings — not MIDI, not synth — composition **and** performance Public Domain or CC0 (or CC-BY with attribution). Sourced from open public data: Wikimedia Commons, Openverse, Musopen, archive.org PD collections, IMSLP (verify each recording's license page), NASA/US federal archives. Drop the file into `assets/music/`, add a credits row, and set `musicBed()` in `sfx-plan.mjs` to return `{ path, trimTo: T.DUR, gain, fadeIn, fadeOut }`. The mix stage trims, fades and sidechain-ducks it under the VO (≈6–8 dB). **Never two beds:** when a classical asset exists, the synth drone fallback is retired for that film. Project 001's Satie bed was lost in the wipe — see `projects/001-.../assets/music/README.md`.
+Background music is **always real classical music from open public-domain / openly-licensed sources** (MUSIC LAW): actual recordings — not MIDI, not synth — composition **and** performance Public Domain or CC0 (or CC-BY with attribution). Sourced from open public data: Wikimedia Commons, Openverse, Musopen, archive.org PD collections, IMSLP (verify each recording's license page), NASA/US federal archives. Drop the file into `assets/music/`, add a credits row, and set `musicBed()` in `sfx-plan.mjs` to return `{ path, trimTo: T.DUR, gain, fadeIn, fadeOut, trimLead: true }`. The mix stage trims (including any leading silence), fades and sidechain-ducks it under the VO (≈6–8 dB) — **the bed must be audible from second 0** (verify no ≥0.3 s run at −38 dB at open). **Never two beds:** when a classical asset exists, the synth drone fallback is retired for that film. Project 001's Satie bed was lost in the wipe — see `projects/001-.../assets/music/README.md`.
 
 ## Sourcing photos/clips from the internet (LAW 1)
 
-See `ASSETS-AND-CLIPS.md`. `bun studio/engine/clips.mjs` searches/fetches via Wikimedia Commons (no key), Pexels (`PEXELS_API_KEY`), or direct licensed URLs into `assets/clips/` with `manifest.json` + a CSV row — **review and append to `assets-credits.csv` manually**. For Mixkit/Coverr/Videvo/manual pages, use `.agents/skills/get-image` + `.agents/skills/agent-browser` to obtain the final licensed URL, then `clips.mjs fetch url`. Sourced media may enter as **printed props**, **grade-matched full-frame plates / B-roll** (ffmpeg frame extraction → `drawImage` in the beat window — see the bible `.agents/skills/cinematic-motion-graphics/SKILL.md` §4/§8), or documented assets. Never raw, ungraded, uncredited stock; never AI-generated media.
+**Every film MUST ship with at least one licensed real (non-AI) external asset in-frame (LAW 9)** — verify this before sign-off. See `ASSETS-AND-CLIPS.md`. `bun studio/engine/clips.mjs` searches/fetches via Wikimedia Commons (no key), Pexels (`PEXELS_API_KEY`), or direct licensed URLs into `assets/clips/` with `manifest.json` + a CSV row — **review and append to `assets-credits.csv` manually**. For Mixkit/Coverr/Videvo/manual pages, use `.agents/skills/get-image` + `.agents/skills/agent-browser` to obtain the final licensed URL, then `clips.mjs fetch url`. Sourced media may enter as **printed props**, **grade-matched full-frame plates / B-roll** (ffmpeg frame extraction → `drawImage` in the beat window — see the bible `.agents/skills/cinematic-motion-graphics/SKILL.md` §4/§8), or documented assets. Never raw, ungraded, uncredited stock; never AI-generated media.
 
 ## QC checklist (per AGENTS.md)
 
 - [ ] **Still sweep** at every beat **at pose and at text entry/exit frames**: `bun render.mjs still <t>` — nothing beheaded, nothing spilling, no text collisions (LAW 4/6/8).
 - [ ] **Shot cards complete** in `BEATS.md` for every beat (intent/shot/move/grid/hero/text/cues/assets).
 - [ ] **Zoom crops** on characters/underlines: nothing floats (LAW 5), no stroke crosses type (LAW 6).
+- [ ] **LAW 4 safe-area sweep**: `bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs` prints `SAFE AREA OK` (exit 0).
+- [ ] **LAW 9 source-asset gate**: ≥1 real licensed external asset in-frame; credits-CSV rows present.
 - [ ] `bun build.mjs` prints `FINAL-FILE LAW ok` (frames + both stream durations, LAW 3).
-- [ ] Audio QC: mix ≈ −14.5 LUFS area, TP ≤ −0.9 dBTP, bed audibly ducked.
+- [ ] Audio QC: mix ≈ −14.5 LUFS area, TP ≤ −0.9 dBTP, bed audibly ducked **and audible from 0:00 (no leading silence ≥0.3 s at −38 dB)**.
 - [ ] Credits CSV complete; zip rebuilt per LAW 7; git commit.
 
 ## House style rules (the short list)
 
 1. **The boil** — every hand line jitters ±2.4px / ±0.002rad, quantized to 8 fps; hashed from world coordinates (deterministic, order-independent). Never shimmer.
-2. **Paper has character** — laid paper everywhere: fiber grain, blotches, world-aligned rules every 118px bowed on a fixed lattice (lines never crawl under the camera).
-3. **Safe area** — titles/captions keep ≥60px from viewport edges at every camera pose (LAW 4). Check with still sweeps, never "it only clips for a moment".
+2. **Paper has character** — laid paper with a **subtle two-axis grid**: laid rules (horizontal, α≈0.05) + chain lines (vertical, α≈0.04), 118px, bowed on a fixed lattice (lines never crawl under the camera).
+3. **Safe area** — titles/captions/hero art keep ≥60px from viewport edges at every camera pose (LAW 4). Check with `bun studio/tools/safearea.mjs` (exit 1 on breach), never "it only clips for a moment".
 4. **Nothing floats** — attached parts root inside the silhouette; the joint is covered by body fill (LAW 5).
 5. **No stroke crosses type** — underlines go below the last line, ≥40px clearance, timed to land after the text (LAW 6).
 6. **Single clock** — `timings.mjs` is the only timing truth; world and sfx-plan both import it.

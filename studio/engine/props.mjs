@@ -1,7 +1,8 @@
 // props.mjs — the paper world and physical photo props.
-// drawPaper lays the 20,000px board: PAPER base, fiber grain, blotches and
-// LAID RULES (118px spacing, α≈0.05, bowed on a fixed world lattice so lines
-// NEVER crawl as the camera moves). Photo prints drop in with overshoot
+// drawPaper lays the 20,000px board: PAPER base, fiber grain, blotches and a
+// SUBTLE TWO-AXIS GRID — laid rules (horizontal, 118px, α≈0.05) + chain lines
+// (vertical, 118px, α≈0.04), both bowed on a fixed world lattice so lines
+// NEVER crawl as the camera moves. Photo prints drop in with overshoot
 // bounce physics. All alphas MULTIPLY inherited globalAlpha.
 //
 // Performance: the compositor calls setPaperView() with the visible world
@@ -21,10 +22,11 @@ function inView(x, y, pad = MARGIN) {
   return x > v.x - pad && x < v.x + v.w + pad && y > v.y - pad && y < v.y + v.h + pad;
 }
 
-// ── LAID RULES: fixed world lattice ───────────────────────────────────────
+// ── GRID (laid rules + chain lines): fixed world lattice ─────────────────
 export const RULE_SPACING = 118;
-// Bow of one laid rule at world x, for rule index i — fixed lattice: control
-// points every 900px, phase seeded by hash(lineIndex). Camera-independent.
+// Bow of one grid line at sample position, for line index i — fixed lattice:
+// control points every 900px, phase seeded by hash(lineIndex). Camera-independent.
+// Used for both laid rules (y0 is the rule's y) and chain lines (x0 is the line's x).
 function ruleY(y0, x, i) {
   const cp = 900;
   const x0 = Math.floor(x / cp) * cp;
@@ -35,7 +37,8 @@ function ruleY(y0, x, i) {
 }
 
 // drawPaper — the world board. Fibers are short α≈0.03 strokes on a hashed
-// lattice; blotches are radial gradients at α≈0.02–0.04; rules every 118px.
+// lattice; blotches are radial gradients at α≈0.02–0.04; subtle two-axis grid
+// (laid rules + chain lines) every 118px.
 export function drawPaper(ctx, x, y, w, h, seed = 7) {
   // 1) base
   ctx.fillStyle = PAPER;
@@ -109,6 +112,25 @@ export function drawPaper(ctx, x, y, w, h, seed = 7) {
     for (let px = Math.max(x, vx0); px <= Math.min(x + w, vx1); px += step) {
       const py = ruleY(y0, px, i);
       if (px === Math.max(x, vx0)) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+  }
+  // 5) chain lines — vertical counterpart of the laid rules (two-axis grid)
+  ctx.strokeStyle = INK;
+  ctx.lineWidth = 2;
+  const j0 = Math.ceil((paperView ? Math.max(x, paperView.x - MARGIN) : x) / RULE_SPACING) - 1;
+  const j1 = Math.floor((paperView ? Math.min(x + w, paperView.x + paperView.w + MARGIN) : x + w) / RULE_SPACING) + 1;
+  const vy0 = paperView ? paperView.y - MARGIN : y;
+  const vy1 = paperView ? paperView.y + paperView.h + MARGIN : y + h;
+  const step5 = 450;
+  for (let j = j0; j <= j1; j++) {
+    const x0 = j * RULE_SPACING;
+    if (x0 < x || x0 > x + w) continue;
+    ctx.globalAlpha = baseA * 0.04;
+    ctx.beginPath();
+    for (let py = Math.max(y, vy0); py <= Math.min(y + h, vy1); py += step5) {
+      const px = ruleY(x0, py, j); // same lattice bow, applied to x
+      if (py === Math.max(y, vy0)) ctx.moveTo(px, py); else ctx.lineTo(px, py);
     }
     ctx.stroke();
   }

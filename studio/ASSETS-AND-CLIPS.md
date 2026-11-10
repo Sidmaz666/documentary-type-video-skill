@@ -1,5 +1,7 @@
 # Assets & Internet Clip Sourcing (LAW 1 compliant)
 
+> **LAW 9 — External Source Law:** every film MUST contain **at least one** real, licensed external asset in-frame (photo/clip/archival). A film with zero external source material is a **failure**. Source below, credit everything, grade-match, composite — see repo `AGENTS.md` §LAW 9 and Definition of Done gate 4b.
+
 Opuscar films ban **AI-generated media** outright (LAW 1). Licensed, real
 (non-AI) stock images and video **are** allowed in the timeline — as physical
 printed props/cards (`drawPrint`/`noteCard`), as **grade-matched full-frame
@@ -47,9 +49,13 @@ Use the repo skills in `.agents/skills/` (get-image, agent-browser):
 
 ```js
 import { drawPrint, loadImage } from '../../engine/props.mjs';
+import { clamp } from '../../engine/style.mjs';
 const img = await loadImage(new URL('./assets/clips/aurochs.jpg', import.meta.url));
-drawPrint(ctx, img, 2200, 1120, { w: 1320, t0: S.hook + 1.2, t, rot: -0.01 });
+// LAW 4: prints must fade in SITU — a drop-in crosses the top safe band and fails safearea.mjs
+drawPrint(ctx, img, 2200, 1120, { w: 1320, rot: -0.01, alpha: clamp((t - S.hook - 1.2) / 0.6, 0, 1) });
 ```
+
+Never let a print travel through the 60px safe band (no `drop:` entries for prints that start above the board edge); the `bun studio/tools/safearea.mjs` sweep fails on any ink-like pixel in the band.
 
 ## Using a sourced clip/photo as a full-frame plate or B-roll
 

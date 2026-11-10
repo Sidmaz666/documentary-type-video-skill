@@ -35,6 +35,6 @@ export function sfxEvents() {
 export function musicBed() {
   return {
     path: join(HERE, 'assets', 'music', 'gymnopedie_no1.ogg'),
-    trimTo: T.DUR, gain: 0.44, fadeIn: 0.8, fadeOut: 2.0,
+    trimTo: T.DUR, gain: 0.78, fadeIn: 0.5, fadeOut: 2.0, trimLead: true, // bed must enter audibly — no silent open
   };
 }

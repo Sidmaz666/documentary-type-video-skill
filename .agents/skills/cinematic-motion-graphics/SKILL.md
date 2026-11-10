@@ -42,9 +42,10 @@ Grid anchors are **viewport coordinates at the beat's camera pose**, not world c
 
 ### 1.1 Frame formats & safe areas
 - House master: **3840×1646 (21:9)** or 1920×1080 (16:9); 9:16 vertical re-frame centers the subject, never letterbox-pads.
-- **Action-safe** ≈ inner 90–93% · **title-safe** ≈ inner 80%. House hard law (LAW 4): titles/captions keep **≥60px** from every viewport edge at every camera pose, every beat.
+- **Action-safe** ≈ inner 90–93% · **title-safe** ≈ inner 80%. House hard law (LAW 4): titles/captions/hero art keep **≥60px** from every viewport edge at every camera pose, every beat. Enforcement sweep: `bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs` (renders stills every 0.25 s, exits 1 on any ink-like pixel in the outer band). Prints/props must **fade in situ** (`alpha:`), never drop across the band (LAW 4; learned in 002).
 - Letterboxing (2.39:1 bars) is a style choice, never a hiding place for violations — check safe areas against the *visible* frame.
 - Horizon and eyelines are compositional elements: place them deliberately, never "wherever they landed".
+- House paper world carries a **subtle two-axis grid** — laid rules (horizontal, α≈0.05) + chain lines (vertical, α≈0.04), 118px, bowed on a fixed world lattice (`drawPaper` in `engine/props.mjs`). Thin enough to never compete with heroes, structured enough to read as designed — treat it as a feature of the frame, never a distraction (LAW 4 spacing still rules: grids are < α 0.1, ink-legal paper texture, never counted as safe-band violations).
 
 ### 1.2 Rule of thirds
 - Divide the frame into 3×3; power points at the four intersections (≈ 1/3, 2/3).
@@ -337,12 +338,13 @@ House identity is the paper world. Pre-drawn in code: all type, diagrams, charts
 
 Before any build, for **every** beat:
 1. `bun render.mjs stills <t1,t2,...>` — one still per beat **plus one at pose ±0.5s** and at every text-layer entry/exit frame.
+1a. LAW 4 enforcement: `bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs` — must report `SAFE AREA OK` (exit 0); exit 1 = breach, fix and re-run.
 2. At each still: grid overlay check (if available) or thirds/phi mental overlay; collision scan (§5.4); behead check (LAW 4); stroke-through-type check (LAW 6); floats check — attached parts rooted (LAW 5).
 3. Zoom crops (`--scale 4`) on: every text block; every stamp; every print edge; every joint.
 4. Sample the plate under each caption → compute contrast ≥4.5:1.
 5. Fail = fix world/layout/rail/timing. Never accept "it only clips for a moment".
 
-Beat is QC-clean when: card complete (§0) → stills pass (§9.1–4) → LAW sweep clean → credits CSV rows exist for everything external → SFX/music cues mapped to the same clock `T`.
+Beat is QC-clean when: card complete (§0) → stills pass (§9.1–4) + safearea sweep OK → **≥1 real licensed external asset in-frame somewhere in the film (LAW 9)** → credits CSV rows exist for everything external → SFX/music cues mapped to the same clock `T`.
 
 ---
 
@@ -386,3 +388,4 @@ Plus the existing Texture & motion feel section (boil, paper, rail, safe-area, L
 | LAW 6 (no stroke crosses type) | §3.4, §5.4 |
 | LAW 7 (publish/zip hygiene) | repo ops, not craft — see `AGENTS.md` |
 | LAW 8 (frame/beat craft; no text collisions) | §0–§6, §9, §10 |
+| LAW 9 (external source assets mandatory) | §8, §9, §4 |

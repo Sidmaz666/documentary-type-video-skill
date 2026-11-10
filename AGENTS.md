@@ -14,6 +14,7 @@ studio/
 ├── ASSETS-AND-CLIPS.md  ← internet clip/photo sourcing (MediaWiki/Pexels/direct) + LAW 1
 ├── PROJECTS.md          ← index of every video idea (delivered / in production / ideas)
 ├── new.sh               ← bash studio/new.sh <slug> "<Title>" → scaffolds the next project
+├── tools/               ← asr (whisper ASR) · tts (kokoro) · ddg (search) · rotoscope · safearea (LAW 4 sweep)
 ├── engine/              ← TOPIC-AGNOSTIC toolchain (imports nothing from projects, ever)
 │   ├── style.mjs        house palette / fonts / math helpers
 │   ├── camera.mjs       one-continuous-move camera rig (Catmull-Rom rail)
@@ -55,6 +56,7 @@ public/film/             published MP4s (canonical artifacts)
 ## 2 · Hard laws
 
 ### LAW 1 — No AI-generated media; licensed real stock IS allowed
+**Mandatory:** every film MUST contain at least one real, licensed external asset in-frame — see LAW 9.
 **Banned forever:** AI-generated or synthesized video, images, voices and music — even if labeled "free"/CC0. No scraped/ripped third-party video. No uncredited media of any kind.
 
 **Allowed (real, licensed, documented):** stock images, stock video and B-roll clips, archival footage, photos — anything shot/drawn by a human, under a license that permits our use (PD, CC0, CC-BY with attribution, or Pexels/Pixabay/Unsplash/Mixkit/Coverr-style free licenses, or paid stock with the license on file). They may enter the timeline in three ways:
@@ -95,7 +97,7 @@ ffprobe -v error -select_streams a:0 \
 - Historical incident: project 001 once shipped with 244 frames of picture under 32.5 s of audio because of exactly this. This law exists because of that.
 
 ### LAW 4 — Safe-Area Law (framing)
-No text or bottom element may touch or spill past the viewport edges, on ANY keyframe, during ANY camera pose. Titles keep minimum clearance from the top edge; bottom captions/underlines keep minimum clearance from the bottom edge. The audit command is `bun render.mjs still <t>` swept across every beat — if an element beheads or clips at any t, fix the world layout or re-time the camera rail; never accept "it only clips for a moment."
+No text or bottom element may touch or spill past the viewport edges, on ANY keyframe, during ANY camera pose. Titles keep minimum clearance from the top edge; bottom captions/underlines keep minimum clearance from the bottom edge. The audit command is `bun studio/tools/safearea.mjs --world studio/projects/<slug>/world.mjs --timings studio/projects/<slug>/timings.mjs` (renders stills every 0.25 s, FAILS on any ink-like pixel in the outer 60-design-px band, exit 1) plus `bun render.mjs still <t>` swept across every beat — if an element beheads or clips at any t, fix the world layout or re-time the camera rail; never accept "it only clips for a moment." Prints/props must **fade in situ** — drop-in entries cross the top band and fail the sweep (learned in 002).
 
 ### LAW 5 — Nothing floats
 Attached parts (tails, ears, limbs) must root **inside** the silhouette they belong to; the root joint is covered by the body fill. A floating tail was a shipped defect once; it is now a banned defect.
@@ -109,18 +111,21 @@ The zip/archive handed off must contain only what the project needs. Exclude nod
 ### LAW 8 — Frame/beat craft & zero text collisions
 Every beat in `BEATS.md` carries a complete **shot card** (intent, shot size, angle, camera move + easing, composition-grid anchor, hero, text layers with clearances, transition, cues, assets). Every frame must honor the cinematographer grammar (rule of thirds / phi grid / leading lines / headroom / nose room / lead room), the motion grammar (Disney staging, slow in/out, arcs, follow-through, easing discipline), and the layout law — **no text may overlap any other text, hero art, stroke, or the viewport edge, at any frame, in any camera pose**. QC is by still sweep at every beat at pose (±0.5 s) and at every text entry/exit frame, with `--scale 4` crops on each text block. The full bible, binding for all projects: `.agents/skills/cinematic-motion-graphics/SKILL.md`. A beat with an incomplete shot card is not rendered (LAW 8).
 
+### LAW 9 — External Source Law (source assets are mandatory)
+Every film MUST contain **at least one real, licensed external asset in-frame** — a photo/clip/plate/archival still from a human author under a license permitting our use (PD, CC0, CC-BY with attribution, or the usual free-stock licenses), placed as a **printed prop**, a **grade-matched full-frame plate/B-roll**, or a documented asset — with a row in `assets/assets-credits.csv` (license, author, source URL). A film whose timeline contains zero external source material is a **failure**, regardless of polish. Source via `studio/engine/clips.mjs` + the get-image catalog; verify licenses there; composite so the paper world stays the house identity (never majority-stock; grade-match, contact shadow, film grain, safe-area compliant). 001 uses PD/CC-BY/Unsplash/Pexels prints; 002 uses a CC0 Cleveland Museum ink cake and a PD Gutenberg Bible leaf. (001 predates this law and was delivered before it — new films are not exempt.)
+
 ---
 
 ## 3 · Conventions
 
 - **Single clock T.** `studio/projects/<slug>/timings.mjs` is the only source of timing truth. Picture (world/zones) and sound (sfx-plan) both import the same clock, so SFX can never drift from picture. Re-timing the film = editing one file, then re-render + re-mix.
 - **The boil.** Hand-drawn wobble on strokes/text/cast: jitter quantized to 8 fps steps (pencil-test feel, never shimmer), hashed from world coordinates (byte-deterministic, order-independent), magnitudes ±2.4px / ±0.002rad. Every stroke helper multiplies inherited `globalAlpha` (never assigns absolute alpha) so zone dim-backs survive.
-- **Paper has character.** The 20,000px world board is laid paper: fiber grain, blotches, and faint world-aligned rules (118px spacing, α≈0.05, gently bowed on a fixed lattice so lines never crawl as the camera moves).
+- **Paper has character.** The board is laid paper with a **subtle two-axis grid**: laid rules (horizontal, 118px, α≈0.05) + chain lines (vertical, 118px, α≈0.04), fiber grain, blotches — bowed on a fixed world lattice so lines never crawl as the camera moves.
 - **Camera.** One continuous Catmull-Rom spline move for the whole film (C1-continuous — it never stops dead; holds keep drifting toward the next move). Handheld noise is damped during fast pushes. Temporal motion blur: sub-samples at 1/90s spacing (looser spacing ghosts structure during fast travel — banned).
 - **Zone dim-backs.** When the camera leaves a zone, the zone dims back instead of lingering at full ink. Old heroes must never bleed into the next beat's frame.
 - **Maps & geospatial plates (optional).** When a beat needs REAL geography (not the ink spreadMap), use the open-source **leafmap** (MIT) via `.agents/skills/leafmap/SKILL.md` — render to a graded plate/print, Natural Earth (PD) for ink-style redraws, NASA GIBS/USGS/NOAA for Earth-science imagery, mandatory attribution end-card when required; credits CSV rows always (LAW 1).
 - **Presets.** `studio/engine/presets.mjs` is the single home for cinematic looks: `FILM_PRESETS` (`paper-storybook` house default, `documentary-grade` warm/cool Netflix-doc, `archival-essay`, `night-essay`), `VIDEO_PRESETS` (`master` crf 16 / `web` crf 19 / `qc`; x264 lookahead always ≤ 20 — OOM law), `CAST_PRESETS`, `CAMERA_PRESETS`, `THIRDS`/`PHI_GRID` anchors. All projects should resolve looks through presets, not ad-hoc constants.
-- **Cinematic framing (LAW 8).** `BEATS.md` rows are **shot cards** (intent, shot size/angle, camera move + easing, grid anchor, hero, text clearances, cues, assets) — the creative contract, per beat. Compose on thirds/phi grids; one hero; one idea; ≥60px safe area; no text collisions (bible §5.4). The binding craft manual is `.agents/skills/cinematic-motion-graphics/SKILL.md` — load it whenever touching `world.mjs`, camera rail, text layout or BEATS.md.
+- **Cinematic framing (LAW 8).** `BEATS.md` rows are **shot cards** (intent, shot size/angle, camera move + easing, grid anchor, hero, text clearances, cues, assets) — the creative contract, per beat. Compose on thirds/phi grids; one hero; one idea; ≥60px safe area; no text collisions (bible §5.4). The binding craft manual is `.agents/skills/cinematic-motion-graphics/SKILL.md` — load it whenever touching `world.mjs`, camera rail, text layout or BEATS.md. Every beat must name its grid anchor and hero in the shot card; heroes sit ON third/phi lines, never dead-center.
 - **Grain is per-run deterministic but order-sensitive.** Same command shape → identical bytes; different command shapes advance the grain RNG differently (documented, not a bug).
 - **Voiceover.** If the user provides narration audio, it is canonical (project 001 uses the user's own `vo.m4a` + `timings.json`). For future projects without supplied audio, generate VO locally with Kokoro (kokoro-82m, calm professional male voice by default — `am_michael`): `python studio/tools/tts/kokoro.py --text "…" --out vo.m4a` (offline ONNX weights in `models/kokoro/`; requires `pip install kokoro-onnx`; verified 2026-11-09; word timings via the ASR tool above). For ASR/STT verification/fallback with **word-level timestamps**, use `node studio/tools/asr/transcribe.mjs <audio> --out vo-timings.whisper.json` (JS: @huggingface/transformers + onnx, model Xenova/whisper-tiny.en auto-downloads to `models/whisper/` on first run).
 - **Credits.** Every external asset (photo, clip, music recording, font) gets a row in the project's `assets/assets-credits.csv` with license and source URL — no exceptions, including CC0.
@@ -139,6 +144,7 @@ Every beat in `BEATS.md` carries a complete **shot card** (intent, shot size, an
 ```bash
 bun render.mjs still <t>          # one QC still at time t (project dir)
 bun render.mjs stills t1,t2,...   # contact sheet
+bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs   # LAW 4 sweep (exit 1 on breach)
 bun render.mjs chunk <start> <end>  # frames [start,end) → out/part_<start>.mp4
 bun audio.mjs                     # rebuild mix.wav (VO + SFX + music bed)
 bun build.mjs                     # concat chunks → mux → publish to public/film/
@@ -152,9 +158,11 @@ bun run lint                      # must be clean before any "done"
 2. **FINAL-FILE LAW** passes on the published MP4 (frames + stream durations).
 3. Browser-verified: page loads, film plays, currentTime advances, zero console errors, footer sticks on desktop and mobile, scrub bar fills.
 4. Defect sweep: QC stills at every beat, zoom-in crops on characters/underlines (Laws 4/5/6).
+4a. **LAW 4 sweep**: `bun studio/tools/safearea.mjs --world … --timings …` reports `SAFE AREA OK` (no ink in the outer 60 design px at any pose).
+4b. **LAW 9 source-asset gate**: ≥1 real licensed external asset in-frame, credits-CSV rows present, attribution composited if the license requires it.
 5. LAW 8 sweep: every beat's shot card complete (intent/shot/move/grid/hero/text/cues/assets); no text collisions at pose or at text entry/exit frames; framing matches the grid declared in BEATS.md (bible §9).
 5a. Claim ledger green: every factual VO claim traced in SOURCES.md (research-sourcing skill) — no failing rows at render time.
-6. Numeric audio QC: mix loudness ≈ VO anchor (−14.5 LUFS area), TP ≤ −0.9 dBTP, bed audibly ducked under speech.
+6. Numeric audio QC: mix loudness ≈ VO anchor (−14.5 LUFS area), TP ≤ −0.9 dBTP, bed audibly ducked under speech, **and the bed is audible from second 0** — no leading silence ≥0.3 s at −38 dB (`mixVoWithBus(..., { trimLead: true })` skips bed pre-silence automatically; verify with ebur128/silencedetect).
 7. Credits CSV complete; zip rebuilt per LAW 7; git commit.
 
 ## 7 · Incident log (do not repeat)
@@ -165,4 +173,7 @@ bun run lint                      # must be clean before any "done"
 - **Viewport spill** — "WE EVOLVED FOR IT." beheaded at the top edge at t=23.5–26.6 → LAW 4.
 - **Zip bloat** — archive reached 146 MB because `studio/models/*` was not excluded → LAW 7.
 - **Sandbox wipe (Nov 2026)** — the sandbox reset erased the working tree and git history. Survivors: the user's `upload/` files, including the delivered film itself. The delivered MP4 of project 001 (`001-the-bravest-snack-in-history.mp4`, 976 frames / 32.533 s) is the **canonical artifact**; it was restored from the user's upload. Lesson: publish early, commit often — a file that exists only in the sandbox does not exist.
+- **Required source assets (Nov 2026)** — user directive: a film with zero external source material is a failure (002 originally shipped picture with no external asset; fixed with a CC0 Cleveland Museum ink-cake print and a PD Gutenberg Bible leaf; LAW 9 added).
+- **Print drop-ins breach LAW 4** — `drawPrint` `drop:` entries travel 340px from above the board and necessarily cross the top safe band; the new `studio/tools/safearea.mjs` flagged them. Fix: prints fade in situ (`alpha:`), never dropped across the band.
+- **Silent bed opening** — a 0.2s of leading silence in the CC0 Satie bed left the film opening musically dead; `mixVoWithBus` gained `trimLead: true` to skip bed pre-silence. Verify audibility from 0:00, not just LUFS.
 - **Policy change (Nov 2026)** — LAW 1 re-issued: licensed, real (non-AI) stock images/video/clips are now allowed in the timeline (grade-matched plates/B-roll or printed props), not just props. AI-generated media remains banned forever. MUSIC LAW clarified to **open public-domain / openly-licensed classical recordings from public data sources** (Commons/Openverse/Musopen/archive.org/IMSLP/federal archives) with both composition and performance PD/CC0. New **LAW 8** and the binding bible `.agents/skills/cinematic-motion-graphics/SKILL.md` codify per-beat shot cards, thirds/phi framing, animation/VFX/typography law, and zero text collisions.

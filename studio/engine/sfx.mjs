@@ -222,6 +222,7 @@ function duckEnvelope(voL, voR, len, { window = 0.05, duck = 0.42 } = {}) {
 // sfxEvents: [{ t, samples?, make?, name?, gain?, pan? }]
 // music: { path, trimTo, gain = 1, fadeIn = 0.8, fadeOut = 1.2 } or null
 export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out = 'out/mix.wav', tail = 0.0, voGain = 1 } = {}) {
+  // MUSIC LAW helpers: trimLead skips the source recording's leading silence so the bed is audibly PRESENT from second 0 (never a silent open).
   const vo = await decodeAudio(voPath);
   if (voGain !== 1) { for (let i = 0; i < vo.L.length; i++) { vo.L[i] *= voGain; vo.R[i] *= voGain; } }
   headFade(vo.L); headFade(vo.R);
@@ -246,7 +247,22 @@ export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out =
   // music bed: decode → trim → fades → sidechain duck under VO (MUSIC LAW)
   if (music && music.path) {
     const m = await decodeAudio(music.path);
-    const trimN = Math.min(m.L.length, Math.round((music.trimTo ?? vo.dur) * SR));
+    // find first true onset (windowed RMS above -42 dBFS, scanned from t=0, first 12 s max)
+    let onsetS = 0;
+    if (music.trimLead) {
+      const win = sec(0.05);
+      const scanEnd = Math.min(m.L.length, sec(12));
+      outer:
+      for (let s = 0; s < scanEnd; s += win) {
+        let e = 0;
+        for (let i = s; i < Math.min(s + win, m.L.length); i++) e += m.L[i] * m.L[i] + m.R[i] * m.R[i];
+        const rms = Math.sqrt(e / (2 * win));
+        if (rms > 0.008) { onsetS = Math.max(0, (s - Math.round(0.05 * SR)) / SR); break outer; } // keep 100 ms of room
+      }
+      if (onsetS > 0) console.log(`[mix] music bed: trimmed ${onsetS.toFixed(3)}s of leading silence for presence at open`);
+    }
+    const onsetN = Math.round(onsetS * SR);
+    const trimN = Math.min(m.L.length - onsetN, Math.round((music.trimTo ?? vo.dur) * SR));
     const g = music.gain ?? 1;
     const fi = sec(music.fadeIn ?? 0.8), fo = sec(music.fadeOut ?? 1.2);
     const duck = duckEnvelope(vo.L, vo.R, total);
@@ -255,8 +271,8 @@ export async function mixVoWithBus(voPath, sfxEvents = [], { music = null, out =
       if (i < fi) f *= i / fi;
       if (i > trimN - fo) f *= Math.max(0, (trimN - i) / fo);
       const d = duck[i];
-      bus.L[i] += m.L[i] * g * f * d;
-      bus.R[i] += m.R[i] * g * f * d;
+      bus.L[i] += m.L[i + onsetN] * g * f * d;
+      bus.R[i] += m.R[i + onsetN] * g * f * d;
     }
   } else if (music) {
     // music requested but no file → documented fallback bed (drone)
