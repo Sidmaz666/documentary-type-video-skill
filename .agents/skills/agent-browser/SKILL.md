@@ -322,6 +322,27 @@ agent-browser --cdp 9222 snapshot                    # Connect via CDP
 - Always snapshot after navigation to get new refs.
 - Use fill instead of type for input fields to ensure existing text is cleared.
 
+## DuckDuckGo research scraping (agentic web research)
+
+Primary path for Opuscar research (fast, no JS engine, verified 2026-11 on this machine):
+```bash
+bun studio/tools/ddg.mjs "<query>" [--limit N] [--json]
+```
+Fetches the static lite SERP (`lite.duckduckgo.com/lite/?q=`) and prints decoded result titles + URLs (unwraps `uddg=` redirect links). Use inside research-sourcing loops before touching agent-browser.
+
+Agent-browser path (use only when a page needs JS or interactive extraction — it is slow/hang-prone on constrained machines, so time out everything):
+```bash
+agent-browser open "https://html.duckduckgo.com/html/?q=<url-encoded-query>"   # NOTE: results render inside an iframe (ref=e2); iframe switching hangs on slow boxes
+agent-browser eval "JSON.stringify([...document.querySelectorAll('.result__a')].slice(0,10).map(a=>a.textContent+' → '+a.href))"
+agent-browser snapshot -c        # structure view; if the iframe content is wanted, open the iframe's src as a top-level page instead of switching into it
+agent-browser close
+```
+Rules:
+- Prefer ddg.mjs; keep agent-browser for JS-heavy verification reads of a chosen page.
+- Never hammer DDG (≥2 requests/s); back off on HTTP 202/403.
+- SERP scraping finds leads; the claim ledger still requires opening the actual source page (research-sourcing skill).
+- Always `agent-browser close` when done — orphaned browsers leak.
+
 ## Reporting Issues
 
 - Skill issues: Open an issue at https://github.com/TheSethRose/Agent-Browser-CLI

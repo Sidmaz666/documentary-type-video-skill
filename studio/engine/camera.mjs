@@ -2,7 +2,7 @@
 // A Catmull-Rom rail through camera keys {t,x,y,zoom}: C1-continuous, so the
 // move never stops dead — between keys the curve keeps easing toward the next
 // key (hold-drift). Handheld noise is damped during fast pushes.
-import { hash, lerp, clamp } from './style.mjs';
+import { hash, clamp } from './style.mjs';
 
 // Catmull-Rom for one component given 4 control values and u∈[0,1].
 function catmullRom(p0, p1, p2, p3, u) {
@@ -50,22 +50,26 @@ export function camSpeed(rail, t, dt = 0.05) {
   return Math.hypot(dx, dy, dz * 2000);
 }
 
-// Value-noise-ish handheld offset, hashed from integer time cells so it is
-// deterministic per frame. Damped when the camera moves fast.
+// Slow handheld drift — like a documentary operator breathing on sticks.
+// Two slow sine octaves plus one gentle third; no high-frequency cells, so
+// there is nothing to alias into judder at 30 fps. Damped further on pushes.
 export function handheld(t, seed = 1) {
-  const cell = (x) => hash(Math.imul(Math.floor(x * 24) + 1013 * (seed | 0), 2654435761));
-  const n = (x) => { // 1D value noise over 24Hz cells, smoothstep-blended
-    const i = Math.floor(x), u = x - i, s = u * u * (3 - 2 * u);
-    return lerp(cell(i), cell(i + 1), s) * 2 - 1;
+  const s = (seed | 0) || 1;
+  const TAU = Math.PI * 2;
+  const ph = (i) => hash(Math.imul(i + 1013 * s, 2654435761)) * TAU;
+  return {
+    nx: Math.sin(t * 0.62 + ph(11)) * 0.58 + Math.sin(t * 1.31 + ph(23)) * 0.3 + Math.sin(t * 2.7 + ph(37)) * 0.12,
+    ny: Math.cos(t * 0.51 + ph(51)) * 0.56 + Math.cos(t * 1.13 + ph(67)) * 0.32 + Math.cos(t * 2.3 + ph(71)) * 0.12,
+    nz: Math.sin(t * 0.43 + ph(91)) * 0.55 + Math.sin(t * 1.02 + ph(97)) * 0.45,
   };
-  return { nx: n(t * 6.3), ny: n(t * 6.3 + 37.7), nz: n(t * 6.3 + 91.3) };
 }
 
-// handheld(t, seed, speed) — convenience: amplitude damped by camera speed.
+// handheldDamped — breath on sticks: a few px at rest, a whisper on pushes.
 export function handheldDamped(rail, t, seed = 1) {
   const h = handheld(t, seed);
-  const damp = clamp(1 - (camSpeed(rail, t) - 900) / 2600, 0.25, 1); // full shake when slow, ≥25% when pushing fast
-  return { nx: h.nx * damp, ny: h.ny * damp, nz: h.nz * damp };
+  const damp = clamp(1 - (camSpeed(rail, t) - 400) / 1600, 0.12, 1); // gentle breath > moving fast
+  const A = 4.5; // px of drift at rest (was 14 — that aliased into judder at 30 fps)
+  return { nx: h.nx * A * damp, ny: h.ny * A * damp, nz: h.nz * damp };
 }
 
 // applyCam(ctx, cam, W, H) — map world coords to viewport, center-focused zoom.

@@ -13,7 +13,7 @@ export async function buildAudio() {
   if (!existsSync(voPath)) throw new Error(`assets/vo.m4a missing — drop the narration in first (LAW 2: duration = VO)`);
   const music = musicBed();
   const out = join(HERE, 'out', 'mix.wav');
-  const res = await mixVoWithBus(voPath, sfxEvents(), { music, out, tail: 0.05, voGain: 2.6 }); // Kokoro am_michael sits ~9.8 dB under 001's anchor
+  const res = await mixVoWithBus(voPath, sfxEvents(), { music, out, tail: 0.05, voGain: 3.5 }); // Kokoro am_michael sits ~9.8 dB under 001's anchor; +3.5 → lands on ~anchor, TP capped by limiter
   console.log(`mix written → ${res.out} (${res.dur.toFixed(3)}s @48kHz stereo)`);
   return res;
 }

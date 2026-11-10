@@ -4,10 +4,10 @@ One continuous camera move across a 4000px ink-black paper board, 1920×822 desi
 
 | Time | Intent | Shot / angle | Move (ease) | Grid anchor | Hero | Text (clearance) | SFX / cues | Assets |
 |------|--------|--------------|-------------|-------------|------|------------------|------------|--------|
-| 0.0–3.9 | the hook: ink is memory | WS, eye level | static hold + drift-in | hero at left-third power point (700,411) | red ping seed | `5,000` / `YEARS` stamps center zone; `INK.` bigger, red | whoosh tiny @0.1 · stamp thud @0.9, @1.6 · ping @0.5 | — |
-| 3.9–10.0 | how ink is made (China) | MS, eye level | drift L→R (easeInOutCubic) | hero left-third (1650,400) | scribe + mortar | `PINE SOOT + GLUE` typewriter mid, `+ ground into sticks` hand small below | paperDropWhump @4.2 · grind scratch @6.1 · stamp thud @7.7 | — |
-| 10.0–19.3 | ink splits the word (Gutenberg) | MS → MCU | drift L→R, damped | hero right-third (2580,400) | press plate + type case | `1440.` stamp, `MOVABLE TYPE` typewriter, `1455.` red stamp on the Bible word | whoosh @10.2 · pencilScratch @12.4 · thud @10.9, @13.1, @15.0 | — |
-| 19.3–24.6 | everything you've read | WS → ECU on the drop | push-in, settle | hero center-right (3480,400) | falling ink drop + pool | `EVERYTHING YOU HAVE EVER READ` mask-up → `IT REMEMBERS.` stamp | whoosh @22.3 (fall) · whump @22.6 (land) · thud @22.9 | — |
+| 0.0–3.9 | the hook: ink is memory | WS, eye level | static hold + 12px creep | hero at left-third power point (750,411) | red seed + ping | `INK.` stamp lands ON "ink" @1.7; `five thousand years of memory` types from @0.55 | ping @0.5 · thud @1.7 | — |
+| 3.9–10.0 | how ink is made (China) | MS, eye level | drift L→R, ≤250px/s, arrives BEFORE "In China" | hero left-third (1650,400) | scribe + mortar + ink stick | `PINE SOOT + GLUE` typewriter @6.35 (on "lampblack"); ink stick drops @5.5 | whump @3.95 · thud @5.6 · grind scratch @5.9 · thud @7.5 | — |
+| 10.0–19.3 | ink splits the word (Gutenberg) | MS → MCU | drift L→R, ≤200px/s, arrives BEFORE "Around" | hero right-third (2530,398) | press plate + type case | sheet drops @10.15; `1440.` stamp lands ON "fourteen forty" @10.85 · `MOVABLE TYPE` headline of the page @13.0 · `1455.` red stamp lands ON "1455" @14.95 | whoosh @9.6 · thud @10.85 · ping @13.0 · thud @14.95 | — |
+| 19.3–24.6 | everything you've read | WS → ECU on the drop | push-in, arrives BEFORE "Everything" | hero center-right (3480,400) | falling ink drop + pool | `EVERYTHING YOU` / `HAVE EVER READ` mask-up from @19.0 (on the word) → drop falls clear right of the words @19.6–22.6 → `IT REMEMBERS.` stamp lands ON "It remembers." @23.96 | ping @18.98 · whoosh @22.3 · whump @22.65 · thud @23.96 | — |
 | 24.62 | tail | pull-back | easeInOutCubic | — | whole board recedes | — | soft whoosh @24.1 | — |
 
 ## Texture & motion feel

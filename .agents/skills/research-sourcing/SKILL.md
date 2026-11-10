@@ -27,7 +27,7 @@ Confidence: **high** (2+ independent primary sources agree) · **medium** (singl
 
 ## 2 · The agentic loop
 1. **Seed** — from the brief (PROJECT.md), list every factual claim the VO will need. Include numbers, dates, names, causal claims ("X caused Y"), superlatives ("first/oldest/largest").
-2. **Fetch** — use `agent-browser` to open candidate pages, `get-image` to locate archives, `clips.mjs` if the claim involves media we'll show. Read the actual page — never trust a snippet.
+2. **Fetch** — first-line search: `bun studio/tools/ddg.mjs "<query>" --limit 8` (decoded titles+URLs; verified). For JS pages or in-depth reading: `agent-browser` (open → eval/snapshot → close). Locate archives with `get-image`; source media with `clips.mjs`. Read the actual page — never trust a snippet, never trust a search-result title as evidence.
 3. **Ledger** — fill `SOURCES.md`. Quote the exact supporting sentence. If two sources disagree, both go in; confidence = low; the script hedges or cuts.
 4. **Write only from the ledger** — VO pass: each sentence maps to ledger rows (cite `[#n]` in the BEATS.md narration column for contested claims).
 5. **Pre-render fact-check gate** — re-read the finished VO line-by-line against the ledger. Any line without a green row is cut, hedged ("researchers estimate…", "written sources say…"), or re-timed. **No render starts on a failing gate.**

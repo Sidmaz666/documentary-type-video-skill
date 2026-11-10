@@ -11,9 +11,11 @@ import { T } from './timings.mjs';
 const S = T.scenes;
 const REDF = '#b3341f';
 
-// zone dim-back: fades in over `inT`, fades out over `inT+dur` … `outT` window
-const zoneAlpha = (t, inT, outT, dur = 0.7) =>
-  clamp((t - inT + dur) / dur, 0, 1) * clamp(1 - Math.max(0, (t - outT) / 1.0), 0, 1);
+// zone dim-back: fade in over `dur`, hold through the beat, soft-dim after
+// `outT`. `floor` keeps a faint "memory" of the hero on the board at the tail
+// pull-back (enterprise doc feel — the board remembers everything).
+const zoneAlpha = (t, inT, outT, dur = 0.7, floor = 0) =>
+  clamp((t - inT + dur) / dur, 0, 1) * Math.max(floor, clamp(1 - Math.max(0, (t - outT) / 1.1), 0, 1));
 
 // a filled red dot (the seed of every story)
 function seedDot(ctx, x, y, r, t, t0) {
@@ -51,7 +53,7 @@ function inkStick(ctx, x, y, t, t0) {
 
 // grinding bowl — two shallow arc strokes
 function mortar(ctx, x, y, t) {
-  const u = clamp((t - 4.4) / 0.9);
+  const u = clamp((t - 3.8) / 0.9);
   if (u <= 0) return;
   handStroke(ctx, [
     { x: x - 95, y }, { x: x - 55, y: y + 40 }, { x, y: y + 52 }, { x: x + 55, y: y + 40 }, { x: x + 95, y },
@@ -63,7 +65,7 @@ function mortar(ctx, x, y, t) {
 
 // soot dust — deterministic hash dots above the bowl
 function soot(ctx, x, y, t) {
-  const u = clamp((t - 5.2) / 1.4);
+  const u = clamp((t - 5.6) / 1.5);
   if (u <= 0) return;
   const inherited = ctx.globalAlpha;
   for (let i = 0; i < 34; i++) {
@@ -83,7 +85,7 @@ function soot(ctx, x, y, t) {
 
 // Gutenberg press sheet with four lines of "type"
 function pressSheet(ctx, x, y, t) {
-  const u = clamp((t - 10.3) / 0.7);
+  const u = clamp((t - 8.9) / 0.7);
   if (u <= 0) return;
   // sheet drop shadow + paper
   ctx.save();
@@ -97,7 +99,7 @@ function pressSheet(ctx, x, y, t) {
   ctx.restore();
   // four lines of text setting in (staggered)
   for (let r = 0; r < 4; r++) {
-    const t0 = 11.0 + r * 0.42;
+    const t0 = 10.2 + r * 0.42;
     const pu = clamp((t - t0) / 0.5);
     if (pu <= 0) continue;
     const w = [330, 290, 315, 235][r];
@@ -110,7 +112,7 @@ function pressSheet(ctx, x, y, t) {
 
 // type case — 5×4 standing type blocks above the press
 function typeCase(ctx, x, y, t) {
-  const u = clamp((t - 10.1) / 0.6);
+  const u = clamp((t - 8.9) / 0.6);
   if (u <= 0) return;
   const inherited = ctx.globalAlpha;
   for (let c = 0; c < 5; c++) {
@@ -172,59 +174,63 @@ export function drawWorld(ctx, t) {
 
   // ── ZONE A · hook ────────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 0.0, 3.9, 0.55) * clamp(1 - Math.max(0, t - 4.6) / 1.1, 0, 1);
+    const a = zoneAlpha(t, 0.0, 5.2, 0.55, 0.16);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
       seedDot(ctx, 750, 225, 20, t, 0.5);
       handCircle(ctx, 750, 225, 40 + Math.sin(t * 3.2) * 8, { w: 6, color: REDF, alpha: 0.85, progress: clamp((t - 0.5) / 0.7) });
       ping(ctx, 750, 225, 150, (Math.max(0, t - 0.5) * 1.35) % 1.6);
-      stampText(ctx, 750, 440, 'INK.', { size: 250, t0: 0.9, t, color: INK, rot: -0.012 });
-      typewriter(ctx, 750, 625, 'five thousand years of memory', { size: 36, t0: 2.35, t, cps: 22, font: FONT.hand, rot: 0.008 });
+      const textA = clamp(1 - Math.max(0, t - 2.3) / 0.7, 0, 1); // gone by t=3.0 — before the camera can crop it (LAW 4, absolute at every pose)
+      if (textA > 0.01) {
+        stampText(ctx, 750, 440, 'INK.', { size: 250, t0: 1.7, t, color: INK, rot: -0.012, alpha: textA });
+        typewriter(ctx, 750, 625, 'five thousand years of memory', { size: 36, t0: 0.55, t, cps: 18, font: FONT.hand, rot: 0.008, alpha: textA });
+      }
       ctx.restore();
     }
   }
 
   // ── ZONE B · china ───────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 3.9, 10.0, 0.6) * clamp(1 - Math.max(0, t - 11.2) / 1.2, 0, 1);
+    const a = zoneAlpha(t, 3.4, 10.8, 0.6, 0.22);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      stickman(ctx, 1400, 640, { h: 250, pose: 'stand', t, progress: clamp((t - 4.2) / 1.5) });
+      stickman(ctx, 1400, 640, { h: 250, pose: 'stand', t, progress: clamp((t - 3.55) / 1.6) });
       mortar(ctx, 1795, 585, t);
       soot(ctx, 1795, 560, t);
-      inkStick(ctx, 1795, 470, t, 4.9);
-      typewriter(ctx, 1650, 738, 'PINE SOOT + GLUE', { size: 46, t0: 6.25, t, cps: 18, font: FONT.serif });
+      inkStick(ctx, 1795, 470, t, 5.5);
+      const textA = clamp(1 - Math.max(0, t - 9.0) / 0.8, 0, 1); // text leaves its window before the camera does (LAW 4)
+      if (textA > 0.01) typewriter(ctx, 1760, 738, 'PINE SOOT + GLUE', { size: 44, t0: 6.35, t, cps: 18, font: FONT.serif, alpha: textA });
       ctx.restore();
     }
   }
 
   // ── ZONE C · gutenberg ───────────────────────────────────────
   {
-    const a = zoneAlpha(t, 10.0, 19.3, 0.6) * clamp(1 - Math.max(0, t - 20.1) / 1.2, 0, 1);
+    const a = zoneAlpha(t, 8.8, 19.6, 0.7, 0.16);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
       pressSheet(ctx, 2580, 400, t);
       typeCase(ctx, 2580, 155, t);
-      stampText(ctx, 2310, 692, '1440.', { size: 132, t0: 10.9, t, color: INK, rot: 0.015 });
-      typewriter(ctx, 2580, 262, 'MOVABLE TYPE', { size: 30, t0: 12.45, t, cps: 22, font: FONT.serif });
-      stampText(ctx, 2870, 692, '1455.', { size: 132, t0: 14.98, t, color: REDF, rot: -0.018 });
+      stampText(ctx, 2310, 692, '1440.', { size: 132, t0: 10.85, t, color: INK, rot: 0.015 });
+      typewriter(ctx, 2580, 262, 'MOVABLE TYPE', { size: 30, t0: 13.0, t, cps: 22, font: FONT.serif });
+      stampText(ctx, 2870, 692, '1455.', { size: 132, t0: 14.95, t, color: REDF, rot: -0.018 });
       ctx.restore();
     }
   }
 
   // ── ZONE D · everything ──────────────────────────────────────
   {
-    const a = zoneAlpha(t, 19.1, 99.0, 0.6);
+    const a = zoneAlpha(t, 17.9, 99.0, 0.7);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
       maskUpText(ctx, 3300, 180, 'EVERYTHING YOU', { size: 68, t0: 19.0, t1: 20.1, t, font: FONT.display, rot: 0 });
       maskUpText(ctx, 3300, 268, 'HAVE EVER READ', { size: 68, t0: 20.0, t1: 21.1, t, font: FONT.display, rot: 0 });
       inkDrop(ctx, 3920, 560, t);
-      stampText(ctx, 3480, 700, 'IT REMEMBERS.', { size: 130, t0: 22.9, t, color: INK, rot: -0.01 });
+      stampText(ctx, 3720, 700, 'IT REMEMBERS.', { size: 118, t0: 23.96, t, color: INK, rot: -0.01 });
       ctx.restore();
     }
   }
