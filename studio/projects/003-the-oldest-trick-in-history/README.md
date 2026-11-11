@@ -1,6 +1,6 @@
 # 003 — The Oldest Trick in the History Still Works, Right?
 
-A **5:40 investigative documentary** about the November 2026 NVIDIA / Jensen Huang
+A **5:03 investigative documentary** about the November 2026 NVIDIA / Jensen Huang
 affair-and-intelligence allegations — produced entirely inside the Opuscar Studio
 pipeline (canvas-drawn paper world, no AI-generated media, licensed real source
 assets only). One idea: how does a personal relationship at the top of the world's
@@ -69,7 +69,7 @@ publish at AAC **320k** — the native AAC filterbank reconstructs transients
 
 ## Deliverables (published, canonical)
 
-- `public/film/003-the-oldest-trick-in-history.mp4` — 21:9 master (2560×1098, 30fps, 10,198 frames)
+- `public/film/003-the-oldest-trick-in-history.mp4` — 21:9 master (2560×1098, 30fps, 9,092 frames)
 - `public/film/003-the-oldest-trick-in-history-16x9.mp4` — 16:9 paper-extension master
 - `public/film/003-the-oldest-trick-in-history.en.srt` — captions (148 cues)
 - `public/film/003-the-oldest-trick-in-history-thumb.png` / `…-thumb-alt.png` — YouTube thumbnails

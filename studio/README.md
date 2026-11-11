@@ -1,6 +1,6 @@
 # studio/ — the Opuscar film factory
 
-A **topic-agnostic, code-drawn film studio**. One repo holds many films; each film is one folder under `projects/`. Frames are composited frame-by-frame by a canvas program (`@napi-rs/canvas` under Bun) and encoded to MP4 — never AI-generated media; licensed, real (non-AI) stock images/video/clips are allowed as grade-matched plates, B-roll or printed props (LAW 1) — and **at least one such external asset is mandatory in every film (LAW 9)**; a film with zero source assets is a failure. Sound is synthesized SFX + real public-domain/openly-licensed classical recordings from open public-data sources, mixed against the voiceover (LAW 1b). The operating manual (hard laws) lives in `AGENTS.md` at the repo root — read it first; it wins over anything here.
+A **topic-agnostic, code-drawn film studio**. One repo holds many films; each film is one folder under `projects/`. Frames are composited frame-by-frame by a canvas program (`@napi-rs/canvas` under Bun) and encoded to MP4 — never AI-generated media; licensed, real (non-AI) stock images/video/clips are allowed as grade-matched plates, B-roll or printed props (LAW 1) — and **at least one such external asset is mandatory in every film (LAW 9)** — and **every beat carries sourced imagery (LAW 11)**: in-situ prints from licensed assets, vibe plate built once at module load (~7200-px feathered tiles, α≈0.16, viewport-culled), never a bare text-only zone; a film with zero source assets is a failure. Sound is synthesized SFX + real public-domain/openly-licensed classical recordings from open public-data sources, mixed against the voiceover (LAW 1b). The operating manual (hard laws) lives in `AGENTS.md` at the repo root — read it first; it wins over anything here.
 
 ## Repo map
 
@@ -31,7 +31,7 @@ studio/
 ```
 
 
-**Pipeline:** canvas frame → raw RGBA piped frame-by-frame into ffmpeg → 244-frame chunks (`part_*.mp4`, sequential — OOM law) → every part ffprobed (LAW 3) → concat `-c copy` → `video-only.mp4` → mux with `mix.wav` (+faststart) → publish to `public/film/<slug>.mp4` → FINAL-FILE LAW numeric probe.
+**Pipeline:** canvas frame → raw RGBA piped frame-by-frame into ffmpeg → 244-frame chunks (`part_*.mp4`, sequential — OOM law) → every part ffprobed (LAW 3) → concat `-c copy` (list numerically sorted, chunk dirs wiped on re-render — LAW 3b) → `video-only.mp4` → mux with `mix.wav` (+faststart) → publish to `public/film/<slug>.mp4` → FINAL-FILE LAW numeric probe.
 
 ## Production targets
 

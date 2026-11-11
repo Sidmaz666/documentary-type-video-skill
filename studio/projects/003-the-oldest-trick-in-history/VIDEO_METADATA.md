@@ -15,38 +15,40 @@
 **Chapters** (from `timings.mjs` scene clock — picture truth, no drift):
 
 ```
-0:00 The Hook — "I was unfaithful"
-0:26 NVIDIA — the most important chip company on earth
-0:56 The woman named Alice Huang
-1:21 What US intelligence reportedly believed
-1:53 Denials, caveats and confirmations
-2:28 Megaspeed — the reported $4.8B in restricted-chip flows
-3:01 The oldest trick in history — Mata Hari to the Stasi Romeos
-3:53 Why Washington cares — the US–China chip war
-4:22 The fallout — markets and a shareholder lawsuit
-4:48 What we actually know
-5:15 The final question
+0:00 Stratagem 31 — the beauty trap (Xi Shi & the Wu–Yue wars)
+0:25 NVIDIA — the most important chip company on earth
+0:53 The woman named Alice Huang
+1:14 MSS — reported
+1:49 Denials, caveats and confirmations
+2:20 Megaspeed — the reported $4.8B in restricted-chip flows
+2:51 The playbook ships — Mata Hari to the Stasi Romeos
+3:33 Why Washington cares — the US–China chip war
+3:58 The fallout — markets and a shareholder lawsuit
+4:22 What we actually know
+4:42 The final question
 ```
 
 **Description:**
 
 ```
+Twenty-five hundred years before the microchip, the King of Wu fell for the most expensive gift ever wrapped — Xi Shi, stratagem 31 of 36: the beauty trap. This is the story of the week that trick came back.
+
 On November 8, 2026, NVIDIA's board announced an independent investigation into its own founder and CEO — and Jensen Huang published a message admitting an extramarital affair. Within hours, reporting based on US intelligence assessments identified the woman involved — Alice Huang, reported to work at Singapore-based Megaspeed International — as a suspected asset of China's Ministry of State Security. Beijing called the reports "groundless smears." Singapore said no such investigation exists. NVIDIA says it has no reason to believe company secrets were compromised.
 
 How did a personal relationship at the top of the world's most important AI company become a national-security and corporate-governance crisis? This investigation reconstructs the timeline from primary sources, honestly separates what is CONFIRMED from what is REPORTED and what is UNKNOWN, and traces the parallel history — Mata Hari, the Stasi's "Romeo" agents, Christine Fang, Monica Witt — without ever asserting that a honey trap occurred here. The evidence decides the conclusion, and the evidence is not yet in.
 
 ⏱ CHAPTERS
-0:00 The Hook — "I was unfaithful"
-0:26 NVIDIA — the most important chip company on earth
-0:56 The woman named Alice Huang
-1:21 What US intelligence reportedly believed
-1:53 Denials, caveats and confirmations
-2:28 Megaspeed — the reported $4.8B in restricted-chip flows
-3:01 The oldest trick in history
-3:53 Why Washington cares — the US–China chip war
-4:22 The fallout — markets and a shareholder lawsuit
-4:48 What we actually know
-5:15 The final question
+0:00 Stratagem 31 — the beauty trap (Xi Shi & the Wu–Yue wars)
+0:25 NVIDIA — the most important chip company on earth
+0:53 The woman named Alice Huang
+1:14 MSS — reported
+1:49 Denials, caveats and confirmations
+2:20 Megaspeed — the reported $4.8B in restricted-chip flows
+2:51 The playbook ships — Mata Hari to the Stasi Romeos
+3:33 Why Washington cares — the US–China chip war
+3:58 The fallout — markets and a shareholder lawsuit
+4:22 What we actually know
+4:42 The final question
 
 🔍 PRIMARY SOURCES (all claims traceable; full dossier in the pinned comment)
 NVIDIA board statement, Nov 8 2026: https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors
@@ -73,8 +75,12 @@ Jensen Huang portrait: Office of the President, ROC (Taiwan), CC BY 2.0, via
 Wikimedia Commons (File:Jensen_Huang_20231109.jpg) — also used in the thumbnail.
 Markus Wolf: Bundesarchiv Bild 183-1989-1208-420, Elke Schöps, CC BY-SA 3.0 de.
 Mata Hari: Jacob Merkelbach, ca. 1906, Public Domain. Monica Witt wanted poster: FBI, Public Domain.
-Data-center photograph: US DOE/NREL, Public Domain. Background ink-wash: Song Nian
-(清·松年) landscape handscroll, The Met Open Access, CC0 DP204810.
+Prints: "In the Palace" handscroll (CMA 1976.1, CC0) beside Xi Shi; NVIDIA HQ sign
+(Will Buckner, CC BY 2.0); Marina Bay dusk (Benh LIEU SONG, CC BY-SA 4.0); White
+House (pteron60, CC BY 2.0); Great Hall of the People (IQRemix, CC BY-SA 2.0);
+Summit supercomputer (ORNL, CC BY 2.0, illustrative); Jefferson Lab racks (PDM);
+NYSE floor (aherrero, CC BY-SA 2.0). Background ink-wash: Song Nian
+(清·松年) landscape handscroll, The Met Open Access, CC0 DP204810 (retiled).
 Music: Tchaikovsky — Symphony No. 6 "Pathétique", Op. 74, IV. Finale
 (Adagio lamentoso), Musopen Symphony — composition & performance Public Domain.
 Voiceover: synthesized with Kokoro-82M (Apache-2.0). Fonts: SIL OFL.

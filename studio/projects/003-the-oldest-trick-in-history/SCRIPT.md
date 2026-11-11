@@ -116,3 +116,6 @@ Canonical narration = `narration.txt` (Kokoro am_michael, speed 1.18, **339.925 
   end-card credits (see VIDEO_METADATA.md).
 - Sound: bed swell · final downbeat at "patched." (339.8) · silence to 339.925 ·
   fadeOut [338.9, 339.925].
+
+## v13 (2026-11-11) — supersedes the v12 script
+Narration rewritten: ancient cold open (Xi Shi / Stratagem 31, 美人計), Gen-Z comedic register, allegations still attributed; see `narration.txt` + `vo-timings.whisper.json`. v12 line-by-line below kept for history.

@@ -33,3 +33,6 @@
 | 2026-11-10 | 2026-11-10 | Trump: "FBI is looking into it in terms of something else"; AP top story; NBC: DOJ told Commerce to pause Megaspeed probe (after NVIDIA counsel contact); CNA: Megaspeed assets $33M→$3B | J11/J17/J14 | High (as statements/reports) |
 | 2026-11-18 (upcoming) | — | House GOP closed-door briefing; day after Q3 earnings (Nov 17) | J9 | High (scheduled) |
 | Class period | filed 2026-11-09 | Oct 9, 2025 – Nov 8, 2026 (Kistenmacher) — date internally inconsistent; flagged | J8 | Low |
+
+## v13 re-time (2026-11-11)
+Narration rewritten (ancient cold open). S01 = 0.0–25.34 · S02 = 25.34–53.42 · S03 = 53.42–74.88 · S04 = 74.88–109.24 · S05 = 109.24–140.86 · S06 = 140.86–171.80 · S07 = 171.80–213.36 · S08 = 213.36–238.68 · S09 = 238.68–262.56 · S10 = 262.56–282.28 · S11 = 282.28–303.061. DUR = 303.061 s (LAW 2), FRAMES 9,092 @30fps. This table superseded.

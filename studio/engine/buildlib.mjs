@@ -71,6 +71,19 @@ export async function renderChunks(renderFrame, T, { chunk = 244, slug } = {}) {
 
 // concatParts — LAW 3: probe EVERY part before concat; fail loudly on a
 // corrupt part (missing moov → ffprobe errors or reports no duration).
+// ORDERISM (LAW 3b): chunk names are `part_<startFrame>.mp4` — once the start
+// frame crosses 4 digits (≥9996 frames ⇒ ~41 s per chunk × 41 chunks), plain
+// lexicographic `.sort()` puts `part_10004` BETWEEN `part_0976` and `part_1220`.
+// `-c copy` concat is order-blind, frame-count/duration probes are order-blind:
+// 003 shipped the final question scene second and every scene after it rewound
+// while ALL numeric gates passed ("sudden flash of scenes, misplaced scenes").
+// Order is now enforced NUMERICALLY, always, and list.txt is rewritten in that
+// order — a stale/poisoned list can never be trusted again.
+const partOrder = (name) => {
+  const m = /^part_(\d+)\.mp4$/.exec(name);
+  if (!m) throw new Error(`LAW 3: unexpected part name ${name}`);
+  return Number(m[1]);
+};
 export async function concatParts(slug, { dir } = {}) {
   dir = dir || outDir(slug);
   const listPath = join(dir, 'list.txt');
@@ -79,13 +92,16 @@ export async function concatParts(slug, { dir } = {}) {
     list = readFileSync(listPath, 'utf8')
       .split('\n').map((l) => l.trim()).filter(Boolean).map((l) => l.replace(/^file '/, '').replace(/'$/, ''));
   } else {
-    // alternate renders (e.g. deliver.mjs) may not write list.txt — scan for parts
     list = ((await import('node:fs')).readdirSync(dir))
-      .filter((f) => /^part_\d+\.mp4$/.test(f))
-      .sort();
+      .filter((f) => /^part_\d+\.mp4$/.test(f));
   }
+  list = [...new Set(list)].sort((a, b) => partOrder(a) - partOrder(b)); // NUMERIC, deduped — LAW 3b
   if (!list.length) throw new Error('no parts listed — nothing to concat');
-  if (!existsSync(listPath)) writeFileSync(listPath, list.map((n) => `file '${n}'`).join('\n') + '\n');
+  if (partOrder(list[0]) !== 0) throw new Error(`LAW 3b: first part must start at frame 0 — got ${list[0]}`);
+  for (let k = 1; k < list.length; k++) {
+    if (partOrder(list[k]) <= partOrder(list[k - 1])) throw new Error(`LAW 3b: non-ascending part order at ${list[k]}`);
+  } // coverage gaps (a deleted middle chunk) show up as an FRAMES count failure at the FINAL-FILE LAW gate
+  writeFileSync(listPath, list.map((n) => `file '${n}'`).join('\n') + '\n');
   for (const name of list) {
     const p = join(dir, name);
     if (!existsSync(p)) throw new Error(`LAW 3: missing part ${name} — delete and re-render that chunk`);

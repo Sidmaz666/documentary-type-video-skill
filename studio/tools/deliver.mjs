@@ -58,6 +58,10 @@ mkdirSync(join(ROOT, 'public/film'), { recursive: true });
 mkdirSync(join(ROOT, 'public/film/stills'), { recursive: true });
 
 const CHUNK = 244;
+// wipe the whole 16x9 out-dir first: stale part_*.mp4 from a longer previous
+// render get swept into the concat (silent +frames — LAW 3 incident class).
+rmSync(OUT16, { recursive: true, force: true });
+mkdirSync(OUT16, { recursive: true });
 for (let start = 0; start < T16.FRAMES; start += CHUNK) {
   const end = Math.min(T16.FRAMES, start + CHUNK);
   const partPath = join(OUT16, `part_${String(start).padStart(4, '0')}.mp4`);
