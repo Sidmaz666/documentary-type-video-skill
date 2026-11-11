@@ -25,7 +25,7 @@ Both ask a question — neither asserts a conclusion. CC BY 2.0 attribution for
 thumbnail use rides in the YouTube description credit block (VIDEO_METADATA.md).
 
 ## Vibe plate & grade
-`drawBackgroundPlate` multiply at α≈0.16 — RETILED v13: ~7200px tiles with
+`drawBackgroundPlate` multiply at α≈0.075 (v14, after v13's 0.16 read too heavy) — RETILED v13: ~7200px tiles with
 feathered L/R edges, built ONCE at module load (viewport-culled). An earlier
 whole-board stretch at α=0.09 was invisible. Warm split-tone grade (`documentary-grade`
 preset), vignette 0.34, grain 0.62. Prints fade in situ only — never

@@ -376,7 +376,7 @@ export function drawWorld(ctx, t) {
     for (let px = -200; px < T.BOARD_W + 200; px += 6600) {
       const tl = px, tr = px + 7200;
       if (tr < cam.x - halfW || tl > cam.x + halfW) continue;
-      drawBackgroundPlate(ctx, vibeTile, { x: px, y: -1200, w: 7200, h: T.BOARD_H + 2400, alpha: 0.16 });
+      drawBackgroundPlate(ctx, vibeTile, { x: px, y: -1200, w: 7200, h: T.BOARD_H + 2400, alpha: 0.075 });
     }
   }
 
