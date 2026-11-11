@@ -49,12 +49,15 @@ Tchaikovsky Op. 74 (PD) · Voice: Kokoro-82M (Apache-2.0) · Opuscar Studio.
 - `racks.jpg` — data-center racks, Jefferson Lab, Public Domain Mark (US DOE); ACT 7→8 transit; “PDM”.
 - `nyse.jpg` — NYSE trading floor, aherrero, CC BY-SA 2.0 (Flickr); ACT 9; “NYSE FLOOR · CC BY-SA 2.0”.
 
-## Alice Huang photograph policy (v13)
-No freely licensable photograph of Alice Huang exists (verified via Wikimedia
-Commons, Openverse and Flickr search; news-agency images are out of scope for
-LAW 1). The film shows an honest ABSENCE: a redacted “PRESS FILE / ALICE HUANG”
-card with empty redaction bars and a rotated red NOT PICTURED stamp, plus the
-caption “NO LICENSED PHOTOGRAPH EXISTS”. Gravitas first, joke second, fabrication never.
+## Alice Huang — no face is ever shown (v15, full search done)
+Search completion (Commons, Openverse, Flickr, DDG news roundup, agent-browser):
+**zero freely-licensed, identity-verifiable portraits of the Alice Huang tied to
+Megaspeed exist.** Every image found is a copyrighted news/company photo of an
+unverified woman — using one would misidentify a real private person as a
+suspected spy (defamation) and violate LAW 1. The v13 “NOT PICTURED” press-file
+gag was deleted as tone-deaf (user directive). The film never shows any Alice
+Huang face — voice and on-screen text name her (public reporting); the visuals
+carry the relationship diagram and the Singapore print only.
 
 ## Narration v13 (LAW 2)
 Ancient cold open (Xi Shi / 36 Stratagems / 美人計 brush stamp) → Gen-Z comedic

@@ -61,7 +61,7 @@ export const films: Film[] = [
     height: 1098,
     fps: 30,
     codec: "H.264 + AAC",
-    sizeMB: 360,
+    sizeMB: 377,
     captions: "/film/003-the-oldest-trick-in-history.en.srt",
     alternates: [
       { label: "YouTube thumbnail (primary)", url: "/film/003-the-oldest-trick-in-history-thumb.png", note: "HONEY TRAP? — asked, not asserted; jh_2023 CC BY 2.0 portrait, grade-matched house paper print style (attribution in the video description)" },
@@ -89,7 +89,7 @@ export const films: Film[] = [
         line: "The woman at the center is Alice Huang. No relation. There is no public photograph of her that anyone can legally license, print, or screen grab.",
         start: 53.42,
         end: 74.88,
-        hero: "ALICE HUANG typewriter · relationship diagram: two circles + ? · Marina Bay print (CC BY-SA 4.0) · NOT PICTURED redacted press-file card",
+        hero: "ALICE HUANG typewriter · relationship diagram: two circles + ? · Marina Bay print (CC BY-SA 4.0) · REPORTED, NOT DEPICTED — no face of Alice Huang is shown",
       },
       {
         id: "mss",

@@ -132,7 +132,7 @@ Every transit between zones MUST carry a **non-horizontal vector**. A film whose
 Empty text-only zones are a defect, not a style. Rules:
 - **One licensed real asset per beat minimum**, placed in situ with the LAW 4 fade helpers (`printA` in 003; `fadeExit`/`fadeEntry`). Text stamps alone never fill a scene for >3 s of hold.
 - **The vibe plate must be verified VISIBLE in a still before publish** — multiply-blend, α≈0.07–0.08 (003 ships 0.075 — visible but a whisper), **tiled** (whole-board single-stretch at α 0.09 is invisible on this paper). Build the tile ONCE at module load (feathered L/R edges, ~7000-design-px tiles), **viewport-cull** the tiles every frame (drawing all tiles per frame made the LAW 4 sweep take >1 h), and QC with `bun render.mjs still <t>` — if the ink-wash doesn't read at all, raise α.
-- In-reference/illustrative assets must be captioned as such on frame (e.g. "ILLUSTRATIVE: SUPERCOMPUTER-CLASS COMPUTE") — never imply Megaspeed runs on depicted hardware. No licensed photo exists → show an honest absence card (003's NOT PICTURED press-file for Alice Huang) — never a fabricated likeness or another person's face.
+- In-reference/illustrative assets must be captioned as such on frame (e.g. "ILLUSTRATIVE: SUPERCOMPUTER-CLASS COMPUTE") — never imply Megaspeed runs on depicted hardware. No freely-licensed, identity-verifiable photo exists → show NO face at all: name the reported person only in voice/on-screen text (never a guess, never a scraped press photo). (003 retired its "NOT PICTURED" absence gag as tone-deaf in v15.)
 - Draw marginalia (annotations, arrows, red herrings) to fill negative space during holds; transit bands carry interlude flourishes.
 
 ---
