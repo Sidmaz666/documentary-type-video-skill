@@ -5,7 +5,7 @@
 // First run downloads the model (~116 MB) into ./models/whisper/ (gitignored).
 //
 // Examples:
-//   node studio/tools/asr/transcribe.mjs studio/projects/001-the-bravest-snack-in-history/assets/vo.m4a
+//   node studio/tools/asr/transcribe.mjs studio/projects/003-the-oldest-trick-in-history/assets/vo.m4a
 //   node studio/tools/asr/transcribe.mjs assets/vo.m4a --out assets/vo-timings.json --model Xenova/whisper-tiny.en
 //
 // Output JSON: {backend,model,audio,duration,language,text,

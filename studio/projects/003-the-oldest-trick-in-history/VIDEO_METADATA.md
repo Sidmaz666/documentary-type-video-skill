@@ -5,12 +5,10 @@
 
 **Files:**
 - Master (21:9): `public/film/003-the-oldest-trick-in-history.mp4`
-- Alternate (16:9): `public/film/003-the-oldest-trick-in-history-16x9.mp4`
 - Captions: `public/film/003-the-oldest-trick-in-history.en.srt`
-- Thumbnail: `public/film/003-the-oldest-trick-in-history-thumb.png` (primary,
-  `HONEY TRAP?` hook) · `…-thumb-alt.png` (variant, `AN AFFAIR? / AN OPERATION?` —
-  A/B test candidate). Both built by `thumbnail.mjs` from the SAME licensed
-  portrait used in-frame (jh_2023, CC BY 2.0 — see credits below).
+- Thumbnail: `public/film/003-the-oldest-trick-in-history-thumb.png` (`HONEY TRAP?`
+  hook). Built by `thumbnail.mjs` from the SAME licensed portrait used in-frame
+  (jh_2023, CC BY 2.0 — see credits below).
 
 **Chapters** (from `timings.mjs` scene clock — picture truth, no drift):
 

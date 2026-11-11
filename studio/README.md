@@ -26,7 +26,7 @@ studio/
 │   ├── buildlib.mjs     chunk render → probe → concat → mux → publish (LAW 3)
 │   └── clips.mjs        media search/fetch → assets/clips + manifest + CSV row (LAW 1)
 ├── projects/
-│   └── 001-the-bravest-snack-in-history/   ← delivered film (canonical MP4 in public/film/)
+│   └── 003-the-oldest-trick-in-history/    ← shipped film (canonical MP4 in public/film/)
 └── templates/project/   ← runnable skeleton copied by new.sh
 ```
 
@@ -35,7 +35,7 @@ studio/
 
 ## Production targets
 
-**001 and 002 are test reels.** They exist to prove the research→VO→render→publish pipeline; nobody ships a 30-second film as "done". Production films are **5–6-minute** or **10–12-minute** illustrated essays: VO-driven (Kokoro/verified-wav), one zone per ~20–40 s of narration, long paper boards (~10–14k px per minute), many transits — every one of them diagonal or arc'd (**LAW 10**: `makeVariedRail` in `engine/camera.mjs`, never a dead straight ride; record `T.rail.variety`), QC still sweep at every pose, LAW 4 sweep mandatory, and **SRT captions + a 16:9 paper-extension master + key stills** delivered alongside the 21:9 master (`studio/tools/deliver.mjs`). Zone counts, durations, and rail length all scale from the VO — nothing is stretched to a target runtime (LAW 2).
+**Production films are 5–6-minute** or **10–12-minute** illustrated essays: VO-driven (Kokoro/verified-wav), one zone per ~20–40 s of narration, long paper boards (~10–14k px per minute), many transits — every one of them diagonal or arc'd (**LAW 10**: `makeVariedRail` in `engine/camera.mjs`, never a dead straight ride; record `T.rail.variety`), QC still sweep at every pose, LAW 4 sweep mandatory, and **SRT captions + key stills** delivered alongside the 21:9 master (a 16:9 alternate only when explicitly requested — `studio/tools/deliver.mjs`). Zone counts, durations, and rail length all scale from the VO — nothing is stretched to a target runtime (LAW 2).
 
 ## Quickstart: film #002 end-to-end
 
@@ -73,7 +73,7 @@ bun build.mjs
 
 ## The music stage
 
-Background music is **always real classical music from open public-domain / openly-licensed sources** (MUSIC LAW): actual recordings — not MIDI, not synth — composition **and** performance Public Domain or CC0 (or CC-BY with attribution). Sourced from open public data: Wikimedia Commons, Openverse, Musopen, archive.org PD collections, IMSLP (verify each recording's license page), NASA/US federal archives. Drop the file into `assets/music/`, add a credits row, and set `musicBed()` in `sfx-plan.mjs` to return `{ path, trimTo: T.DUR, gain, fadeIn, fadeOut, trimLead: true }`. The mix stage trims (including any leading silence), fades and sidechain-ducks it under the VO (≈6–8 dB) — **the bed must be audible from second 0** (verify no ≥0.3 s run at −38 dB at open). **Never two beds:** when a classical asset exists, the synth drone fallback is retired for that film. Project 001's Satie bed was lost in the wipe — see `projects/001-.../assets/music/README.md`.
+Background music is **always real classical music from open public-domain / openly-licensed sources** (MUSIC LAW): actual recordings — not MIDI, not synth — composition **and** performance Public Domain or CC0 (or CC-BY with attribution). Sourced from open public data: Wikimedia Commons, Openverse, Musopen, archive.org PD collections, IMSLP (verify each recording's license page), NASA/US federal archives. Drop the file into `assets/music/`, add a credits row, and set `musicBed()` in `sfx-plan.mjs` to return `{ path, trimTo: T.DUR, gain, fadeIn, fadeOut, trimLead: true }`. The mix stage trims (including any leading silence), fades and sidechain-ducks it under the VO (≈6–8 dB) — **the bed must be audible from second 0** (verify no ≥0.3 s run at −38 dB at open). **Never two beds:** when a classical asset exists, the synth drone fallback is retired for that film. Project 003 ships a Pathétique IV bed ducked under the VO — the pattern is the same.
 
 ## Sourcing photos/clips from the internet (LAW 1)
 

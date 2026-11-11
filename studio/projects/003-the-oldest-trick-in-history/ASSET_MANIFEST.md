@@ -21,7 +21,6 @@ as illustration.
 `thumbnail.mjs` (run: `bun thumbnail.mjs`) composes the 1280×720 thumbnails from
 the SAME CC BY 2.0 portrait (re-graded in-canvas; CSV row 10): primary
 `HONEY TRAP?` (`out/thumb.png` → `public/film/003-…-thumb.png`) and variant
-`AN AFFAIR? / AN OPERATION?` (`out/thumb-alt.png` → `public/film/003-…-thumb-alt.png`).
 Both ask a question — neither asserts a conclusion. CC BY 2.0 attribution for
 thumbnail use rides in the YouTube description credit block (VIDEO_METADATA.md).
 

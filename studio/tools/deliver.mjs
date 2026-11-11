@@ -1,5 +1,5 @@
 // deliver.mjs — alternate deliverables for a film (run from repo root):
-//   bun studio/tools/deliver.mjs --project 002-ink-and-ember
+//   bun studio/tools/deliver.mjs --project 003-the-oldest-trick-in-history
 //
 // Produces, into public/film/:
 //   <slug>.en.srt                 sidecar captions (copied from the project,

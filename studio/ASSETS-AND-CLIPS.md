@@ -22,7 +22,7 @@ bun studio/engine/clips.mjs search commons "wild aurochs lithograph" --limit 5
 bun studio/engine/clips.mjs search pexels "holstein cow" --limit 5   # needs PEXELS_API_KEY
 
 # fetch into a project (writes assets/clips/* + manifest.json, prints csvRow)
-bun studio/engine/clips.mjs fetch commons "File:Ur-painting.jpg" --project 001-the-bravest-snack-in-history --id 20 --as aurochs.jpg
+bun studio/engine/clips.mjs fetch commons "File:Ur-painting.jpg" --project 003-the-oldest-trick-in-history --id 20 --as aurochs.jpg
 bun studio/engine/clips.mjs fetch url "https://..." --project <slug> --license "Public Domain" --source "https://..." --id 21
 
 # inspect manifest
@@ -81,5 +81,5 @@ MUSIC LAW: real classical recordings from open public-domain / openly-licensed
 sources only (Commons, Openverse, Musopen, archive.org, IMSLP — verify both
 composition and performance are PD/CC0; or CC-BY with credits row + attribution),
 never MIDI/synth, never two beds. Store in `assets/music/`, trim/fade/duck in
-`sfx-plan.mjs` → `musicBed()`. See `projects/001-.../assets/music/README.md` for
+`sfx-plan.mjs` → `musicBed()`. See `projects/003-the-oldest-trick-in-history/sfx-plan.mjs` for
 the provenance template.
