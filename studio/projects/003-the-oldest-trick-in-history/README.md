@@ -69,10 +69,10 @@ publish at AAC **320k** — the native AAC filterbank reconstructs transients
 
 ## Deliverables (published, canonical)
 
-- `public/film/003-the-oldest-trick-in-history.mp4` — 21:9 master (2560×1098, 30fps, 9,092 frames)
-- `public/film/003-the-oldest-trick-in-history.en.srt` — captions (148 cues)
-- `public/film/003-the-oldest-trick-in-history-thumb.png` — YouTube thumbnail
-- `public/film/stills/003-the-oldest-trick-in-history-{hook,everything,remember}.png` — key stills
+- `public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.mp4` — 21:9 master (2560×1098, 30fps, 9,092 frames)
+- `public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.en.srt` — captions (65 cues)
+- `public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history-thumb.png` — YouTube thumbnail
+- `public/film/003-the-oldest-trick-in-history/stills/003-the-oldest-trick-in-history-{hook,everything,remember}.png` — key stills
 
 Environment notes: render chunks SEQUENTIALLY (4 GB sandbox — parallel renders
 OOM-kill), probe every `part_*.mp4` before concat, verify the published file

@@ -31,7 +31,7 @@ studio/
 ```
 
 
-**Pipeline:** canvas frame → raw RGBA piped frame-by-frame into ffmpeg → 244-frame chunks (`part_*.mp4`, sequential — OOM law) → every part ffprobed (LAW 3) → concat `-c copy` (list numerically sorted, chunk dirs wiped on re-render — LAW 3b) → `video-only.mp4` → mux with `mix.wav` (+faststart) → publish to `public/film/<slug>.mp4` → FINAL-FILE LAW numeric probe.
+**Pipeline:** canvas frame → raw RGBA piped frame-by-frame into ffmpeg → 244-frame chunks (`part_*.mp4`, sequential — OOM law) → every part ffprobed (LAW 3) → concat `-c copy` (list numerically sorted, chunk dirs wiped on re-render — LAW 3b) → `video-only.mp4` → mux with `mix.wav` (+faststart) → publish to `public/film/<slug>/<slug>.mp4` → FINAL-FILE LAW numeric probe.
 
 ## Production targets
 

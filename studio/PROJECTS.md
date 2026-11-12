@@ -10,8 +10,8 @@
 
 | Deliverable | 003 |
 |-------------|-----|
-| 21:9 master (21:9 class, H.264+AAC) | `public/film/003-the-oldest-trick-in-history.mp4` |
-| SRT captions (sidecar) | `public/film/003-the-oldest-trick-in-history.en.srt` |
-| Key stills | `public/film/stills/003-the-oldest-trick-in-history-*.png` (hook / everything / remember) |
+| 21:9 master (21:9 class, H.264+AAC) | `public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.mp4` |
+| SRT captions (sidecar) | `public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.en.srt` |
+| Key stills | `public/film/003-the-oldest-trick-in-history/stills/003-the-oldest-trick-in-history-*.png` (hook / everything / remember) |
 | Credits CSV | `studio/projects/003-the-oldest-trick-in-history/assets/assets-credits.csv` (rows 01–17) |
-| YouTube packaging | `VIDEO_METADATA.md` (title/chapters/description/tags/pinned comment) + `public/film/003-the-oldest-trick-in-history-thumb.png` |
+| YouTube packaging | `VIDEO_METADATA.md` (title/chapters/description/tags/pinned comment) + `public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history-thumb.png` |

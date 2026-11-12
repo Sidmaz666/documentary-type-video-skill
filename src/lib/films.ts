@@ -44,7 +44,7 @@ export type Film = {
 /**
  * Film manifest — canonical per-film metadata/credits. No app consumes this in-repo;
  * the showcase site (when it exists) renders from here. Slug/file naming must match
- * public/film/<slug>.mp4. Film #002 appears by adding one entry.
+ * public/film/<slug>/<slug>.mp4 (one directory per film).
  */
 export const films: Film[] = [
   {
@@ -53,7 +53,7 @@ export const films: Film[] = [
     tagline: "An investigative documentary · 5:03 · one continuous, ever-varying camera move",
     description:
       "Twenty-five hundred years before the microchip, the King of Wu fell for the most expensive gift ever wrapped — Xi Shi, stratagem 31 of 36: the beauty trap. This film is the story of the week that trick came back: on November 8, 2026, Jensen Huang told his staff he had been unfaithful to his wife — and NVIDIA's board announced an independent investigation within hours. Every frame is drawn by a canvas program onto a paper world washed with a retiled ink-wash plate (Song Nian, 清·松年, Met DP204810, CC0): the drawn chip, the memo card, the money chain, the history wall — anchored by real licensed artifacts as physical prints (the Cleveland Museum's CC0 \"In the Palace\" handscroll beside Xi Shi; Mata Hari, PD; Markus Wolf, Bundesarchiv, CC BY-SA 3.0 de; Monica Witt, FBI wanted poster, PD; Huang himself, official portrait, Office of the President ROC, CC BY 2.0; NVIDIA HQ sign, Will Buckner, CC BY 2.0; Marina Bay, Benh LIEU SONG, CC BY-SA 4.0; White House, pteron60, CC BY 2.0; Great Hall of the People, IQRemix, CC BY-SA 2.0; Summit supercomputer, ORNL, CC BY 2.0; Jefferson Lab racks, PDM; NYSE floor, aherrero, CC BY-SA 2.0). Every contested claim is attributed on screen and in SOURCE_REGISTER.md; denied or unproven claims are labelled as such; no honourable audience is left believing the honey trap verdict has been reached by any authority.",
-    videoUrl: "/film/003-the-oldest-trick-in-history.mp4",
+    videoUrl: "/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.mp4",
     zipUrl: "",
     duration: 303.061,
     frames: 9092,
@@ -62,9 +62,9 @@ export const films: Film[] = [
     fps: 30,
     codec: "H.264 + AAC",
     sizeMB: 377,
-    captions: "/film/003-the-oldest-trick-in-history.en.srt",
+    captions: "/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.en.srt",
     alternates: [
-      { label: "YouTube thumbnail (primary)", url: "/film/003-the-oldest-trick-in-history-thumb.png", note: "HONEY TRAP? — asked, not asserted; jh_2023 CC BY 2.0 portrait, grade-matched house paper print style (attribution in the video description)" },
+      { label: "YouTube thumbnail (primary)", url: "/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history-thumb.png", note: "HONEY TRAP? — asked, not asserted; jh_2023 CC BY 2.0 portrait, grade-matched house paper print style (attribution in the video description)" },
     ],
     scenes: [
       {

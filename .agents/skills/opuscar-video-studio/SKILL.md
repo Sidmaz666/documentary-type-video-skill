@@ -12,7 +12,7 @@ Follow repo `AGENTS.md` first (hard laws win).
 - `.agents/skills/cinematic-motion-graphics/` the cinematographer/motion-director bible (LAW 8) — load it whenever framing, animating text, compositing stock, or writing BEATS.md.
 - `studio/projects/<NNN-slug>/` one film: `PROJECT.md`, `BEATS.md`, `timings.mjs` (single clock `T`), `world.mjs` (art), `sfx-plan.mjs` (SFX/music, reads `T`), `render.mjs`, `audio.mjs`, `build.mjs`, `assets/`.
 - `studio/templates/project/` + `bash studio/new.sh <slug> "Title"` scaffold next film.
-- `public/film/<slug>.mp4` published artifact; `src/lib/films.ts` film manifest.
+- `public/film/<slug>/<slug>.mp4` published artifact (one dir per film); `src/lib/films.ts` film manifest.
 
 ## Hard laws checklist
 - **LAW 1**: no AI-generated media, ever. Licensed, **real** (non-AI) stock images/video/clips ARE allowed: as printed props, as grade-matched full-frame plates/B-roll (ffmpeg frame extraction → `drawImage`, bible §4), or documented assets — every one with `assets/assets-credits.csv` rows (license, author, source URL, modification). Never raw/ungraded stock to the timeline.
@@ -27,7 +27,7 @@ Follow repo `AGENTS.md` first (hard laws win).
 - **LAW 4 safe area**: no text/element clips viewport on any beat/camera pose; sweep every 0.25 s: `bun studio/tools/safearea.mjs --world studio/projects/<slug>/world.mjs --timings studio/projects/<slug>/timings.mjs` (exit 1 on breach); supplement with `bun render.mjs still <t> --scale 4` per beat. Prints must **fade in situ** — drop-in entries cross the top safe band.
 - **LAW 5 nothing floats**: attached parts root inside silhouette, joint covered.
 - **LAW 6 no stroke crosses type**: underline/circle below last line, >=40px clearance, timed after text stamps in; retime stroke, not text.
-- **LAW 7 publish hygiene**: zip hand-off excludes models/caches/chunks/.env; rebuild after source changes; `public/film/<slug>.mp4` is canonical.
+- **LAW 7 publish hygiene**: zip hand-off excludes models/caches/chunks/.env; rebuild after source changes; `public/film/<slug>/<slug>.mp4` is canonical.
 - **LAW 8 craft**: every BEATS.md row is a complete shot card (intent/shot/move/grid/hero/text-clearance/cues/assets); thirds/phi framing; no text collisions at any frame/pose; still sweep + `--scale 4` crops per beat; binding manual `.agents/skills/cinematic-motion-graphics/SKILL.md`.
 - **LAW 11 scene-fill & visible plates**: every beat carries ≥1 licensed real asset (in-situ fade helpers, never `drop:` across the band); background vibe plate must be verified **visible** in a still — multiply α≈0.15–0.20, TILED ~7000-px feathered-edge tiles built ONCE at module load (never rebuilt per frame; draw only viewport-intersecting tiles). Epoch: 003 shipped a blank-looking plate at α 0.09 and a >1h LAW 4 sweep before both were fixed. Honest-absence card when no licensed photo exists (003: redacted PRESS FILE / NOT PICTURED) — never a fabricated likeness.
 - **LAW 10 camera variety**: every zone-to-zone transit carries a non-horizontal vector (diagonal up/down, arc) — never a dead straight horizontal ride. Use `makeVariedRail(keys, seed)` (engine/camera.mjs) instead of `makeRail`: any span with |Δx| ≥ 650 px is auto-split and nudged by a deterministic anti-repeat bank; record `T.rail.variety` in PROJECT.md. Hand-keyed rails need the same diagonal discipline. LAW 4 still gates — re-seed or shrink `dyScale` on breach.

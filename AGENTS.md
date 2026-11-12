@@ -49,7 +49,7 @@ src/lib/films.ts         film manifest (per-film metadata/credits; no app in-rep
 public/film/             published MP4s (canonical artifacts)
 ```
 
-**Pipeline:** canvas frame → pipe RGBA to ffmpeg → 244-frame chunks (`part_*.mp4`) → concat (`-c copy`) → `video-only.mp4` → mux with `mix.wav` → publish to `public/film/<slug>.mp4`.
+**Pipeline:** canvas frame → pipe RGBA to ffmpeg → 244-frame chunks (`part_*.mp4`) → concat (`-c copy`) → `video-only.mp4` → mux with `mix.wav` → publish to `public/film/<slug>/<slug>.mp4`.
 
 ---
 
@@ -85,10 +85,10 @@ After every build, verify the **published** file numerically — never trust bui
 ```bash
 ffprobe -v error -count_frames -select_streams v:0 \
   -show_entries stream=nb_read_frames,duration -of default=noprint_wrappers=1 \
-  public/film/<slug>.mp4
+  public/film/<slug>/<slug>.mp4
 ffprobe -v error -select_streams a:0 \
   -show_entries stream=duration -of default=noprint_wrappers=1 \
-  public/film/<slug>.mp4
+  public/film/<slug>/<slug>.mp4
 ```
 
 - Video frames must equal the project's FRAMES (±1).
@@ -111,7 +111,7 @@ Attached parts (tails, ears, limbs) must root **inside** the silhouette they bel
 Underlines, circles and rules must never strike through text. An underline goes **below the last line** of the block it decorates with ≥40px clearance (layout-guard numbers commented in the world file). It must also land **after** the text it underlines has stamped in — re-time the underline, not the text.
 
 ### LAW 7 — Publish/archive hygiene
-The zip/archive handed off must contain only what the project needs. Exclude node_modules, `models/*` + ASR/HF caches (models are large and re-downloadable), `studio/projects/**/out/` chunks, extracted `frames/`, scratch analysis JSON, `.env`. Rebuild the zip **after** any source change that invalidates it; a stale zip in hand-off is a defect. The published MP4 in `public/film/<slug>.mp4` is the canonical artifact — a file that exists only in the sandbox does not exist (see incident log).
+The zip/archive handed off must contain only what the project needs. Exclude node_modules, `models/*` + ASR/HF caches (models are large and re-downloadable), `studio/projects/**/out/` chunks, extracted `frames/`, scratch analysis JSON, `.env`. Rebuild the zip **after** any source change that invalidates it; a stale zip in hand-off is a defect. The published MP4 in `public/film/<slug>/<slug>.mp4` is the canonical artifact — a file that exists only in the sandbox does not exist (see incident log).
 
 ### LAW 8 — Frame/beat craft & zero text collisions
 Every beat in `BEATS.md` carries a complete **shot card** (intent, shot size, angle, camera move + easing, composition-grid anchor, hero, text layers with clearances, transition, cues, assets). Every frame must honor the cinematographer grammar (rule of thirds / phi grid / leading lines / headroom / nose room / lead room), the motion grammar (Disney staging, slow in/out, arcs, follow-through, easing discipline), and the layout law — **no text may overlap any other text, hero art, stroke, or the viewport edge, at any frame, in any camera pose**. QC is by still sweep at every beat at pose (±0.5 s) and at every text entry/exit frame, with `--scale 4` crops on each text block. The full bible, binding for all projects: `.agents/skills/cinematic-motion-graphics/SKILL.md`. A beat with an incomplete shot card is not rendered (LAW 8).
