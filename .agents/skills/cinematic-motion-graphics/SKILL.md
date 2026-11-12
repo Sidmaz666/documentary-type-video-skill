@@ -291,6 +291,22 @@ A sustained window of blank paper breaks the picture. Rules:
 5. **Drop-onset rule (props entering from above):** an object entering across the top edge must not enter before the camera has cleared the transit that dipped the view; onset is calibrated to the rail (002: onset 18.4, after the low-swoop recovery — the sweep failed at 17.0), never to the VO alone.
 6. **Pull-back echo rule (LAW 4):** ghost reprises on the tail pull-back must sit ≥120 design-px inside the deepest-pull view window (002 tail zoom 0.60 → view x∈[1350,4550]; the stickman echo was half-clipped at 1520 and moved to 1780) or they clip at the frame edge. Shrink, re-place, or cut them.
 
+### 5.10 Thumbnail grammar — every scene must hold up as its own thumbnail (binding)
+
+The film's key art sets the density bar the film itself must meet (003 thumb: **HONEY TRAP?** — ~260px display on a 1280-wide frame, one portrait filling ~40% of the width, kicker on top, script subline, disclaimer at the base). A scene that would not work as a thumbnail is a defect, not a style.
+
+1. **Hero-scale test (per beat, at pose).** The hero asset occupies **≥ 35–45% of frame width** (or the headline is **≥ 18% of frame height**). If a beat fails, enlarge the hero, restructure to a hero layout, or cut the beat — never ship a scene of small props floating on empty paper.
+2. **Web hero layouts — pick one per beat and name it in the shot card:**
+   - **split-hero:** text block 45% left / asset 45% right (003 S03, S04);
+   - **centered hero:** headline dead-center, asset band top or bottom;
+   - **two-up / 3-up grid:** equal cards on a baseline;
+   - **full-width band:** one edge-to-edge structure (chart, ledger, timeline) + one stamp.
+3. **Type ladder per scene:** kicker 22–34px → subhead 34–48px → headline 100–260px → micro-credit 22–26px. Never two mid-size tiers competing for the eye.
+4. **Asset anatomy:** print, then caption ≤ 24px below the print bottom with ≥ 20px clearance; never text on/over the print (LAW 8); prints render at **full opacity at hold** — fade only while entering/leaving the frame.
+5. **Fill rule:** no quarter of the frame sits empty for >1.5s during a hold — add marginalia, a second print, a plate, or re-block the scene.
+6. **Fade-calibration law:** entry/exit fades are calibrated to the **frame edge in canvas px**: alpha 0 only when the element edge is inside the outer 60px band; alpha 1 by ~200 canvas-px inside. World-offset constants (the old 1256±220 style) ghost assets that are still well in frame at zoom<1 — banned (the "why do assets look washed out" defect).
+7. **Transit budget:** zone-to-zone travel ≤ **3.2s**; arrive ≥ 1.2s before the first VO word of the beat; long holds drift, never dead-stop. A 4.5s+ empty transit reads as a screensaver.
+
 ---
 
 ## 6 · Color & the color script

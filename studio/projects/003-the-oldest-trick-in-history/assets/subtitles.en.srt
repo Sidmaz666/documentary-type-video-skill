@@ -1,5 +1,5 @@
 1
-00:00:00,820 --> 00:00:06,260
+00:00:00,820 --> 00:00:06,280
 2500 years before the microchip, the king of Wu fell for the most expensive gift ever wrapped.
 
 2
@@ -19,7 +19,7 @@ Wu partyed. Wu declined. You won the war.
 Strategy 31 of 36.
 
 6
-00:00:19,220 --> 00:00:20,240
+00:00:19,220 --> 00:00:20,260
 The beauty trap.
 
 7
@@ -32,7 +32,7 @@ This is the story of the week it came back.
 
 9
 00:00:25,340 --> 00:00:34,240
-Cut to 2026, NVIDIA is the most important ship company on Earth, the $5 trillion furnace the entire AI boom is welded to.
+Cut to 2026, Envidia is the most important ship company on Earth, the $5 trillion furnace the entire AI boom is welded to.
 
 10
 00:00:34,940 --> 00:00:38,760
@@ -47,213 +47,233 @@ And two weeks ago he sent his staff a letter that opens like a tabloid headline 
 I was unfaithful to my wife, and the board has opened an independent investigation.
 
 13
-00:00:45,400 --> 00:00:51,080
+00:00:45,400 --> 00:00:51,180
 I was unfaithful to my wife, and the board has opened an independent investigation into me.
 
 14
-00:00:51,600 --> 00:00:53,220
+00:00:51,740 --> 00:00:53,220
 Yes, out loud.
 
 15
-00:00:53,420 --> 00:00:56,960
+00:00:53,400 --> 00:00:56,960
 The woman at the center is Alice Wong, no relation.
 
 16
-00:00:57,300 --> 00:01:04,120
+00:00:57,300 --> 00:01:04,160
 Reporting places her as a top executive at Megaspeed International, a Singapore-based data center operator.
 
 17
-00:01:04,340 --> 00:01:14,560
-There is no public photograph of her that anyone can legally license, print, or screen grab, which in 2026 is its own genre of suspicious.
+00:01:04,260 --> 00:01:10,360
+The only photo of her in circulation is a dinner candid nobody ever authorized.
 
 18
-00:01:14,880 --> 00:01:19,080
-Here is where it stops being awkward and becomes national security.
+00:01:10,940 --> 00:01:14,600
+Which, in 2026, is its own genre of suspicious.
 
 19
+00:01:14,900 --> 00:01:19,080
+Here is where it stops being awkward and becomes national security.
+
+20
 00:01:19,400 --> 00:01:31,140
 According to reporting based on US intelligence assessments, surveillance unmasked contact, and identified Alice Huang as a suspected asset of China's Ministry of State Security.
 
-20
+21
 00:01:31,140 --> 00:01:36,420
 A spring 2026 Intelligence memo reportedly describes an attempted romance.
 
-21
-00:01:36,540 --> 00:01:38,700
+22
+00:01:36,540 --> 00:01:38,720
 Of course it does that is the strategy.
 
-22
-00:01:39,060 --> 00:01:42,120
+23
+00:01:39,060 --> 00:01:42,300
 The State Department under Rubio oversaw the memo.
 
-23
+24
 00:01:42,380 --> 00:01:44,800
 Officials were briefed almost a year earlier.
 
-24
-00:01:45,120 --> 00:01:49,060
+25
+00:01:45,140 --> 00:01:49,060
 Alleged, not charged, not proven, but briefed.
 
-25
+26
 00:01:49,240 --> 00:01:51,160
 Now the receipts get contested.
 
-26
+27
 00:01:51,340 --> 00:01:54,720
 Singapore's government says no such investigation exists.
 
-27
+28
 00:01:54,940 --> 00:02:02,840
 China's foreign ministry called the report's groundless speculation, smears, slander, and attempt to poison business ties.
 
-28
-00:02:03,200 --> 00:02:09,080
+29
+00:02:03,180 --> 00:02:09,080
 NBC News notes that none of it is independently confirmed, and the CIA said nothing at all.
 
-29
-00:02:09,360 --> 00:02:20,600
+30
+00:02:09,360 --> 00:02:20,640
 An Nvidia board read this one twice says it has no reason to believe company secrets were compromised, which is either the reassurance or the reason the investigation exists.
 
-30
+31
 00:02:20,860 --> 00:02:22,200
 So who is megaspede?
 
-31
+32
 00:02:22,580 --> 00:02:31,240
 Once known as seven road, Singapore registered, data centers across Asia, and a buying arm speed matrix in Malaysia.
 
-32
-00:02:31,440 --> 00:02:41,160
+33
+00:02:31,440 --> 00:02:41,140
 Bluemerk traced at least $4 .8 billion of Nvidia chip flows through those companies between February 2024 and February 2026.
 
-33
+34
 00:02:41,420 --> 00:02:44,840
 Jensen Huang called it normal and not unusual.
 
-34
+35
 00:02:45,220 --> 00:02:48,720
 Nvidia called it thoroughly investigated and debunked last year.
 
-35
+36
 00:02:48,980 --> 00:02:51,500
 Pick whichever sentence you find more comforting.
 
-36
+37
 00:02:51,800 --> 00:02:54,760
 Because none of this is new, it just shipped a new build.
 
-37
+38
 00:02:55,180 --> 00:02:57,920
 Mata Hari executed in 1917.
 
-38
-00:02:58,120 --> 00:03:01,020
+39
+00:02:58,140 --> 00:03:01,020
 Declassified files say she leaked almost nothing.
 
-39
+40
 00:03:01,260 --> 00:03:03,460
 And that is the trap's dirty secret.
 
-40
+41
 00:03:03,580 --> 00:03:05,360
 You don't need to steal anything.
 
-41
+42
 00:03:05,700 --> 00:03:07,560
 Proximity is the payload.
 
-42
+43
 00:03:07,900 --> 00:03:15,200
 East Germany ran an entire direct rate of Romeo agents staged romances, used to recruit civil servants.
 
-43
-00:03:15,480 --> 00:03:18,600
+44
+00:03:15,480 --> 00:03:18,440
 Monica Whit walked away to Iran in 2013.
 
-44
-00:03:18,960 --> 00:03:22,300
+45
+00:03:18,920 --> 00:03:22,320
 Christine Fang spent 2011 to 2015 befriending U .S.
 
-45
-00:03:22,760 --> 00:03:27,000
-politicians before vanishing mid-investigation, access, intimacy,
-
 46
-00:03:28,060 --> 00:03:33,160
-leverage, the playbook is older than the printing press, and it still ships on schedule.
+00:03:22,760 --> 00:03:25,360
+politicians before vanishing mid-investigation.
 
 47
-00:03:33,360 --> 00:03:36,100
-Why does Washington even care who dates whom?
+00:03:26,080 --> 00:03:28,560
+Access. Intimacy. Leverage.
 
 48
-00:03:36,260 --> 00:03:42,880
-Because in October 2022, export controls turned advanced AI chips into weapons-grade hardware.
+00:03:28,780 --> 00:03:33,140
+The playbook is older than the printing press, and it still ships on schedule.
 
 49
-00:03:42,880 --> 00:03:48,260
-The H20 license alone cost Nvidia 5 .5 billion dollars in charges.
+00:03:33,340 --> 00:03:36,040
+Why does Washington even care who dates whom?
 
 50
+00:03:36,300 --> 00:03:42,780
+Because in October 2022, export controls turned advanced AI chips into weapons-grade hardware.
+
+51
+00:03:42,920 --> 00:03:48,260
+The H20 license alone cost Nvidia 5 .5 billion dollars in charges.
+
+52
 00:03:48,460 --> 00:03:54,000
 And by May 2026, reported deliveries of those chips to China had fallen to zero.
 
-51
+53
 00:03:54,680 --> 00:03:58,480
 Suddenly, a CEO's personal life is a customs checkpoint.
 
-52
-00:03:58,680 --> 00:04:04,760
+54
+00:03:58,700 --> 00:04:04,760
 So when an alleged asset is reported beside the CEO, markets do the math in one trading day.
 
-53
-00:04:05,160 --> 00:04:06,200
+55
+00:04:05,160 --> 00:04:06,220
 November 9th.
 
-54
-00:04:06,660 --> 00:04:13,600
-Nvidia dropped 4 .3 %, roughly $190 billion in value, deleted before lunch.
-
-55
-00:04:13,840 --> 00:04:18,960
-A shareholder lawsuit followed claiming investors were kept in the dark about the disclosures.
-
 56
-00:04:19,200 --> 00:04:26,080
-Allegations not findings, but the number is real, so what do we actually know confirmed he admitted the affair?
+00:04:06,420 --> 00:04:13,600
+In video dropped 4 .3 %, roughly $190 billion in value, deleted before lunch.
 
 57
-00:04:26,240 --> 00:04:41,880
-The board opened an independent investigation, reported the MSS link the memo the briefing, denied Beijing, Singapore, unknown whether anything was compromised, whether this was an operation at all, or whether it was simply a terrible coincidence.
+00:04:13,840 --> 00:04:18,980
+A shareholder lawsuit followed claiming investors were kept in the dark about the disclosures.
 
 58
+00:04:19,200 --> 00:04:25,680
+Allegations not findings, but the number is real, so what do we actually know confirmed he admitted the affair?
+
+59
+00:04:26,240 --> 00:04:28,640
+The board opened an independent investigation.
+
+60
+00:04:29,420 --> 00:04:31,680
+Reported, the MSS link the memo, the briefing,
+
+61
+00:04:32,500 --> 00:04:34,400
+denied Beijing, Singapore.
+
+62
+00:04:35,280 --> 00:04:41,640
+Unknown, whether anything was compromised, whether this was an operation at all, or whether it was simply a terrible coincidence.
+
+63
 00:04:42,280 --> 00:04:47,740
 The oldest trick in the history survived Babylon, the Borges, and every spy thriller ever written.
 
-59
+64
 00:04:48,040 --> 00:04:49,900
 Two people. One relationship.
 
-60
+65
 00:04:50,780 --> 00:04:53,860
 Five trillion dollars of secrets standing behind them.
 
-61
+66
 00:04:54,060 --> 00:04:55,200
 Maybe it was love.
 
-62
-00:04:55,460 --> 00:04:56,900
+67
+00:04:55,440 --> 00:04:56,880
 Maybe it was tradecraft.
 
-63
+68
 00:04:57,160 --> 00:04:58,460
 Maybe it was both.
 
-64
-00:04:58,680 --> 00:05:01,560
+69
+00:04:58,680 --> 00:05:01,580
 Trust has always been the cheapest door to kick in.
 
-65
-00:05:01,740 --> 00:05:03,020
+70
+00:05:01,740 --> 00:05:06,020
 And it has never been patched.

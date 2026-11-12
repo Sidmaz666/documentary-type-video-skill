@@ -15,12 +15,27 @@ const REDF = RED;
 // fadeExit dissolves an element BEFORE its left edge crosses the band
 // (sxL = element's left edge, camX = camera center). Camera always moves right.
 const camXNow = (t) => camAt(T.rail, t).x;
-const fadeExit = (sxL, camX) => clamp((sxL + 1256 - camX) / 300, 0, 1);
-const fadeEntry = (sxR, camX) => clamp((1256 - (sxR - camX)) / 130, 0, 1);
+// Frame-edge calibrated: alpha 0 only when the element's edge is within the
+// 60px outer band on the CANVAS, full opacity once it is 200 canvas-px inside.
+// (The old zoom-1.0 constants ghosted assets that were still well in frame at
+// zoom 0.92-0.97 — the "washed-out asset" defect.)
+const EDGE_Z = 0.95;
+const fadeExit = (sxL, camX) => clamp(((sxL - camX) * EDGE_Z + 1220) / 140, 0, 1);
+const fadeEntry = (sxR, camX) => clamp((1220 - (sxR - camX) * EDGE_Z) / 140, 0, 1);
 
 const ASSET_DIR = new URL('./assets/clips/', import.meta.url);
 const { loadImage } = await import('../../engine/props.mjs');
 const { createCanvas } = await import('@napi-rs/canvas');
+// press photo grade-match — lift contrast/saturation once at load (paper-world solidity)
+const graded = async (url) => {
+  const img = await loadImage(url);
+  const c = createCanvas(img.width, img.height);
+  const g = c.getContext('2d');
+  g.filter = 'contrast(1.22) saturate(1.15) brightness(1.03)';
+  g.drawImage(img, 0, 0);
+  return c;
+};
+
 const IMG = {
   jh: await loadImage(new URL('jh_2023.jpg', ASSET_DIR)),
   mataHari: await loadImage(new URL('mata_hari.jpg', ASSET_DIR)),
@@ -35,6 +50,7 @@ const IMG = {
   racks: await loadImage(new URL('racks.jpg', ASSET_DIR)),
   nyse: await loadImage(new URL('nyse.jpg', ASSET_DIR)),
   palace: await loadImage(new URL('palace.jpg', ASSET_DIR)),
+  alice: await graded(new URL('alice_press.jpg', ASSET_DIR)),
 };
 
 // vibe tile — built ONCE at module load: Song Nian slice stretched to 7200×4800,
@@ -108,7 +124,7 @@ function chipGlyph(ctx, x, y, s, t, t0) {
 
 function memoCard(ctx, x, y, t) {
   // Illustrative memo — clearly labelled; NOT a real document.
-  const T0 = 93.6;
+  const T0 = 80.6;
   const u = clamp((t - T0) / 0.7);
   if (u <= 0) return;
   noteCard(ctx, x, y, { w: 880, h: 470, t0: T0, t, dur: 0.6, rot: -0.012, alpha: 1 });
@@ -151,7 +167,7 @@ function memoCard(ctx, x, y, t) {
 
 function chainFlow(ctx, x, y, t) {
   // MEGASPEED -> SPEEDMATRIX chain cards + arrows
-  const u1 = clamp((t - 142.8) / 0.5);
+  const u1 = clamp((t - 139.2) / 0.5);
   const u2 = clamp((t - 149.4) / 0.5);
   const u3 = clamp((t - 153.0) / 0.5);
   if (u1 <= 0) return;
@@ -200,7 +216,7 @@ function chainFlow(ctx, x, y, t) {
 }
 
 function stockChart(ctx, x, y, t) {
-  const u = clamp((t - 246.0) / 2.6);
+  const u = clamp((t - 243.2) / 2.6);
   if (u <= 0) return;
   const pts = [];
   const n = 46;
@@ -209,20 +225,20 @@ function stockChart(ctx, x, y, t) {
     const jag = (hash(Math.imul(i + 3, 73856093)) - 0.5) * 50;
     let dy = jag;
     if (f > 0.78) dy += (f - 0.78) / 0.22 * 430; // the cliff
-    pts.push({ x: x - 1050 + f * 2100, y: y + dy });
+    pts.push({ x: x - 800 + f * 1600, y: y + dy });
   }
   const upto = Math.floor(u * (pts.length - 1)) + 1;
   handStroke(ctx, pts.slice(0, upto), { w: 8, color: INK, boil: 1.2 });
   // −4.3% annotation at the cliff foot (lands when VO says the number)
   const au = clamp((t - 249.4) / 0.6);
   if (au > 0) {
-    handLine(ctx, x + 830, y + 445, x + 830, y + 495, { w: 5, color: REDF, boil: 1 });
+    handLine(ctx, x + 630, y + 445, x + 630, y + 495, { w: 5, color: REDF, boil: 1 });
     ctx.save();
     ctx.globalAlpha *= au;
     ctx.fillStyle = REDF;
     ctx.font = '700 52px "Archivo Black", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('−4.3%', x + 830, y + 515);
+    ctx.fillText('−4.3%', x + 630, y + 515);
     ctx.restore();
   }
 }
@@ -293,7 +309,7 @@ function interlude(ctx, x, y, t, t0, adlib = '') {
 }
 
 function evidenceWall(ctx, x, y, t) {
-  const u = clamp((t - 263.6) / 0.9);
+  const u = clamp((t - 261.3) / 0.9);
   if (u <= 0) return;
   const panel = (cx, head, lines, accent, uIn) => {
     if (uIn <= 0) return;
@@ -318,17 +334,17 @@ function evidenceWall(ctx, x, y, t) {
     '— Huang: “I was unfaithful”',
     '— Board: independent probe',
     '— NVDA −4.3% on Nov 9',
-  ], false, clamp((t - 264.5) / 0.7));
+  ], false, clamp((t - 262.6) / 0.7));
   panel(x, 'REPORTED', [
     '— MSS asset (NYT / FT / NBC)',
     '— memo, spring 2026',
     '— Singapore MHA: no probes',
-  ], false, clamp((t - 269.5) / 0.7));
+  ], false, clamp((t - 267.0) / 0.7));
   panel(x + 700, 'UNKNOWN', [
     '— what, if anything, passed',
     '— whether this was “an op”',
     '— no charge. no admission.',
-  ], true, clamp((t - 275.4) / 0.7));
+  ], true, clamp((t - 271.6) / 0.7));
 }
 
 function exportStamps(ctx, x, y, t) {
@@ -351,31 +367,8 @@ function exportStamps(ctx, x, y, t) {
   }
 }
 
-function ghostDrift(ctx, t) {
-  // Parallax back-layer: vast, faint ink ghosts sliding at ~0.35× camera speed.
-  // Depth without heroes — nothing here ever enters the safe band's attention.
-  const camX = camAt(T.rail, t).x;
-  const drift = camX * 0.65; // objects keep 0.35 of world speed
-  ctx.save();
-  for (let i = 0; i < 14; i++) {
-    const bx = i * 4600 + (i % 3) * 1400 + 500;
-    const gx = bx + drift;
-    const gy = 400 + ((i * 733) % 2600);
-    const r = 240 + ((i * 389) % 260);
-    const a = 0.05 + ((i * 37) % 10) * 0.004;
-    ctx.globalAlpha = a;
-    ctx.lineWidth = 44 + (i % 3) * 20;
-    ctx.strokeStyle = INK;
-    ctx.beginPath();
-    ctx.ellipse(gx, gy, r, r * (0.55 + (i % 3) * 0.22), (i % 4) * 0.4, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-
 export function drawWorld(ctx, t) {
   drawPaper(ctx, -200, -1200, T.BOARD_W + 400, T.BOARD_H + 2400, 21);
-  ghostDrift(ctx, t);
   // vibe plate — TILED (retile: one whole-board stretch was invisible at α 0.09).
   // Tiles are pre-feathered ONCE at module load (L/R edges dissolve to transparent
   // over 390px) so overlaps blend in multiply — no seams, no double-darkening.
@@ -412,23 +405,23 @@ export function drawWorld(ctx, t) {
       maskUpText(ctx, 1780, 600, 'GIFT EVER WRAPPED.”', { size: 125, t0: 5.7, t1: 6.3, t, font: FONT.display });
       // underline — below last line, landed AFTER the text (LAW 6)
       if (t > 6.4) handStroke(ctx, [{ x: 1470, y: 668 }, { x: 2095, y: 662 }], { w: 9, color: REDF, progress: clamp((t - 6.4) / 0.4) });
-      typewriter(ctx, 1780, 775, '— THE STORY AS THE ANCIENTS TELL IT', { size: 39, t0: 7.3, t, cps: 24, font: FONT.serif });
+      typewriter(ctx, 1250, 775, '— THE STORY AS THE ANCIENTS TELL IT', { size: 39, t0: 7.3, t, cps: 24, font: FONT.serif });
       // left margin: the fall of Wu
       stampText(ctx, 980, 830, 'WU PARTIES.', { size: 44, t0: 13.5, t, color: INK, rot: -0.01, font: FONT.serif });
       stampText(ctx, 980, 920, 'YUE WINS.', { size: 44, t0: 15.7, t, color: REDF, rot: 0.012, font: FONT.serif });
       // right column: Xi Shi + the palace scroll print (in-situ fade, LAW 4)
       typewriter(ctx, 2380, 340, 'XI SHI', { size: 83, t0: 6.5, t, cps: 9, font: FONT.display });
       typewriter(ctx, 2380, 392, 'GIFT OF THE KING OF YUE', { size: 31, t0: 7.0, t, cps: 22, font: FONT.serif });
-      drawPrint(ctx, IMG.palace, 2380, 850, { w: 610, rot: -0.014, alpha: printA(t, 2.0, 18.6, 2380 - 250) });
-      const capA = clamp((t - 2.7) / 0.6, 0, 1) * a * fadeExit(2380 - 250, camXNow(t));
+      drawPrint(ctx, IMG.palace, 2330, 840, { w: 780, rot: -0.014, alpha: printA(t, 2.0, 18.6, 2330 - 310) });
+      const capA = clamp((t - 2.7) / 0.6, 0, 1) * a * fadeExit(2330 - 310, camXNow(t));
       if (capA > 0.01) {
         ctx.save(); ctx.globalAlpha *= capA;
         ctx.fillStyle = INK; ctx.font = '23px "Noto Serif", serif'; ctx.textAlign = 'center';
-        ctx.fillText('COURT LADIES · CLEVELAND MUSEUM · CC0', 2380, 985);
+        ctx.fillText('COURT LADIES · CLEVELAND MUSEUM · CC0', 2330, 1010);
         ctx.restore();
       }
       // the stratagem, named when the VO names it (LAW 6)
-      stampText(ctx, 1780, 850, 'STRATAGEM 31 OF 36 — THE BEAUTY TRAP', { size: 39, t0: 17.2, t, color: INK, rot: -0.006, font: FONT.serif });
+      stampText(ctx, 1300, 850, 'STRATAGEM 31 OF 36 — THE BEAUTY TRAP', { size: 39, t0: 17.2, t, color: INK, rot: -0.006, font: FONT.serif });
       {
         const bA = clamp((t - 17.4) / 0.5, 0, 1) * a * fadeExit(1780 - 160, camXNow(t));
         if (bA > 0.01) {
@@ -436,7 +429,7 @@ export function drawWorld(ctx, t) {
           ctx.fillStyle = REDF;
           ctx.font = `83px "${FONT.brush}"`;
           ctx.textAlign = 'center';
-          ctx.fillText('美人計', 1780, 955);
+          ctx.fillText('美人計', 1680, 955);
           ctx.restore();
         }
       }
@@ -458,40 +451,51 @@ export function drawWorld(ctx, t) {
       stampText(ctx, 7970, 890, 'OCT 2025', { size: 44, t0: 32.9, t, color: REDF, font: FONT.serif });
       typewriter(ctx, 7400, 130, 'THE MOST IMPORTANT CHIP COMPANY ON EARTH', { size: 39, t0: 27.8, t, cps: 26, font: FONT.serif });
       // prints — HQ sign (left) + Jensen Huang (right); in-situ fades (LAW 4)
-      drawPrint(ctx, IMG.hq, 6480, 780, { w: 370, rot: -0.018, alpha: printA(t, 28.2, 48.6, 6330) });
-      drawPrint(ctx, IMG.jh, 8150, 380, { w: 400, rot: 0.016, alpha: printA(t, 34.9, 48.6, 7985) });
+      drawPrint(ctx, IMG.hq, 6480, 780, { w: 420, rot: -0.018, alpha: printA(t, 28.2, 48.6, 6330) });
+      drawPrint(ctx, IMG.jh, 8150, 380, { w: 450, rot: 0.016, alpha: printA(t, 34.9, 48.6, 7985) });
       const cA = clamp((t - 28.9) / 0.6, 0, 1) * a * fadeExit(6330, camXNow(t));
       if (cA > 0.01) {
         ctx.save(); ctx.globalAlpha *= cA;
         ctx.fillStyle = INK; ctx.font = '23px "Noto Serif", serif'; ctx.textAlign = 'center';
-        ctx.fillText('HQ SIGN · CC BY 2.0', 6480, 940);
+        ctx.fillText('HQ SIGN · CC BY 2.0', 6480, 992);
         ctx.restore();
       }
       ctx.restore();
     }
   }
 
-  // ── S03 · ALICE HUANG ───────────────────────────────────────
+  // ── S03 · ALICE HUANG ───────────────────
   {
     const a = zoneAlpha(t, 51.6, 68.6, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      typewriter(ctx, 12980, 240, 'ALICE HUANG', { size: 109, t0: 55.2, t, cps: 12, font: FONT.display });
-      typewriter(ctx, 12980, 360, 'MEGASPEED INTERNATIONAL · SINGAPORE', { size: 42, t0: 59.7, t, cps: 26, font: FONT.serif });
-      typewriter(ctx, 12980, 415, 'NO RELATION TO JENSEN', { size: 34, t0: 56.1, t, cps: 26, font: FONT.serif });
+      // two-column hero — press print LEFT, headline stack + diagram RIGHT
+      drawPrint(ctx, IMG.alice, 12140, 560, { w: 700, rot: -0.016, alpha: printA(t, 54.8, 68.3, 11790) });
+      const alA = clamp((t - 55.4) / 0.6, 0, 1) * a * fadeExit(11790, camXNow(t));
+      if (alA > 0.01) {
+        ctx.save(); ctx.globalAlpha *= alA;
+        ctx.fillStyle = INK; ctx.textAlign = 'center'; ctx.font = '23px "Noto Serif", serif';
+        ctx.fillText('PHOTO AS PUBLISHED BY NEWS OUTLETS', 12140, 900);
+        ctx.font = 'italic 22px "Noto Serif", serif';
+        ctx.fillText('identity as reported — not independently verified', 12140, 930);
+        ctx.restore();
+      }
+      typewriter(ctx, 13520, 240, 'ALICE HUANG', { size: 109, t0: 55.2, t, cps: 12, font: FONT.display });
+      typewriter(ctx, 13520, 352, 'MEGASPEED INTERNATIONAL', { size: 42, t0: 61.4, t, cps: 24, font: FONT.serif });
+      typewriter(ctx, 13520, 402, 'SINGAPORE · NO RELATION TO JENSEN', { size: 34, t0: 56.1, t, cps: 26, font: FONT.serif });
       // relationship diagram — two circles, dotted ?, NOT a heart
-      handCircle(ctx, 12640, 640, 92, { w: 6, color: INK, progress: clamp((t - 61.3) / 0.8) });
-      handCircle(ctx, 13320, 640, 92, { w: 6, color: INK, progress: clamp((t - 62.3) / 0.8) });
-      ctx.font = '600 44px "Archivo Black", sans-serif';
+      handCircle(ctx, 13140, 620, 88, { w: 6, color: INK, progress: clamp((t - 61.3) / 0.8) });
+      handCircle(ctx, 13810, 620, 88, { w: 6, color: INK, progress: clamp((t - 62.3) / 0.8) });
+      ctx.font = '600 33px "Archivo Black", sans-serif';
       ctx.fillStyle = INK;
       ctx.textAlign = 'center';
       const ta = clamp((t - 62.9) / 0.5, 0, 1);
       ctx.globalAlpha *= ta;
-      ctx.fillText('JENSEN', 12640, 640);
-      ctx.fillText('ALICE', 13320, 640);
+      ctx.fillText('JENSEN', 13140, 620);
+      ctx.fillText('ALICE', 13810, 620);
       ctx.globalAlpha /= ta;
-      if (t > 63.7) dashedLine(ctx, 12750, 640, 13210, 640, t, 63.7);
+      if (t > 63.7) dashedLine(ctx, 13240, 620, 13710, 620, t, 63.7);
       // rotating dashed targeting ring — slow, red, never settles (ambient motion)
       {
         const spin = t * 0.55;
@@ -500,30 +504,19 @@ export function drawWorld(ctx, t) {
         ctx.strokeStyle = REDF; ctx.lineWidth = 7;
         ctx.setLineDash([30, 22]);
         ctx.lineDashOffset = -spin * 160;
-        ctx.beginPath(); ctx.arc(13320, 640, 132, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(13810, 620, 132, 0, Math.PI * 2); ctx.stroke();
         ctx.setLineDash([]);
         ctx.restore();
       }
-      typewriter(ctx, 12980, 805, 'REPORTED — NEVER CHARGED', { size: 36, t0: 68.4, t, cps: 22, font: FONT.hand });
-      // Singapore plate (Marina Bay dusk) — in-situ fade (LAW 4)
-      drawPrint(ctx, IMG.sg, 12480, 880, { w: 515, rot: 0.014, alpha: printA(t, 61.9, 68.3, 12270) });
-      const sA = clamp((t - 62.6) / 0.6, 0, 1) * a * fadeExit(12270, camXNow(t));
+      typewriter(ctx, 13520, 750, 'REPORTED — NEVER CHARGED', { size: 36, t0: 68.4, t, cps: 22, font: FONT.hand });
+      // Singapore plate bottom-right — the documented link
+      drawPrint(ctx, IMG.sg, 13600, 900, { w: 430, rot: 0.012, alpha: printA(t, 61.9, 68.3, 13330) });
+      const sA = clamp((t - 62.6) / 0.6, 0, 1) * a * fadeExit(13330, camXNow(t));
       if (sA > 0.01) {
         ctx.save(); ctx.globalAlpha *= sA;
         ctx.fillStyle = INK; ctx.font = '23px "Noto Serif", serif'; ctx.textAlign = 'center';
-        ctx.fillText('MARINA BAY · CC BY-SA 4.0', 12480, 1000);
+        ctx.fillText('MARINA BAY · CC BY-SA 4.0', 13600, 1024);
         ctx.restore();
-      }
-      // no face of Alice Huang — anywhere: no freely-licensed, identity-verifiable
-      // portrait exists; never a guess, never a scraped press photo
-      {
-        const rA = clamp((t - 66.4) / 0.6, 0, 1) * a * fadeExit(13650, camXNow(t));
-        if (rA > 0.01) {
-          ctx.save(); ctx.globalAlpha *= rA * 0.85;
-          ctx.fillStyle = INK; ctx.font = 'italic 26px "Noto Serif", serif'; ctx.textAlign = 'center';
-          ctx.fillText('REPORTED, NOT DEPICTED — no public portrait licensed', 12980, 905);
-          ctx.restore();
-        }
       }
       ctx.restore();
     }
@@ -540,12 +533,12 @@ export function drawWorld(ctx, t) {
       memoCard(ctx, 18760, 520, t);
       typewriter(ctx, 18760, 862, 'SPRING 2026 · RUBIO OVERSAW THE MEMO', { size: 34, t0: 100.8, t, cps: 24, font: FONT.serif });
       // White House print — Washington owns the memo (LAW 4 in-situ fade)
-      drawPrint(ctx, IMG.wh, 17760, 880, { w: 390, rot: -0.016, alpha: printA(t, 79.2, 102.6, 17600) });
-      const wA = clamp((t - 79.9) / 0.6, 0, 1) * a * fadeExit(17600, camXNow(t));
+      drawPrint(ctx, IMG.wh, 18040, 790, { w: 440, rot: -0.016, alpha: printA(t, 79.2, 102.6, 17820) });
+      const wA = clamp((t - 79.9) / 0.6, 0, 1) * a * fadeExit(17820, camXNow(t));
       if (wA > 0.01) {
         ctx.save(); ctx.globalAlpha *= wA;
         ctx.fillStyle = INK; ctx.font = '23px "Noto Serif", serif'; ctx.textAlign = 'center';
-        ctx.fillText('WHITE HOUSE · CC BY 2.0', 17760, 1038);
+        ctx.fillText('WHITE HOUSE · CC BY 2.0', 18040, 992);
         ctx.restore();
       }
       ctx.restore();
@@ -580,16 +573,7 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
       ledgerColumns(ctx, 24680, 480, t);
       stampText(ctx, 24680, 940, 'NO REASON TO BELIEVE', { size: 57, t0: 133.2, t, color: INK, rot: 0.006, font: FONT.serif });
       // Great Hall print — Beijing's denial (LAW 4 in-situ fade)
-      drawPrint(ctx, IMG.bj, 24680, 920, { w: 355, rot: 0.012, alpha: printA(t, 114.9, 134.0, 24535) });
-      {
-        const bA = clamp((t - 115.6) / 0.6, 0, 1) * a * fadeExit(24535, camXNow(t));
-        if (bA > 0.01) {
-          ctx.save(); ctx.globalAlpha *= bA;
-          ctx.fillStyle = INK; ctx.font = '21px "Noto Serif", serif'; ctx.textAlign = 'center';
-          ctx.fillText('GREAT HALL · CC BY-SA 2.0', 24680, 1042);
-          ctx.restore();
-        }
-      }
+      drawPrint(ctx, IMG.bj, 25380, 912, { w: 320, rot: 0.012, alpha: printA(t, 114.9, 134.0, 25215) });
       ctx.restore();
     }
   }
@@ -608,13 +592,13 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
       typewriter(ctx, 30480, 728, '— NVIDIA', { size: 26, t0: 168.8, t, cps: 30, font: FONT.serif });
       ctx.globalAlpha /= qx;
       // supercomputer plate — illustrative, captioned honestly (LAW 4)
-      drawPrint(ctx, IMG.hpc, 31180, 830, { w: 440, rot: -0.014, alpha: printA(t, 146.6, 165.0, 31000) });
+      drawPrint(ctx, IMG.hpc, 31180, 800, { w: 600, rot: -0.014, alpha: printA(t, 143.6, 165.0, 31000) });
       {
-        const hA = clamp((t - 147.3) / 0.6, 0, 1) * a * fadeExit(31000, camXNow(t));
+        const hA = clamp((t - 144.3) / 0.6, 0, 1) * a * fadeExit(31000, camXNow(t));
         if (hA > 0.01) {
           ctx.save(); ctx.globalAlpha *= hA;
           ctx.fillStyle = INK; ctx.font = '23px "Noto Serif", serif'; ctx.textAlign = 'center';
-          ctx.fillText('ILLUSTRATIVE: SUPERCOMPUTER-CLASS COMPUTE', 31180, 966);
+          ctx.fillText('ILLUSTRATIVE: SUPERCOMPUTER-CLASS COMPUTE', 31180, 1006);
           ctx.restore();
         }
       }
@@ -666,21 +650,21 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
       });
       const acA = fadeExit(38600 - 390, camXNow(t));
       ctx.save(); ctx.globalAlpha *= acA;
-      typewriter(ctx, 38600, 800, 'ACCESS · INTIMACY · LEVERAGE', { size: 60, t0: 206.2, t, cps: 20, font: FONT.display });
+      typewriter(ctx, 38600, 900, 'ACCESS · INTIMACY · LEVERAGE', { size: 60, t0: 206.2, t, cps: 20, font: FONT.display });
       ctx.restore();
       ctx.restore();
       // three prints — in-situ fades (LAW 4)
-      drawPrint(ctx, IMG.mataHari, 35650, 445, { w: 365, rot: -0.02, alpha: printA(t, 175.3, 210.3, 35500) });
-      drawPrint(ctx, IMG.wolf, 37550, 445, { w: 365, rot: 0.014, alpha: printA(t, 188.2, 210.3, 37400) });
-      drawPrint(ctx, IMG.witt, 38550, 445, { w: 365, rot: -0.012, alpha: printA(t, 195.7, 210.3, 38400) });
+      drawPrint(ctx, IMG.mataHari, 35650, 552, { w: 380, rot: -0.02, alpha: printA(t, 175.3, 210.3, 35460) * fadeEntry(35840, camXNow(t)) });
+      drawPrint(ctx, IMG.wolf, 37550, 552, { w: 380, rot: 0.014, alpha: printA(t, 188.2, 210.3, 37360) * fadeEntry(37740, camXNow(t)) });
+      drawPrint(ctx, IMG.witt, 38550, 552, { w: 380, rot: -0.012, alpha: printA(t, 195.7, 210.3, 38360) * fadeEntry(38740, camXNow(t)) });
       // captions under prints (29px serif)
       const cap = (cx, cap1, u, sxL) => {
         if (u <= 0) return;
-        const fx = fadeExit(sxL, camXNow(t));
+        const fx = fadeExit(sxL, camXNow(t)) * fadeEntry(cx + 260, camXNow(t));
         if (fx <= 0.01) return;
         ctx.save(); ctx.globalAlpha *= u * fx * zoneAlpha(t, 171.2, 210.5, 0.6, 0);
         ctx.fillStyle = INK; ctx.font = '29px "Noto Serif", serif'; ctx.textAlign = 'center';
-        ctx.fillText(cap1, cx, 700); ctx.restore();
+        ctx.fillText(cap1, cx, 852); ctx.restore();
       };
       cap(35650, 'MATA HARI · 1917', clamp((t - 175.6) / 0.5, 0, 1), 35500);
       cap(37550, 'WOLF · STASI “ROMEOS”', clamp((t - 188.6) / 0.5, 0, 1), 37400);
@@ -752,7 +736,7 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      typewriter(ctx, 49060, 135, 'NOVEMBER 9, 2026', { size: 39, t0: 245.3, t, cps: 20, font: FONT.serif });
+      typewriter(ctx, 49060, 135, 'NOVEMBER 9, 2026', { size: 39, t0: 241.6, t, cps: 20, font: FONT.serif });
       {
         const mA = clamp((t - 252.0) / 0.6, 0, 1);
         if (mA > 0.01) {
@@ -763,24 +747,24 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
       }
       stockChart(ctx, 49060, 300, t);
       stampText(ctx, 49060, 200, '$178.67', { size: 83, t0: 253.3, t, color: INK, rot: 0.008, font: FONT.display });
-      noteCard(ctx, 49060, 935, { w: 980, h: 140, t0: 254.3, t, dur: 0.6, rot: -0.01, alpha: 1 });
+      noteCard(ctx, 48620, 960, { w: 940, h: 140, t0: 254.3, t, dur: 0.6, rot: -0.01, alpha: 1 });
       ctx.save();
       ctx.globalAlpha *= clamp((t - 255.1) / 0.5, 0, 1);
       ctx.fillStyle = INK;
       ctx.font = '700 39px "Archivo Black", sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('KISTENMACHER v. NVIDIA', 49060, 905);
+      ctx.fillText('KISTENMACHER v. NVIDIA', 48620, 930);
       ctx.font = '29px "Noto Serif", serif';
-      ctx.fillText('N.D. CAL. · disclosure claims only · no finding of espionage', 49060, 952);
+      ctx.fillText('N.D. CAL. · disclosure claims only · no finding of espionage', 48620, 977);
       ctx.restore();
       // NYSE floor print — where the math happens (LAW 4 in-situ fade)
-      drawPrint(ctx, IMG.nyse, 48280, 620, { w: 415, rot: 0.018, alpha: printA(t, 243.9, 256.2, 48110) });
+      drawPrint(ctx, IMG.nyse, 49860, 640, { w: 400, rot: 0.018, alpha: printA(t, 239.8, 256.2, 49660) });
       {
-        const nA = clamp((t - 244.6) / 0.6, 0, 1) * a * fadeExit(48110, camXNow(t));
+        const nA = clamp((t - 240.5) / 0.6, 0, 1) * a * fadeExit(49660, camXNow(t));
         if (nA > 0.01) {
           ctx.save(); ctx.globalAlpha *= nA;
           ctx.fillStyle = INK; ctx.font = '23px "Noto Serif", serif'; ctx.textAlign = 'center';
-          ctx.fillText('NYSE FLOOR · CC BY-SA 2.0', 48280, 905);
+          ctx.fillText('NYSE FLOOR · CC BY-SA 2.0', 49860, 933);
           ctx.restore();
         }
       }

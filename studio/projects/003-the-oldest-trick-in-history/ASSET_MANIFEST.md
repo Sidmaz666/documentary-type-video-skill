@@ -49,15 +49,17 @@ Tchaikovsky Op. 74 (PD) · Voice: Kokoro-82M (Apache-2.0) · Opuscar Studio.
 - `racks.jpg` — data-center racks, Jefferson Lab, Public Domain Mark (US DOE); ACT 7→8 transit; “PDM”.
 - `nyse.jpg` — NYSE trading floor, aherrero, CC BY-SA 2.0 (Flickr); ACT 9; “NYSE FLOOR · CC BY-SA 2.0”.
 
-## Alice Huang — no face is ever shown (v15, full search done)
-Search completion (Commons, Openverse, Flickr, DDG news roundup, agent-browser):
-**zero freely-licensed, identity-verifiable portraits of the Alice Huang tied to
-Megaspeed exist.** Every image found is a copyrighted news/company photo of an
-unverified woman — using one would misidentify a real private person as a
-suspected spy (defamation) and violate LAW 1. The v13 “NOT PICTURED” press-file
-gag was deleted as tone-deaf (user directive). The film never shows any Alice
-Huang face — voice and on-screen text name her (public reporting); the visuals
-carry the relationship diagram and the Singapore print only.
+## Alice Huang — press photo now IN-FRAME (v16, director's call)
+
+v15 shipped "no face shown" because **zero freely-licensed, identity-verifiable
+portraits** of the Alice Huang tied to this story exist. In v16 the film's
+director explicitly directed use of the widely republished dinner photo
+(user-supplied; no stated license) — used ONCE in S03 as a printed press
+clipping, grade-matched (contrast/saturation), with the on-frame caption
+"PHOTO AS PUBLISHED BY NEWS OUTLETS / identity as reported — not independently
+verified" and credits row 18. This is a documented editorial-use directive,
+not a general license: any future use needs the same explicit direction +
+on-frame attribution + credits row.
 
 ## Narration v13 (LAW 2)
 Ancient cold open (Xi Shi / 36 Stratagems / 美人計 brush stamp) → Gen-Z comedic

@@ -53,3 +53,17 @@ LAW 2 — duration = VO (339.925 s). VO: Kokoro am_michael @ 1.18.
 ## Manifest rows
 
 `src/lib/films.ts` — entry `003-the-oldest-trick-in-history` added (21:9 master, 16:9 alternate via `studio/tools/deliver.mjs`, SRT sidecar, **YouTube thumbnails (primary + A/B variant) in `alternates`**, 11 scene shots with VO lines, credits rows incl. LAW 9 assets + Pathétique IV Musopen PD recording). `studio/PROJECTS.md` — 003 row + deliverables table updated. `public/film/stills/003-the-oldest-trick-in-history-{hook,everything,remember}.png` key stills published. `public/film/003-the-oldest-trick-in-history-16x9.mp4` 16:9 paper-extension master published. Thumbnails published: `public/film/003-the-oldest-trick-in-history-thumb.png` + `…-thumb-alt.png`.
+
+## v16 (2026-11-12) — Layout revamp + press photo + house-law updates
+
+- **Thumbnail grammar**: every scene re-blocked on web hero layouts (split-hero S01/S03/S04/S09, full-width band S05/S08, card grid S07/S10); hero prints enlarged (S03 press 700px, S06 plate 600px) at full opacity.
+- **Alice Huang photo (director's call)**: the dinner photo supplied by the user — an already-published press image with no stated license — is used ONCE in S03 as a printed press clipping, with an honest on-frame caption ("PHOTO AS PUBLISHED BY NEWS OUTLETS / identity as reported — not independently verified") and a credits-CSV row. This is an explicit editorial-use directive from the film's director; it does not set a precedent that overrides LAW 1 without the same explicit direction + on-frame attribution + credits row.
+- **Fade calibration fixed**: fadeExit/fadeEntry were zoom-1.0 world-offset approximations that ghosted in-frame assets at zoom 0.92–0.97 — now calibrated to the frame edge in canvas px (alpha 0 only inside the outer 60px band). LAW 12 added to AGENTS.md.
+- **Empty-scene windows closed**: memo card 93.6→80.6 (S04), chain 142.8→139.2 (S06), NYSE/date/chart (S09), evidence panels (S10) retimed to land on arrival.
+- **Transit compression**: zone transits cut from 4.5–4.8s to ~3.1–3.6s (arrival ≥1.2s before first VO word); S07 mid-hold key added so the history wall actually holds its prints; S08 camera re-centered 43760→44200.
+- **Music bed**: gain 0.72→0.86, constant across the film (LAW 1b / house music rule).
+- Ghost-drift hollow-circle layer removed (read as a defect, not texture).
+
+## v16a (2026-11-12) — Narration corrected: the "no photograph" line is now false
+
+With the press photo in the film, the VO line "there is no public photograph of her that anyone can legally license…" was invalid. Replaced with: "The only photo of her in circulation is a dinner candid nobody ever authorized. Which, in twenty twenty six, is its own genre of suspicious." Regenerated that single Kokoro segment (am_michael, 1.0), silence-trimmed, tempo-fitted 1.0174x to the exact 64.34–74.56 s slot (total VO stays 303.061 s — no scene/camera retime), re-spliced `assets/vo.m4a`, re-mixed, re-ran ASR word timings (745 words / 75 segments), regenerated SRT (70 cues, one ASR artifact hand-fixed), re-muxed and re-published via `build.mjs --no-video` (picture unchanged).

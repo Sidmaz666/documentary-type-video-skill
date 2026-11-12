@@ -53,7 +53,7 @@ export function sfxEvents() {
 export function musicBed() {
   return {
     path: join(HERE, 'assets', 'music', 'pathetique_iv.flac'),
-    trimTo: T.DUR, gain: 0.72, fadeIn: 0.6, fadeOut: 2.6, trimLead: true, // bed enters audibly from 0:00
+    trimTo: T.DUR, gain: 0.86, fadeIn: 0.6, fadeOut: 2.6, trimLead: true, // bed enters audibly from 0:00
     swell: { at: 285.2, gain: 1.22, dur: 2.4 }, // the question returns — bed blooms +1.7 dB
   };
 }
