@@ -307,6 +307,30 @@ The film's key art sets the density bar the film itself must meet (003 thumb: **
 6. **Fade-calibration law:** entry/exit fades are calibrated to the **frame edge in canvas px**: alpha 0 only when the element edge is inside the outer 60px band; alpha 1 by ~200 canvas-px inside. World-offset constants (the old 1256±220 style) ghost assets that are still well in frame at zoom<1 — banned (the "why do assets look washed out" defect).
 7. **Transit budget:** zone-to-zone travel ≤ **3.2s**; arrive ≥ 1.2s before the first VO word of the beat; long holds drift, never dead-stop. A 4.5s+ empty transit reads as a screensaver.
 
+### 5.11 Web hero standards (how a scene is composed, concretely)
+
+Scenes are composed like modern web hero sections, not free-floating props:
+
+1. **Grid.** Author on a 12-column grid inside **80px outer margins** (design 2560×1098 → content 2400, gutters 24). Every element snaps: kicker/title to the top band, hero to the center row, metrics/labels to a baseline row, micro-credits to the footer band.
+2. **Symmetry around the hold pose.** Lay out relative to the camera's hold centre (zone centre), not to leftovers: mirrored pairs share equal gutters (±dx), metric bands are centered, three-up grids have equal gaps. If the composition reads lopsided in a still, it is wrong.
+3. **One structure per scene, named.** split-hero (50/50 columns) · centered hero (title band → hero → metric band) · two-up · three-up grid · full-width band. Secondary elements either flank symmetric or sit in bands — nothing floats between columns.
+4. **All animation happens in-viewport.** Reveals are in situ — fade/type/mask/underline on the spot. Nothing slides in from off-canvas or crosses the safe band; a hero never enters already clipped at the frame edge. Ambient motion (ring spin, scan line) stays inside its own element box.
+5. **Margins are law.** No element's bbox enters the outer 60px band at any pose (LAW 4 sweep), and gutters between neighbouring elements are ≥ 40px — including rotated prints (measure the rotated corner, not the upright box).
+6. **Footer band.** Every hold scene ends with something in the lower band (caption, metric labels, conclusion rule/stamp) so the frame never dies into empty paper below the hero row.
+
+### 5.12 Layout system (binding, mandatory before composing)
+
+The engine ships a production layout system at `studio/engine/layouts.mjs` — **64 named layouts × 5 aspect ratios** (16:9, 9:16, 1:1, 4:5, 4:3), validated by `bun studio/tools/layout-audit.mjs` (must print `LAYOUT AUDIT OK`).
+
+**Always compose scenes through it:**
+
+1. **Pick a layout id per scene** from the registry (hero 01–10, grid 11–20, compare 21–30, data/timeline 31–45, list 46–56, editorial 57–64) and record it in `BEATS.md` (`layout:` line in the shot card). `SCENE_LAYOUTS` in `layouts.mjs` holds the current film's records.
+2. **Use the engine's tokens** — `SPACE` (8-pt scale), `typeScale(format)`, `safeRect(format)`, `grid(format)` — never raw margins. Regions returned by `resolveLayout(id, format)` are safe-area-snapped; draw into them.
+3. **Selection intelligence, not templates.** Match the scene's message: one idea → hero/pull-quote; two sides → comparison; 3–4 units → card grid; sequence → timeline/process; quantity → chart/KPI; relationship → flowchart/tree; evidence → claim-evidence/source panel; transition → chapter divider. Vary layouts across the film; never repeat one because it is easy.
+4. **Responsive or it is wrong.** Portrait/square formats stack split layouts (see `resolveLayout` output); reflow, never squash. Every layout variant must stay inside `safeRect`.
+5. **Motion is part of the layout.** `MOTION` presets set entrance/fade/stagger/exit durations; reveals are in-situ (fade/type/mask/draw) and the entire animation path must stay in the safe region and never cross other text. Deterministic, frame-derived timing only.
+6. **Scene-level QA is mandatory.** For every scene: still at entry / hold / exit, safe-area sweep (`studio/tools/safearea.mjs`) and the thumbnail test (LAW 12 §5.10). A scene with an unassigned layout id or a failed resolved region is not renderable.
+
 ---
 
 ## 6 · Color & the color script

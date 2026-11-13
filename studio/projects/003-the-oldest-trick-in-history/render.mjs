@@ -40,6 +40,7 @@ async function main() {
     await renderChunkFrames({
       T, drawWorld, grade: GRADE, start: s, end: e,
       outPath: join(HERE, 'out', `part_${String(s).padStart(4, '0')}.mp4`), scale, quality: 'master',
+      threads: 6, // single-worker CLI: leave headroom for the canvas thread (auto=18 oversubscribes)
     });
     console.log(`chunk [${s}, ${e}) → out/`);
   } else {

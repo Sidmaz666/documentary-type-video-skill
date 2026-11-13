@@ -7,7 +7,7 @@
 // durations) and throws on mismatch.
 import { spawn } from 'node:child_process';
 import { createCanvas } from '@napi-rs/canvas';
-import { mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ffmpegChunkArgs } from './compose.mjs';
@@ -32,22 +32,37 @@ async function ffprobeJson(path) {
   return JSON.parse(stdout);
 }
 
-// renderChunks — sequential chunk render of the whole film.
+// renderChunks — chunk render of the whole film.
 // renderFrame: (ctx, W, H, t) => void  (project-bound pipeline)
 // T: { W, H, FPS, FRAMES }
-export async function renderChunks(renderFrame, T, { chunk = 244, slug } = {}) {
+// workers: bounded parallel pool. The beachhead sandbox law was "1 worker,
+// 4 GB RAM" (4 concurrent Skia+ffmpeg OOM-killed each other). On a desktop
+// with 6c/12t + 16 GB a small pool is safe: each worker owns one canvas
+// (≈11 MB RGBA at 2560×1098) and one x264 with a hard thread cap so the
+// encoder does not starve the canvas thread (auto threads=18 on a
+// 12-thread CPU is ~3× slower than threads=5). Keep workers × threads
+// ≤ logical cores. Default stays 1 for 4 GB-class sandboxes.
+export async function renderChunks(renderFrame, T, { chunk = 244, slug, workers = 1, threads = 0 } = {}) {
   if (!slug) throw new Error('renderChunks needs { slug }');
   const dir = outDir(slug);
   mkdirSync(dir, { recursive: true });
-  const canvas = createCanvas(T.W, T.H);
-  const ctx = canvas.getContext('2d');
-  const list = [];
-  for (let start = 0; start < T.FRAMES; start += chunk) {
+  // LAW 3b: a re-render must never sweep stale parts from a previous render
+  // into the concat — wipe every part before writing new ones.
+  for (const f of readdirSync(dir)) {
+    if (/^part_\d+\.mp4$/.test(f) || f === 'list.txt') rmSync(join(dir, f), { force: true });
+  }
+  const starts = [];
+  for (let start = 0; start < T.FRAMES; start += chunk) starts.push(start);
+  const list = new Array(starts.length);
+
+  async function renderPart(start) {
     const end = Math.min(T.FRAMES, start + chunk);
     const name = `part_${String(start).padStart(4, '0')}.mp4`;
     const partPath = join(dir, name);
     rmSync(partPath, { force: true }); // never append into a stale part
-    const ff = spawn('ffmpeg', ffmpegChunkArgs(T.W, T.H, partPath), { stdio: ['pipe', 'inherit', 'inherit'] });
+    const canvas = createCanvas(T.W, T.H);
+    const ctx = canvas.getContext('2d');
+    const ff = spawn('ffmpeg', ffmpegChunkArgs(T.W, T.H, partPath, undefined, { threads }), { stdio: ['pipe', 'inherit', 'inherit'] });
     await new Promise((res, rej) => {
       ff.on('error', rej);
       ff.on('close', (code) => (code === 0 ? res() : rej(new Error(`chunk ${name} exited ${code}`))));
@@ -62,9 +77,19 @@ export async function renderChunks(renderFrame, T, { chunk = 244, slug } = {}) {
         } catch (e) { ff.kill('SIGKILL'); rej(e); }
       })();
     });
-    list.push(name);
     console.log(`[${new Date().toISOString()}] chunk ${name} ok (frames ${start}–${end - 1})`);
   }
+
+  let cursor = 0;
+  await Promise.all(Array.from({ length: Math.max(1, Math.min(workers, starts.length)) }, async () => {
+    while (true) {
+      const i = cursor++;
+      if (i >= starts.length) return;
+      const start = starts[i];
+      await renderPart(start);
+      list[i] = `part_${String(start).padStart(4, '0')}.mp4`;
+    }
+  }));
   writeFileSync(join(dir, 'list.txt'), list.map((n) => `file '${n}'`).join('\n') + '\n');
   return list;
 }

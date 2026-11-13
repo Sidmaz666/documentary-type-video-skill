@@ -138,6 +138,10 @@ Empty text-only zones are a defect, not a style. Rules:
 ### LAW 12 — Thumbnail Grammar Law (scene density, asset scale, fades)
 Every scene's key pose must hold up as a standalone thumbnail (the film's key art is the density bar). Binding rules (bible §5.10): hero asset **≥ 35–45% of frame width** or headline **≥ 18% of frame height**; scenes are laid out on **web hero layouts** (split-hero, centered hero, two-up/3-up grid, full-width band — named in the shot card); prints render at **full opacity at hold** and never under text; captions ≤ 24px below the print bottom with ≥ 20px clearance; no quarter-frame empty >1.5s in a hold; **fade helpers calibrated to the frame edge in canvas px** — alpha 0 only inside the outer 60px band, 1.0 by ~200px inside (world-offset constants ghost in-frame assets at zoom<1 — banned); **transit budget ≤ 3.2s** with arrival ≥ 1.2s before the beat's first VO word. QC: still sweep judged against the thumbnail bar + LAW 4 sweep must pass.
 
+### LAW 13 — Layout system (every scene composes through the engine)
+
+`studio/engine/layouts.mjs` is the only layout authority: 64 named layouts across hero / grid / comparison / data / list / editorial categories, each responsive to 16:9, 9:16, 1:1, 4:5 and 4:3 with safe-area-snapped regions, shared spacing and type tokens, and motion presets. Every scene's shot card records its layout id; scenes draw into the resolved regions. Gate: `bun studio/tools/layout-audit.mjs` prints `LAYOUT AUDIT OK` (64 × 5 clean) before any render; a scene without a recorded layout id is not renderable.
+
 ---
 
 ## 3 · Conventions
@@ -162,7 +166,7 @@ Every scene's key pose must hold up as a standalone thumbnail (the film's key ar
 
 ## 4 · Environment quirks (this 4 GB sandbox — follow or OOM)
 
-- **Render chunks sequentially, never in parallel.** 4 concurrent Skia+ffmpeg instances OOM-kill each other (~75s per 244-frame chunk).
+- **Render chunks in a BOUNDED pool (device-scaled).** The original law — "sequential, never parallel" — was written for the 4 GB beachhead sandbox where 4 concurrent Skia+ffmpeg instances OOM-killed each other. On a desktop-class box (6c/12t, 16 GB) run a small pool instead: `renderChunks(..., { workers: 2, threads: 5 })` (workers × threads ≤ logical cores; x264 must NOT auto-claim every core or it starves the canvas thread — auto `threads=18` on a 12-thread CPU is ~3× SLOWER than `threads=5`). Cap workers so workers × ~300 MB stays inside free RAM. Keep `rc-lookahead ≤ 20` per worker. On a 4 GB sandbox, workers must be 1.
 - **Detached background processes may be reaped** when the shell exits. Run chunk renders synchronously inside the tool window, or via `setsid` with explicit progress polling.
 - **x264 lookahead capped at 20 + `-preset fast`** (`-x264-params rc-lookahead=20`; a bare `lookahead=` is silently ignored by libx264 — only warns, never applies). The default deep lookahead queues ~400 MB at 4K and contributed to OOM kills.
 - **4K H.264 decode can be SIGKILLed** for frame extraction QC; verify picture via render-side stills (`bun render.mjs still <t>`) and the browser, audio via `astats`/`silencedetect` on small windows.

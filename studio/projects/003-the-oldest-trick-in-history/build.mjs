@@ -22,7 +22,10 @@ const renderFrame = (ctx, W, H, t) => engineFrame(ctx, W, H, t, drawWorld, { rai
 async function main() {
   const noVideo = process.argv.includes('--no-video');
   if (!noVideo) {
-    await renderChunks(renderFrame, T, { slug: SLUG }); // sequential — OOM law
+    // Bounded parallel pool for this workstation (6c/12t, 16GB): 2 workers ×
+    // 5 x264 threads keeps the encoders from starving the canvas thread.
+    // The old "sequential only" law was written for the 4GB Linux sandbox.
+    await renderChunks(renderFrame, T, { slug: SLUG, workers: 2, threads: 5 });
     await concatParts(SLUG);                            // probes every part first — LAW 3
   } else {
     const vo = join(HERE, 'out', 'video-only.mp4');

@@ -19,3 +19,28 @@ timings.mjs. VO anchors = vo-timings.whisper.json.
 | S09 | 238.68 | 262.56 | The cost, cash — markets do the math | chart draw-on, 0.96 | L-third · cliff line hero | “NOVEMBER 9, 2026” (y 135, 30) · “−4.3%” (y 815/515, 40 red) · “$178.67” (y 200, 64) · KISTENMACHER v. NVIDIA card (y 935, 30/22) | whoosh in @232.3 · thud @253.3 · whump @254.3 | nyse.jpg (CC BY-SA 2.0) |
 | S10 | 262.56 | 282.28 | The wall — confirmed/reported/unknown | pull-in to the wall, 0.97 | center wall · three panels | panels CONFIRMED / REPORTED / UNKNOWN (y 470, 34, cards 620×470) | pings @264.5/269.5/275.4 | — |
 | S11 | 282.28 | 303.061 | The question returns — unpatched | slow pull-back, 0.9→0.8 | C-third · type hero | mask-ups “THE OLDEST TRICK / IN THE HISTORY” (y 300/412, 96) · “STILL WORKS?” red (y 560, 158) | whoosh @285.2 · heartbeats @294.1/295.5 · thud @302.5 · fadeOut 302→303 | end-card strata (allegations notice + sources/credits) |
+
+
+---
+
+## Scene layout records (LAW 13 — layout system, v17)
+
+Every scene composes through `studio/engine/layouts.mjs`. Layout ids are binding:
+the camera pose, hero placement and text zones are the resolved regions for 16:9.
+
+| Scene | Time | Layout id | Hero / primary region |
+|---|---|---|---|
+| S01 | 0:00 | `10-pullquote-hero` | pull-quote + attribution (left rail: Wu/Yue marginalia; right rail: Xi Shi print) |
+| S02 | 0:25 | `09-hero-stat` | centered chip hero + mirrored $4T/$5T stat band, HQ/Jensen prints flanking |
+| S03 | 0:53 | `05-equal-split` | press print left / headline stack + relation diagram right |
+| S04 | 1:14 | `62-screenshot` | memo card (document hero) + White House print in the annotation column |
+| S05 | 1:49 | `50-table` | full-width two-column ledger (REPORTED / DENIED) + Beijing print lower-right |
+| S06 | 2:20 | `43-flowchart` | Megaspeed → SpeedMatrix flow band + $4.8B stat + illustrative compute plate |
+| S07 | 2:51 | `36-h-timeline` | horizontal spine 1917 → 2011–15 with three historical prints |
+| S08 | 3:33 | `41-pyramid` | centered title / BIS chapter stamp + export-arc corridor (US ↔ CN) |
+| S09 | 3:58 | `34-line-chart` | Nov 9 cliff chart + NYSE print + disclosure-claims card |
+| S10 | 4:22 | `12-three-col` | CONFIRMED / REPORTED / UNKNOWN panel grid + conclusion band |
+| S11 | 4:42 | `64-chapter-end` | final-question headline stack + credits strata |
+
+Typography/spacing tokens: `typeScale('16:9')`, `SPACE`, `safeRect('16:9')`. Audit:
+`bun studio/tools/layout-audit.mjs` → LAYOUT AUDIT OK (64 layouts × 5 formats).

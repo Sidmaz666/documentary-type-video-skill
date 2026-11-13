@@ -145,12 +145,13 @@ export function drawPaper(ctx, x, y, w, h, seed = 7) {
 // majority-stock (house identity = paper world + typography). Edge fade is
 // the grade's vignette's job. Call AFTER drawPaper, BEFORE any zone art.
 export function drawBackgroundPlate(ctx, img, opts = {}) {
-  const { x, y, w, h, alpha = 0.15 } = opts;
+  const { x, y, w, h, alpha = 0.15, sx, sy, sw, sh } = opts;
   const inherited = ctx.globalAlpha;
   ctx.save();
   ctx.globalCompositeOperation = 'multiply';
   ctx.globalAlpha = inherited * alpha;
-  ctx.drawImage(img, x, y, w, h);
+  if (sx === undefined) ctx.drawImage(img, x, y, w, h);
+  else ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
   ctx.restore();
 }
 

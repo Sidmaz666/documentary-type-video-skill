@@ -67,3 +67,44 @@ LAW 2 — duration = VO (339.925 s). VO: Kokoro am_michael @ 1.18.
 ## v16a (2026-11-12) — Narration corrected: the "no photograph" line is now false
 
 With the press photo in the film, the VO line "there is no public photograph of her that anyone can legally license…" was invalid. Replaced with: "The only photo of her in circulation is a dinner candid nobody ever authorized. Which, in twenty twenty six, is its own genre of suspicious." Regenerated that single Kokoro segment (am_michael, 1.0), silence-trimmed, tempo-fitted 1.0174x to the exact 64.34–74.56 s slot (total VO stays 303.061 s — no scene/camera retime), re-spliced `assets/vo.m4a`, re-mixed, re-ran ASR word timings (745 words / 75 segments), regenerated SRT (70 cues, one ASR artifact hand-fixed), re-muxed and re-published via `build.mjs --no-video` (picture unchanged).
+
+## v17 (2026-11-13) — Professional layout system + full scene recomposition
+
+**Layout system (engine).** New `studio/engine/layouts.mjs`: 64 named layouts in six
+categories (hero 01–10, grid 11–20, compare 21–30, data/timeline 31–45, list 46–56,
+editorial 57–64), responsive across 16:9 / 9:16 / 1:1 / 4:5 / 4:3 with safe-area percent
+defaults, 12-column grid, 8-pt spacing scale, typography scale, motion presets and a
+scene→layout registry (`SCENE_LAYOUTS`). Validator: `studio/tools/layout-audit.mjs`
+(64 × 5 regions safe; runs in CI/DoD). Skills updated: cinematic §5.12, studio skill
+LAW 13 block.
+
+**Scene recomposition (all 11 zones).** S01 pull-quote hero: floating "??" removed,
+attribution moved under the quote, stratagem row cleared of the Wu/Yue margin column,
+美人計 brush stamp re-set with a font-covered glyph (simplified 计 — the brush font
+lacks traditional 計) and moved clear of the print. S02 recentered as a symmetric
+hero-stat composition (chip center, mirrored $4T/$5T, prints pulled in to survive the
+rail's Catmull-Rom drift; the 204-px overshoot had shipped the Jensen print into the
+safe band). S03 keeps the equal-split hero (press clipping left, headline + relation
+diagram right). S05 card shortened so the Beijing print clears its corner and the
+footer band. S06 arrow now connects card-edge to card-edge (it pierced the SpeedMatrix
+card), the $4.8B stat + Bloomberg label + denial quotes arranged as stat band + bottom
+row; compute plate moved bottom-left, caption verified. S07 title/spine advance to
+arrive 1.2 s+ early after the transit. S08 title/stamps/corridor recentered on the hold
+pose. S09 unchanged (chart + NYSE print + claims card). S10 added the conclusion band
+("THE EVIDENCE DECIDES THE CONCLUSION.") closing the lower third. S11 question stamp
+moved to its own band (it collided with "IN THE HISTORY"), credits strata shifted down
+with ≥36 px gaps. Transits: interlude flourish now camera-gated (its text tail was
+breaching the left safe band at 170.5–173.0 s).
+
+**Production stack (documented).** Picture: Bun + @napi-rs/canvas (Skia), ffmpeg/x264
+libx264 crf 16 21:9 master. VO: **Kokoro-82M ONNX** (Apache-2.0, voice am_michael,
+speed 1.0; v16a segment 1.0174× tempo-fit). ASR/word timings: **Xenova/whisper-tiny.en**
+(@huggingface/transformers, ONNX). Music: Tchaikovsky Pathétique IV, Musopen PD/CC0
+recording, gain 0.86, sidechain-ducked. All external media licensed with credits CSV
+rows (19). Agent tooling used during production: opencode CLI, model
+`opencode/deepseek-v4.1-flash-free` (editorial/layout/code passes only — no AI media
+is generated; LAW 1).
+
+**Verification.** `SAFE AREA OK: 1213 frames clean at 60px margin`; `LAYOUT AUDIT OK
+(64 layouts × 5 formats)`; stills QC across every beat; FINAL-FILE LAW on publish;
+lint clean.

@@ -109,29 +109,33 @@ export function renderFrame(ctx, W, H, t, drawWorld, opts = {}) {
 // ── ffmpeg chunk writer (raw RGBA piped frame by frame) ───────────────────
 // quality: name of a VIDEO_PRESETS ladder entry ('master'|'web'|'qc') or a
 // preset object. lookahead is ALWAYS capped ≤ 20 (AGENTS.md §4 OOM law).
-export function ffmpegChunkArgs(W, H, outPath, quality = DEFAULT_VIDEO_PRESET) {
+export function ffmpegChunkArgs(W, H, outPath, quality = DEFAULT_VIDEO_PRESET, opts = {}) {
   const q = typeof quality === 'string' ? VIDEO_PRESETS[quality] : (quality || VIDEO_PRESETS[DEFAULT_VIDEO_PRESET]);
   if (!q) throw new Error(`unknown video preset: ${quality} (have: ${Object.keys(VIDEO_PRESETS).join(', ')})`);
   const lookahead = Math.min(20, q.lookahead ?? 20);
-  return [
+  const args = [
     '-y', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-r', String(FPS),
     '-i', '-',
     '-c:v', 'libx264', '-preset', q.preset, '-crf', String(q.crf),
     '-x264-params', `rc-lookahead=${lookahead}`, '-pix_fmt', q.pixFmt || 'yuv420p',
-    outPath,
   ];
+  // Optional thread cap — a parallel worker pool must not let each x264
+  // instance claim every logical core (canvas drawing needs cores too).
+  if (opts.threads) args.push('-threads', String(opts.threads));
+  args.push(outPath);
+  return args;
 }
 
 // renderChunkFrames — renders frames [start, end) of T into outPath by
 // streaming RGBA buffers into ffmpeg. drawWorld/T come from the caller.
 // Returns a promise that resolves when ffmpeg exits 0.
-export function renderChunkFrames({ T, drawWorld, grade, start, end, outPath, scale = 1, W, H, quality = DEFAULT_VIDEO_PRESET }) {
+export function renderChunkFrames({ T, drawWorld, grade, start, end, outPath, scale = 1, W, H, quality = DEFAULT_VIDEO_PRESET, threads = 0 }) {
   W = W || T.W; H = H || T.H;
   const SW = Math.round(W / scale), SH = Math.round(H / scale);
   const canvas = createCanvas(SW, SH);
   const ctx = canvas.getContext('2d');
   mkdirSync(dirname(outPath), { recursive: true });
-  const ff = spawn('ffmpeg', ffmpegChunkArgs(SW, SH, outPath, quality), { stdio: ['pipe', 'inherit', 'inherit'] });
+  const ff = spawn('ffmpeg', ffmpegChunkArgs(SW, SH, outPath, quality, { threads }), { stdio: ['pipe', 'inherit', 'inherit'] });
   return new Promise((res, rej) => {
     ff.on('error', rej);
     ff.on('close', (code) => (code === 0 ? res() : rej(new Error(`ffmpeg chunk exited ${code}`))));
