@@ -41,7 +41,7 @@ export function drawWorld(ctx, t) {
   //   artifact   y 314..430   (alpha: clamp((t - tc)/0.7, 0, 1) — fade in situ, never drop)
   //   pool/fall  y 469..499
   //   terminal   y 560..660   (stampText, size ~100 — no underline, full stop)
-  //   credits    y 699..758   (bottom baseline ≤ H-58)
+  //   (no credits band — on-frame credit text banned, AGENTS LAW 16)
   // When refitting, re-check every band at t_end−1.0 / t_end−0.3 / t_end
   // (bible §5.8). Zone hand-offs: bridge empty paper with in-situ fading
   // carry-over prints placed BELOW the departing transit's dip band (bible §5.9).

@@ -35,7 +35,7 @@ Confidence: **high** (2+ independent primary sources agree) · **medium** (singl
 
 ## 3 · On-screen citation practice (when to show sources)
 - Essay films with contested numbers: a 1.5 s small Noto Serif footnote card per claim block is enough (`SOURCES.md` # → short URL shown).
-- Always in the tail/end-card: full source list for anything an audience could contest.
+- Never in the picture (LAW 16): no source list, credits or license text on frame, thumbnails or end cards. The full source list for anything an audience could contest lives in `SOURCES.md` + `assets/assets-credits.csv` and is published in the video **description**.
 - Museum/archive images in frame already carry license credit (LAW 1) — separate line from fact-sources; don't merge them.
 
 ## 4 · Hard prohibitions

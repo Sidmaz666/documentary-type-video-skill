@@ -25,6 +25,10 @@ export const T = {
   fadeIn: [0, 0.4],
   fadeOut: [9.5, 10.0],
 
+  // LAW 14 preview gate — ~2.5 s sampler windows, one per beat + end card.
+  // `bun build.mjs --preview` renders these (video + the same audio windows).
+  preview: [[0.5, 3.0], [4.0, 6.5], [7.5, 10.0]],
+
   // One continuous Catmull-Rom move with VARIED transits (LAW 10): long spans
   // (|dx| ≥ 650 design px) are auto-split and nudged by a deterministic
   // anti-repeat bank (diag-sink/diag-rise/high-arc/low-swoop/stepped-rise/

@@ -53,7 +53,7 @@ The full catalogue this repo's agents should draw from. Pick per beat, verify th
 1. **AI-generated media is banned forever (LAW 1)** — even if tagged "free"/CC0. No exceptions.
 1a. **A film MUST include ≥1 real licensed external asset (LAW 9)** — this catalog is how you find it; the film is not shippable without it.
 2. **Music beds**: real classical recordings only, PD/CC0 composition AND performance, from open public-data sources (§5). All other music is for reference only — never publish it.
-3. **Every asset → `assets/assets-credits.csv`** (id, source URL, license, attribution, modification). Attribution-required → composited end-card credit block (LAW 1).
+3. **Every asset → `assets/assets-credits.csv`** (id, source URL, license, attribution, modification). Attribution-required → delivered off-frame (credits CSV + video description credit block). On-frame credit/license text is banned (LAW 16, user directive Nov 2026).
 4. **Grade before composite** (bible §4): black/white/gamma/contrast, split-tone, light-wrap, contact shadow; QC still at entry/mid/exit (LAW 8). Never raw stock straight to the timeline.
 5. **Never misrepresent** stock/archival as original footage; never strip watermarks; never bypass paywalls/CAPTCHAs; respect rate limits & terms; prefer Commons API / `clips.mjs`.
 6. If close to majority-stock composition, redesign the beat (bible §8.4).

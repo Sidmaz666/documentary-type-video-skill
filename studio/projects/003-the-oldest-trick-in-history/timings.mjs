@@ -29,6 +29,15 @@ export const T = {
   fadeIn: [0, 0.4],
   fadeOut: [302.0, 303.061],
 
+  // LAW 14 (preview gate): scene sampler — 12 × 2.5 s windows (one per beat +
+  // end card) = 30.0 s. Rendered before ANY full render and shown with the
+  // scene sheet; the full build refuses to start until the user confirms.
+  preview: [
+    [5.6, 8.1], [31.0, 33.5], [59.5, 62.0], [88.6, 91.1], [123.6, 126.1],
+    [151.2, 153.7], [185.6, 188.1], [224.8, 227.3], [252.2, 254.7], [263.8, 266.3],
+    [285.2, 287.7], [293.8, 296.3],
+  ],
+
   // One continuous Catmull-Rom move — every zone transit carries a non-horizontal
   // vector (LAW 10, makeVariedRail, seed 7). Holds end ~4–5 s before each
   // zone's VO-window ends; arrivals land ~1.5–2.5 s before the beat word.

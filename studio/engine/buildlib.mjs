@@ -6,11 +6,13 @@
 // FINAL-FILE LAW probe runs numeric verification (frame count + both stream
 // durations) and throws on mismatch.
 import { spawn } from 'node:child_process';
+import os from 'node:os';
 import { createCanvas } from '@napi-rs/canvas';
 import { mkdirSync, writeFileSync, readFileSync, rmSync, existsSync, readdirSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ffmpegChunkArgs } from './compose.mjs';
+import { VIDEO_PRESETS } from './presets.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..', '..');
 export const outDir = (slug) => join(ROOT, 'studio/projects', slug, 'out');
@@ -32,18 +34,58 @@ async function ffprobeJson(path) {
   return JSON.parse(stdout);
 }
 
+// ── device probe: GPU encode lane (LAW 15 perf) ──────────────────────────
+// One ffmpeg -encoders call, cached for the process. RENDER_GPU=0 forces the
+// CPU lane; RENDER_GPU=1 forces the GPU lane (fails loudly if absent).
+let _nvenc = null;
+export async function detectGpuEncode() {
+  if (_nvenc !== null) return _nvenc;
+  const env = process.env.RENDER_GPU;
+  if (env === '0') return (_nvenc = false);
+  try {
+    const { stdout } = await run('ffmpeg', ['-hide_banner', '-encoders']);
+    const has = /\bh264_nvenc\b/.test(stdout);
+    if (env === '1' && !has) throw new Error('RENDER_GPU=1 but h264_nvenc is not available');
+    return (_nvenc = has);
+  } catch (e) {
+    if (env === '1') throw e;
+    return (_nvenc = false);
+  }
+}
+
+// Dynamic pool sizing on a desktop-class box: canvas drawing is the
+// bottleneck (single-threaded per worker), encoders are per-worker. GPU lane
+// removes x264's thread tax entirely, so more workers fit; CPU lane keeps the
+// old "workers = 2, threads = 5" ceiling. Workers × ~900 MB must stay inside
+// free RAM. 4 GB sandboxes: workers = 1 (the original law).
+export function renderPlan({ gpu } = {}) {
+  const cores = os.cpus().length;
+  const freeGB = os.freemem() / 1024 ** 3;
+  const envW = Number(process.env.RENDER_WORKERS || 0);
+  let workers;
+  if (envW > 0) workers = envW;
+  else if (gpu) workers = Math.max(1, Math.min(6, Math.floor(cores / 2) - 1));
+  else workers = cores >= 8 ? 2 : 1;
+  workers = Math.min(workers, Math.max(1, Math.floor(freeGB / 1.0)));
+  return { workers, threads: gpu ? 0 : 5, gpu, cores, freeGB };
+}
+
 // renderChunks — chunk render of the whole film.
 // renderFrame: (ctx, W, H, t) => void  (project-bound pipeline)
 // T: { W, H, FPS, FRAMES }
-// workers: bounded parallel pool. The beachhead sandbox law was "1 worker,
-// 4 GB RAM" (4 concurrent Skia+ffmpeg OOM-killed each other). On a desktop
-// with 6c/12t + 16 GB a small pool is safe: each worker owns one canvas
-// (≈11 MB RGBA at 2560×1098) and one x264 with a hard thread cap so the
-// encoder does not starve the canvas thread (auto threads=18 on a
-// 12-thread CPU is ~3× slower than threads=5). Keep workers × threads
-// ≤ logical cores. Default stays 1 for 4 GB-class sandboxes.
-export async function renderChunks(renderFrame, T, { chunk = 244, slug, workers = 1, threads = 0 } = {}) {
+// workers/threads: explicit overrides; otherwise renderPlan() decides
+// (GPU lane when h264_nvenc exists — see detectGpuEncode).
+// quality: VIDEO_PRESETS name; default auto → masterGpu on the GPU lane,
+// master on the CPU lane.
+export async function renderChunks(renderFrame, T, { chunk = 244, slug, workers, threads, quality } = {}) {
   if (!slug) throw new Error('renderChunks needs { slug }');
+  const gpu = await detectGpuEncode();
+  const plan = renderPlan({ gpu });
+  workers = workers || plan.workers;
+  threads = threads ?? plan.threads;
+  const qual = quality || (gpu ? 'masterGpu' : 'master');
+  const qc = VIDEO_PRESETS[qual];
+  console.log(`[render] lane=${gpu ? 'GPU/NVENC' : 'CPU/x264'} quality=${qual} workers=${workers} threads=${threads || 'auto'} cores=${plan.cores} freeRAM=${plan.freeGB.toFixed(1)}GB`);
   const dir = outDir(slug);
   mkdirSync(dir, { recursive: true });
   // LAW 3b: a re-render must never sweep stale parts from a previous render
@@ -62,7 +104,8 @@ export async function renderChunks(renderFrame, T, { chunk = 244, slug, workers 
     rmSync(partPath, { force: true }); // never append into a stale part
     const canvas = createCanvas(T.W, T.H);
     const ctx = canvas.getContext('2d');
-    const ff = spawn('ffmpeg', ffmpegChunkArgs(T.W, T.H, partPath, undefined, { threads }), { stdio: ['pipe', 'inherit', 'inherit'] });
+    const t0 = Date.now();
+    const ff = spawn('ffmpeg', ffmpegChunkArgs(T.W, T.H, partPath, qc, { threads }), { stdio: ['pipe', 'inherit', 'inherit'] });
     await new Promise((res, rej) => {
       ff.on('error', rej);
       ff.on('close', (code) => (code === 0 ? res() : rej(new Error(`chunk ${name} exited ${code}`))));
@@ -77,7 +120,8 @@ export async function renderChunks(renderFrame, T, { chunk = 244, slug, workers 
         } catch (e) { ff.kill('SIGKILL'); rej(e); }
       })();
     });
-    console.log(`[${new Date().toISOString()}] chunk ${name} ok (frames ${start}–${end - 1})`);
+    const secs = (Date.now() - t0) / 1000;
+    console.log(`[${new Date().toISOString()}] chunk ${name} ok (frames ${start}–${end - 1}, ${((end - start) / secs).toFixed(2)} fps)`);
   }
 
   let cursor = 0;

@@ -1,13 +1,17 @@
 // build.mjs — full build: chunk render → concat → audio mix → mux → publish.
-//   bun build.mjs              render everything, verify, publish to public/film/
-//   bun build.mjs --no-video   re-publish from the existing out/video-only.mp4
+//   bun build.mjs --preview     render the LAW 14 gate: 30 s scene sampler
+//   bun build.mjs --yes         full render (only AFTER the user confirmed
+//                               the scene sheet + 30 s preview)
+//   bun build.mjs --no-video    re-publish from the existing out/video-only.mp4
 // Note: existsSync is imported correctly here (a historical build failed at
 // the final gate for exactly this missing import — keep it).
 import { existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { renderChunks, concatParts, muxAndPublish } from '../../engine/buildlib.mjs';
-import { renderFrame as engineFrame } from '../../engine/compose.mjs';
+import { spawn } from 'node:child_process';
+import { createCanvas } from '@napi-rs/canvas';
+import { renderChunks, concatParts, muxAndPublish, detectGpuEncode } from '../../engine/buildlib.mjs';
+import { renderFrame as engineFrame, ffmpegChunkArgs } from '../../engine/compose.mjs';
 import { filmGrade } from '../../engine/presets.mjs';
 import { T } from './timings.mjs';
 import { drawWorld } from './world.mjs';
@@ -19,13 +23,94 @@ const GRADE = filmGrade('documentary-grade', { fadeIn: T.fadeIn, fadeOut: T.fade
 
 const renderFrame = (ctx, W, H, t) => engineFrame(ctx, W, H, t, drawWorld, { rail: T.rail, grade: GRADE });
 
+function ffprobeRun(args) {
+  return new Promise((res, rej) => {
+    const p = spawn('ffprobe', args, { stdio: ['ignore', 'pipe', 'pipe'] });
+    let so = '', se = '';
+    p.stdout.on('data', (d) => (so += d));
+    p.stderr.on('data', (d) => (se += d));
+    p.on('error', rej);
+    p.on('close', (c) => (c === 0 ? res(so) : rej(new Error(se.slice(-400)))));
+  });
+}
+
+// LAW 14 preview: 12 sampler windows from T.preview, one raw-video pipe, then
+// audio from out/mix.wav (same windows, filter concat) muxed into one file.
+async function preview() {
+  const wins = T.preview;
+  if (!wins?.length) throw new Error('T.preview missing — LAW 14 needs sampler windows in timings.mjs');
+  const totalS = wins.reduce((s, [a, b]) => s + (b - a), 0);
+  const gpu = await detectGpuEncode();
+  const qual = gpu ? 'qcGpu' : 'qc';
+  const mixWav = join(HERE, 'out', 'mix.wav');
+  if (!existsSync(mixWav)) throw new Error('out/mix.wav missing — run `bun audio.mjs` first');
+  const videoOnly = join(HERE, 'out', 'preview-video.mp4');
+  const audioOnly = join(HERE, 'out', 'preview-audio.m4a');
+  const pub = join(HERE, 'out', 'preview-30s.mp4');
+
+  console.log(`[preview] ${wins.length} windows · ${totalS.toFixed(2)} s · lane=${gpu ? 'GPU/NVENC' : 'CPU/x264'} (${qual})`);
+  const canvas = createCanvas(T.W, T.H);
+  const ctx = canvas.getContext('2d');
+  const ff = spawn('ffmpeg', ffmpegChunkArgs(T.W, T.H, videoOnly, qual), { stdio: ['pipe', 'inherit', 'inherit'] });
+  await new Promise((res, rej) => {
+    ff.on('error', rej);
+    ff.on('close', (c) => (c === 0 ? res() : rej(new Error(`preview video ffmpeg exited ${c}`))));
+    (async () => {
+      try {
+        for (const [a, b] of wins) {
+          const f0 = Math.round(a * T.FPS), f1 = Math.round(b * T.FPS);
+          for (let f = f0; f < f1; f++) {
+            renderFrame(ctx, T.W, T.H, f / T.FPS);
+            if (!ff.stdin.write(canvas.data())) await new Promise((r) => ff.stdin.once('drain', r));
+          }
+        }
+        ff.stdin.end();
+      } catch (e) { ff.kill('SIGKILL'); rej(e); }
+    })();
+  });
+
+  // audio sampler — atrim each window, concat, encode once
+  const segs = wins.map(([a, b], i) => `[0:a]atrim=${a}:${b},asetpts=PTS-STARTPTS[a${i}]`).join(';');
+  const cat = wins.map((_, i) => `[a${i}]`).join('') + `concat=n=${wins.length}:v=0:a=1[aout]`;
+  await new Promise((res, rej) => {
+    const p = spawn('ffmpeg', ['-y', '-i', mixWav, '-filter_complex', `${segs};${cat}`, '-map', '[aout]', '-c:a', 'aac', '-b:a', '192k', audioOnly], { stdio: ['ignore', 'inherit', 'inherit'] });
+    p.on('error', rej);
+    p.on('close', (c) => (c === 0 ? res() : rej(new Error(`preview audio ffmpeg exited ${c}`))));
+  });
+  await new Promise((res, rej) => {
+    const p = spawn('ffmpeg', ['-y', '-i', videoOnly, '-i', audioOnly, '-map', '0:v', '-map', '1:a', '-c', 'copy', '-movflags', '+faststart', pub], { stdio: ['ignore', 'inherit', 'inherit'] });
+    p.on('error', rej);
+    p.on('close', (c) => (c === 0 ? res() : rej(new Error(`preview mux ffmpeg exited ${c}`))));
+  });
+  const d = await ffprobeRun(['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', pub]);
+  console.log(`[preview] written → ${pub} (${Number(d).toFixed(2)} s)`);
+}
+
+async function sheet() {
+  await new Promise((res, rej) => {
+    const p = spawn('bun', ['_overview.mjs'], { cwd: HERE, stdio: 'inherit' });
+    p.on('error', rej);
+    p.on('close', (c) => (c === 0 ? res() : rej(new Error(`sheet exited ${c}`))));
+  });
+}
+
 async function main() {
+  const mode = process.argv.includes('--preview') ? 'preview' : process.argv.includes('--sheet') ? 'sheet' : 'build';
+  if (mode === 'preview') { await preview(); return; }
+  if (mode === 'sheet') { await sheet(); return; }
+
   const noVideo = process.argv.includes('--no-video');
   if (!noVideo) {
-    // Bounded parallel pool for this workstation (6c/12t, 16GB): 2 workers ×
-    // 5 x264 threads keeps the encoders from starving the canvas thread.
-    // The old "sequential only" law was written for the 4GB Linux sandbox.
-    await renderChunks(renderFrame, T, { slug: SLUG, workers: 2, threads: 5 });
+    // LAW 14 — the preview gate. A full render requires explicit confirmation.
+    if (!process.argv.includes('--yes') && process.env.FILM_CONFIRM !== '1') {
+      console.error('LAW 14 preview gate: show the scene sheet + 30 s preview (`bun build.mjs --preview`),\n' +
+        'get explicit user confirmation, then re-run as `bun build.mjs --yes`.');
+      process.exit(2);
+    }
+    // Bounded parallel pool, sized by renderPlan inside renderChunks: GPU lane
+    // (NVENC) when available frees the CPU for the canvas; CPU lane caps x264
+    // threads so encoders never starve the canvas thread.
+    await renderChunks(renderFrame, T, { slug: SLUG });
     await concatParts(SLUG);                            // probes every part first — LAW 3
   } else {
     const vo = join(HERE, 'out', 'video-only.mp4');

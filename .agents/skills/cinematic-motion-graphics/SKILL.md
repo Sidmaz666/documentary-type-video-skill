@@ -275,10 +275,10 @@ Text is a bounding-box system, not vibes. Per frame:
 Text lives in title-safe (inner ~80%), ≥60px from every edge — verify at **every camera pose in the beat's window**, including mid-rail poses, not just key poses.
 
 ### 5.8 End-card stack contract (LAW 8)
-The final 2–4 seconds stack artifact print + mask-ups + pool/falling prop + terminal stamp + credits in ONE viewport. Without a hard banded layout they collide (002 v9 shipped with the terminal stamp sitting on the ink pool). Rules:
-1. Lay the end card as strata, top→bottom, each band **≥40 design-px apart**, and write the band table as a comment in `world.mjs` (002: mask-ups 130..300 · scroll print 314..430 · ink pool 469..499 · terminal stamp 560..660 · credits 699..758).
+The final 2–4 seconds stack artifact print + mask-ups + pool/falling prop + terminal stamp in ONE viewport (no credits band — LAW 16). Without a hard banded layout they collide (002 v9 shipped with the terminal stamp sitting on the ink pool). Rules:
+1. Lay the end card as strata, top→bottom, each band **≥40 design-px apart**, and write the band table as a comment in `world.mjs` (003 v20: title mask-ups 330..462 · question stamp 700 · hand-circle 550..850). No credits band — on-frame credit/license text is banned (LAW 16).
 2. Never restack a band without re-verifying **every other band** at the same t.
-3. The terminal stamp carries no underline — it is the full stop; credits go below it, bottom baseline ≤ H−58 (762 for 822 design height).
+3. The terminal stamp carries no underline — it is the full stop; nothing goes below it. Bottom baseline ≤ H−58 (762 for 822 design height); end cards end with the question, not a credits block (LAW 16).
 4. Artifacts fade in **in situ** (alpha ramps), never drop across the safe band; their fade-in ramps must clear the previous transit.
 5. QC stills at **t_end−1.0, t_end−0.3, t_end** minimum (`bun render.mjs still <t>`), not just key poses — the two hold frames catch overlaps that pose checks miss.
 
@@ -293,7 +293,7 @@ A sustained window of blank paper breaks the picture. Rules:
 
 ### 5.10 Thumbnail grammar — every scene must hold up as its own thumbnail (binding)
 
-The film's key art sets the density bar the film itself must meet (003 thumb: **HONEY TRAP?** — ~260px display on a 1280-wide frame, one portrait filling ~40% of the width, kicker on top, script subline, disclaimer at the base). A scene that would not work as a thumbnail is a defect, not a style.
+The film's key art sets the density bar the film itself must meet (003 approved thumb: **THE OLDEST TRICK / IN THE HISTORY / STILL WORKS?** — the film's exact title on three display lines (~124px Anton per line on a 1280-wide frame; "STILL WORKS?" in red inside a rough hand-ellipse), one licensed in-film print filling ~35–40% of the width, kicker on top, script subline, honesty line at the base; LAW 15 — packaging must match the cut's real title, imagery and spine). A scene that would not work as a thumbnail is a defect, not a style.
 
 1. **Hero-scale test (per beat, at pose).** The hero asset occupies **≥ 35–45% of frame width** (or the headline is **≥ 18% of frame height**). If a beat fails, enlarge the hero, restructure to a hero layout, or cut the beat — never ship a scene of small props floating on empty paper.
 2. **Web hero layouts — pick one per beat and name it in the shot card:**
@@ -301,7 +301,7 @@ The film's key art sets the density bar the film itself must meet (003 thumb: **
    - **centered hero:** headline dead-center, asset band top or bottom;
    - **two-up / 3-up grid:** equal cards on a baseline;
    - **full-width band:** one edge-to-edge structure (chart, ledger, timeline) + one stamp.
-3. **Type ladder per scene:** kicker 22–34px → subhead 34–48px → headline 100–260px → micro-credit 22–26px. Never two mid-size tiers competing for the eye.
+3. **Type ladder per scene:** kicker 22–34px → subhead 34–48px → headline 100–260px. No micro-credit tier — on-frame credits are banned (LAW 16); the only allowed small-tier line is a one-line integrity notice (serif ≤31px). Never two mid-size tiers competing for the eye.
 4. **Asset anatomy:** print, then caption ≤ 24px below the print bottom with ≥ 20px clearance; never text on/over the print (LAW 8); prints render at **full opacity at hold** — fade only while entering/leaving the frame.
 5. **Fill rule:** no quarter of the frame sits empty for >1.5s during a hold — add marginalia, a second print, a plate, or re-block the scene.
 6. **Fade-calibration law:** entry/exit fades are calibrated to the **frame edge in canvas px**: alpha 0 only when the element edge is inside the outer 60px band; alpha 1 by ~200 canvas-px inside. World-offset constants (the old 1256±220 style) ghost assets that are still well in frame at zoom<1 — banned (the "why do assets look washed out" defect).
@@ -311,7 +311,7 @@ The film's key art sets the density bar the film itself must meet (003 thumb: **
 
 Scenes are composed like modern web hero sections, not free-floating props:
 
-1. **Grid.** Author on a 12-column grid inside **80px outer margins** (design 2560×1098 → content 2400, gutters 24). Every element snaps: kicker/title to the top band, hero to the center row, metrics/labels to a baseline row, micro-credits to the footer band.
+1. **Grid.** Author on a 12-column grid inside **80px outer margins** (design 2560×1098 → content 2400, gutters 24). Every element snaps: kicker/title to the top band, hero to the center row, metrics/labels to a baseline row. Never add a footer credit band (LAW 16).
 2. **Symmetry around the hold pose.** Lay out relative to the camera's hold centre (zone centre), not to leftovers: mirrored pairs share equal gutters (±dx), metric bands are centered, three-up grids have equal gaps. If the composition reads lopsided in a still, it is wrong.
 3. **One structure per scene, named.** split-hero (50/50 columns) · centered hero (title band → hero → metric band) · two-up · three-up grid · full-width band. Secondary elements either flank symmetric or sit in bands — nothing floats between columns.
 4. **All animation happens in-viewport.** Reveals are in situ — fade/type/mask/underline on the spot. Nothing slides in from off-canvas or crosses the safe band; a hero never enters already clipped at the frame edge. Ambient motion (ring spin, scan line) stays inside its own element box.
@@ -390,13 +390,13 @@ bun studio/engine/clips.mjs manifest --project <slug>
 - The tool prints a `csvRow`; **you review license + attribution, then append to `assets/assets-credits.csv` yourself.** Non-PD/CC0 → attribution decided by you, documented in the row.
 - Complex/download-gated pages: `.agents/skills/get-image` (source + licensing guide) → `.agents/skills/agent-browser` (navigate, snapshot license page, capture final URL) → `clips.mjs fetch url`.
 - Imagery enters as **prints/cards/props** (`drawPrint`) or **full-frame plates/B-roll** (ffmpeg frame extraction → `drawImage` in the beat window) — both are LAW 1-legal; raw ungraded stock straight to the timeline is never legal (§4.1).
-- License requires attribution → end-card credit block (≤3 lines, exists specifically for this) or tail card; attribution is part of the film, not a comment in a CSV nobody reads.
+- License requires attribution → satisfied **off-frame**: `assets/assets-credits.csv` + the published video description credit block. On-frame credit/license text is banned (LAW 16, user directive Nov 2026) — end cards and tail cards stay clean.
 
 ### 8.4 When to draw instead of source
 - **Tracing real plates into house ink** (lithographs, artifacts, species): use the `rotoscope` skill (`studio/tools/rotoscope/trace.py` → `engine/trace.mjs`) — a trace is a derivative of the source; license still applies (LAW 1). Prefer PD/CC0 references.
 House identity is the paper world. Pre-drawn in code: all type, diagrams, charts, maps, timelines, characters, icons, paper props. Source only what drawing can't do: real faces/places/events, archival textures, scientific plates. A film that is 80% stock is a compilation, not an Opuscar Studio film — if you reach that ratio, redesign the beat, don't source harder.
 
-**Background vibe plate (encouraged):** one constant, low-alpha (α≈0.10–0.20) plate multiply-blended into the paper (`drawBackgroundPlate` in `engine/props.mjs`) — ink-wash paintings and archival scans give instant atmospheric depth without touching the heroes. Never per-beat plates, never a competing focal point; plate = texture, always a credits-CSV row. Close the film with a **micro-credit sources end-card** during the tail (tiny serif, α low, inside safe area) — house practice, and it makes the audit trail visible. (002 exemplar: Webber, 1779 PD plate.)
+**Background vibe plate (encouraged):** one constant, low-alpha (α≈0.10–0.20) plate multiply-blended into the paper (`drawBackgroundPlate` in `engine/props.mjs`) — ink-wash paintings and archival scans give instant atmospheric depth without touching the heroes. Never per-beat plates, never a competing focal point; plate = texture, always a credits-CSV row. Do NOT close with a sources/credit end-card — that practice was retired (LAW 16). The audit trail lives in `SOURCES.md` + `assets-credits.csv` + the video description. (003 exemplar: Song Nian CC0 plate.)
 
 ---
 
@@ -417,7 +417,7 @@ Beat is QC-clean when: card complete (§0) → stills pass (§9.1–4) + safeare
 ## 10 · Banned-defect kill list
 
 - Text overlapping text, text over a face/eyes, text outside safe area, stroke through type (LAW 6), underline above the last line.
-- Live rectangles of stock uncredited / unlicensed / AI-generated.
+- Live rectangles of stock uncredited / unlicensed / AI-generated; on-frame credit/license text of any kind (LAW 16).
 - Two music beds; bed audibly above VO; unducked music.
 - Shimmer/flicker; linear organic motion; overshoot >5%; per-letter bounce type.
 - Mid-frame horizontal horizon on a thirds beat; mandatory-symmetry ignored on monument beats.

@@ -112,16 +112,28 @@ export function renderFrame(ctx, W, H, t, drawWorld, opts = {}) {
 export function ffmpegChunkArgs(W, H, outPath, quality = DEFAULT_VIDEO_PRESET, opts = {}) {
   const q = typeof quality === 'string' ? VIDEO_PRESETS[quality] : (quality || VIDEO_PRESETS[DEFAULT_VIDEO_PRESET]);
   if (!q) throw new Error(`unknown video preset: ${quality} (have: ${Object.keys(VIDEO_PRESETS).join(', ')})`);
-  const lookahead = Math.min(20, q.lookahead ?? 20);
   const args = [
     '-y', '-f', 'rawvideo', '-pix_fmt', 'rgba', '-s', `${W}x${H}`, '-r', String(FPS),
     '-i', '-',
-    '-c:v', 'libx264', '-preset', q.preset, '-crf', String(q.crf),
-    '-x264-params', `rc-lookahead=${lookahead}`, '-pix_fmt', q.pixFmt || 'yuv420p',
   ];
-  // Optional thread cap — a parallel worker pool must not let each x264
-  // instance claim every logical core (canvas drawing needs cores too).
-  if (opts.threads) args.push('-threads', String(opts.threads));
+  if (q.codec === 'h264_nvenc') {
+    // GPU lane — no x264 lookahead knobs; NVENC runs VBR with -cq targeting.
+    args.push(
+      '-c:v', 'h264_nvenc', '-preset', q.preset, '-tune', 'hq',
+      '-rc', 'vbr', '-cq', String(q.cq), '-b:v', '0',
+      '-spatial-aq', '1', '-temporal-aq', '1',
+      '-pix_fmt', q.pixFmt || 'yuv420p',
+    );
+  } else {
+    const lookahead = Math.min(20, q.lookahead ?? 20);
+    args.push(
+      '-c:v', 'libx264', '-preset', q.preset, '-crf', String(q.crf),
+      '-x264-params', `rc-lookahead=${lookahead}`, '-pix_fmt', q.pixFmt || 'yuv420p',
+    );
+    // Optional thread cap — a parallel worker pool must not let each x264
+    // instance claim every logical core (canvas drawing needs cores too).
+    if (opts.threads) args.push('-threads', String(opts.threads));
+  }
   args.push(outPath);
   return args;
 }

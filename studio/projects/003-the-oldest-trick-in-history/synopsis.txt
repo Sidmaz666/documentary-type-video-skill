@@ -1,0 +1,125 @@
+SYNOPSIS — The Oldest Trick in History Still Works, Right?
+Project: 003-the-oldest-trick-in-history
+Runtime: 5:03 (303.061 s) · 2560×1098 (21:9) master @ 30 fps · H.264 + AAC
+Master: public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.mp4
+Captions: studio/projects/003-the-oldest-trick-in-history/assets/subtitles.en.srt
+Thumbnail: public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history-thumb.png
+Scene sheet: public/film/003-the-oldest-trick-in-history/stills/overview-v20.png
+Preview (30 s sampler): studio/projects/003-the-oldest-trick-in-history/out/preview-30s.mp4
+
+LOGLINE
+A five-minute illustrated essay about a 2025–2026 reporting thread — Nvidia, an AI
+compute company in Singapore, and an alleged romance at the centre of an
+export-control story — told with dry, modern sarcasm, then traced 2,500 years back
+to the oldest spy trick in the book: the beauty trap.
+
+SUMMARY — WHAT THE FILM REPORTS
+· A cold open on the ancient stratagem: the King of Wu and Xi Shi, the "beauty trap"
+  as later tradition numbers it in the Thirty-Six Stratagems — labelled honestly as
+  traditional narrative, not verified history.
+· The 2025–2026 thread: Nvidia's founder tells employees he was unfaithful, and the
+  board opens an independent investigation after reporting on a foreign intelligence
+  effort; the company says it has no reason to believe national security or Nvidia
+  secrets were compromised.
+· The reported allegation: US intelligence concluded a Nvidia executive identified in
+  press accounts as Alice Huang was an asset of China's Ministry of State Security —
+  reported by multiple outlets, not publicly confirmed; identities remain as reported.
+· The responses: the White House and CIA have not publicly confirmed the memo;
+  Singapore's Ministry of Home Affairs says no such investigations were conducted in
+  respect of Alice Huang; Beijing calls the reporting groundless speculation.
+· The business backdrop: Nvidia's four- and five-trillion-dollar milestones, export
+  controls, the H20 licence and charge, the approved H200 arrangement with a 25% cut,
+  and a share drop of about 4.3% — roughly $190 billion — when the story broke, plus a
+  securities class action that alleges disclosure claims only, not espionage.
+· The playbook: a quick, honest history of the trick — Mata Hari in 1917 (and the 1999
+  declassified files that found nothing), East Germany's "Romeos", Monica Witt, and
+  Christine Fang — then the open question the film leaves standing: an operation, or
+  human weakness? Public evidence does not settle it.
+
+WHAT IS ALLEGED VS ESTABLISHED
+The film separates the record as follows. Official documents and statements — Nvidia's
+newsroom letter and board statement, export-control rules, the Singapore MHA statement,
+the FBI's 2019 indictment — are treated as established. The intelligence conclusion and
+the reported romance are treated as reported allegations: attributed, hedged, and never
+stated as proven. No legal conclusions are drawn; the securities case is described as
+disclosure claims, not an espionage finding. Names of non-public individuals are used
+as reported, with an on-screen guard line where an image could be mistaken for evidence.
+
+HOW IT IS MADE
+Picture is a code-drawn paper world (Bun + @napi-rs/canvas): one continuous camera move
+over a hand-inked board, with licensed real photographs and archival prints composited as
+physical props — grade-matched, credited off-frame. No AI-generated imagery or video is
+used anywhere. Sound is the narration plus synthesized SFX, with a licensed public-domain
+classical recording as the constant music bed, sidechain-ducked under speech (MUSIC LAW).
+No license, credit or source text appears on any frame; attribution lives in this file,
+assets/assets-credits.csv, and the video description (house LAW 16).
+
+CONTRIBUTORS
+· Direction, writing, production — Sidhartha Mazumder (Opuscar Studio)
+· Research — Opuscar Studio editorial desk; agent-assisted, claim-by-claim ledger in SOURCES.md
+· Narration — Kokoro-82M neural text-to-speech (Apache-2.0, voice am_michael), generated
+  locally from the approved script; not a depiction or impersonation of any real person
+· Picture — code-drawn canvas world, one continuous camera rig; engine/ toolchain
+· Sound — synthesized SFX library; public-domain classical recording (see credits)
+· Encoding — ffmpeg (NVENC hardware lane), 30 fps master, AAC audio
+· Typefaces — Archivo Black, Caveat, Noto Serif, Liu Jian Mao Cao (SIL OFL 1.1)
+
+SOURCE RECORD (full claim-by-claim ledger with quotes: SOURCES.md in this project)
+Primary statements
+· Nvidia, "A Message to Our Company" — https://nvidianews.nvidia.com/news/a-message-to-our-company
+· Nvidia board of directors statement — https://nvidianews.nvidia.com/news/statement-from-nvidia-board-of-directors
+Reporting underpinning the allegations (full publisher/date/quote rows in SOURCES.md)
+· NYT (2026-10-29, 2026-11-06) · FT (2026-11-07) · Bloomberg (2026-11-09) · WSJ (2026-10-30)
+· BBC (2026-11-08) · NBC (2026-11-08) · Axios (2020-12-08, Christine Fang) · TechCrunch (2026-11)
+Official denials / records
+· Singapore Ministry of Home Affairs statement (2026-10-31)
+· China MFA remarks, Guo Jiakun (2026-10-30 and 2026-11-09, as carried by BBC/DW/ABC)
+· FBI indictment of Monica Witt, 1:19-cr-43 (2019-02-13)
+· US BIS export-control rules (2022-10-07, 2023-10-17); Nvidia 8-K (H20 charge)
+History
+· France 24 / BBC Culture on Mata Hari and the 1999 declassified files
+· BBC / CIA / Bundesarchiv on the Stasi "Romeos"
+· Traditional Wu–Yue narrative (Wu Yue Chunqiu; later Thirty-Six Stratagems collections) —
+  labelled in-film as traditional account, not primary-record history
+
+MUSIC & MEDIA CREDITS (canonical manifest: assets/assets-credits.csv)
+· Music — Tchaikovsky, Symphony No. 6 "Pathétique", Op. 74, IV. Finale (Adagio lamentoso);
+  recording: Musopen Symphony; composition and recording public domain (Musopen dedication).
+  https://commons.wikimedia.org/wiki/File:Tchaikovsky_-_Symphony_No._6_in_B_minor,_Op._74_%27Path%C3%A9tique%27_-_IV._Finale_%E2%80%93_Adagio_lamentoso_%28Musopen_Symphony%29.flac
+· In the Palace handscroll (Song copy after Tang, before 1140), Cleveland Museum of Art 1976.1 — CC0.
+  https://openaccess-cdn.clevelandart.org/1976.1/1976.1_web.jpg
+· Song Nian landscape handscroll, Met Open Access DP204810 — CC0.
+  https://commons.wikimedia.org/wiki/File:清_松年_山水_手卷-Landscape_MET_DP204810.jpg
+· Jensen Huang official portrait (Office of the President, Taiwan, 2023-11-09) — CC BY 2.0.
+  https://commons.wikimedia.org/wiki/File:Jensen_Huang_20231109.jpg
+· Mata Hari portrait, Jacob Merkelbach ca. 1906 — public domain.
+  https://commons.wikimedia.org/wiki/File:Mata_Hari,_by_Jacob_Merkelbach.jpg
+· Monica Elfriede Witt FBI wanted poster (2019) — public domain (US federal work).
+  https://commons.wikimedia.org/wiki/File:Monica_Elfriede_Witt.png
+· Markus Wolf, Bundesarchiv Bild 183-1989-1208-420, photo Elke Schöps — CC BY-SA 3.0 de.
+  https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-1989-1208-420,_Markus_Wolf.jpg
+· Nvidia HQ sign, photo Will Buckner — CC BY 2.0.
+  https://upload.wikimedia.org/wikipedia/commons/8/84/Nvidia_sign.jpg
+· Singapore Marina Bay at dusk, photo Benh LIEU SONG — CC BY-SA 4.0.
+  https://upload.wikimedia.org/wikipedia/commons/b/b0/Singapore_Marina_Bay_Dusk_2018-02-27.jpg
+· White House south facade, photo pteron60 — CC BY 2.0.
+  https://live.staticflickr.com/3567/3460256391_28d4c93863_b.jpg
+· Great Hall of the People, photo IQRemix — CC BY-SA 2.0.
+  https://live.staticflickr.com/7440/15738716804_85e6438592_b.jpg
+· Summit supercomputer, Oak Ridge Leadership Computing Facility — CC BY 2.0.
+  https://live.staticflickr.com/4814/44552255940_733c353390_b.jpg
+· Data-center racks, Jefferson Lab — Public Domain Mark.
+  https://live.staticflickr.com/65535/53960023394_7755d93376_b.jpg
+· NYSE trading floor, photo aherrero — CC BY-SA 2.0.
+  https://live.staticflickr.com/6156/6175878927_7d3e10e8c1_b.jpg
+· Press photo (S03) of Jensen Huang and the person identified as Alice Huang, as published
+  by news outlets — licence not stated by publisher; director-directed editorial use with
+  an on-screen identity guard line. Source URL to be supplied by the director in the
+  description credit block.
+· Fonts — Archivo Black / Caveat / Noto Serif / Liu Jian Mao Cao, SIL OFL 1.1.
+
+DELIVERABLES
+· 21:9 master (H.264/AAC) — public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.mp4
+· English SRT — assets/subtitles.en.srt
+· Key stills + scene sheet — public/film/003-the-oldest-trick-in-history/stills/
+· Thumbnail — public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history-thumb.png

@@ -57,5 +57,6 @@ echo "  4. (optional) source licensed media (LAW 1): bun ../../engine/clips.mjs 
 echo "     fetch: bun ../../engine/clips.mjs fetch commons <File|url> --project ${num}-${slug} --id 20"
 echo "     review license, append csvRow to assets/assets-credits.csv (LAW 1: props/plates/B-roll, grade-matched, never raw)"
 echo "  5. draw world.mjs → score sfx-plan.mjs (same clock T)"
-echo "  6. QC: bun render.mjs stills 0.5,2.0,6.0 --scale 4   then  bun build.mjs"
-echo "  7. verify FINAL-FILE LAW, update src/lib/films.ts (film manifest), commit"
+echo "  6. QC stills + safearea sweep, then the LAW 14 gate: bun build.mjs --preview"
+echo "     present sheet + preview, wait for explicit user OK, then bun build.mjs --yes"
+echo "  7. FINAL-FILE LAW probe, fill synopsis.txt (contributors + sources with links), update src/lib/films.ts, commit"

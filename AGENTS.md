@@ -34,7 +34,8 @@ studio/
 │       ├── timings.mjs  THIS film's clock T — the only file to edit when re-timing
 │       ├── world.mjs    this film's art (six zones on one 20,000px paper board)
 │       ├── sfx-plan.mjs this film's sound score (reads the same clock T)
-│       ├── render.mjs / audio.mjs / build.mjs
+│       ├── render.mjs / audio.mjs / build.mjs / thumbnail.mjs / _overview.mjs
+│       ├── synopsis.txt  professional package copy: logline, summary, contributors, sources+links, deliverable specs
 │       └── assets/      vo.m4a · timings.json · assets-credits.csv · music/ · clips/
 └── templates/project/   runnable skeleton copied by new.sh
 .agents/skills/opuscar-video-studio/  repo skill for agents (workflow, laws, QC, clip sourcing)
@@ -64,7 +65,7 @@ public/film/             published MP4s (canonical artifacts)
 2. **Full-frame plates / B-roll** — extracted to a frame sequence (`ffmpeg … -vf scale=…:flags=lanczos assets/clips/frames/<id>/f_%05d.png`) and composited by the canvas program inside the beat's time window, after grade matching (bible §4);
 3. **Documented assets** (charts, maps, our own screen captures) — same credits discipline.
 
-Every external asset — photo, clip, plate, music recording, font — gets a row in the project's `assets/assets-credits.csv` (license, author/performer, source URL, modification note; attribution rows documented, including CC0). No exceptions. License requiring attribution → attribution is composited into the film (end-card credit block), not left in a CSV.
+Every external asset — photo, clip, plate, music recording, font — gets a row in the project's `assets/assets-credits.csv` (license, author/performer, source URL, modification note; attribution rows documented, including CC0). No exceptions. **NO on-frame credit/license text — ever (LAW 16, user directive Nov 2026).** Attribution is delivered off-frame: the CSV row + the video description credit block. Prefer PD/CC0 assets so attribution is not legally required.
 
 **Internet sourcing (license-aware):** use `studio/engine/clips.mjs` (Wikimedia Commons API, optional Pexels with `PEXELS_API_KEY`, or explicit direct URLs — Mixkit/Coverr/Videvo/NASA/archives via `.agents/skills/get-image` + `agent-browser` to obtain a final licensed URL). The tool downloads to `assets/clips/`, writes `manifest.json`, and prints a CSV row — **review license/attribution and append to `assets/assets-credits.csv` manually**. Raw ungraded stock straight to the timeline is never acceptable: grade-match (black/white/gamma/contrast/split-tone), composite with light-wrap/contact shadow/grain, QC-still at entry/mid/exit. The paper world and its typography remain the house identity — if a film is majority stock, redesign the beats (bible §8.4).
 
@@ -117,7 +118,7 @@ The zip/archive handed off must contain only what the project needs. Exclude nod
 Every beat in `BEATS.md` carries a complete **shot card** (intent, shot size, angle, camera move + easing, composition-grid anchor, hero, text layers with clearances, transition, cues, assets). Every frame must honor the cinematographer grammar (rule of thirds / phi grid / leading lines / headroom / nose room / lead room), the motion grammar (Disney staging, slow in/out, arcs, follow-through, easing discipline), and the layout law — **no text may overlap any other text, hero art, stroke, or the viewport edge, at any frame, in any camera pose**. QC is by still sweep at every beat at pose (±0.5 s) and at every text entry/exit frame, with `--scale 4` crops on each text block. The full bible, binding for all projects: `.agents/skills/cinematic-motion-graphics/SKILL.md`. A beat with an incomplete shot card is not rendered (LAW 8).
 
 ### LAW 9 — External Source Law (source assets are mandatory)
-Every film MUST contain **at least one real, licensed external asset in-frame** — a photo/clip/plate/archival still from a human author under a license permitting our use (PD, CC0, CC-BY with attribution, or the usual free-stock licenses), placed as a **printed prop**, a **grade-matched full-frame plate/B-roll**, or a documented asset — with a row in `assets/assets-credits.csv` (license, author, source URL). A film whose timeline contains zero external source material is a **failure**, regardless of polish. License-not-requiring attribution still gets an on-screen micro-credit end-card (house practice; 002 does this). Source via `studio/engine/clips.mjs` + the get-image catalog; verify licenses there; composite so the paper world stays the house identity (never majority-stock; grade-match, contact shadow, film grain, safe-area compliant). Film 003 uses a CC0 CMA handscroll, CC-BY/Wikimedia prints and a CC0 Met plate. New films are not exempt — the DoD gate exists for this.
+Every film MUST contain **at least one real, licensed external asset in-frame** — a photo/clip/plate/archival still from a human author under a license permitting our use (PD, CC0, CC-BY with attribution, or the usual free-stock licenses), placed as a **printed prop**, a **grade-matched full-frame plate/B-roll**, or a documented asset — with a row in `assets/assets-credits.csv` (license, author, source URL). A film whose timeline contains zero external source material is a **failure**, regardless of polish. On-frame micro-credits are BANNED (LAW 16) — every credit/license/source string lives in the CSV and the video description, never in a shot. Source via `studio/engine/clips.mjs` + the get-image catalog; verify licenses there; composite so the paper world stays the house identity (never majority-stock; grade-match, contact shadow, film grain, safe-area compliant). Film 003 uses a CC0 CMA handscroll, CC-BY/Wikimedia prints and a CC0 Met plate. New films are not exempt — the DoD gate exists for this.
 
 ### LAW 10 — Camera Variety Law (no straight rides)
 Every transit between zones MUST carry a **non-horizontal vector**. A film whose camera travels the same axis from scene to scene end-to-end reads as a screensaver, not cinema. Rules:
@@ -132,7 +133,7 @@ Every transit between zones MUST carry a **non-horizontal vector**. A film whose
 Empty text-only zones are a defect, not a style. Rules:
 - **One licensed real asset per beat minimum**, placed in situ with the LAW 4 fade helpers (`printA` in 003; `fadeExit`/`fadeEntry`). Text stamps alone never fill a scene for >3 s of hold.
 - **The vibe plate must be verified VISIBLE in a still before publish** — multiply-blend, α≈0.07–0.08 (003 ships 0.075 — visible but a whisper), **tiled** (whole-board single-stretch at α 0.09 is invisible on this paper). Build the tile ONCE at module load (feathered L/R edges, ~7000-design-px tiles), **viewport-cull** the tiles every frame (drawing all tiles per frame made the LAW 4 sweep take >1 h), and QC with `bun render.mjs still <t>` — if the ink-wash doesn't read at all, raise α.
-- In-reference/illustrative assets must be captioned as such on frame (e.g. "ILLUSTRATIVE: SUPERCOMPUTER-CLASS COMPUTE") — never imply Megaspeed runs on depicted hardware. No freely-licensed, identity-verifiable photo exists → show NO face at all: name the reported person only in voice/on-screen text (never a guess, never a scraped press photo). (003 retired its "NOT PICTURED" absence gag as tone-deaf in v15.)
+- In-reference/illustrative assets must never imply what they are not (prefer subject-neutral framing and let the VO carry the caveat); when an image could be mistaken for evidence, one short plain-language integrity note is allowed (e.g. "illustration — no public memo exists") — license/credit text never (LAW 16). No freely-licensed, identity-verifiable photo exists → show NO face at all: name the reported person only in voice/on-screen text (never a guess, never a scraped press photo). (003 retired its "NOT PICTURED" absence gag as tone-deaf in v15.)
 - Draw marginalia (annotations, arrows, red herrings) to fill negative space during holds; transit bands carry interlude flourishes.
 
 ### LAW 12 — Thumbnail Grammar Law (scene density, asset scale, fades)
@@ -141,6 +142,34 @@ Every scene's key pose must hold up as a standalone thumbnail (the film's key ar
 ### LAW 13 — Layout system (every scene composes through the engine)
 
 `studio/engine/layouts.mjs` is the only layout authority: 64 named layouts across hero / grid / comparison / data / list / editorial categories, each responsive to 16:9, 9:16, 1:1, 4:5 and 4:3 with safe-area-snapped regions, shared spacing and type tokens, and motion presets. Every scene's shot card records its layout id; scenes draw into the resolved regions. Gate: `bun studio/tools/layout-audit.mjs` prints `LAYOUT AUDIT OK` (64 × 5 clean) before any render; a scene without a recorded layout id is not renderable.
+
+### LAW 14 — Preview & Confirmation Law (no blind full renders)
+
+A film is **never** rendered end-to-end before the user has seen and approved a preview. The gate, in order:
+1. **Scene sheet.** Render every beat's key pose at QC scale and assemble the labelled contact sheet (`bun build.mjs --sheet` → `_overview.mjs` → `public/film/<slug>/stills/overview-<version>.png`). The sheet must show every scene + the end card, with scene name, layout id and timestamp.
+2. **30-second preview.** `bun build.mjs --preview` renders a **30 s scene sampler** (windows declared in the project clock `T.preview`, one per beat + end card, video **and** the same audio windows) to `out/preview-30s.mp4`. Full render resolution; GPU lane when available.
+3. **Explicit user confirmation.** The sheet + preview are presented; only after the user says go may the full render run. `build.mjs` enforces this: a full render refuses to start without `--yes` (or `FILM_CONFIRM=1`). Never "just finish it" — a 60-minute render the user didn't sign off is wasted electricity and a trust defect.
+4. After any world/camera/thumbing change that invalidates the preview, the gate repeats.
+
+### LAW 15 — Thumbnail Fidelity Law (packaging must match the cut)
+
+The thumbnail is the film's promise; it must be **derived from the actual film** and never imply content the edit does not contain:
+- Title/headline on the thumb = the film's real title or a true paraphrase of its spine (003 incident: thumb said "HONEY TRAP?" + Jensen portrait while the film's spine is "The Oldest Trick in History Still Works, Right?" and the hook is the ancient beauty-trap story — misleading, user-reported).
+- Imagery must be frames/props that actually appear in the film, graded in the house paper style (paper board, ink stamps, licensed in-film print, boil/grain/vignette grammar).
+- Honesty disclaimers stay ("ALLEGED, NOT ESTABLISHED · THE REPORTING, TRACED").
+- Regenerate the thumb after every major revamp and eyeball it against the final cut: if a viewer who watched the film would feel tricked, it fails.
+- The bible's thumbnail-grammar section (§5.10) names the current approved thumb; keep it in sync.
+
+
+### LAW 16 — No On-Frame Credits (ban on license/credit text in picture)
+
+**User directive (Nov 2026): never show license, source, archive or credit text on screen — it is useless noise.** Hard rules:
+- **Banned on every frame, forever:** license names (CC0/CC BY/CC BY-SA/PD/©), archive/museum/agency credits (e.g. "Cleveland Museum", "Bundesarchiv", "AP", "Adobe Stock"), source URLs, creator/attribution strings, and end-card credit paragraphs / micro-credit strata.
+- Attribution is **off-frame only**: `assets/assets-credits.csv` row (license, author, source URL, modification) + the published video **description credit block**. Thumbnails/sheets/stills carry no credit text either.
+- End cards are **clean** — title, question, honesty line at most. No sources block, no "credits" band.
+- Prefer PD/CC0 so attribution is not legally required; where a license requires attribution, it is satisfied by the description block + CSV (documented in PROJECT.md), never by picture.
+- **Exception (misinformation guard, not a credit):** one short plain-language line is allowed when an image could be mistaken for evidence of a real document/person (e.g. "illustration — no public memo exists", "identity as reported — not independently verified"). Max one line, serif ≤ 31px, no license words, never stacked into a credit block.
+- QC: grep the world for `CC0|CC BY|PD|Museum|Archiv|Stock|SOURCES —|CREDITS —` before any render; the final still sweep must show zero credit/license strings.
 
 ---
 
@@ -153,7 +182,7 @@ Every scene's key pose must hold up as a standalone thumbnail (the film's key ar
 - **Background vibe plate (optional, encouraged).** A grade-matched, low-alpha plate blended *into* the paper (`drawBackgroundPlate` in `engine/props.mjs`; multiply, α≈0.10–0.20; ink-wash paintings, archival scans, manuscript pages). One constant plate for the whole film — cohesion over variety — never a competing hero, never majority-stock. The plate is an external asset: credits-CSV row required (LAW 1/9).
 - **Camera.** One continuous Catmull-Rom spline move for the whole film (C1-continuous — it never stops dead; holds keep drifting toward the next move). Handheld noise is damped during fast pushes. Temporal motion blur: sub-samples at 1/90s spacing (looser spacing ghosts structure during fast travel — banned). **Every transit between zones carries a non-horizontal vector (LAW 10) — never another straight ride; use `makeVariedRail` or an equivalent hand-keyed diagonal bank.**
 - **Zone dim-backs.** When the camera leaves a zone, the zone dims back instead of lingering at full ink. Old heroes must never bleed into the next beat's frame.
-- **Maps & geospatial plates (optional).** When a beat needs REAL geography (not the ink spreadMap), use the open-source **leafmap** (MIT) via `.agents/skills/leafmap/SKILL.md` — render to a graded plate/print, Natural Earth (PD) for ink-style redraws, NASA GIBS/USGS/NOAA for Earth-science imagery, mandatory attribution end-card when required; credits CSV rows always (LAW 1).
+- **Maps & geospatial plates (optional).** When a beat needs REAL geography (not the ink spreadMap), use the open-source **leafmap** (MIT) via `.agents/skills/leafmap/SKILL.md` — render to a graded plate/print, Natural Earth (PD) for ink-style redraws, NASA GIBS/USGS/NOAA for Earth-science imagery; attribution handled off-frame (description + CSV, LAW 16); credits CSV rows always (LAW 1).
 - **Presets.** `studio/engine/presets.mjs` is the single home for cinematic looks: `FILM_PRESETS` (`paper-storybook` house default, `documentary-grade` warm/cool Netflix-doc, `archival-essay`, `night-essay`), `VIDEO_PRESETS` (`master` crf 16 / `web` crf 19 / `qc`; x264 lookahead always ≤ 20 — OOM law), `CAST_PRESETS`, `CAMERA_PRESETS`, `THIRDS`/`PHI_GRID` anchors. All projects should resolve looks through presets, not ad-hoc constants.
 - **Cinematic framing (LAW 8).** `BEATS.md` rows are **shot cards** (intent, shot size/angle, camera move + easing, grid anchor, hero, text clearances, cues, assets) — the creative contract, per beat. Compose on thirds/phi grids; one hero; one idea; ≥60px safe area; no text collisions (bible §5.4). The binding craft manual is `.agents/skills/cinematic-motion-graphics/SKILL.md` — load it whenever touching `world.mjs`, camera rail, text layout or BEATS.md. Every beat must name its grid anchor and hero in the shot card; heroes sit ON third/phi lines, never dead-center.
 - **Grain is per-run deterministic but order-sensitive.** Same command shape → identical bytes; different command shapes advance the grain RNG differently (documented, not a bug).
@@ -161,12 +190,16 @@ Every scene's key pose must hold up as a standalone thumbnail (the film's key ar
 - **Narration voice (house style, all topics).** Every film's VO is written **witty, comedic, Gen-Z sarcastic** — dry asides, deadpan modern phrasing, punchline cadence — while every factual claim stays attributed and honest (ridicule the situation, never the victims; allegations stay "— allegedly"). Narration files stay pure spoken text (no headers/notes — TTS reads them aloud).
 - **Music bed (LAW 1b throttle).** The licensed classical bed runs **constant for the full film**, gain **≥ 0.85** (audible under the mix, ducked only ~6–8 dB under speech), no leading or mid-film silence; verify bed presence from 0:00 with ebur128/silencedetect.
 - **Credits.** Every external asset (photo, clip, music recording, font) gets a row in the project's `assets/assets-credits.csv` with license and source URL — no exceptions, including CC0.
+- **Synopsis file (every project, mandatory).** Each project ships `synopsis.txt` — professional package copy written for the video description / press use: title, slug, runtime + format specs, master path, logline, honest summary of what the film reports, editorial-standard note (what is alleged vs established), **contributors** (direction, writing/research, narration method, picture/sound/encoding tooling), and a **source record with links** — primary-source URLs, music/media credit links (`assets/assets-credits.csv` stays the canonical asset manifest). Plain UTF-8 text, no markdown quirks; refresh it whenever the cut, credits or claims change (LAW 2/Law 16: no license text on frames — the description/synopsis carries attribution).
 
 ---
 
 ## 4 · Environment quirks (this 4 GB sandbox — follow or OOM)
 
-- **Render chunks in a BOUNDED pool (device-scaled).** The original law — "sequential, never parallel" — was written for the 4 GB beachhead sandbox where 4 concurrent Skia+ffmpeg instances OOM-killed each other. On a desktop-class box (6c/12t, 16 GB) run a small pool instead: `renderChunks(..., { workers: 2, threads: 5 })` (workers × threads ≤ logical cores; x264 must NOT auto-claim every core or it starves the canvas thread — auto `threads=18` on a 12-thread CPU is ~3× SLOWER than `threads=5`). Cap workers so workers × ~300 MB stays inside free RAM. Keep `rc-lookahead ≤ 20` per worker. On a 4 GB sandbox, workers must be 1.
+- **Render chunks in a BOUNDED pool (device-scaled), GPU lane first.** The original law — "sequential, never parallel" — was written for the 4 GB beachhead sandbox where 4 concurrent Skia+ffmpeg instances OOM-killed each other. On desktop-class hardware the pool is sized dynamically by `renderPlan()` in `engine/buildlib.mjs`:
+  - **GPU lane (preferred):** if `h264_nvenc` exists (`detectGpuEncode()` — RTX 3050 verified), renderChunks defaults to `masterGpu` (NVENC p7, VBR cq 18) and frees the CPU for the Skia canvas thread — the real bottleneck. Default workers = `clamp(1, floor(cores/2) − 1, 6)` (12 threads → 5; verify with RAM). `RENDER_GPU=0|1` forces lane; `RENDER_WORKERS=N` overrides the pool.
+  - **CPU lane:** `workers = 2` on ≥8 threads, x264 hard-capped `threads=5` (auto `threads=18` on a 12-thread CPU is ~3× SLOWER — measured). `rc-lookahead ≤ 20` per worker. Cap workers so workers × ~900 MB stays inside free RAM. On a 4 GB sandbox, workers must be 1.
+  - **Never** mix codecs inside one concat: a GPU-lane build is all-NVENC parts; `-c copy` concat then works unchanged (LAW 3 probing still applies). First GPU publish gets a still-sweep + file-size sanity check before it is trusted as the master.
 - **Detached background processes may be reaped** when the shell exits. Run chunk renders synchronously inside the tool window, or via `setsid` with explicit progress polling.
 - **x264 lookahead capped at 20 + `-preset fast`** (`-x264-params rc-lookahead=20`; a bare `lookahead=` is silently ignored by libx264 — only warns, never applies). The default deep lookahead queues ~400 MB at 4K and contributed to OOM kills.
 - **4K H.264 decode can be SIGKILLed** for frame extraction QC; verify picture via render-side stills (`bun render.mjs still <t>`) and the browser, audio via `astats`/`silencedetect` on small windows.
@@ -179,7 +212,9 @@ bun render.mjs stills t1,t2,...   # contact sheet
 bun studio/tools/safearea.mjs --world world.mjs --timings timings.mjs   # LAW 4 sweep (exit 1 on breach)
 bun render.mjs chunk <start> <end>  # frames [start,end) → out/part_<start>.mp4
 bun audio.mjs                     # rebuild mix.wav (VO + SFX + music bed)
-bun build.mjs                     # concat chunks → mux → publish to public/film/
+bun build.mjs --sheet             # LAW 14: scene sheet → public/film/<slug>/stills/overview-<ver>.png
+bun build.mjs --preview           # LAW 14: 30 s scene sampler → out/preview-30s.mp4
+bun build.mjs --yes               # concat chunks → mux → publish (needs user confirmation)
 bun build.mjs --no-video          # re-publish with existing video-only.mp4
 bun run lint                      # must be clean before any "done"
 ```
@@ -191,11 +226,13 @@ bun run lint                      # must be clean before any "done"
 3. Browser-verified: page loads, film plays, currentTime advances, zero console errors, footer sticks on desktop and mobile, scrub bar fills.
 4. Defect sweep: QC stills at every beat, zoom-in crops on characters/underlines (Laws 4/5/6).
 4a. **LAW 4 sweep**: `bun studio/tools/safearea.mjs --world … --timings …` reports `SAFE AREA OK` (no ink in the outer 60 design px at any pose).
-4b. **LAW 9 source-asset gate**: ≥1 real licensed external asset in-frame, credits-CSV rows present, attribution composited if the license requires it.
+4b. **LAW 9 source-asset gate**: ≥1 real licensed external asset in-frame, credits-CSV rows present, attribution in the CSV + video description; **zero credit/license/source text on any frame (LAW 16)**.
+4c. **LAW 14 preview gate**: scene sheet + 30 s preview were presented and the user explicitly confirmed before the full render ran (a `--yes` build without that confirmation is a process defect).
+4d. **LAW 15 thumbnail gate**: thumb regenerated from the final cut's real content/title, house paper style, honesty line present; no claim or image the film does not contain.
 5. LAW 8 sweep: every beat's shot card complete (intent/shot/move/grid/hero/text/cues/assets); no text collisions at pose or at text entry/exit frames; framing matches the grid declared in BEATS.md (bible §9). LAW 10: every transit non-horizontal; profile list logged in the decision log.
 5a. Claim ledger green: every factual VO claim traced in SOURCES.md (research-sourcing skill) — no failing rows at render time.
 6. Numeric audio QC: mix loudness ≈ VO anchor (−14.5 LUFS area), TP ≤ −0.9 dBTP, bed audibly ducked under speech, **and the bed is audible from second 0** — no leading silence ≥0.3 s at −38 dB (`mixVoWithBus(..., { trimLead: true })` skips bed pre-silence automatically; verify with ebur128/silencedetect).
-7. Credits CSV complete; zip rebuilt per LAW 7; git commit.
+7. Credits CSV + `synopsis.txt` complete and current (contributors, sources with links, spec block — see §3); zip rebuilt per LAW 7; git commit.
 
 ## 7 · Incident log (do not repeat)
 

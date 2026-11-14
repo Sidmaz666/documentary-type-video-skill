@@ -1,0 +1,40 @@
+SYNOPSIS — <Title>
+Project: NNN-your-slug
+Runtime: <M:SS> (DUR s) · <resolution> master @ 30 fps · 1 file
+Master: public/film/NNN-your-slug/NNN-your-slug.mp4
+Captions: assets/subtitles.en.srt
+Thumbnail: public/film/NNN-your-slug/NNN-your-slug-thumb.png
+
+LOGLINE
+<One sentence — the film's promise, honestly, no clickbait the cut does not deliver.>
+
+SUMMARY — WHAT THE FILM REPORTS
+<Short plain-language summary, beat by beat (3–6 bullets or short paragraphs).>
+
+WHAT IS ALLEGED VS ESTABLISHED
+<One short editorial-standard paragraph: claims marked alleged stay alleged; what the
+public record settles vs what it does not. No legal conclusions.>
+
+HOW IT IS MADE
+Picture: code-drawn canvas world (Bun + @napi-rs/canvas), one continuous camera move,
+grain/vignette grade — no AI-generated imagery or video. Licensed real stock prints/clips
+composite as physical props or grade-matched plates (see assets/assets-credits.csv).
+Sound: narration + synthesized SFX; licensed public-domain classical music bed.
+No license or credit text appears on any frame — attribution lives in this file, the
+credits CSV, and the video description (LAW 16).
+
+CONTRIBUTORS
+- Direction, writing, production: <name/studio>
+- Research: <names/desk> — claim ledger in SOURCES.md
+- Narration: <method — e.g. Kokoro-82M synthesized voice (Apache-2.0), locally generated>
+- Picture/sound/encoding tooling: Bun, @napi-rs/canvas, ffmpeg (NVENC), engine/*.mjs
+
+SOURCE RECORD (full claim-by-claim ledger: SOURCES.md)
+- <Claim group> — <publisher/primary doc> — <URL>
+- <Claim group> — <publisher/primary doc> — <URL>
+(≥2 sources for contested numbers; official statements and primary documents preferred.)
+
+MUSIC & MEDIA CREDITS (canonical manifest: assets/assets-credits.csv)
+- Music: <composer — work — recording/performer — license (PD/CC0) — URL>
+- Images/clips: <author — asset — license — source URL> (one per row)
+- Fonts: <family> — SIL OFL 1.1 — <source>

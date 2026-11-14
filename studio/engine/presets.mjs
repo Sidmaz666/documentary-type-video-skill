@@ -49,13 +49,21 @@ export function filmGrade(name, fade) {
   return grade;
 }
 
-// ── Encoder quality ladder (x264) ─────────────────────────────────────────
-// lookahead ALWAYS ≤ 20 for 4K (AGENTS.md §4). `master` is the publish
-// default; `web` for smaller builds; `qc` for fast local checks only.
+// ── Encoder quality ladder ────────────────────────────────────────────────
+// x264 lookahead ALWAYS ≤ 20 for 4K (AGENTS.md §4 OOM law). `master` is the
+// publish default; `web` for smaller builds; `qc` for fast local checks only.
+// GPU lane (LAW 15 perf): NVENC presets — when a GPU encoder is detected,
+// `masterGpu`/`webGpu`/`qcGpu` free the CPU for the Skia canvas thread (the
+// real bottleneck) and encode chunks several× faster. `-cq` at high presets
+// (p7/p6) is visually transparent for ink/paper art at publish sizes; verify
+// with a still-sweep + file-size sanity gate on the first GPU publish.
 export const VIDEO_PRESETS = {
   master: { crf: 16, preset: 'fast', lookahead: 20, pixFmt: 'yuv420p', label: 'Master 4K (publish)' },
   web:    { crf: 19, preset: 'fast', lookahead: 20, pixFmt: 'yuv420p', label: 'Web publish' },
   qc:     { crf: 24, preset: 'fast', lookahead: 12, pixFmt: 'yuv420p', label: 'QC preview (small)' },
+  masterGpu: { codec: 'h264_nvenc', preset: 'p7', cq: 18, pixFmt: 'yuv420p', label: 'Master 4K (NVENC GPU)' },
+  webGpu:    { codec: 'h264_nvenc', preset: 'p6', cq: 22, pixFmt: 'yuv420p', label: 'Web publish (NVENC GPU)' },
+  qcGpu:     { codec: 'h264_nvenc', preset: 'p4', cq: 26, pixFmt: 'yuv420p', label: 'QC preview (NVENC GPU)' },
 };
 export const DEFAULT_VIDEO_PRESET = 'master';
 
