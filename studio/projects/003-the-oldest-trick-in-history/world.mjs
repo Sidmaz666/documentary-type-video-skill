@@ -130,7 +130,7 @@ function chipGlyph(ctx, x, y, s, t, t0) {
 
 function memoCard(ctx, x, y, t) {
   // Illustrative memo — clearly labelled; NOT a real document.
-  const T0 = 80.6;
+  const T0 = 73.2;
   const u = clamp((t - T0) / 0.7);
   if (u <= 0) return;
   noteCard(ctx, x, y, { w: 1020, h: 560, t0: T0, t, dur: 0.6, rot: -0.012, alpha: 1 });
@@ -161,19 +161,19 @@ function memoCard(ctx, x, y, t) {
     handLine(ctx, -390, sy, 330, sy, { w: 3, color: REDF, boil: 0.5 });
   }
   ctx.restore();
-  // caption — honest label
+  // caption — honest label, lands after the card settles (LAW 6 clearance ≥ 40px)
   ctx.save();
-  ctx.globalAlpha *= clamp((t - T0 + 1.0) / 0.7, 0, 1) * 0.82;
+  ctx.globalAlpha *= clamp((t - T0 - 0.55) / 0.5, 0, 1) * 0.82;
   ctx.fillStyle = INK;
   ctx.font = 'italic 31px "Noto Serif", serif';
   ctx.textAlign = 'center';
-  ctx.fillText('illustration — no public memo exists', x, y + 330);
+  ctx.fillText('illustration — no public memo exists', x, y + 352);
   ctx.restore();
 }
 
 function chainFlow(ctx, x, y, t) {
   // MEGASPEED -> SPEEDMATRIX chain cards + arrows
-  const u1 = clamp((t - 139.2) / 0.5);
+  const u1 = clamp((t - 138.2) / 0.5);
   const u2 = clamp((t - 149.4) / 0.5);
   const u3 = clamp((t - 153.0) / 0.5);
   if (u1 <= 0) return;
@@ -239,7 +239,12 @@ function chainFlow(ctx, x, y, t) {
 }
 
 function stockChart(ctx, x, y, t) {
-  const u = clamp((t - 243.2) / 2.6);
+  // Two-phase draw so the chart is never blank during the beat:
+  // phase 1 — the flat market line while VO says "markets do the math";
+  // phase 2 — the cliff lands on the spoken drop number.
+  const flat = clamp((t - 239.2) / 4.0);
+  const drop = clamp((t - 246.6) / 1.4);
+  const u = flat * 0.78 + drop * 0.22;
   if (u <= 0) return;
   const pts = [];
   const n = 46;
@@ -258,11 +263,11 @@ function stockChart(ctx, x, y, t) {
   for (const gy of [590, 710, 830]) handLine(ctx, 48350, gy, 49600, gy, { w: 2, color: INK, boil: 0.5 });
   ctx.restore();
   const pu = clamp((t - 249.0) / 0.5, 0, 1);
-  if (pu > 0) handLine(ctx, 49600, 400, 49600, 400 + 505 * pu, { w: 3, color: REDF, boil: 0.8 });
-  // −4.3% annotation at the cliff foot (lands when VO says the number)
+  if (pu > 0) handLine(ctx, 49600, 400, 49600, 400 + 460 * pu, { w: 3, color: REDF, boil: 0.8 });
+  // −4.3% annotation at the cliff foot (lands when VO says the number) —
+  // sits below the plumb leader, no stroke crosses the type (LAW 6)
   const au = clamp((t - 249.4) / 0.6);
   if (au > 0) {
-    handLine(ctx, x + 540, y + 445, x + 540, y + 495, { w: 5, color: REDF, boil: 1 });
     ctx.save();
     ctx.globalAlpha *= au;
     ctx.fillStyle = REDF;
@@ -305,13 +310,13 @@ function ledgerDuel(ctx, x, y, t) {
     '— she vanished, 2026',
     '— FT: a “romance”, reported',
     '— no document, no charge',
-  ], false, 110.2, -0.01);
+  ], false, 106.2, -0.01);
   card(x + 480, 'DENIED / UNCONFIRMED', 'or flatly denied', [
     '— China: “smears… slander”',
     '— Singapore MHA: no probes',
     '— NBC: not independently',
     '— confirmed · CIA silent',
-  ], true, 110.8, 0.01);
+  ], true, 107.0, 0.01);
 }
 
 function interlude(ctx, x, y, t, t0, adlib = '') {
@@ -438,17 +443,17 @@ function circuitTraces(ctx, t, t0) {
 }
 
 function evidenceWall(ctx, x, y, t) {
-  const u = clamp((t - 261.3) / 0.9);
+  const u = clamp((t - 260.6) / 0.9);
   if (u <= 0) return;
   const panel = (cx, head, lines, accent, uIn) => {
     if (uIn <= 0) return;
     ctx.save();
     ctx.globalAlpha *= uIn;
     ctx.fillStyle = '#faf3e3';
-    roundRect(ctx, cx - 352, y - 312, 704, 512, 12); ctx.fill();
+    roundRect(ctx, cx - 340, y - 312, 680, 512, 12); ctx.fill();
     ctx.strokeStyle = accent ? REDF : INK;
     ctx.lineWidth = 7;
-    roundRect(ctx, cx - 352, y - 312, 704, 512, 12); ctx.stroke();
+    roundRect(ctx, cx - 340, y - 312, 680, 512, 12); ctx.stroke();
     ctx.fillStyle = accent ? REDF : INK;
     ctx.font = '700 49px "Archivo Black", sans-serif';
     ctx.textAlign = 'center';
@@ -463,19 +468,19 @@ function evidenceWall(ctx, x, y, t) {
     '— Huang: “I was unfaithful”',
     '— Board: independent probe',
     '— NVDA −4.3% on Nov 9',
-  ], false, clamp((t - 262.6) / 0.7));
+  ], false, clamp((t - 261.4) / 0.7));
   panel(x, 'REPORTED', [
     '— MSS asset (NYT / FT / NBC)',
     '— memo, spring 2026',
     '— Singapore MHA: no probes',
-  ], false, clamp((t - 267.0) / 0.7));
+  ], false, clamp((t - 263.8) / 0.7));
   panel(x + 700, 'UNKNOWN', [
     '— what, if anything, passed',
     '— whether this was “an op”',
     '— no charge. no admission.',
-  ], true, clamp((t - 271.6) / 0.7));
+  ], true, clamp((t - 267.0) / 0.7));
   // masking tape holds each panel up — tied to that panel's own arrival
-  const panelT = [262.6, 267.0, 271.6];
+  const panelT = [261.4, 263.8, 267.0];
   [x - 700, x, x + 700].forEach((cx, i) => {
     const ta = clamp((t - panelT[i]) / 0.5);
     if (ta <= 0.01) return;
@@ -594,7 +599,7 @@ export function drawWorld(ctx, t) {
 
   // ── S01 · HOOK — THE ANCIENT COLD OPEN ─────────────────────
   {
-    const a = zoneAlpha(t, 0.0, 18.9, 0.5, 0);
+    const a = zoneAlpha(t, 0.0, 23.3, 0.5, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
@@ -616,9 +621,12 @@ export function drawWorld(ctx, t) {
       stampText(ctx, cx + 330, 844, 'YUE WINS.', { size: 50, t0: 15.7, t, color: REDF, rot: 0, font: FONT.serif });
       ctx.restore();
       // right rail — the scroll plate, tabbed and labelled on one axis
-      drawPrint(ctx, IMG.palace, 2526, 592, { w: 700, rot: -0.012, alpha: printA(t, 2.0, 18.6, 2346) });
+      drawPrint(ctx, IMG.palace, 2526, 592, { w: 700, rot: -0.012, alpha: printA(t, 2.0, 23.3, 2346) });
+      ctx.save();
+      ctx.globalAlpha *= fadeExit(2346, camXNow(t));
       stampText(ctx, 2526, 356, 'STRATAGEM 31 OF 36', { size: 42, t0: 17.2, t, color: INK, rot: 0, font: FONT.serif });
       typewriter(ctx, 2526, 812, '— THE BEAUTY TRAP —', { size: 40, t0: 17.3, t, cps: 30, font: FONT.serif });
+      ctx.restore();
       {
         const bA = clamp((t - 17.5) / 0.5, 0, 1) * a * fadeExit(2346, camXNow(t));
         if (bA > 0.01) {
@@ -646,19 +654,19 @@ export function drawWorld(ctx, t) {
       ctx.save();
       ctx.globalAlpha *= a;
       // centered hero: title band → chip → mirrored metric band; prints flank 3/4
-      typewriter(ctx, 7400, 128, 'THE MOST IMPORTANT CHIP COMPANY ON EARTH', { size: 84, t0: 27.8, t, cps: 26, font: FONT.serif });
-      typewriter(ctx, 7400, 206, 'FOUNDED 1993 · SANTA CLARA', { size: 38, t0: 28.6, t, cps: 24, font: FONT.serif });
+      typewriter(ctx, 7400, 128, 'THE MOST IMPORTANT CHIP COMPANY ON EARTH', { size: 84, t0: 23.7, t, cps: 26, font: FONT.serif });
+      typewriter(ctx, 7400, 206, 'FOUNDED 1993 · SANTA CLARA', { size: 38, t0: 24.4, t, cps: 24, font: FONT.serif });
       // chip placed so its upward pins (top ≈ y−306) clear the subtitle
       // baseline (LAW 8 — no stroke crosses type).
-      chipGlyph(ctx, 7400, 540, 280, t, 27.0);
+      chipGlyph(ctx, 7400, 540, 280, t, 23.9);
       // PCB traces — the chip is wired into the world
-      circuitTraces(ctx, t, 28.0);
+      circuitTraces(ctx, t, 24.4);
       stampText(ctx, 6920, 862, '$4T', { size: 175, t0: 30.9, t, color: INK, rot: -0.012, font: FONT.display });
       stampText(ctx, 6920, 990, 'JUL 2025', { size: 44, t0: 31.5, t, color: INK, font: FONT.serif });
       stampText(ctx, 8060, 862, '$5T', { size: 175, t0: 32.3, t, color: REDF, rot: 0.014, font: FONT.display });
       stampText(ctx, 8060, 990, 'OCT 2025', { size: 44, t0: 32.9, t, color: REDF, font: FONT.serif });
       // prints — HQ sign (left) + Jensen Huang (right), mirrored gutters (LAW 4 in-situ fades)
-      drawPrint(ctx, IMG.hq, 6520, 720, { w: 420, rot: -0.018, alpha: printA(t, 28.2, 48.6, 6340) });
+      drawPrint(ctx, IMG.hq, 6520, 720, { w: 420, rot: -0.018, alpha: printA(t, 24.6, 48.6, 6340) });
       drawPrint(ctx, IMG.jh, 8000, 415, { w: 420, rot: 0.016, alpha: printA(t, 34.9, 48.6, 7790) });
       ctx.restore();
     }
@@ -671,8 +679,8 @@ export function drawWorld(ctx, t) {
       ctx.save();
       ctx.globalAlpha *= a;
       // two-column hero — press print LEFT, headline stack + diagram RIGHT
-      drawPrint(ctx, IMG.alice, 12140, 550, { w: 800, rot: -0.016, alpha: printA(t, 54.8, 68.3, 11790) });
-      cropMarks(ctx, 12140, 550, 800, printH(IMG.alice, 800), t, 55.2);
+      drawPrint(ctx, IMG.alice, 12140, 550, { w: 800, rot: -0.016, alpha: printA(t, 52.4, 68.3, 11790) });
+      cropMarks(ctx, 12140, 550, 800, printH(IMG.alice, 800), t, 52.8);
       const alA = clamp((t - 55.4) / 0.6, 0, 1) * a * fadeExit(11790, camXNow(t));
       if (alA > 0.01) {
         ctx.save(); ctx.globalAlpha *= alA;
@@ -681,20 +689,23 @@ export function drawWorld(ctx, t) {
         ctx.fillText('identity as reported — not independently verified', 12140, 930);
         ctx.restore();
       }
-      typewriter(ctx, 13520, 232, 'ALICE HUANG', { size: 126, t0: 55.2, t, cps: 12, font: FONT.display });
+      typewriter(ctx, 13520, 232, 'ALICE HUANG', { size: 126, t0: 53.2, t, cps: 12, font: FONT.display });
       typewriter(ctx, 13520, 348, 'MEGASPEED INTERNATIONAL', { size: 45, t0: 61.4, t, cps: 24, font: FONT.serif });
-      typewriter(ctx, 13520, 392, 'SINGAPORE · NO RELATION TO JENSEN', { size: 37, t0: 56.1, t, cps: 26, font: FONT.serif });
+      typewriter(ctx, 13520, 420, 'SINGAPORE · NO RELATION TO JENSEN', { size: 37, t0: 56.1, t, cps: 26, font: FONT.serif });
       // relationship diagram — two circles, dotted ?, NOT a heart
       handCircle(ctx, 13140, 620, 88, { w: 6, color: INK, progress: clamp((t - 61.3) / 0.8) });
       handCircle(ctx, 13810, 620, 88, { w: 6, color: INK, progress: clamp((t - 62.3) / 0.8) });
-      ctx.font = '600 33px "Archivo Black", sans-serif';
-      ctx.fillStyle = INK;
-      ctx.textAlign = 'center';
       const ta = clamp((t - 62.9) / 0.5, 0, 1);
-      ctx.globalAlpha *= ta;
-      ctx.fillText('JENSEN', 13140, 620);
-      ctx.fillText('ALICE', 13810, 620);
-      ctx.globalAlpha /= ta;
+      if (ta > 0.01) {
+        ctx.save();
+        ctx.globalAlpha *= ta;
+        ctx.font = '600 33px "Archivo Black", sans-serif';
+        ctx.fillStyle = INK;
+        ctx.textAlign = 'center';
+        ctx.fillText('JENSEN', 13140, 620);
+        ctx.fillText('ALICE', 13810, 620);
+        ctx.restore();
+      }
       if (t > 63.7) dashedLine(ctx, 13240, 620, 13710, 620, t, 63.7);
       // rotating dashed targeting ring — slow, red, never settles (ambient motion)
       {
@@ -708,7 +719,19 @@ export function drawWorld(ctx, t) {
         ctx.setLineDash([]);
         ctx.restore();
       }
-      typewriter(ctx, 13100, 700, 'REPORTED — NEVER CHARGED', { size: 50, t0: 68.4, t, cps: 22, font: FONT.hand });
+      // legal status caption — stacked under the press print's honesty note
+      // (was colliding with the relationship-ring gallery at y700; LAW 4/8)
+      {
+        const capA = clamp((t - 57.0) / 0.6, 0, 1) * a * fadeExit(11940, camXNow(t));
+        if (capA > 0.01) {
+          ctx.save(); ctx.globalAlpha *= capA;
+          ctx.fillStyle = REDF;
+          ctx.font = '700 40px "Archivo Black", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('REPORTED — NEVER CHARGED', 12140, 994);
+          ctx.restore();
+        }
+      }
       // Singapore plate bottom-right — the documented link
       drawPrint(ctx, IMG.sg, 13600, 870, { w: 640, rot: 0.012, alpha: printA(t, 61.9, 68.3, 13330) });
       ctx.restore();
@@ -717,14 +740,14 @@ export function drawWorld(ctx, t) {
 
   // ── S04 · THE ALLEGATION ────────────────────────────────────
   {
-    const a = zoneAlpha(t, 73.1, 102.9, 0.6, 0);
+    const a = zoneAlpha(t, 72.1, 102.9, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      typewriter(ctx, 18760, 142, 'ACCORDING TO US INTELLIGENCE ASSESSMENTS', { size: 40, t0: 76.0, t, cps: 26, font: FONT.serif });
+      typewriter(ctx, 18760, 142, 'ACCORDING TO US INTELLIGENCE ASSESSMENTS', { size: 40, t0: 72.6, t, cps: 26, font: FONT.serif });
       stampText(ctx, 18760, 261, 'MSS — REPORTED', { size: 110, t0: 89.4, t, color: REDF, rot: -0.012, font: FONT.display, press: false });
       memoCard(ctx, 18760, 648, t);
-      paperclip(ctx, 19060, 426, t, 81.0);
+      paperclip(ctx, 19060, 426, t, 74.0);
             // White House print — Washington owns the memo (LAW 4 in-situ fade)
       drawPrint(ctx, IMG.wh, 19540, 755, { w: 360, rot: 0.014, alpha: printA(t, 79.2, 102.6, 19360) });
       ctx.restore();
@@ -752,7 +775,7 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
 
   // ── S05 · DENIALS ───────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 107.5, 134.3, 0.6, 0);
+    const a = zoneAlpha(t, 106.4, 134.3, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
@@ -766,19 +789,22 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
 
   // ── S06 · MEGASPEED ─────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 139.1, 165.3, 0.6, 0);
+    const a = zoneAlpha(t, 138.0, 165.3, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
       chainFlow(ctx, 30480, 355, t);
       const qx = fadeExit(30480 - 340, camXNow(t));
-      ctx.globalAlpha *= qx;
-      typewriter(ctx, 31200, 812, 'TRACED · FEB 2024 – FEB 2026 · BLOOMBERG', { size: 30, t0: 155.6, t, cps: 28, font: FONT.serif });
-      typewriter(ctx, 31140, 884, '“NORMAL AND NOT UNUSUAL”', { size: 37, t0: 162.9, t, cps: 26, font: FONT.serif });
-      typewriter(ctx, 31140, 920, '— HUANG, TO BLOOMBERG', { size: 28, t0: 165.4, t, cps: 26, font: FONT.serif });
-      typewriter(ctx, 31140, 966, '“THOROUGHLY INVESTIGATED AND DEBUNKED LAST YEAR”', { size: 26, t0: 166.5, t, cps: 30, font: FONT.serif });
-      typewriter(ctx, 31140, 1004, '— NVIDIA', { size: 26, t0: 168.8, t, cps: 30, font: FONT.serif });
-      ctx.globalAlpha /= qx;
+      if (qx > 0.01) {
+        ctx.save();
+        ctx.globalAlpha *= qx;
+        typewriter(ctx, 31200, 812, 'TRACED · FEB 2024 – FEB 2026 · BLOOMBERG', { size: 30, t0: 155.6, t, cps: 28, font: FONT.serif });
+        typewriter(ctx, 31140, 884, '“NORMAL AND NOT UNUSUAL”', { size: 37, t0: 162.9, t, cps: 26, font: FONT.serif });
+        typewriter(ctx, 31140, 920, '— HUANG, TO BLOOMBERG', { size: 28, t0: 165.4, t, cps: 26, font: FONT.serif });
+        typewriter(ctx, 31140, 966, '“THOROUGHLY INVESTIGATED AND DEBUNKED LAST YEAR”', { size: 26, t0: 166.5, t, cps: 30, font: FONT.serif });
+        typewriter(ctx, 31140, 1004, '— NVIDIA', { size: 26, t0: 168.8, t, cps: 30, font: FONT.serif });
+        ctx.restore();
+      }
       // supercomputer plate — illustrative, captioned honestly (LAW 4)
       drawPrint(ctx, IMG.hpc, 29880, 750, { w: 760, rot: -0.014, alpha: printA(t, 143.6, 165.0, 29470) });
       ctx.restore();
@@ -787,14 +813,14 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
 
   // ── S07 · THE OLDEST TRICK (history wall) ───────────────────
   {
-    const a = zoneAlpha(t, 171.2, 210.5, 0.6, 0);
+    const a = zoneAlpha(t, 168.9, 210.5, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
       // title — camera pans past it; dissolve before its left edge reaches the band
       const txA = fadeExit(35520, camXNow(t));
       ctx.save(); ctx.globalAlpha *= txA;
-      typewriter(ctx, 36400, 195, 'THE PLAYBOOK IS OLDER THAN THE MICROCHIP', { size: 72, t0: 171.5, t, cps: 26, font: FONT.serif });
+      typewriter(ctx, 36400, 172, 'THE PLAYBOOK IS OLDER THAN THE MICROCHIP', { size: 72, t0: 169.3, t, cps: 26, font: FONT.serif });
       ctx.restore();
       // spine timeline — erodes segment-by-segment as the camera passes (LAW 4)
       {
@@ -882,7 +908,7 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
 
   // Christine Fang — text card (no licensed photo exists; honest choice)
   {
-    const u = clamp((t - 199.1) / 0.6, 0, 1) * zoneAlpha(t, 171.2, 210.5, 0.6, 0);
+    const u = clamp((t - 199.1) / 0.6, 0, 1) * zoneAlpha(t, 168.9, 210.5, 0.6, 0);
     const fxR = fadeEntry(39830, camXNow(t)) * fadeExit(39530, camXNow(t));
     if (u > 0.01 && fxR > 0.01) {
       ctx.save();
@@ -902,7 +928,7 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
 
   // ── S08 · WHY IT MATTERS ────────────────────────────────────
   {
-    const a = zoneAlpha(t, 211.6, 232.0, 0.6, 0);
+    const a = zoneAlpha(t, 210.2, 232.0, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
@@ -910,7 +936,7 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
       const tA = clamp((44200 - 700 + 1256 - camX) / 600, 0, 1);
       // kicker marginalia — the subject, before the claim
       {
-        const kA = clamp((t - 215.2) / 0.5, 0, 1);
+        const kA = clamp((t - 211.0) / 0.5, 0, 1);
         if (kA > 0.01) {
           ctx.save(); ctx.globalAlpha *= kA * tA; ctx.translate(44200, 128); ctx.rotate(-0.045);
           ctx.fillStyle = REDF; ctx.font = '54px "Caveat"'; ctx.textAlign = 'center';
@@ -919,7 +945,7 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
         }
       }
       ctx.save(); ctx.globalAlpha *= tA;
-      typewriter(ctx, 44200, 300, 'WHY WASHINGTON CARES', { size: 150, t0: 214.4, t, cps: 16, font: FONT.display });
+      typewriter(ctx, 44200, 300, 'WHY WASHINGTON CARES', { size: 150, t0: 211.5, t, cps: 16, font: FONT.display });
       ctx.restore();
       exportStamps(ctx, 44200, 400, t);
       ctx.restore();
@@ -928,11 +954,11 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
 
   // ── S09 · FALLOUT ───────────────────────────────────────────
   {
-    const a = zoneAlpha(t, 236.9, 256.0, 0.6, 0);
+    const a = zoneAlpha(t, 235.2, 256.0, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      typewriter(ctx, 49060, 122, 'NOVEMBER 9, 2026', { size: 46, t0: 241.6, t, cps: 20, font: FONT.serif });
+      typewriter(ctx, 49060, 122, 'NOVEMBER 9, 2026', { size: 46, t0: 236.4, t, cps: 20, font: FONT.serif });
       stockChart(ctx, 49060, 470, t);
       stampText(ctx, 49060, 330, '$178.67', { size: 188, t0: 253.3, t, color: INK, rot: 0.008, font: FONT.display });
       noteCard(ctx, 48620, 960, { w: 940, h: 140, t0: 254.3, t, dur: 0.6, rot: -0.01, alpha: 1 });
@@ -946,18 +972,18 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
       ctx.fillText('N.D. CAL. · disclosure claims only · no finding of espionage', 48620, 979);
       ctx.restore();
       // NYSE floor print — where the math happens (LAW 4 in-situ fade)
-      drawPrint(ctx, IMG.nyse, 49980, 655, { w: 400, rot: 0.018, alpha: printA(t, 239.8, 256.2, 49750) });
+      drawPrint(ctx, IMG.nyse, 49980, 655, { w: 400, rot: 0.018, alpha: printA(t, 235.8, 256.2, 49750) });
       ctx.restore();
     }
   }
 
   // ── S10 · WHAT WE KNOW ──────────────────────────────────────
   {
-    const a = zoneAlpha(t, 260.8, 276.0, 0.6, 0);
+    const a = zoneAlpha(t, 259.4, 276.0, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      typewriter(ctx, 53880, 130, 'CASE FILE 003 — THE PROOF BOARD', { size: 40, t0: 262.0, t, cps: 30, font: FONT.serif });
+      typewriter(ctx, 53880, 130, 'CASE FILE 003 — THE PROOF BOARD', { size: 40, t0: 259.8, t, cps: 30, font: FONT.serif });
       evidenceWall(ctx, 53880, 500, t);
       ctx.restore();
     }
@@ -965,21 +991,21 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
 
   // ── S11 · THE FINAL QUESTION ────────────────────────────────
   {
-    const a = zoneAlpha(t, 280.7, 303.5, 0.6, 0);
+    const a = zoneAlpha(t, 279.9, 303.5, 0.6, 0);
     if (a > 0.01) {
       ctx.save();
       ctx.globalAlpha *= a;
-      maskUpText(ctx, 58500, 330, 'THE OLDEST TRICK', { size: 142, t0: 283.0, t1: 283.8, t, font: FONT.display });
-      maskUpText(ctx, 58500, 462, 'IN THE HISTORY', { size: 142, t0: 283.9, t1: 284.7, t, font: FONT.display });
-      stampText(ctx, 58500, 700, 'STILL WORKS?', { size: 175, t0: 285.2, t, color: REDF, rot: -0.012, font: FONT.display });
+      maskUpText(ctx, 58500, 330, 'THE OLDEST TRICK', { size: 142, t0: 280.6, t1: 281.4, t, font: FONT.display });
+      maskUpText(ctx, 58500, 462, 'IN THE HISTORY', { size: 142, t0: 281.6, t1: 282.4, t, font: FONT.display });
+      stampText(ctx, 58500, 700, 'STILL WORKS?', { size: 175, t0: 282.8, t, color: REDF, rot: -0.012, font: FONT.display });
       // the question, circled by hand — the closer
-      roughCircle(ctx, 58500, 700, 660, 150, t, 285.6, 23);
+      roughCircle(ctx, 58500, 700, 660, 150, t, 283.2, 23);
       ctx.restore();
     }
   }
 
   // ── interlude flourishes — fill empty transit bands ──────────
-  interlude(ctx, 3480, 520, t, 20.0, 'sound familiar?');
+  interlude(ctx, 5600, 520, t, 21.2, 'sound familiar?');
   interlude(ctx, 8500, 520, t, 49.8, 'the other Huang');
   interlude(ctx, 16660, 520, t, 70.0, 'alleged. allegedly.');
   interlude(ctx, 22000, 520, t, 104.2, 'denials on the table');

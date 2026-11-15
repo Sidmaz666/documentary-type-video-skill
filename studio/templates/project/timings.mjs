@@ -5,6 +5,8 @@
 // PRODUCTION TARGETS: 5–6 min or 10–12 min essays (001/002 are test reels).
 // Boards scale ~10–14k px per minute; use many zones and makeVariedRail (LAW 10)
 // so every transit bends diagonally — never a dead straight right.
+// LAW 17: derive camera arrivals (camAt) BEFORE timing text — first readable
+// content <=1.0s after arrival, every named element landed before its VO word.
 import { makeVariedRail } from '../../engine/camera.mjs';
 
 export const T = {

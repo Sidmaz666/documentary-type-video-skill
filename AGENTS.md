@@ -137,7 +137,7 @@ Empty text-only zones are a defect, not a style. Rules:
 - Draw marginalia (annotations, arrows, red herrings) to fill negative space during holds; transit bands carry interlude flourishes.
 
 ### LAW 12 — Thumbnail Grammar Law (scene density, asset scale, fades)
-Every scene's key pose must hold up as a standalone thumbnail (the film's key art is the density bar). Binding rules (bible §5.10): hero asset **≥ 35–45% of frame width** or headline **≥ 18% of frame height**; scenes are laid out on **web hero layouts** (split-hero, centered hero, two-up/3-up grid, full-width band — named in the shot card); prints render at **full opacity at hold** and never under text; captions ≤ 24px below the print bottom with ≥ 20px clearance; no quarter-frame empty >1.5s in a hold; **fade helpers calibrated to the frame edge in canvas px** — alpha 0 only inside the outer 60px band, 1.0 by ~200px inside (world-offset constants ghost in-frame assets at zoom<1 — banned); **transit budget ≤ 3.2s** with arrival ≥ 1.2s before the beat's first VO word. QC: still sweep judged against the thumbnail bar + LAW 4 sweep must pass.
+Every scene's key pose must hold up as a standalone thumbnail (the film's key art is the density bar). Binding rules (bible §5.10): hero asset **≥ 35–45% of frame width** or headline **≥ 18% of frame height**; scenes are laid out on **web hero layouts** (split-hero, centered hero, two-up/3-up grid, full-width band — named in the shot card); prints render at **full opacity at hold** and never under text; captions ≤ 24px below the print bottom with ≥ 20px clearance; no quarter-frame empty >1.5s in a hold; **fade helpers calibrated to the frame edge in canvas px** — alpha 0 only inside the outer 60px band, 1.0 by ~200px inside (world-offset constants ghost in-frame assets at zoom<1 — banned); **transit budget ≤ 3.2s** with arrival ≥ 1.2s before the beat's first VO word; **key pose complete** (every panel/hero landed — LAW 17). QC: still sweep judged against the thumbnail bar + LAW 4 sweep must pass.
 
 ### LAW 13 — Layout system (every scene composes through the engine)
 
@@ -170,6 +170,18 @@ The thumbnail is the film's promise; it must be **derived from the actual film**
 - Prefer PD/CC0 so attribution is not legally required; where a license requires attribution, it is satisfied by the description block + CSV (documented in PROJECT.md), never by picture.
 - **Exception (misinformation guard, not a credit):** one short plain-language line is allowed when an image could be mistaken for evidence of a real document/person (e.g. "illustration — no public memo exists", "identity as reported — not independently verified"). Max one line, serif ≤ 31px, no license words, never stacked into a credit block.
 - QC: grep the world for `CC0|CC BY|PD|Museum|Archiv|Stock|SOURCES —|CREDITS —` before any render; the final still sweep must show zero credit/license strings.
+
+### LAW 17 — Timing & Density Contract (scene starts, landings, spacing)
+
+**User directive (Nov 2026): no dead canvas while narration runs, no late scene starts, no overlong camera moves, no cramped or overlapping text — in every film, forever.** A scene is not "animated in" once it eventually appears; it must be *present when the VO needs it*. Hard rules:
+- **Enter on arrival.** The first readable content of a zone enters within **≤ 1.0 s of camera arrival** (zone's hold key / `zoneAlpha` in-time), never 3–6 s later. Arrivals are computed from the rail (`camAt`), not guessed: build the arrival-vs-VO table before timing text.
+- **Land before the word.** Every element a VO line names (a print, a chart, a caption, a panel) must be **fully landed before that word starts**. Typewriters may still be typing *while the previous line speaks* — never while the line that names them speaks.
+- **No VO-over-blank.** While narration is speaking, a window > 1.5 s with nothing readable on screen is a defect (LAW 8 dead-air rule, extended to content starts). Bridge with in-situ content or retime; never pad.
+- **Key pose is complete.** At every beat's thumbnail pose (mid-hold, ≤ 2 s after its last element start), the scene passes the LAW 12 density bar — all panels/cards/stamps present, no missing half of a 3-up wall, no empty half-frame.
+- **Transit budget ≤ 3.2 s** (LAW 12); camera moves never ride while the *new* beat's text is already animating — the beat's animation starts at/after arrival.
+- **Spacing system.** Text-to-text / text-to-art / text-to-stroke clearance **≥ 40 px** (LAW 6); neighbouring panel/card gutters **≥ 20 px** (003 S10 shipped a 4 px card/stroke overlap before the 680-px panel fix); mirrored elements share equal gutters (±dx); one scene = one spacing rhythm — don't mix 20/44/70 px gaps arbitrarily.
+- **Alpha discipline (NaN ban).** Never divide inherited alpha (`ctx.globalAlpha /= x` — with x=0 it becomes NaN and silently blanks every subsequent draw in the block; 003 shipped invisible S03 art for 10 s this way). Use `save()/restore()` and guard every `*=` whose factor can be 0 (`if (f > 0.01)`).
+- **Audit procedure (part of every QC, before the scene sheet):** (1) print the transit/arrival table (`camAt` at every key vs VO word anchors); (2) still at `arrival + 1.0 s` for every zone — content must be readable; (3) still at every beat's key pose — density bar; (4) grep the world for `/=`; (5) LAW 4 sweep. All five green before `--sheet`.
 
 ---
 
@@ -228,6 +240,7 @@ bun run lint                      # must be clean before any "done"
 4a. **LAW 4 sweep**: `bun studio/tools/safearea.mjs --world … --timings …` reports `SAFE AREA OK` (no ink in the outer 60 design px at any pose).
 4b. **LAW 9 source-asset gate**: ≥1 real licensed external asset in-frame, credits-CSV rows present, attribution in the CSV + video description; **zero credit/license/source text on any frame (LAW 16)**.
 4c. **LAW 14 preview gate**: scene sheet + 30 s preview were presented and the user explicitly confirmed before the full render ran (a `--yes` build without that confirmation is a process defect).
+4d. **LAW 17 timing/density gate**: arrival-vs-VO table printed; arrival+1.0 s stills show readable content in every zone; key-pose stills complete (all panels landed); `/=  *` alpha-division grep clean; gutters/clearances (≥20 px cards, ≥40 px text) hold.
 4d. **LAW 15 thumbnail gate**: thumb regenerated from the final cut's real content/title, house paper style, honesty line present; no claim or image the film does not contain.
 5. LAW 8 sweep: every beat's shot card complete (intent/shot/move/grid/hero/text/cues/assets); no text collisions at pose or at text entry/exit frames; framing matches the grid declared in BEATS.md (bible §9). LAW 10: every transit non-horizontal; profile list logged in the decision log.
 5a. Claim ledger green: every factual VO claim traced in SOURCES.md (research-sourcing skill) — no failing rows at render time.

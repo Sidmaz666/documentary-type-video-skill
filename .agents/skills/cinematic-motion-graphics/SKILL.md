@@ -331,6 +331,20 @@ The engine ships a production layout system at `studio/engine/layouts.mjs` — *
 5. **Motion is part of the layout.** `MOTION` presets set entrance/fade/stagger/exit durations; reveals are in-situ (fade/type/mask/draw) and the entire animation path must stay in the safe region and never cross other text. Deterministic, frame-derived timing only.
 6. **Scene-level QA is mandatory.** For every scene: still at entry / hold / exit, safe-area sweep (`studio/tools/safearea.mjs`) and the thumbnail test (LAW 12 §5.10). A scene with an unassigned layout id or a failed resolved region is not renderable.
 
+### 5.13 Scene-start & set-piece timing contract (LAW 17, binding)
+
+A scene that "eventually" animates in is a defect: it must be *readable when the VO needs it*. The 003 v21 pass found every zone paying 3–6 s of blank canvas after arrival — never again:
+
+1. **Arrival-vs-VO table first.** Print `camAt(T.rail, t)` at every key and the VO word anchors (`assets/vo-timings.whisper.json` aligned to the narration). Text/print `t0`s are chosen against that table, not guessed. Arrival = the camera's hold key for the zone.
+2. **Enter on arrival:** the zone's first readable element starts within **≤ 1.0 s of arrival** (typically at the arrival key +0.2–0.4 s). A zone whose hero appears > 1 s after arrival fails.
+3. **Land before the word:** each element named by a VO line is fully drawn **before that word's start**; the previous line's speech time is the budget (e.g. title types while "…still ships on schedule" plays, lands before "Why does Washington…").
+4. **No VO-over-blank:** while speech plays, > 1.5 s with nothing readable = defect. Extend in-situ content or retime — never pad.
+5. **Key pose complete:** at the beat's thumbnail pose (mid-hold, ≤ 2 s after the last element start) every panel/card/stamp is present. A 3-up wall with one card is not "key pose"; 003 S10 shipped that until panels were re-timed 261.4/263.8/267.0.
+6. **Exits:** guard departing content with `fadeExit(edge, camX)` rather than extending zone outs into the transit — zone-extension attempts caused 97-frame LAW 4 breaches (003). The fade is a multiply on inherited alpha, `save()/restore()` scoped.
+7. **Spacing rhythm:** ≥ 40 px text-to-text/art/stroke; ≥ 20 px card/panel gutters (003 S10: 4 px overlap → 680-wide panels); one gutter scale per scene; honesty/caption lines land after their card's drop animation completes (003 S04 caption: t0 +0.55 s, y +352 → 40 px clearance from the settled card).
+8. **NaN-alpha ban:** never `ctx.globalAlpha /= x` (x=0 → NaN → silent blank block; 003 lost the SG print/ring/caption for 10 s in S03). Guard every multiplying factor that can be 0.
+9. **Gate:** the five-check audit (table → arrival+1 s stills → key-pose stills → `/=` grep → LAW 4 sweep) runs before every `--sheet`; a film that skips it is not previewable.
+
 ---
 
 ## 6 · Color & the color script
