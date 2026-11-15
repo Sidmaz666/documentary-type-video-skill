@@ -342,11 +342,11 @@ A scene that "eventually" animates in is a defect: it must be *readable when the
 5. **Key pose complete:** at the beat's thumbnail pose (mid-hold, ≤ 2 s after the last element start) every panel/card/stamp is present. A 3-up wall with one card is not "key pose"; 003 S10 shipped that until panels were re-timed 261.4/263.8/267.0.
 6. **Exits:** guard departing content with `fadeExit(edge, camX)` rather than extending zone outs into the transit — zone-extension attempts caused 97-frame LAW 4 breaches (003). The fade is a multiply on inherited alpha, `save()/restore()` scoped.
 7. **Spacing rhythm:** ≥ 40 px text-to-text/art/stroke; ≥ 20 px card/panel gutters (003 S10: 4 px overlap → 680-wide panels); one gutter scale per scene; honesty/caption lines land after their card's drop animation completes (003 S04 caption: t0 +0.55 s, y +352 → 40 px clearance from the settled card).
-8. **NaN-alpha ban:** never `ctx.globalAlpha /= x` (x=0 → NaN → silent blank block; 003 lost the SG print/ring/caption for 10 s in S03). Guard every multiplying factor that can be 0.
-9. **Gate:** the five-check audit (table → arrival+1 s stills → key-pose stills → `/=` grep → LAW 4 sweep) runs before every `--sheet`; a film that skips it is not previewable.
+8. **Interlude dwell (NEW):** every chapter-break flourish (`interlude()`) gets a **hold key** at its center `(x, y, zoom)` for **≥ 1.3 s** drawing the adlib ink-wash line centered at x, y−60, zoom, then resuming the rail. Without this the cross-band ornament flashes past the camera and becomes barely readable (003 S01→S02, S07, etc.). Travel spans between holds stay ≤ 3.2 s (LAW 12).
+9. **NaN-alpha ban:** never `ctx.globalAlpha /= x` (x=0 → NaN → silent blank block; 003 lost the SG print/ring/caption for 10 s in S03). Guard every multiplying factor that can be 0.
+10. **Gate:** the five-check audit (table → arrival+1 s stills → key pose → `/=` grep → LAW 4 sweep) runs before every `--sheet`.
 
 ---
-
 ## 6 · Color & the color script
 
 - House palette: ink `#1a1714` · paper `#f4ead8` · warm accent `#e8b04b` · alarm red `#c33` (only for alarm/circles/underline) · teal shadow `#22333b` (sparingly).
@@ -470,3 +470,5 @@ Plus the existing Texture & motion feel section (boil, paper, rail, safe-area, L
 | LAW 8 (frame/beat craft; no text collisions) | §0–§6, §9, §10 |
 | LAW 9 (external source assets mandatory) | §8, §9, §4 |
 | LAW 10 (camera variety; never straight rides) | §2, §0 `move`, engine `makeVariedRail()` |
+| LAW 12 (thumbnail grammar & complete key pose) | §5.9–§5.13: arrival-vs-VO table, land-before-word, no VO-over-blank, key pose, dwell, NaN-alpha ban |
+| LAW 17 (timing & density contract) | §5.13: five-check audit, arrival-vs-VO table, interlude dwell, spacing, NaN-alpha ban |

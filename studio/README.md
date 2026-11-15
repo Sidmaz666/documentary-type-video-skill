@@ -1,6 +1,23 @@
-# studio/ — the Opuscar film factory
+# studio/ — **documentary-type-video-skill** (the Opuscar film factory)
 
 A **topic-agnostic, code-drawn film studio**. One repo holds many films; each film is one folder under `projects/`. Frames are composited frame-by-frame by a canvas program (`@napi-rs/canvas` under Bun) and encoded to MP4 — never AI-generated media; licensed, real (non-AI) stock images/video/clips are allowed as grade-matched plates, B-roll or printed props (LAW 1) — and **at least one such external asset is mandatory in every film (LAW 9)** — and **every beat carries sourced imagery (LAW 11)**: in-situ prints from licensed assets, vibe plate built once at module load (~7200-px feathered tiles, α≈0.16, viewport-culled), never a bare text-only zone; a film with zero source assets is a failure. Sound is synthesized SFX + real public-domain/openly-licensed classical recordings from open public-data sources, mixed against the voiceover (LAW 1b). The operating manual (hard laws) lives in `AGENTS.md` at the repo root — read it first; it wins over anything here.
+
+## Project name
+
+This project is **`documentary-type-video-skill`** — not "extest". All files, commits, and the published master reference this slug. The canonical video artifact for 003 is `public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.mp4`.
+
+## Showcase film — 003 · The Oldest Trick in History Still Works, Right?
+
+| | |
+|---|---|
+| **Title** | The Oldest Trick in History Still Works, Right? |
+| **Runtime** | ~5:15 · 2560×1098 (21:9) · 30 fps |
+| **Master** | [`public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.mp4`](../public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history.mp4) |
+| **Thumbnail** | `public/film/003-the-oldest-trick-in-history/003-the-oldest-trick-in-history-thumb.png` |
+| **Scene sheet** | `public/film/003-the-oldest-trick-in-history/stills/overview-v20.png` |
+| **Captions** | `assets/subtitles.en.srt` |
+
+A code-drawn illustrated essay on the reported intelligence scandal around Nvidia and Megaspeed — the beauty-trap stratagem (美人計) as the oldest recruitment playbook in history. Every frame composited by canvas; licensed CC0/CC-BY plates as printed props; Pathétique IV as the classical PD bed. The published MP4 is the canonical artifact.
 
 ## Repo map
 
@@ -35,7 +52,7 @@ studio/
 
 ## Production targets
 
-**Production films are 5–6-minute** or **10–12-minute** illustrated essays: VO-driven (Kokoro/verified-wav), one zone per ~20–40 s of narration, long paper boards (~10–14k px per minute), many transits — every one of them diagonal or arc'd (**LAW 10**: `makeVariedRail` in `engine/camera.mjs`, never a dead straight ride; record `T.rail.variety`), QC still sweep at every pose, LAW 4 sweep mandatory, and **SRT captions + key stills** delivered alongside the 21:9 master (a 16:9 alternate only when explicitly requested — `studio/tools/deliver.mjs`). Zone counts, durations, and rail length all scale from the VO — nothing is stretched to a target runtime (LAW 2).
+**Production films are 5–6-minute** or **10–12-minute** illustrated essays: VO-driven (Kokoro/verified-wav), one zone per ~20–40 s of narration, long paper boards (~10–14k px per minute), many transits — every one of them diagonal or arc'd (**LAW 10**: `makeVariedRail` in `engine/camera.mjs`, never a dead straight ride; record `T.rail.variety`), **interlude holds** — every chapter-break flourish gets a **≥1.3 s hold key** at its center so it reads before the camera moves on (LAW 17 §5.13), **zoom choreography** — holds push in slightly (zoom 0.92→0.96), transits pull back (zoom 0.97→0.85), end card pulls back to 0.8 for a full-board reveal; QC still sweep at every pose, LAW 4 sweep mandatory, and **SRT captions + key stills** delivered alongside the 21:9 master (a 16:9 alternate only when explicitly requested — `studio/tools/deliver.mjs`). Zone counts, durations, and rail length all scale from the VO — nothing is stretched to a target runtime (LAW 2).
 
 ## Quickstart: film #002 end-to-end
 

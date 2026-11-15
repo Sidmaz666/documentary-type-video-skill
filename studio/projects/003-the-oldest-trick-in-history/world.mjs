@@ -1006,14 +1006,14 @@ function dashedLine(ctx, x1, y1, x2, y2, t, t0) {
 
   // ── interlude flourishes — fill empty transit bands ──────────
   interlude(ctx, 5600, 520, t, 21.2, 'sound familiar?');
-  interlude(ctx, 8500, 520, t, 49.8, 'the other Huang');
-  interlude(ctx, 16660, 520, t, 70.0, 'alleged. allegedly.');
-  interlude(ctx, 22000, 520, t, 104.2, 'denials on the table');
-  interlude(ctx, 34800, 520, t, 168.2, 'this has happened before');
-  interlude(ctx, 41350, 520, t, 208.5, 'access. intimacy.');
-  interlude(ctx, 46350, 520, t, 233.5, 'chips ≠ dating');
-  interlude(ctx, 50750, 520, t, 257.4, 'the market did the math');
-  interlude(ctx, 56450, 520, t, 277.2, 'so what do we know');
+  interlude(ctx, 8500, 520, t, 51.1, 'the other Huang');
+  interlude(ctx, 16660, 520, t, 72.6, 'alleged. allegedly.');
+  interlude(ctx, 22000, 520, t, 108.1, 'denials on the table');
+  interlude(ctx, 34800, 520, t, 173.4, 'this has happened before');
+  interlude(ctx, 41350, 520, t, 215.0, 'access. intimacy.');
+  interlude(ctx, 46350, 520, t, 241.3, 'chips ≠ dating');
+  interlude(ctx, 50750, 520, t, 266.5, 'the market did the math');
+  interlude(ctx, 56450, 520, t, 287.6, 'so what do we know');
 
   // END-CARD — title + question only (user directive: no credit/license text on frame)
 }
