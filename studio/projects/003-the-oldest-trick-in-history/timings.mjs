@@ -6,28 +6,30 @@ export const T = {
   W: 2560,
   H: 1098, // 21:9 (even dims)
   FPS: 30,
-  FRAMES: 9443, // round(314.761 * 30) — LAW 2: duration = VO + interlude holds
-  DUR: 314.761,
+  FRAMES: 12398, // round(413.248 * 30) — LAW 2: duration = VO + interlude holds
+  DUR: 413.248,
   BOARD_W: 62000,
   BOARD_H: 3600,
 
-  // VO word anchors (assets/vo-timings.whisper.json) — narration v13
+  // VO word anchors (assets/vo-timings.whisper.json) — narration v14 (updated Nov 15 2026)
   scenes: {
     hook: 0.0,
-    nvidia: 25.34,
-    alice: 53.42,
-    allegation: 74.88,
-    denials: 109.24,
-    megaspeed: 140.86,
-    history: 171.8,
-    why: 213.36,
-    fallout: 238.68,
-    know: 262.56,
-    final: 282.28,
+    nvidia: 43.42,      // "letter ... unfaithful"
+    resignation: 56.0,  // "gone" / Huang resigned Nov 12
+    second-affair: 91.5, // Kimberly Powell / Nvidia exec
+    alice: 121.28,      // "The woman at the center is Alice Huang"
+    megaspeed: 126.34,  // Megaspeed International
+    allegation: 145.0,  // MSS memo / national security
+    denials: 160.0,     // Singapore / China / board deny
+    history: 200.0,     // Mata Hari / Romeo agents
+    why: 240.0,         // export controls H20
+    fallout: 300.0,     // Nov twelfth -4.3% / $190B / $490B
+    know: 370.0,        // "What do we actually know?"
+    final: 392.36,      // "oldest trick" end card
   },
 
   fadeIn: [0, 0.4],
-  fadeOut: [313.7, 314.761],
+  fadeOut: [412.0, 413.248],
 
   // LAW 14 (preview gate): scene sampler — 12 × 2.5 s windows (one per beat +
   // end card) = 30.0 s. Rendered before ANY full render and shown with the
